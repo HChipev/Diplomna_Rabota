@@ -9,7 +9,7 @@
         @click="(menuShow = false), (clicked = false)"
       >
         <li>
-          <RouterLink to="/home" class="nav-button">
+          <RouterLink to="/" class="nav-button">
             <font-awesome-icon class="me-1" icon="fa-solid fa-house" />Home</RouterLink
           >
         </li>
@@ -18,7 +18,7 @@
           <RouterLink to="/search" class="nav-button"
             ><font-awesome-icon
               class="me-1"
-              icon="fa-solid fa-magnifying-glass"
+              icon="fa-magnifying-glass"
             />Search</RouterLink
           >
         </li>
@@ -38,10 +38,7 @@
 
         <li>
           <RouterLink to="/about" class="nav-button"
-            ><font-awesome-icon
-              class="me-1"
-              icon="fa-solid fa-circle-info"
-            />About</RouterLink
+            ><font-awesome-icon icon="fa-solid fa-circle-info" />About</RouterLink
           >
         </li>
       </ul>
@@ -54,8 +51,8 @@
         "
         class="menu-button"
       >
-        <font-awesome-icon v-if="!clicked" icon="bars" />
-        <font-awesome-icon v-else icon="xmark" />
+        <font-awesome-icon v-if="!clicked" icon="fa-solid fa-bars" />
+        <font-awesome-icon v-else icon="fa-solid fa-xmark" />
       </ReuseableButton>
     </div>
   </nav>
@@ -63,13 +60,15 @@
 <script setup>
 let clicked = ref(false);
 let menuShow = ref(null);
-//* getting window width
-let windowWidth = ref(onWidthChange());
+let windowWidth = ref(null);
+console.log(windowWidth.value);
+
 const onWidthChange = () => (
   (windowWidth.value = window.innerWidth),
   //! menuShow value is changed
   (menuShow.value = isMenuShown())
 );
+
 onMounted(() => {
   if (process.client) {
     window.addEventListener("resize", onWidthChange);
