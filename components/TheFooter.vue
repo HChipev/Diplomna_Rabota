@@ -1,16 +1,17 @@
 <template>
   <div class="container">
     <div
-      class="footer d-flex flex-wrap justify-content-between align-items-center pt-3 px-1 mt-4 border-top"
+      class="footer d-flex flex-wrap justify-content-between align-items-center pt-3 px-1 pb-1 mt-4 border-top"
     >
-      <a
-        href="/"
-        class="col-md-6 d-flex align-items-center justify-content-between mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+      <a href="/" class="col-md-6 d-flex align-items-center justify-content-between"
         ><img width="124" src="../assets/text-logo.svg" alt="text-logo-footer"
       /></a>
       <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
-          <a class="text-muted" href="https://instagram.com/_hchipev_/" target="_blank"
+          <a
+            class="align-items-center justify-content-center"
+            href="https://instagram.com/_hchipev_/"
+            target="_blank"
             ><img
               class="external-link-icons"
               src="../assets/instagram-icon.svg"
@@ -18,7 +19,10 @@
           /></a>
         </li>
         <li class="ms-3">
-          <a class="text-muted" href="https://github.com/HChipev" target="_blank"
+          <a
+            class="align-items-center justify-content-center"
+            href="https://github.com/HChipev"
+            target="_blank"
             ><img
               class="external-link-icons"
               src="../assets/github-icon.svg"

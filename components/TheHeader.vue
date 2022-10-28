@@ -5,45 +5,46 @@
     </div>
     <div class="navbar-container">
       <ul
+        v-if="inBrowser"
         :class="menuShow ? 'active' : 'not-active'"
         @click="(menuShow = false), (clicked = false)"
       >
         <li>
-          <RouterLink to="/" class="nav-button">
-            <font-awesome-icon class="me-1" icon="fa-solid fa-house" />Home</RouterLink
+          <NuxtLink to="/" class="nav-button">
+            <font-awesome-icon class="me-1" icon="fa-solid fa-house" />Home</NuxtLink
           >
         </li>
 
         <li>
-          <RouterLink to="/search" class="nav-button"
-            ><font-awesome-icon
-              class="me-1"
-              icon="fa-magnifying-glass"
-            />Search</RouterLink
+          <NuxtLink to="/search" class="nav-button"
+            ><font-awesome-icon class="me-1" icon="fa-magnifying-glass" />Search</NuxtLink
           >
         </li>
 
         <li>
-          <RouterLink to="/add-listing" class="nav-button"
-            ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</RouterLink
+          <NuxtLink to="/add-listing" class="nav-button"
+            ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
           >
         </li>
 
         <li>
           <!--//todo proveka dali profila e kopuvach -->
-          <RouterLink to="/my-listings" class="nav-button"
-            ><font-awesome-icon icon="fa-solid fa-warehouse" /> My Listings</RouterLink
+          <NuxtLink to="/my-listings" class="nav-button"
+            ><font-awesome-icon icon="fa-solid fa-warehouse" /> My Listings</NuxtLink
           >
         </li>
 
         <li>
-          <RouterLink to="/about" class="nav-button"
-            ><font-awesome-icon icon="fa-solid fa-circle-info" />About</RouterLink
+          <NuxtLink to="/about" class="nav-button"
+            ><font-awesome-icon
+              class="me-1"
+              icon="fa-solid fa-circle-info"
+            />About</NuxtLink
           >
         </li>
       </ul>
       <ReuseableButton
-        v-if="windowWidth <= 900"
+        v-if="windowWidth <= 900 && inBrowser"
         @click="
           (clicked = !clicked),
             //! menuShow value is changed
@@ -60,8 +61,11 @@
 <script setup>
 let clicked = ref(false);
 let menuShow = ref(null);
-let windowWidth = ref(null);
-console.log(windowWidth.value);
+let windowWidth = ref(0);
+if (process.client) {
+  windowWidth.value = window.innerWidth;
+}
+const inBrowser = ref(false);
 
 const onWidthChange = () => (
   (windowWidth.value = window.innerWidth),
@@ -72,11 +76,10 @@ const onWidthChange = () => (
 onMounted(() => {
   if (process.client) {
     window.addEventListener("resize", onWidthChange);
+    inBrowser.value = true;
   }
 });
-// onMounted(() => {
-//   window.addEventListener("resize", onWidthChange);
-// });
+
 onUnmounted(() => window.removeEventListener("resize", onWidthChange));
 //* checking if menu should be active
 function isMenuShown() {
