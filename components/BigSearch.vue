@@ -7,22 +7,38 @@
           <select
             @change="selectionChanged($event)"
             id="category-dropbox"
-            class="form-select mt-1 mb-5"
+            class="form-select mt-1 mb-1"
             aria-label="Default select example"
           >
             <option value="Cars">Cars</option>
             <option value="Parts">Parts</option>
           </select>
+          <div v-if="carSearch" class="d-flex flex-nowrap">
+            <input
+              @change="checkboxSelected()"
+              :checked="carsOnParts"
+              class="form-check-input mt-1 mb-4"
+              type="checkbox"
+              aria-label="cars-on-parts"
+            />
+            <label class="ms-1 text-nowrap" for="checkbox">On Parts</label>
+          </div>
         </div>
         <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
           <img
-            v-if="carSearch"
+            v-if="carSearch && !carsOnParts"
             class="cat-icon"
             src="../assets/car-icon.svg"
             alt="category-icon"
           />
           <img
-            v-else
+            v-if="carSearch && carsOnParts"
+            class="cat-icon"
+            src="../assets/cars-on-parts-icon.svg"
+            alt="category-icon"
+          />
+          <img
+            v-else-if="!carSearch"
             class="cat-icon"
             src="../assets/parts-icon.svg"
             alt="category-icon"
@@ -48,6 +64,7 @@
 
 <script setup>
 const carSearch = ref(true);
+const carsOnParts = ref(false);
 
 function selectionChanged(e) {
   if (e.target.value === "Parts") {
@@ -55,6 +72,10 @@ function selectionChanged(e) {
   } else {
     carSearch.value = true;
   }
+}
+function checkboxSelected() {
+  carsOnParts.value = !carsOnParts.value;
+  console.log(carsOnParts.value);
 }
 </script>
 
@@ -74,18 +95,19 @@ form {
 }
 
 @media (max-width: 767px) {
-  #logo {
-    max-width: 124px;
-  }
   .cat-icon {
-    margin-top: 1.55rem;
     margin-left: 1em;
+    margin-bottom: 0.75rem;
   }
   #category-dropbox {
     margin-bottom: 1rem !important;
   }
 }
 @media (max-width: 575px) {
+  #logo {
+    max-width: 154px;
+    margin-bottom: 0 !important;
+  }
   .label {
     font-size: 16px !important;
   }
@@ -93,20 +115,23 @@ form {
     margin-bottom: 1rem !important;
   }
   .cat-icon {
-    margin-top: 1.25rem;
-    height: 45px !important;
+    margin-bottom: 1.25rem;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 400px) {
   #logo {
-    max-width: 100px;
-    margin-top: 0.5em;
-    margin-bottom: 0 !important;
+    max-width: 144px;
   }
   .cat-icon {
-    margin-top: 1.25rem;
-    height: 35px !important;
+    height: 40px !important;
+    margin-right: 0.5em;
+  }
+}
+@media (max-width: 350px) {
+  #logo {
+    margin-top: 0.5em;
+    max-width: 104px;
   }
 }
 </style>
