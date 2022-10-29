@@ -16,6 +16,7 @@
   }
 }
 .accent-button {
+  min-height: 50px;
   color: $primery-color;
   border: 1px solid $primery-darker-color;
   border-radius: 1em;

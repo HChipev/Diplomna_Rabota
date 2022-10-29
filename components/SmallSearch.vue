@@ -71,6 +71,12 @@ form {
     width: 45px;
     height: 45px;
   }
+  #category-dropbox {
+    border-color: $primery-darker-color;
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    }
+  }
 }
 
 @media (max-width: 767px) {

@@ -8,6 +8,7 @@
             @change="selectionChanged($event)"
             id="category-dropbox"
             class="form-select mt-1 mb-1"
+            :class="!carSearch ? 'mb-5' : ''"
             aria-label="Default select example"
           >
             <option value="Cars">Cars</option>
@@ -34,7 +35,7 @@
           <img
             v-if="carSearch && carsOnParts"
             class="cat-icon"
-            src="../assets/cars-on-parts-icon.svg"
+            src="../assets/car-on-parts-icon.svg"
             alt="category-icon"
           />
           <img
@@ -89,18 +90,29 @@ form {
     padding-right: 0;
   }
   .cat-icon {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
+  }
+  .form-check-input {
+    border-color: $accent-color;
+    &:checked {
+      background-color: $accent-color;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    }
+  }
+  #category-dropbox {
+    border-color: $primery-darker-color;
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    }
   }
 }
-
 @media (max-width: 767px) {
   .cat-icon {
     margin-left: 1em;
-    margin-bottom: 0.75rem;
-  }
-  #category-dropbox {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.1rem;
   }
 }
 @media (max-width: 575px) {
@@ -111,11 +123,8 @@ form {
   .label {
     font-size: 16px !important;
   }
-  #category-dropbox {
-    margin-bottom: 1rem !important;
-  }
   .cat-icon {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
   }
 }
 

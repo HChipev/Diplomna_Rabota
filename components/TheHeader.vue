@@ -142,7 +142,7 @@ nav {
     .navbar-container {
       ul.active {
         position: absolute;
-        top: 49px;
+        top: 47.8px;
         right: 0px;
         background-color: $black;
         padding: 0;
