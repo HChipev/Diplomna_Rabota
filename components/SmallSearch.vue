@@ -16,12 +16,7 @@
             </select>
           </div>
           <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
-            <img
-              id="cat-icon"
-              src="../assets/car-icon.svg"
-              :src="`~/assets/${iconUrl}`"
-              alt="category-icon"
-            />
+            <img id="cat-icon" :src="`~/assets/${iconUrl}`" alt="category-icon" />
           </div>
           <div class="col-6" align="end">
             <img
