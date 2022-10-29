@@ -17,7 +17,14 @@
           </div>
           <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
             <img
-              id="cat-icon"
+              v-if="carSearch"
+              class="cat-icon"
+              src="../assets/car-icon.svg"
+              alt="category-icon"
+            />
+            <img
+              v-else
+              class="cat-icon"
               :src="carSearch ? '../assets/car-icon.svg' : '../assets/parts-icon.svg'"
               alt="category-icon"
             />
@@ -60,7 +67,7 @@ form {
   .col-6:has(#logo) {
     padding-right: 0;
   }
-  #cat-icon {
+  .cat-icon {
     width: 45px;
     height: 45px;
   }
@@ -70,7 +77,7 @@ form {
   #logo {
     max-width: 124px;
   }
-  #cat-icon {
+  .cat-icon {
     margin-top: 1.55rem;
     margin-left: 1em;
   }
@@ -90,14 +97,14 @@ form {
   #category-dropbox {
     margin-bottom: 1rem !important;
   }
-  #cat-icon {
+  .cat-icon {
     margin-top: 1.25rem;
     height: 45px !important;
   }
 }
 
 @media (max-width: 375px) {
-  #cat-icon {
+  .cat-icon {
     margin-top: 1.25rem;
     height: 35px !important;
   }
