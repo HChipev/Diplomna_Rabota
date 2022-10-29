@@ -16,7 +16,11 @@
             </select>
           </div>
           <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
-            <img id="cat-icon" :src="`~/assets/${iconUrl}`" alt="category-icon" />
+            <img
+              id="cat-icon"
+              :src="carSearch ? '../assets/car-icon.svg' : '../assets/parts-icon.svg'"
+              alt="category-icon"
+            />
           </div>
           <div class="col-6" align="end">
             <img
@@ -36,15 +40,12 @@
 </template>
 
 <script setup>
-const iconUrl = ref("car-icon.svg");
 const carSearch = ref(true);
 
 function selectionChanged(e) {
   if (e.target.value === "Parts") {
-    iconUrl.value = "parts-icon.svg";
     carSearch.value = false;
   } else {
-    iconUrl.value = "car-icon.svg";
     carSearch.value = true;
   }
 }
