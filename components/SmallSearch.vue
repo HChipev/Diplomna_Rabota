@@ -25,7 +25,7 @@
             <img
               v-else
               class="cat-icon"
-              :src="carSearch ? '../assets/car-icon.svg' : '../assets/parts-icon.svg'"
+              src="../assets/parts-icon.svg"
               alt="category-icon"
             />
           </div>
