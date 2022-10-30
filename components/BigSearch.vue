@@ -22,7 +22,12 @@
               type="checkbox"
               aria-label="cars-on-parts"
             />
-            <label class="ms-1 text-nowrap" for="checkbox">On Parts</label>
+            <label
+              @click="checkboxSelected()"
+              class="checkbox-label ms-1 text-nowrap"
+              for="checkbox"
+              >On Parts</label
+            >
           </div>
         </div>
         <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
@@ -59,6 +64,25 @@
         <SmallSearchCars v-if="carSearch" />
         <SmallSearchParts v-else />
       </div>
+      <div class="row flex-nowrap">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <ReuseableButton
+            @click="showAdvanced()"
+            :class="isAdvancedShown ? 'active' : ''"
+            class="dropdown-button px-2 mt-2 d-flex align-items-center justify-content-center flex-nowrap"
+            v-if="inBrowser"
+            >Advanced
+            <font-awesome-icon
+              v-if="!isAdvancedShown"
+              class="px-1"
+              icon="fa-solid fa-chevron-down" />
+            <font-awesome-icon v-else class="px-1" icon="fa-solid fa-chevron-up"
+          /></ReuseableButton>
+        </div>
+      </div>
+      <div v-if="isAdvancedShown" class="row mt-3 border-top">
+        <AdvancedSearch />
+      </div>
     </form>
   </div>
 </template>
@@ -66,7 +90,14 @@
 <script setup>
 const carSearch = ref(true);
 const carsOnParts = ref(false);
+const inBrowser = ref(false);
+const isAdvancedShown = ref(false);
 
+onMounted(() => {
+  if (process.client) {
+    inBrowser.value = true;
+  }
+});
 function selectionChanged(e) {
   if (e.target.value === "Parts") {
     carSearch.value = false;
@@ -77,6 +108,9 @@ function selectionChanged(e) {
 function checkboxSelected() {
   carsOnParts.value = !carsOnParts.value;
   console.log(carsOnParts.value);
+}
+function showAdvanced() {
+  isAdvancedShown.value = !isAdvancedShown.value;
 }
 </script>
 
@@ -107,6 +141,9 @@ form {
     &:focus {
       box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
     }
+  }
+  .row {
+    border-top-color: $border-color !important;
   }
 }
 @media (max-width: 767px) {

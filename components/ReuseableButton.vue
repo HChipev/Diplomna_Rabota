@@ -1,5 +1,5 @@
 <template>
-  <button><slot></slot></button>
+  <button type="button"><slot></slot></button>
 </template>
 <script setup></script>
 <style lang="scss">
@@ -34,6 +34,27 @@
     );
     box-shadow: -0.4em 0.5em 0.6em -0.3em black;
     transform: translateY(-0.25em) translateX(0.25em);
+  }
+}
+.dropdown-button {
+  min-height: 30px;
+  background: $primery-color;
+  color: $black;
+  border: 1px solid $primery-color;
+  border-radius: $border-radius;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: $accent-color;
+    color: $primery-color;
+    transform: translateY(0.25em);
+  }
+  &.active {
+    &:hover {
+      background: $black;
+      color: $primery-color;
+      transform: translateY(-0.25em);
+    }
   }
 }
 </style>

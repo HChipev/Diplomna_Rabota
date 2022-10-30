@@ -35,6 +35,11 @@ body {
     -ms-user-select: none;
     user-select: none;
   }
+  .checkbox-label {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 }
 * {
   margin: 0;
