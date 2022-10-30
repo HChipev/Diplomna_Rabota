@@ -7,11 +7,7 @@
     <TheFooter />
   </footer>
 </template>
-<script setup>
-useHead({
-  link: [{ rel: "icon", type: "image/x-icon", href: "./public/favicon.ico" }],
-});
-</script>
+<script setup></script>
 <style lang="scss" global>
 body {
   margin: 0;
