@@ -12,7 +12,9 @@ export default defineNuxtConfig({
             "The best place for buying and selling used cars and car parts.",
         },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "./favicon.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "./assets/favicon.ico" },
+      ],
     },
   },
   plugins: ["~/plugins/fontawesome.js"],
