@@ -11,9 +11,52 @@ export default defineNuxtConfig({
           content:
             "The best place for buying and selling used cars and car parts.",
         },
-      ],
-      link: [
-        { rel: "icon", type: "image/x-icon", href: "./assets/favicon.ico" },
+        {
+          property: "og:url",
+          content: "https://4ips-auto.netlify.app",
+        },
+        {
+          property: "og:type",
+          content: "website",
+        },
+        {
+          property: "og:title",
+          content: "4ip's Auto",
+        },
+        {
+          property: "og:description",
+          content:
+            "The best place for buying and selling used cars and car parts.",
+        },
+        {
+          property: "og:image",
+          content: "",
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "twitter:domain",
+          content: "4ips-auto.netlify.app",
+        },
+        {
+          property: "twitter:url",
+          content: "https://4ips-auto.netlify.app",
+        },
+        {
+          name: "twitter:title",
+          content: "4ip's Auto",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "The best place for buying and selling used cars and car parts.",
+        },
+        {
+          name: "twitter:image",
+          content: "",
+        },
       ],
     },
   },
