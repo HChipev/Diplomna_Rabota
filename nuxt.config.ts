@@ -9,11 +9,11 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "The best place for buying and selling use cars and car parts",
+            "The best place for buying and selling used cars and car parts.",
         },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "./public/favicon.ico" },
+        { rel: "icon", type: "image/x-icon", href: "../public/favicon.ico" },
       ],
     },
   },
