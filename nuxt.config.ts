@@ -58,7 +58,7 @@ export default defineNuxtConfig({
           content: "",
         },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "./favicon.ico" }],
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
   plugins: ["~/plugins/fontawesome.js"],
