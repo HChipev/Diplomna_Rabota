@@ -70,7 +70,7 @@
             @click="showAdvanced()"
             :class="isAdvancedShown ? 'active' : ''"
             class="dropdown-button px-2 mt-2 d-flex align-items-center justify-content-center flex-nowrap"
-            v-if="inBrowser"
+            v-if="inBrowser && carSearch && !carsOnParts"
             >Advanced
             <font-awesome-icon
               v-if="!isAdvancedShown"
@@ -80,7 +80,10 @@
           /></ReuseableButton>
         </div>
       </div>
-      <div v-if="isAdvancedShown" class="row mt-3 border-top">
+      <div
+        v-if="isAdvancedShown && carSearch && !carsOnParts"
+        class="row mt-3 border-top"
+      >
         <AdvancedSearch />
       </div>
     </form>
