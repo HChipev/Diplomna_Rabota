@@ -107,7 +107,6 @@ function selectionChanged(e) {
 }
 function checkboxSelected() {
   carsOnParts.value = !carsOnParts.value;
-  console.log(carsOnParts.value);
 }
 function showAdvanced() {
   isAdvancedShown.value = !isAdvancedShown.value;

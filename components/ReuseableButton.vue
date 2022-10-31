@@ -51,8 +51,6 @@
   }
   &.active {
     &:hover {
-      background: $black;
-      color: $primery-color;
       transform: translateY(-0.25em);
     }
   }
