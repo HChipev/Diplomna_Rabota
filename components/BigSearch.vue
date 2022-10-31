@@ -1,6 +1,6 @@
 <template>
   <div class="container pb-2 pt-2">
-    <form>
+    <form :class="isAdvancedShown ? 'pb-1' : ''">
       <div class="row flex-nowrap">
         <div class="col-5 d-flex flex-column align-items-start justify-content-center">
           <label class="label fs-4" for="category">Category</label>
@@ -140,9 +140,6 @@ form {
     &:focus {
       box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
     }
-  }
-  .row {
-    border-top-color: $border-color !important;
   }
 }
 @media (max-width: 767px) {

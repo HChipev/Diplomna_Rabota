@@ -3,6 +3,7 @@
     <input
       class="form-check-input mt-1 mb-4"
       @change="check(extraName)"
+      :checked="checked"
       type="checkbox"
       aria-label="cars-on-parts"
     />
