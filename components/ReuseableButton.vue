@@ -47,6 +47,7 @@
   &:hover {
     background-color: $accent-color;
     color: $primery-color;
+    border-color: $accent-color;
     transform: translateY(0.25em);
   }
   &.active {
