@@ -22,6 +22,7 @@ const checked = ref(false);
 defineProps({
   extraName: String,
 });
+
 function check(extraName) {
   checked.value = !checked.value;
   console.log(extraName);

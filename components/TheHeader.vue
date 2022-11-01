@@ -74,9 +74,9 @@ const onWidthChange = () => (
 );
 
 onMounted(() => {
-  if (process.client) {
-    window.addEventListener("resize", onWidthChange);
+  if (typeof window !== "undefined") {
     inBrowser.value = true;
+    window.addEventListener("resize", onWidthChange);
   }
 });
 

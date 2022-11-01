@@ -92,25 +92,27 @@
 
 <script setup>
 const carSearch = ref(true);
-const carsOnParts = ref(false);
-const inBrowser = ref(false);
-const isAdvancedShown = ref(false);
-
-onMounted(() => {
-  if (process.client) {
-    inBrowser.value = true;
-  }
-});
-function selectionChanged(e) {
-  if (e.target.value === "Parts") {
-    carSearch.value = false;
-  } else {
+const selectionChanged = (event) => {
+  if (event.target.value === "Cars") {
     carSearch.value = true;
+  } else {
+    carSearch.value = false;
   }
-}
+};
+
+const carsOnParts = ref(false);
 function checkboxSelected() {
   carsOnParts.value = !carsOnParts.value;
 }
+
+const inBrowser = ref(false);
+onMounted(() => {
+  if (typeof window !== "undefined") {
+    inBrowser.value = true;
+  }
+});
+
+const isAdvancedShown = ref(false);
 function showAdvanced() {
   isAdvancedShown.value = !isAdvancedShown.value;
 }

@@ -48,14 +48,13 @@
 
 <script setup>
 const carSearch = ref(true);
-
-function selectionChanged(e) {
-  if (e.target.value === "Parts") {
-    carSearch.value = false;
-  } else {
+const selectionChanged = (event) => {
+  if (event.target.value == "Cars") {
     carSearch.value = true;
+  } else {
+    carSearch.value = false;
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
