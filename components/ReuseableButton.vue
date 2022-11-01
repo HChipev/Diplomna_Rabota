@@ -23,7 +23,6 @@
   background: $primery-darker-color;
   font-size: 28px;
   transition: all 0.5s ease;
-  &:focus,
   &:hover {
     background: $primery-darker-color;
     background: linear-gradient(

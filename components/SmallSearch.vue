@@ -39,8 +39,8 @@
         </div>
       </div>
       <div class="row">
-        <SmallSearchCars v-if="carSearch" />
-        <SmallSearchParts v-else />
+        <SearchCars v-if="carSearch" />
+        <SearchParts v-else />
       </div>
     </form>
   </div>
@@ -55,6 +55,8 @@ const selectionChanged = (event) => {
     carSearch.value = false;
   }
 };
+
+provide("extras", {});
 </script>
 
 <style lang="scss" scoped>

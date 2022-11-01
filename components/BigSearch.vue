@@ -61,8 +61,8 @@
         </div>
       </div>
       <div class="row">
-        <SmallSearchCars v-if="carSearch" />
-        <SmallSearchParts v-else />
+        <SearchCars v-if="carSearch" />
+        <SearchParts v-else />
       </div>
       <div class="row flex-nowrap">
         <div class="col-12 d-flex align-items-center justify-content-center">
@@ -116,6 +116,8 @@ const isAdvancedShown = ref(false);
 function showAdvanced() {
   isAdvancedShown.value = !isAdvancedShown.value;
 }
+const extras = {};
+provide("extras", extras);
 </script>
 
 <style lang="scss" scoped>

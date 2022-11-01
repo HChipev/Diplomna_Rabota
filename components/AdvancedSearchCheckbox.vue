@@ -23,8 +23,15 @@ defineProps({
   extraName: String,
 });
 
+const extras = inject("extras");
+
 function check(extraName) {
   checked.value = !checked.value;
+  if (checked.value) {
+    extras[extraName] = checked.value;
+  } else {
+    delete extras[extraName];
+  }
   console.log(extraName);
 }
 </script>
