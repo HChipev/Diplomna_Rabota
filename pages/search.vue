@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NuxtPage v-if="$route.params.name" />
-    <BigSearch v-else />
+    <BigSearch v-if="useRoute().path === '/search'" />
+    <NuxtPage v-else />
   </div>
 </template>
 <script setup></script>

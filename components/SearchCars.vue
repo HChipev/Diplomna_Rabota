@@ -6,7 +6,7 @@
       >
         <label class="mt-1" for="make">Make</label>
         <select
-          v-model="searchCriteria.make"
+          v-model="make"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -21,7 +21,7 @@
       >
         <label class="mt-1" for="model">Model</label>
         <select
-          v-model="searchCriteria.model"
+          v-model="model"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -38,7 +38,7 @@
       >
         <label class="mt-1" for="max-price">Max Price</label>
         <select
-          v-model="searchCriteria.maxPrice"
+          v-model="maxPrice"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -53,7 +53,7 @@
       >
         <label class="mt-1" for="year">Year</label>
         <select
-          v-model="searchCriteria.year"
+          v-model="year"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -70,7 +70,7 @@
       >
         <label class="mt-1" for="engine">Engine Type</label>
         <select
-          v-model="searchCriteria.engineType"
+          v-model="engineType"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -85,7 +85,7 @@
       >
         <label class="mt-1" for="gearbox">Gearbox Type</label>
         <select
-          v-model="searchCriteria.gearboxType"
+          v-model="gearboxType"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -104,7 +104,7 @@
       >
         <label class="mt-1" for="region">Region</label>
         <select
-          v-model="searchCriteria.region"
+          v-model="region"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -121,7 +121,7 @@
       >
         <label class="mt-1" for="city-village">City/Village</label>
         <select
-          v-model="searchCriteria.city"
+          v-model="city"
           class="form-select mt-1"
           aria-label="Default select example"
         >
@@ -135,7 +135,20 @@
     <div class="row">
       <div class="col-sm-12 mb-2 d-flex align-items-center border-top">
         <ReuseableButton
-          @click="useSearchCars(searchCriteria)"
+          @click="
+            useSearchCars({
+              make,
+              model,
+              maxPrice,
+              year,
+              engineType,
+              gearboxType,
+              region,
+              city,
+              extras,
+            }),
+              useRouter().push('/search/results')
+          "
           class="accent-button flex-fill mt-4"
           >Search</ReuseableButton
         >
@@ -144,17 +157,20 @@
   </div>
 </template>
 <script setup>
-const searchCriteria = ref({
-  make: "All",
-  model: "All",
-  maxPrice: "All",
-  year: "All",
-  engineType: "All",
-  gearboxType: "All",
-  region: "All",
-  city: "All",
-  extras: inject("extras"),
-});
+import { useCarParams } from "~~/store/useCarParams";
+const carParams = useCarParams();
+const {
+  make,
+  model,
+  maxPrice,
+  year,
+  engineType,
+  gearboxType,
+  region,
+  city,
+  extras,
+} = storeToRefs(carParams);
+carParams.setExtras(inject("extras"));
 </script>
 <style lang="scss" scoped>
 .form-select {

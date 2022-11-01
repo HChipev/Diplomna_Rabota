@@ -72,7 +72,18 @@ export default defineNuxtConfig({
       type: "text/javascript",
     },
   ],
-
+  modules: [
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: [
+          "defineStore",
+          "storeToRefs",
+          ["defineStore", "definePiniaStore"],
+        ],
+      },
+    ],
+  ],
   buildModules: ["@nuxtjs/style-resources"],
   vite: {
     css: {
