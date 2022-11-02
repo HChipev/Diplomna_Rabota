@@ -134,9 +134,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 mb-2 d-flex align-items-center border-top">
-        <ReuseableButton
-          @click="printCars(), useRouter().push('/search/results/cars')"
-          class="accent-button flex-fill mt-4"
+        <ReuseableButton @click="searchForCars()" class="accent-button flex-fill mt-4"
           >Search</ReuseableButton
         >
       </div>
@@ -159,11 +157,14 @@ const extras = inject("extras");
 const onParts = inject("onParts");
 carParams.setExtras(extras);
 carParams.setOnParts(onParts);
-function printCars() {
-  if (onParts) {
+function searchForCars() {
+  if (onParts.value) {
     carParams.setExtras({});
+  } else {
+    carParams.setExtras(extras);
   }
   console.log(carParams.getCar);
+  useRouter().push("/search/results/cars");
 }
 </script>
 <style lang="scss" scoped>

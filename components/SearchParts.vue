@@ -137,9 +137,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 mb-2 d-flex align-items-center border-top">
-        <ReuseableButton
-          @click="partParams.printPart(), useRouter().push('/search/results/parts')"
-          class="accent-button flex-fill mt-4"
+        <ReuseableButton @click="searchForParts()" class="accent-button flex-fill mt-4"
           >Search</ReuseableButton
         >
       </div>
@@ -151,6 +149,10 @@ const partParams = usePartParams();
 const { partType, part, make, model, maxPrice, year, region, city } = storeToRefs(
   partParams
 );
+function searchForParts() {
+  partParams.printPart();
+  useRouter().push("/search/results/parts");
+}
 </script>
 <style lang="scss" scoped>
 .form-select {
