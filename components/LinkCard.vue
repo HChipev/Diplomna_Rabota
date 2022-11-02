@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-6 mt-4" align="center">
+  <div class="col-lg-6 mt-4" align="center" @click="openListing()">
     <div class="card p-1" style="max-width: 40rem">
       <div class="row">
         <div class="col-6 pe-1">
@@ -7,7 +7,7 @@
         </div>
         <div class="col-6 ps-1">
           <div class="card-body p-2">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">{{ title }}</h5>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <p id="description">
@@ -25,7 +25,12 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+const title = ref("Card Title");
+function openListing() {
+  useRouter().push("/search/results/" + title.value.replaceAll(" ", "-"));
+}
+</script>
 <style lang="scss" scoped>
 .ps-1 {
   padding-left: 0.15em !important;

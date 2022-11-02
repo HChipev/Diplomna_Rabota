@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ $route.params.name }}</h1>
+    <h1>{{ useRoute().params.name }}</h1>
   </div>
 </template>
 <script setup></script>
