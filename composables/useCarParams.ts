@@ -8,6 +8,7 @@ export const useCarParams = defineStore("carParams", {
     gearboxType: "All",
     region: "All",
     city: "All",
+    onParts: false,
     extras: {},
   }),
   getters: {
@@ -29,6 +30,8 @@ export const useCarParams = defineStore("carParams", {
         " " +
         state.city +
         " " +
+        state.onParts +
+        " " +
         JSON.stringify(state.extras)
       );
     },
@@ -36,6 +39,32 @@ export const useCarParams = defineStore("carParams", {
   actions: {
     setExtras(extras: {}) {
       this.extras = extras;
+    },
+    setOnParts(onParts: boolean) {
+      this.onParts = onParts;
+    },
+    printCar() {
+      console.log(
+        this.make +
+          " " +
+          this.model +
+          " " +
+          this.maxPrice +
+          " " +
+          this.year +
+          " " +
+          this.engineType +
+          " " +
+          this.gearboxType +
+          " " +
+          this.region +
+          " " +
+          this.city +
+          " " +
+          this.onParts +
+          " " +
+          JSON.stringify(this.extras)
+      );
     },
   },
 });

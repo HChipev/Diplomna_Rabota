@@ -118,6 +118,7 @@ function showAdvanced() {
 }
 const extras = {};
 provide("extras", extras);
+provide("onParts", carsOnParts);
 </script>
 
 <style lang="scss" scoped>

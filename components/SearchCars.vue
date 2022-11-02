@@ -135,20 +135,7 @@
     <div class="row">
       <div class="col-sm-12 mb-2 d-flex align-items-center border-top">
         <ReuseableButton
-          @click="
-            useSearchCars({
-              make,
-              model,
-              maxPrice,
-              year,
-              engineType,
-              gearboxType,
-              region,
-              city,
-              extras,
-            }),
-              useRouter().push('/search/results')
-          "
+          @click="printCars(), useRouter().push('/search/results/cars')"
           class="accent-button flex-fill mt-4"
           >Search</ReuseableButton
         >
@@ -157,7 +144,6 @@
   </div>
 </template>
 <script setup>
-import { useCarParams } from "~~/store/useCarParams";
 const carParams = useCarParams();
 const {
   make,
@@ -168,9 +154,17 @@ const {
   gearboxType,
   region,
   city,
-  extras,
 } = storeToRefs(carParams);
-carParams.setExtras(inject("extras"));
+const extras = inject("extras");
+const onParts = inject("onParts");
+carParams.setExtras(extras);
+carParams.setOnParts(onParts);
+function printCars() {
+  if (onParts) {
+    carParams.setExtras({});
+  }
+  console.log(carParams.getCar);
+}
 </script>
 <style lang="scss" scoped>
 .form-select {

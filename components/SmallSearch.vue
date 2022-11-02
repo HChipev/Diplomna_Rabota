@@ -57,6 +57,7 @@ const selectionChanged = (event) => {
 };
 
 provide("extras", {});
+provide("onParts", false);
 </script>
 
 <style lang="scss" scoped>
