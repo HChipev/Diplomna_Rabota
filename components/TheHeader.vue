@@ -3,9 +3,8 @@
     <div class="logo-container">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
-    <div class="navbar-container">
+    <div v-if="inBrowser" class="navbar-container">
       <ul
-        v-if="inBrowser"
         :class="menuShow ? 'active' : 'not-active'"
         @click="(menuShow = false), (clicked = false)"
       >
@@ -33,16 +32,12 @@
             ><font-awesome-icon icon="fa-solid fa-warehouse" /> My Listings</NuxtLink
           >
         </li>
-
-        <li>
-          <NuxtLink to="/about" class="nav-button"
-            ><font-awesome-icon
-              class="me-1"
-              icon="fa-solid fa-circle-info"
-            />About</NuxtLink
-          >
-        </li>
       </ul>
+
+      <NuxtLink to="/about" class="nav-button"
+        ><font-awesome-icon icon="fa-solid fa-cart-shopping"
+      /></NuxtLink>
+
       <ReuseableButton
         v-if="windowWidth <= 900 && inBrowser"
         @click="
@@ -52,8 +47,8 @@
         "
         class="menu-button"
       >
-        <font-awesome-icon v-if="!clicked" icon="fa-solid fa-bars" />
-        <font-awesome-icon v-else icon="fa-solid fa-xmark" />
+        <font-awesome-icon v-if="!clicked" class="fs-5" icon="fa-solid fa-bars" />
+        <font-awesome-icon v-else class="fs-4" icon="fa-solid fa-xmark" />
       </ReuseableButton>
     </div>
   </nav>
@@ -120,20 +115,54 @@ nav {
           margin-inline: 0.5em;
           transition: all 0.3s ease;
           border: 1px solid $primery-darker-color;
-          border-radius: 1em;
+          border-radius: $border-radius;
           &:hover {
             border: 1px solid $accent-color;
-            border-radius: 1em;
+            border-radius: $border-radius;
             background: $accent-color;
           }
-        }
-        .router-link-active {
-          box-shadow: 0.15em 0.12em $primery-color, -0.15em -0.12em $accent-color;
-          &:hover {
-            box-shadow: 0.15em 0.12em $accent-color, -0.15em -0.12em $primery-color;
+          &.router-link-active {
+            box-shadow: 0.15em 0.12em $primery-color, -0.15em -0.12em $accent-color;
+            &:hover {
+              box-shadow: 0.15em 0.12em $accent-color, -0.15em -0.12em $primery-color;
+            }
           }
         }
       }
+    }
+  }
+  .nav-button {
+    color: $primery-color;
+    padding: 0.3em 0.55em;
+    margin-left: 0.25em;
+    margin-right: 0.5em;
+    transition: all 0.3s ease;
+    &:hover {
+      animation: textColor 1s ease infinite;
+      @keyframes textColor {
+        0% {
+          transform: translateY(-0.1em);
+          transform: translateX(-0.1em);
+          color: $primery-color;
+        }
+        50% {
+          transform: translate(0.1em, 0.1em);
+          color: $accent-color;
+        }
+        100% {
+          transform: translateY(-0.1em);
+          transform: translateX(-0.1em);
+          color: $primery-color;
+        }
+      }
+    }
+
+    &.router-link-active {
+      border-radius: $border-radius;
+      color: $accent-color;
+      // &:hover {
+      //   box-shadow: 0.1em 0.08em $accent-color, -0.1em -0.08em $primery-color;
+      // }
     }
   }
 }
@@ -142,7 +171,7 @@ nav {
     .navbar-container {
       ul.active {
         position: absolute;
-        top: 2.95em;
+        top: 3.5em;
         right: 0px;
         background-color: $black;
         padding: 0;
