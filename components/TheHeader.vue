@@ -34,8 +34,8 @@
         </li>
       </ul>
 
-      <NuxtLink to="/about" class="nav-button"
-        ><font-awesome-icon icon="fa-solid fa-cart-shopping"
+      <NuxtLink to="/cart" id="cart-button">
+        <font-awesome-icon class="fs-5" icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <ReuseableButton
@@ -102,13 +102,13 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
     ul {
       display: inline-block;
       margin: 0;
       list-style-type: none;
       li {
         display: inline;
-
         .nav-button {
           color: $primery-color;
           padding: 0.3em 1.5em;
@@ -122,56 +122,56 @@ nav {
             background: $accent-color;
           }
           &.router-link-active {
-            box-shadow: 0.15em 0.12em $primery-color, -0.15em -0.12em $accent-color;
+            box-shadow: 0.075em 0.06em $primery-color, -0.075em -0.06em $accent-color;
             &:hover {
-              box-shadow: 0.15em 0.12em $accent-color, -0.15em -0.12em $primery-color;
+              box-shadow: 0.075em 0.06em $accent-color, -0.075em -0.06em $primery-color;
             }
           }
         }
       }
     }
   }
-  .nav-button {
+  #cart-button {
     color: $primery-color;
     padding: 0.3em 0.55em;
     margin-left: 0.25em;
     margin-right: 0.5em;
     transition: all 0.3s ease;
     &:hover {
-      animation: textColor 1s ease infinite;
-      @keyframes textColor {
-        0% {
-          transform: translateY(-0.1em);
-          transform: translateX(-0.1em);
-          color: $primery-color;
-        }
-        50% {
-          transform: translate(0.1em, 0.1em);
-          color: $accent-color;
-        }
-        100% {
-          transform: translateY(-0.1em);
-          transform: translateX(-0.1em);
-          color: $primery-color;
-        }
-      }
+      animation: jumpUp 0.35s ease-in;
+      color: $accent-color;
     }
 
     &.router-link-active {
-      border-radius: $border-radius;
-      color: $accent-color;
-      // &:hover {
-      //   box-shadow: 0.1em 0.08em $accent-color, -0.1em -0.08em $primery-color;
-      // }
+      box-shadow: 0.075em 0.06em $primery-color, -0.075em -0.06em $accent-color;
+      border-radius: $card-border-radius;
+      &:hover {
+        color: $primery-color;
+        background: $accent-color;
+        box-shadow: 0.075em 0.06em $accent-color, -0.075em -0.06em $primery-color;
+      }
+    }
+  }
+  @keyframes jumpUp {
+    0% {
+      transform: translateY(0em);
+    }
+    50% {
+      transform: translateY(-0.3em);
+    }
+
+    100% {
+      transform: translateY(0);
     }
   }
 }
+
 @media (max-width: 900px) {
   nav {
     .navbar-container {
       ul.active {
         position: absolute;
-        top: 3.5em;
+        top: 3em;
         right: 0px;
         background-color: $black;
         padding: 0;
@@ -199,11 +199,11 @@ nav {
                 $primery-darker-color 75%
               );
             }
-          }
-          .router-link-exact-active {
-            &:hover {
-              background: $accent-color;
-              border: 1px solid $accent-color;
+            &.router-link-exact-active {
+              &:hover {
+                background: $accent-color;
+                border: 1px solid $accent-color;
+              }
             }
           }
         }
@@ -211,6 +211,10 @@ nav {
       ul.not-active {
         display: none;
       }
+    }
+    #cart-button {
+      margin-right: 0.5rem;
+      font-size: 6px;
     }
   }
 }
