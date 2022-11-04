@@ -1,14 +1,14 @@
 <template>
   <div class="container-fluid">
     <div class="footer row pt-3 px-1 pb-1 mt-4 border-top">
-      <div class="col-4">
+      <div class="col-4 d-flex flex-column align-items-start justify-content-start">
         <ul class="internal-ul">
           <li>
             <NuxtLink to="/about" class="internal-links">About</NuxtLink>
           </li>
         </ul>
       </div>
-      <div class="col-4 d-flex flex-column align-items-center justify-content-center">
+      <div class="col-4 d-flex flex-column align-items-center justify-content-end">
         <a href="/" class="d-flex align-items-center justify-content-between"
           ><img
             class="logo-text"
@@ -16,7 +16,7 @@
             src="../assets/text-logo.svg"
             alt="text-logo-footer"
         /></a>
-        <p class="text-center text-muted pt-5 text-nowrap">© 2022 4ip's Auto, Inc</p>
+        <p class="text-center text-muted pt-3 text-nowrap">© 2022 4ip's Auto, Inc</p>
       </div>
       <div class="col-4 d-flex justify-content-end">
         <ul class="nav justify-content-end list-unstyled d-flex flex-nowrap">
@@ -65,11 +65,13 @@
   background: $black;
 
   .internal-ul {
+    transition: all 0.3s ease;
     padding-left: 0;
     list-style-type: none;
     li {
       ::before {
-        content: "⚙️";
+        vertical-align: -5%;
+        content: url("../assets/gear-icon.svg");
         padding-right: 0.25em;
       }
 
@@ -93,16 +95,23 @@
     }
   }
 }
-@media (max-width: 470px) {
+@media (max-width: 500px) {
+  .internal-ul {
+    min-width: 120px;
+  }
   .logo-text {
     width: 124px;
   }
-
   .external-link-icons {
     width: 20px !important;
   }
-  .internal-links {
-    font-size: 14px;
+}
+@media (max-width: 370px) {
+  .col-4 {
+    padding: 0;
+  }
+  li:has(.external-link-icons) {
+    margin-left: 0.5em !important;
   }
 }
 </style>

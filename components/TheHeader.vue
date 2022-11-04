@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo-container">
+    <div class="logo-container d-flex align-items-center justify-content-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
     <div v-if="inBrowser" class="navbar-container">
@@ -35,7 +35,7 @@
       </ul>
 
       <NuxtLink to="/cart" id="cart-button">
-        <font-awesome-icon class="fs-5" icon="fa-solid fa-cart-shopping"
+        <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <ReuseableButton
@@ -47,8 +47,8 @@
         "
         class="menu-button"
       >
-        <font-awesome-icon v-if="!clicked" class="fs-5" icon="fa-solid fa-bars" />
-        <font-awesome-icon v-else class="fs-4" icon="fa-solid fa-xmark" />
+        <font-awesome-icon v-if="!clicked" class="bars" icon="fa-solid fa-bars" />
+        <font-awesome-icon v-else class="x" icon="fa-solid fa-xmark" />
       </ReuseableButton>
     </div>
   </nav>
@@ -102,9 +102,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
     ul {
-      display: inline-block;
       margin: 0;
       list-style-type: none;
       li {
@@ -112,7 +110,7 @@ nav {
         .nav-button {
           color: $primery-color;
           padding: 0.3em 1.5em;
-          margin-inline: 0.5em;
+          margin-inline: 0.4em;
           transition: all 0.3s ease;
           border: 1px solid $primery-darker-color;
           border-radius: $border-radius;
@@ -122,33 +120,48 @@ nav {
             background: $accent-color;
           }
           &.router-link-active {
-            box-shadow: 0.075em 0.06em $primery-color, -0.075em -0.06em $accent-color;
+            box-shadow: 0.075em 0.08em 1px $primery-color,
+              -0.075em -0.08em 1px $accent-color;
             &:hover {
-              box-shadow: 0.075em 0.06em $accent-color, -0.075em -0.06em $primery-color;
+              box-shadow: 0.075em 0.08em 1px $accent-color,
+                -0.075em -0.08em 1px $primery-color;
             }
           }
         }
       }
     }
   }
+  .menu-button {
+    .bars {
+      height: 25px;
+      width: 25px;
+    }
+    .x {
+      height: 27px;
+      width: 25px;
+    }
+  }
   #cart-button {
     color: $primery-color;
-    padding: 0.3em 0.55em;
-    margin-left: 0.25em;
-    margin-right: 0.5em;
+    padding: 0.3em 0.5em;
+    margin-left: 0.15em;
+    margin-right: 0.35em;
     transition: all 0.3s ease;
+    > * {
+      font-size: 20px;
+    }
     &:hover {
       animation: jumpUp 0.35s ease-in;
       color: $accent-color;
     }
 
     &.router-link-active {
-      box-shadow: 0.075em 0.06em $primery-color, -0.075em -0.06em $accent-color;
+      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
       border-radius: $card-border-radius;
       &:hover {
         color: $primery-color;
         background: $accent-color;
-        box-shadow: 0.075em 0.06em $accent-color, -0.075em -0.06em $primery-color;
+        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
       }
     }
   }
@@ -213,8 +226,10 @@ nav {
       }
     }
     #cart-button {
-      margin-right: 0.5rem;
-      font-size: 6px;
+      padding-top: 0.15em;
+      padding-bottom: 0.05em;
+      padding-inline: 0.25em;
+      margin-right: 0.65em;
     }
   }
 }

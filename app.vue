@@ -22,13 +22,11 @@ body {
   background-color: $body-background-color;
   padding-top: 60px;
   color: $text-color;
-  isolation: isolate;
   a {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
     text-decoration: none;
-    transition: 0.4s;
   }
   img {
     -webkit-user-select: none;
