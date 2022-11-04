@@ -10,12 +10,16 @@
       </div>
       <div class="col-4 d-flex flex-column align-items-center justify-content-center">
         <a href="/" class="d-flex align-items-center justify-content-between"
-          ><img width="194" src="../assets/text-logo.svg" alt="text-logo-footer"
+          ><img
+            class="logo-text"
+            width="194"
+            src="../assets/text-logo.svg"
+            alt="text-logo-footer"
         /></a>
-        <p class="text-center text-muted pt-5">© 2022 4ip's Auto, Inc</p>
+        <p class="text-center text-muted pt-5 text-nowrap">© 2022 4ip's Auto, Inc</p>
       </div>
       <div class="col-4 d-flex justify-content-end">
-        <ul class="nav justify-content-end list-unstyled d-flex">
+        <ul class="nav justify-content-end list-unstyled d-flex flex-nowrap">
           <li class="ms-3">
             <a
               class="align-items-center justify-content-center"
@@ -59,6 +63,7 @@
 .footer {
   border-color: $accent-color !important;
   background: $black;
+
   .internal-ul {
     padding-left: 0;
     list-style-type: none;
@@ -86,6 +91,18 @@
       -webkit-filter: grayscale(0);
       filter: grayscale(0);
     }
+  }
+}
+@media (max-width: 470px) {
+  .logo-text {
+    width: 124px;
+  }
+
+  .external-link-icons {
+    width: 20px !important;
+  }
+  .internal-links {
+    font-size: 14px;
   }
 }
 </style>
