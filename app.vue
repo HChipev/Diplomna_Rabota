@@ -1,11 +1,13 @@
 <template>
-  <header>
-    <TheHeader />
-  </header>
-  <NuxtPage />
-  <footer>
-    <TheFooter />
-  </footer>
+  <div id="flex-wrapper">
+    <header>
+      <TheHeader />
+    </header>
+    <NuxtPage />
+    <footer>
+      <TheFooter />
+    </footer>
+  </div>
 </template>
 <script setup></script>
 <style lang="scss" global>
@@ -20,8 +22,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $body-background-color;
-  padding-top: 60px;
+  padding-top: 4.5rem;
   color: $text-color;
+  #flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  footer {
+    margin-top: auto;
+  }
   a {
     -webkit-user-select: none;
     -ms-user-select: none;

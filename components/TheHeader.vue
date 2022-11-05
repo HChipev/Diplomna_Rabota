@@ -9,32 +9,32 @@
         @click="(menuShow = false), (clicked = false)"
       >
         <li>
-          <NuxtLink to="/" class="nav-button">
+          <NuxtLink to="/" class="nav-button" @click="scrollToTop">
             <font-awesome-icon class="me-1" icon="fa-solid fa-house" />Home</NuxtLink
           >
         </li>
 
         <li>
-          <NuxtLink to="/search" class="nav-button"
+          <NuxtLink to="/search" class="nav-button" @click="scrollToTop"
             ><font-awesome-icon class="me-1" icon="fa-magnifying-glass" />Search</NuxtLink
           >
         </li>
 
         <li>
-          <NuxtLink to="/add-listing" class="nav-button"
+          <NuxtLink to="/add-listing" class="nav-button" @click="scrollToTop"
             ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
           >
         </li>
 
         <li>
           <!--//todo proveka dali profila e kopuvach -->
-          <NuxtLink to="/my-listings" class="nav-button"
+          <NuxtLink to="/my-listings" class="nav-button" @click="scrollToTop"
             ><font-awesome-icon icon="fa-solid fa-warehouse" /> My Listings</NuxtLink
           >
         </li>
       </ul>
 
-      <NuxtLink to="/cart" id="cart-button">
+      <NuxtLink to="/cart" id="cart-button" @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
