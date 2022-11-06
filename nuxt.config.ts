@@ -84,7 +84,7 @@ export default defineNuxtConfig({
       },
     ],
   ],
-  buildModules: ["@nuxtjs/style-resources"],
+  buildModules: ["@nuxtjs/style-resources", "@nuxtjs/supabase"],
   vite: {
     css: {
       preprocessorOptions: {
