@@ -63,7 +63,6 @@
 .footer {
   border-color: $accent-color !important;
   background: $black;
-
   .internal-ul {
     transition: all 0.3s ease;
     padding-left: 0;

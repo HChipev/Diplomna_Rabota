@@ -9,7 +9,17 @@
     </footer>
   </div>
 </template>
-<script setup></script>
+<script setup>
+const inBrowser = ref(false);
+onMounted(() => {
+  if (process.client) {
+    inBrowser.value = true;
+  } else {
+    inBrowser.value = false;
+  }
+});
+provide("inBrowser", inBrowser);
+</script>
 <style lang="scss" global>
 body {
   margin: 0;
@@ -49,6 +59,13 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+
+  .form-control {
+    &:focus {
+      border-color: $accent-color !important;
+      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    }
   }
 }
 * {

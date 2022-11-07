@@ -55,4 +55,27 @@
     }
   }
 }
+.primery-button-nav {
+  color: $black;
+  background: $primery-color;
+  border: 1px solid $primery-color;
+  border-radius: $card-border-radius;
+  transition: all 0.5s ease;
+  &.active {
+    transform: translateY(-0.1em) translateX(0.1em);
+    box-shadow: -0.25em 0.3em 0.3em $accent-color;
+  }
+  &.not-active {
+    color: $primery-color;
+    border-color: $primery-darker-color;
+    background: $primery-darker-color;
+    &:hover {
+      background: $accent-color;
+      color: $primery-color;
+      border-color: $accent-color;
+      box-shadow: -0.3em 0.35em 0.7em -0.2em $black;
+      transform: translateY(-0.1em) translateX(0.1em);
+    }
+  }
+}
 </style>

@@ -60,7 +60,7 @@ let windowWidth = ref(0);
 if (process.client) {
   windowWidth.value = window.innerWidth;
 }
-const inBrowser = ref(false);
+const inBrowser = inject("inBrowser");
 
 const onWidthChange = () => (
   (windowWidth.value = window.innerWidth),
@@ -70,7 +70,6 @@ const onWidthChange = () => (
 
 onMounted(() => {
   if (typeof window !== "undefined") {
-    inBrowser.value = true;
     window.addEventListener("resize", onWidthChange);
   }
 });

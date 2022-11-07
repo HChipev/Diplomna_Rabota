@@ -105,12 +105,7 @@ function checkboxSelected() {
   carsOnParts.value = !carsOnParts.value;
 }
 
-const inBrowser = ref(false);
-onMounted(() => {
-  if (typeof window !== "undefined") {
-    inBrowser.value = true;
-  }
-});
+const inBrowser = inject("inBrowser");
 
 const isAdvancedShown = ref(false);
 function showAdvanced() {

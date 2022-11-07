@@ -5,14 +5,12 @@
       @change="check(extraName)"
       :checked="checked"
       type="checkbox"
-      aria-label="cars-on-parts"
     />
     <label
       class="checkbox-label ms-1 text-nowrap"
       @click="check(extraName)"
       for="checkbox"
-    >
-      {{ extraName }}</label
+      >{{ extraName }}</label
     >
   </div>
 </template>
@@ -35,7 +33,7 @@ function check(extraName) {
   console.log(extraName);
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .form-check-input {
   border-color: $accent-color !important;
   &:checked {
