@@ -37,7 +37,7 @@
             <font-awesome-icon icon="fa-brands fa-linkedin" />
           </div>
           <div class="col-1 fs-5 d-flex justify-content-center align-items-center">
-            <font-awesome-icon icon="fa-brands fa-google" />
+            <font-awesome-icon @click="googleSignIn" icon="fa-brands fa-google" />
           </div>
         </div>
         <div class="row mt-3">
@@ -119,11 +119,17 @@ const register = async () => {
   }
 };
 const facebookSignIn = async () => {
-  const { user, session, error } = await client.auth.signInWithOAuth({
+  const { user, error } = await client.auth.signInWithOAuth({
     provider: "facebook",
   });
   console.log("user", user);
-  console.log("session", session);
+  console.log("error", error);
+};
+const googleSignIn = async () => {
+  const { user, error } = await client.auth.signInWithOAuth({
+    provider: "google",
+  });
+  console.log("user", user);
   console.log("error", error);
 };
 </script>
