@@ -3,17 +3,19 @@
     <div class="col-fluid-4 px-4 py-4 border rounded form">
       <form @submit.prevent="isLogInActive ? logIn() : register()">
         <div class="row mb-4">
-          <div class="col d-flex justify-content-evenly">
+          <div class="col d-flex justify-content-center align-items-center">
             <ReuseableButton
               :class="isLogInActive ? 'active' : 'not-active'"
-              class="primery-button-nav py-1 p-5 me-2 text-nowrap"
+              class="primery-button-nav py-1 me-2 text-nowrap flex-fill"
               @click="!isLogInActive ? (isLogInActive = !isLogInActive) : ''"
               >Log In</ReuseableButton
             >
+          </div>
 
+          <div class="col d-flex justify-content-center align-items-center">
             <ReuseableButton
               :class="!isLogInActive ? 'active' : 'not-active'"
-              class="primery-button-nav py-1 p-5 ms-2 text-nowrap"
+              class="primery-button-nav py-1 ms-2 text-nowrap flex-fill"
               @click="isLogInActive ? (isLogInActive = !isLogInActive) : ''"
               >Register</ReuseableButton
             >
@@ -21,23 +23,30 @@
         </div>
 
         <div v-if="inBrowser" class="row mt-3 justify-content-center align-items-center">
-          <div class="col-12 d-flex justify-content-center align-items-center">
+          <div class="col-12 mb-2 fs-5 d-flex justify-content-center align-items-center">
             Sign in with:
           </div>
-          <div class="col-1 fs-5 d-flex justify-content-center align-items-center">
-            <font-awesome-icon
-              @click="facebookSignIn"
-              icon="fa-brands fa-square-facebook"
-            />
+          <div class="col d-flex justify-content-center align-items-center">
+            <div
+              @click="useFacebookSignIn()"
+              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center"
+            >
+              <font-awesome-icon
+                class="fs-5 d-flex"
+                icon="fa-brands fa-square-facebook"
+              />
+              <label class="ms-2">Facebook</label>
+            </div>
           </div>
-          <div class="col-1 fs-5 d-flex justify-content-center align-items-center">
-            <font-awesome-icon icon="fa-brands fa-square-twitter" />
-          </div>
-          <div class="col-1 fs-5 d-flex justify-content-center align-items-center">
-            <font-awesome-icon icon="fa-brands fa-linkedin" />
-          </div>
-          <div class="col-1 fs-5 d-flex justify-content-center align-items-center">
-            <font-awesome-icon @click="googleSignIn" icon="fa-brands fa-google" />
+
+          <div class="col d-flex justify-content-center align-items-center">
+            <div
+              @click="useGoogleSignIn()"
+              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center"
+            >
+              <font-awesome-icon class="fs-5" icon="fa-brands fa-google" />
+              <label class="ms-2">Google</label>
+            </div>
           </div>
         </div>
         <div class="row mt-3">
@@ -106,32 +115,11 @@ const email = ref("");
 const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-const client = useSupabaseClient();
-const register = async () => {
+function register() {
   if (password.value === confirmPassword.value) {
-    const { user, error } = await client.auth.signUp({
-      email: email.value,
-      phone: phone.value,
-      password: password.value,
-    });
-    console.log("user", user);
-    console.log("error", error);
+    useRegister(email.value, phone.value, password.value);
   }
-};
-const facebookSignIn = async () => {
-  const { user, error } = await client.auth.signInWithOAuth({
-    provider: "facebook",
-  });
-  console.log("user", user);
-  console.log("error", error);
-};
-const googleSignIn = async () => {
-  const { user, error } = await client.auth.signInWithOAuth({
-    provider: "google",
-  });
-  console.log("user", user);
-  console.log("error", error);
-};
+}
 </script>
 <style lang="scss" scoped>
 .form {
