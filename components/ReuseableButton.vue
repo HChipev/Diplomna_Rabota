@@ -56,19 +56,14 @@
   }
 }
 .primery-button-nav {
-  color: $black;
-  background: $primery-color;
-  border: 1px solid $primery-color;
+  color: $primery-color;
+  background: $primery-darker-color;
+  border: 1px solid $primery-darker-color;
   border-radius: $card-border-radius;
   transition: all 0.5s ease;
-  &.active {
-    transform: translateY(-0.1em) translateX(0.1em);
-    box-shadow: -0.25em 0.3em 0.3em $accent-color;
-  }
   &.not-active {
-    color: $primery-color;
-    border-color: $primery-darker-color;
-    background: $primery-darker-color;
+    border-color: $primery-gray-color;
+    background: $primery-gray-color;
     &:hover {
       background: $accent-color;
       color: $primery-color;

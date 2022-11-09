@@ -5,7 +5,7 @@
         <div class="row mb-4">
           <div class="col d-flex justify-content-center align-items-center">
             <ReuseableButton
-              :class="isLogInActive ? 'active' : 'not-active'"
+              :class="isLogInActive ? '' : 'not-active'"
               class="primery-button-nav py-1 me-2 text-nowrap flex-fill"
               @click="!isLogInActive ? (isLogInActive = !isLogInActive) : ''"
               >Log In</ReuseableButton
@@ -14,11 +14,14 @@
 
           <div class="col d-flex justify-content-center align-items-center">
             <ReuseableButton
-              :class="!isLogInActive ? 'active' : 'not-active'"
+              :class="!isLogInActive ? '' : 'not-active'"
               class="primery-button-nav py-1 ms-2 text-nowrap flex-fill"
               @click="isLogInActive ? (isLogInActive = !isLogInActive) : ''"
               >Register</ReuseableButton
             >
+          </div>
+          <div class="col-12">
+            <hr :class="isLogInActive ? '' : 'register'" />
           </div>
         </div>
 
@@ -29,7 +32,7 @@
           <div class="col d-flex justify-content-center align-items-center">
             <div
               @click="useFacebookSignIn()"
-              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center"
+              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center o-auth-wrapper"
             >
               <font-awesome-icon
                 class="fs-5 d-flex"
@@ -42,7 +45,7 @@
           <div class="col d-flex justify-content-center align-items-center">
             <div
               @click="useGoogleSignIn()"
-              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center"
+              class="border rounded px-2 py-1 d-flex flex-nowrap flex-fill align-items-center o-auth-wrapper"
             >
               <font-awesome-icon class="fs-5" icon="fa-brands fa-google" />
               <label class="ms-2">Google</label>
@@ -66,7 +69,7 @@
             <label for="phone">Phone</label>
             <input
               v-model="phone"
-              type="text"
+              type="tel"
               id="phone"
               class="form-control"
               placeholder="Phone"
@@ -120,6 +123,9 @@ function register() {
     useRegister(email.value, phone.value, password.value);
   }
 }
+function logIn() {
+  useLogIn(email.value, password.value);
+}
 </script>
 <style lang="scss" scoped>
 .form {
@@ -127,6 +133,55 @@ function register() {
   .accent-button {
     min-height: 2.5em;
     font-size: 18px;
+  }
+  hr {
+    border-radius: $border-radius;
+    background: $accent-color;
+    opacity: 0.75;
+    min-height: 3px;
+    width: 9.5rem;
+    margin-inline: 0.3em;
+    margin-block: 0.5em;
+    transition: all 0.5s ease;
+    &.register {
+      transform: translateX(133%);
+    }
+  }
+  .o-auth-wrapper {
+    transition: all 0.5s ease;
+    &:hover {
+      cursor: pointer;
+      animation: wiggle 0.5s ease-in-out;
+      border-color: $accent-color !important;
+      background: $accent-color;
+
+      @keyframes wiggle {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(3.5deg);
+        }
+        35% {
+          transform: rotate(1.5deg);
+        }
+        45% {
+          transform: rotate(0deg);
+        }
+        55% {
+          transform: rotate(-1.5deg);
+        }
+        75% {
+          transform: rotate(-3.5deg);
+        }
+        85% {
+          transform: rotate(-1.5deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    }
   }
 }
 </style>
