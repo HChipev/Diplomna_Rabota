@@ -39,7 +39,7 @@
       /></NuxtLink>
 
       <NuxtLink
-        :to="user ? '/account' : '/login'"
+        to="/login"
         :class="user ? 'loggedIn' : ''"
         class="nav-button"
         @click="scrollToTop"
