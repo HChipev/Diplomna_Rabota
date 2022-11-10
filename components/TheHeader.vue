@@ -39,7 +39,7 @@
       /></NuxtLink>
 
       <NuxtLink
-        to="/login"
+        :to="user ? '/account' : '/login'"
         :class="user ? 'loggedIn' : ''"
         class="nav-button"
         @click="scrollToTop"
@@ -48,7 +48,7 @@
           height="30"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic"
-        /><font-awesome-icon v-else icon="fa-solid fa-user" />{{
+        /><font-awesome-icon v-else class="me-1" icon="fa-solid fa-user" />{{
           user ? "" : "Log In"
         }}</NuxtLink
       >
@@ -126,79 +126,89 @@ nav {
       }
     }
   }
-}
 
-.nav-button {
-  color: $primery-color;
-  padding: 0.3em 1.5em;
-  margin-inline: 0.4em;
-  transition: all 0.3s ease;
-  border: 1px solid $primery-darker-color;
-  border-radius: $border-radius;
-  &:hover {
+  .nav-button {
     color: $primery-color;
-    border: 1px solid $accent-color;
+    padding: 0.3em 1.5em;
+    margin-inline: 0.4em;
+    transition: all 0.3s ease;
+    border: 1px solid $primery-darker-color;
     border-radius: $border-radius;
-    background: $accent-color;
-  }
-  &.loggedIn {
-    padding: 0;
-    border-radius: 50%;
-  }
-  &.router-link-active {
-    box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
-    &:hover {
-      box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
-    }
-  }
-}
-.menu-button {
-  .bars {
-    height: 25px;
-    width: 25px;
-  }
-  .x {
-    height: 27px;
-    width: 25px;
-  }
-}
-#cart-button {
-  color: $primery-color;
-  padding: 0.3em 0.5em;
-  margin-left: 0.15em;
-  margin-right: 0.35em;
-  transition: all 0.3s ease;
-  > * {
-    font-size: 20px;
-  }
-  &:hover {
-    animation: jumpUp 0.35s ease-in;
-    color: $accent-color;
-  }
-
-  &.router-link-active {
-    box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
-    border-radius: $card-border-radius;
     &:hover {
       color: $primery-color;
+      border: 1px solid $accent-color;
+      border-radius: $border-radius;
       background: $accent-color;
-      box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
+    }
+    &.loggedIn {
+      padding: 0;
+      border-radius: 50%;
+      margin-left: 0;
+      margin-right: 0.35em;
+      &:hover {
+        background: none;
+      }
+      &.router-link-exact-active {
+        box-shadow: none;
+        &:hover {
+          box-shadow: none;
+        }
+      }
+    }
+    &.router-link-active {
+      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
+      &:hover {
+        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
+      }
+    }
+  }
+  .menu-button {
+    .bars {
+      height: 25px;
+      width: 25px;
+    }
+    .x {
+      height: 27px;
+      width: 25px;
+    }
+  }
+  #cart-button {
+    color: $primery-color;
+    padding: 0.3em 0.5em;
+    margin-left: 0.15em;
+    margin-right: 0.35em;
+    transition: all 0.3s ease;
+    > * {
+      font-size: 20px;
+    }
+    &:hover {
+      animation: jumpUp 0.35s ease-in;
+      color: $accent-color;
+    }
+
+    &.router-link-active {
+      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
+      border-radius: $card-border-radius;
+      &:hover {
+        color: $primery-color;
+        background: $accent-color;
+        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
+      }
+    }
+  }
+  @keyframes jumpUp {
+    0% {
+      transform: translateY(0em);
+    }
+    50% {
+      transform: translateY(-0.3em);
+    }
+
+    100% {
+      transform: translateY(0);
     }
   }
 }
-@keyframes jumpUp {
-  0% {
-    transform: translateY(0em);
-  }
-  50% {
-    transform: translateY(-0.3em);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 900px) {
   nav {
     .navbar-container {
@@ -250,6 +260,9 @@ nav {
       padding-bottom: 0.05em;
       padding-inline: 0.25em;
       margin-right: 0.65em;
+    }
+    .loggedIn {
+      margin-right: 0.65em !important;
     }
   }
 }
