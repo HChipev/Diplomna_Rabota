@@ -73,7 +73,7 @@ const clicked = ref(false);
 const menuShow = ref(null);
 const windowWidth = ref(0);
 const inBrowser = inject("inBrowser");
-const user = useSupabaseUser();
+const user = inject("user");
 
 if (process.client) {
   windowWidth.value = window.innerWidth;

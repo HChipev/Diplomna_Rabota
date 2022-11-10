@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup>
-const user = useSupabaseUser();
+const user = inject("user");
 function logout() {
   useLogOut();
   console.log(user);
