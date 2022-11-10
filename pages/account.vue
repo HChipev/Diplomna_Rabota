@@ -5,10 +5,10 @@
   </div>
 </template>
 <script setup>
-const user = inject("user");
+const user = useSupabaseUser();
 function logout() {
   useLogOut();
-  console.log(user);
+  console.log(user.value);
   navigateTo("/");
 }
 </script>

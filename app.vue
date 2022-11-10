@@ -10,7 +10,6 @@
   </div>
 </template>
 <script setup>
-const user = useSupabaseUser();
 const inBrowser = ref(false);
 onMounted(() => {
   if (process.client) {
@@ -19,7 +18,9 @@ onMounted(() => {
     inBrowser.value = false;
   }
 });
-provide("user", user);
+definePageMeta({
+  middleware: ["auth"],
+});
 provide("inBrowser", inBrowser);
 </script>
 <style lang="scss" global>
