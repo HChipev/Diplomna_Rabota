@@ -127,6 +127,7 @@ function register() {
 }
 function logIn() {
   useLogIn(email.value, password.value);
+  console.log(useSupabaseUser());
   navigateTo("/");
 }
 </script>
