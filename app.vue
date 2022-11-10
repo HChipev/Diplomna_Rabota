@@ -18,9 +18,6 @@ onMounted(() => {
     inBrowser.value = false;
   }
 });
-definePageMeta({
-  middleware: ["auth"],
-});
 provide("inBrowser", inBrowser);
 </script>
 <style lang="scss" global>
