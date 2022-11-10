@@ -121,10 +121,12 @@ const confirmPassword = ref("");
 function register() {
   if (password.value === confirmPassword.value) {
     useRegister(email.value, phone.value, password.value);
+    navigateTo("/");
   }
 }
 function logIn() {
   useLogIn(email.value, password.value);
+  navigateTo("/");
 }
 </script>
 <style lang="scss" scoped>

@@ -11,6 +11,7 @@
 </template>
 <script setup>
 const inBrowser = ref(false);
+const user = useSupabaseUser();
 onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
@@ -18,6 +19,7 @@ onMounted(() => {
     inBrowser.value = false;
   }
 });
+provide("user", user);
 provide("inBrowser", inBrowser);
 </script>
 <style lang="scss" global>

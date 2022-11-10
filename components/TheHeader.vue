@@ -34,9 +34,24 @@
         </li>
       </ul>
 
-      <NuxtLink to="/cart" id="cart-button" @click="scrollToTop">
+      <NuxtLink to="/cart" v-if="user" id="cart-button" @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
+
+      <NuxtLink
+        to="/login"
+        :class="user ? 'loggedIn' : ''"
+        class="nav-button"
+        @click="scrollToTop"
+        ><img
+          v-if="user"
+          height="30"
+          src="../assets/profile-pic-icon.png"
+          alt="profile-pic"
+        /><font-awesome-icon v-else icon="fa-solid fa-user" />{{
+          user ? "" : "Log In"
+        }}</NuxtLink
+      >
 
       <ReuseableButton
         v-if="windowWidth <= 900 && inBrowser"
@@ -54,13 +69,15 @@
   </nav>
 </template>
 <script setup>
-let clicked = ref(false);
-let menuShow = ref(null);
-let windowWidth = ref(0);
+const clicked = ref(false);
+const menuShow = ref(null);
+const windowWidth = ref(0);
+const inBrowser = inject("inBrowser");
+const user = inject("user");
+
 if (process.client) {
   windowWidth.value = window.innerWidth;
 }
-const inBrowser = inject("inBrowser");
 
 const onWidthChange = () => (
   (windowWidth.value = window.innerWidth),
@@ -106,75 +123,79 @@ nav {
       list-style-type: none;
       li {
         display: inline;
-        .nav-button {
-          color: $primery-color;
-          padding: 0.3em 1.5em;
-          margin-inline: 0.4em;
-          transition: all 0.3s ease;
-          border: 1px solid $primery-darker-color;
-          border-radius: $border-radius;
-          &:hover {
-            border: 1px solid $accent-color;
-            border-radius: $border-radius;
-            background: $accent-color;
-          }
-          &.router-link-active {
-            box-shadow: 0.075em 0.08em 1px $primery-color,
-              -0.075em -0.08em 1px $accent-color;
-            &:hover {
-              box-shadow: 0.075em 0.08em 1px $accent-color,
-                -0.075em -0.08em 1px $primery-color;
-            }
-          }
-        }
       }
     }
   }
-  .menu-button {
-    .bars {
-      height: 25px;
-      width: 25px;
-    }
-    .x {
-      height: 27px;
-      width: 25px;
-    }
-  }
-  #cart-button {
+}
+
+.nav-button {
+  color: $primery-color;
+  padding: 0.3em 1.5em;
+  margin-inline: 0.4em;
+  transition: all 0.3s ease;
+  border: 1px solid $primery-darker-color;
+  border-radius: $border-radius;
+  &:hover {
     color: $primery-color;
-    padding: 0.3em 0.5em;
-    margin-left: 0.15em;
-    margin-right: 0.35em;
-    transition: all 0.3s ease;
-    > * {
-      font-size: 20px;
-    }
+    border: 1px solid $accent-color;
+    border-radius: $border-radius;
+    background: $accent-color;
+  }
+  &.loggedIn {
+    padding: 0;
+    border-radius: 50%;
+  }
+  &.router-link-active {
+    box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
     &:hover {
-      animation: jumpUp 0.35s ease-in;
-      color: $accent-color;
-    }
-
-    &.router-link-active {
-      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
-      border-radius: $card-border-radius;
-      &:hover {
-        color: $primery-color;
-        background: $accent-color;
-        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
-      }
+      box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
     }
   }
-  @keyframes jumpUp {
-    0% {
-      transform: translateY(0em);
-    }
-    50% {
-      transform: translateY(-0.3em);
-    }
+}
+.menu-button {
+  .bars {
+    height: 25px;
+    width: 25px;
+  }
+  .x {
+    height: 27px;
+    width: 25px;
+  }
+}
+#cart-button {
+  color: $primery-color;
+  padding: 0.3em 0.5em;
+  margin-left: 0.15em;
+  margin-right: 0.35em;
+  transition: all 0.3s ease;
+  > * {
+    font-size: 20px;
+  }
+  &:hover {
+    animation: jumpUp 0.35s ease-in;
+    color: $accent-color;
+  }
 
-    100% {
-      transform: translateY(0);
+  &.router-link-active {
+    box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
+    border-radius: $card-border-radius;
+    &:hover {
+      color: $primery-color;
+      background: $accent-color;
+      box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
     }
+  }
+}
+@keyframes jumpUp {
+  0% {
+    transform: translateY(0em);
+  }
+  50% {
+    transform: translateY(-0.3em);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 
