@@ -34,22 +34,22 @@
         </li>
       </ul>
 
-      <NuxtLink to="/cart" v-if="useUser().getUser" id="cart-button" @click="scrollToTop">
+      <NuxtLink to="/cart" v-if="user" id="cart-button" @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <NuxtLink
         to="/login"
-        :class="useUser().getUser ? 'loggedIn' : ''"
+        :class="user ? 'loggedIn' : ''"
         class="nav-button"
         @click="scrollToTop"
         ><img
-          v-if="useUser().getUser"
+          v-if="user"
           height="30"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic"
         /><font-awesome-icon v-else class="me-1" icon="fa-solid fa-user" />{{
-          useUser().getUser ? "" : "Log In"
+          user ? "" : "Log In"
         }}</NuxtLink
       >
 
@@ -73,8 +73,8 @@ const clicked = ref(false);
 const menuShow = ref(null);
 const windowWidth = ref(0);
 const inBrowser = inject("inBrowser");
-const { user } = storeToRefs(useUser());
-useUser().setUser(useSupabaseUser());
+const user = inject("user");
+
 if (process.client) {
   windowWidth.value = window.innerWidth;
 }

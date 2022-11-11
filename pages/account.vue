@@ -1,12 +1,11 @@
 <template>
   <div>
-    <p>{{ useUser().getUser.email }}</p>
+    <p>{{ user.email }}</p>
     <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
   </div>
 </template>
 <script setup>
-const { user } = storeToRefs(useUser());
-useUser().setUser(useSupabaseUser());
+const user = inject("user");
 function logout() {
   useLogOut();
   console.log(user.value);
