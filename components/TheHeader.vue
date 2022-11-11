@@ -34,22 +34,22 @@
         </li>
       </ul>
 
-      <NuxtLink to="/cart" v-if="user" id="cart-button" @click="scrollToTop">
+      <NuxtLink to="/cart" v-if="useUser().getUser" id="cart-button" @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <NuxtLink
         to="/login"
-        :class="user ? 'loggedIn' : ''"
+        :class="useUser().getUser ? 'loggedIn' : ''"
         class="nav-button"
         @click="scrollToTop"
         ><img
-          v-if="user"
+          v-if="useUser().getUser"
           height="30"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic"
         /><font-awesome-icon v-else class="me-1" icon="fa-solid fa-user" />{{
-          user ? "" : "Log In"
+          useUser().getUser ? "" : "Log In"
         }}</NuxtLink
       >
 
@@ -73,8 +73,8 @@ const clicked = ref(false);
 const menuShow = ref(null);
 const windowWidth = ref(0);
 const inBrowser = inject("inBrowser");
-const user = useSupabaseUser();
-
+const { user } = storeToRefs(useUser());
+useUser().setUser(useSupabaseUser());
 if (process.client) {
   windowWidth.value = window.innerWidth;
 }
@@ -90,7 +90,6 @@ onMounted(() => {
     window.addEventListener("resize", onWidthChange);
   }
 });
-
 onUnmounted(() => window.removeEventListener("resize", onWidthChange));
 //* checking if menu should be active
 function isMenuShown() {
