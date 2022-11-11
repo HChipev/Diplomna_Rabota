@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ user.email }}</p>
+    <p>{{ user !== "undefined" ? user.email : "" }}</p>
     <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
   </div>
 </template>
