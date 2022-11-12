@@ -15,9 +15,10 @@ useSupabaseClient().auth.onAuthStateChange((event, session) => {
   console.log("session changed");
   useUser().setUser(session);
 });
-
-onBeforeMount(() => {
-  useUser().setUser(localStorage.getItem("user"));
+onBeforeMount(async () => {
+  console.log(useSupabaseClient().auth.getSession());
+  useUser().setUser(await useSupabaseClient().auth.getSession());
+  console.log(useUser().getUser);
 });
 onMounted(() => {
   if (process.client) {
