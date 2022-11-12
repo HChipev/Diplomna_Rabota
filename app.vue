@@ -11,7 +11,11 @@
 </template>
 <script setup>
 const inBrowser = ref(false);
-const user = useSupabaseUser();
+useSupabaseClient().auth.onAuthStateChange((event, session) => {
+  console.log("session changed");
+  useUser().setUser(session);
+});
+
 onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
@@ -19,7 +23,6 @@ onMounted(() => {
     inBrowser.value = false;
   }
 });
-provide("user", user);
 provide("inBrowser", inBrowser);
 </script>
 <style lang="scss" global>

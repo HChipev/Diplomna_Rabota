@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup>
-const user = inject("user");
+const user = storeToRefs(useUser());
 function logout() {
   useLogOut();
   console.log(user.value);
