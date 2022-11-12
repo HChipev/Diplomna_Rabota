@@ -1,14 +1,13 @@
 <template>
   <div>
-    <p>{{ user.email }}</p>
+    <p>{{ useUser().getUser.email }}</p>
     <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
   </div>
 </template>
 <script setup>
-const user = storeToRefs(useUser());
 function logout() {
   useLogOut();
-  console.log(user.value);
+  console.log(useUser().getUser.email);
   navigateTo("/");
 }
 </script>
