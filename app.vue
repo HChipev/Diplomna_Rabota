@@ -22,12 +22,6 @@ onMounted(() => {
   } else {
     inBrowser.value = false;
   }
-  const refreshToken = ref(localStorage.getItem("user"));
-  watchEffect(refreshToken, (newVal) => {
-    if (newVal !== null) {
-      useUser().setUser(localStorage.getItem("user"));
-    }
-  });
 });
 provide("inBrowser", inBrowser);
 </script>

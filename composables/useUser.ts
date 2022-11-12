@@ -9,7 +9,7 @@ export const useUser = defineStore("user", {
   },
   actions: {
     setUser(payload) {
-      this.user = payload ? payload.user : null;
+      this.user = payload ? payload.user : localStorage.getItem("user");
       if (payload) {
         localStorage.setItem("user", JSON.stringify(payload.user));
       } else {
