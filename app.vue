@@ -19,15 +19,15 @@ useSupabaseClient().auth.onAuthStateChange((event, session) => {
 onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
-    const refreshToken = ref(localStorage.getItem("user"));
-    watch(refreshToken, (newVal) => {
-      if (newVal !== null) {
-        useUser().setUser(localStorage.getItem("user"));
-      }
-    });
   } else {
     inBrowser.value = false;
   }
+  const refreshToken = ref(localStorage.getItem("user"));
+  watchEffect(refreshToken, (newVal) => {
+    if (newVal !== null) {
+      useUser().setUser(localStorage.getItem("user"));
+    }
+  });
 });
 provide("inBrowser", inBrowser);
 </script>
