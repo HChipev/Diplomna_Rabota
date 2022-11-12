@@ -16,10 +16,12 @@ useSupabaseClient().auth.onAuthStateChange((event, session) => {
   useUser().setUser(session);
 });
 
+onBeforeMount(() => {
+  useUser().setUser(localStorage.getItem("user"));
+});
 onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
-    useUser().setUser(localStorage.getItem("user"));
   } else {
     inBrowser.value = false;
   }
