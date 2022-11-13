@@ -15,11 +15,7 @@ useSupabaseClient().auth.onAuthStateChange((event, session) => {
   console.log("session changed");
   useUser().setUser(session);
 });
-onBeforeMount(async () => {
-  console.log(useSupabaseClient().auth.getSession());
-  useUser().setUser(await useSupabaseClient().auth.getSession());
-  console.log(useUser().getUser);
-});
+
 onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
