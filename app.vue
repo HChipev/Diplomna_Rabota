@@ -11,9 +11,9 @@
 </template>
 <script setup>
 const inBrowser = ref(false);
-useSupabaseClient().auth.onAuthStateChange((event, session) => {
+useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
-  useUser().setUser(session);
+  useUser().setUser(session?.user);
 });
 
 onMounted(() => {
