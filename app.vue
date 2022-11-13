@@ -1,5 +1,5 @@
 <template>
-  <div id="flex-wrapper">
+  <div v-if="appReady" id="flex-wrapper">
     <header>
       <TheHeader />
     </header>
@@ -13,13 +13,10 @@
 const inBrowser = ref(false);
 useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
-  useUser().setUser(session.user);
+  useUser().setUser(session);
 });
 
-onMounted(async () => {
-  if (localStorage.getItem("sb-yztvdomlzybedrnzerif-auth-token")) {
-    useUser().setUser(await useSupabaseClient().auth.getUser());
-  }
+onMounted(() => {
   if (process.client) {
     inBrowser.value = true;
   } else {

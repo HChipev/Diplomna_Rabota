@@ -9,7 +9,7 @@ export const useUser = defineStore("user", {
   },
   actions: {
     setUser(payload) {
-      this.user = payload ? payload : null;
+      this.user = payload ? payload.user : null;
     },
   },
 });
