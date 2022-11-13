@@ -13,10 +13,13 @@
 const inBrowser = ref(false);
 useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
-  useUser().setUser(session?.user);
+  useUser().setUser(session.user);
 });
 
-onMounted(() => {
+onMounted(async () => {
+  if (localStorage.getItem("sb-yztvdomlzybedrnzerif-auth-token")) {
+    useUser().setUser(await useSupabaseClient().auth.getUser());
+  }
   if (process.client) {
     inBrowser.value = true;
   } else {
