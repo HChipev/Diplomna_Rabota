@@ -1,5 +1,5 @@
 <template>
-  <div v-if="appReady" id="flex-wrapper">
+  <div id="flex-wrapper">
     <header>
       <TheHeader />
     </header>
