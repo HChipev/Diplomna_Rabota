@@ -15,8 +15,17 @@ useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
   useUser().setUser(session);
 });
-
+watch(
+  useUser(),
+  (userVal) => {
+    localStorage.setItem("user", JSON.stringify(userVal));
+  },
+  { deep: true }
+);
 onMounted(() => {
+  if (localStorage.getItem("user")) {
+    useUser().setUser(JSON.parse(localStorage.getItem("user")));
+  }
   if (process.client) {
     inBrowser.value = true;
   } else {
