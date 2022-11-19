@@ -24,6 +24,7 @@ watch(
   { deep: true }
 );
 onMounted(() => {
+  useLogOut();
   if (localStorage.getItem("user")) {
     useUser().setUser(parse(localStorage.getItem("user")));
   }
