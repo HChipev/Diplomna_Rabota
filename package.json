@@ -22,6 +22,7 @@
     "@nuxtjs/supabase": "^0.2.2",
     "@pinia/nuxt": "^0.4.3",
     "bootstrap": "^5.2.2",
+    "flatted": "^3.2.7",
     "pinia": "^2.0.23"
   }
 }
