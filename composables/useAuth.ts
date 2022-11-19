@@ -16,6 +16,9 @@ export const useLogIn = async (email, password) => {
 export const useLogOut = async () => {
   const client = useSupabaseClient();
   const { error } = await client.auth.signOut();
+  if (!error) {
+    localStorage.removeItem("user");
+  }
 };
 export const useFacebookSignIn = async () => {
   const client = useSupabaseClient();

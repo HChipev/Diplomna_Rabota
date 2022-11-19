@@ -15,10 +15,22 @@ useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
   useUser().setUser(session);
 });
+const replacerFunc = () => {
+  const visited = new WeakSet();
+  return (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (visited.has(value)) {
+        return;
+      }
+      visited.add(value);
+    }
+    return value;
+  };
+};
 watch(
   useUser(),
   (userVal) => {
-    localStorage.setItem("user", JSON.stringify(userVal));
+    localStorage.setItem("user", JSON.stringify(userVal, replacerFunc()));
   },
   { deep: true }
 );
