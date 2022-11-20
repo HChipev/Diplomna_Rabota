@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ useUser().getUser.email }}</p>
+    <p v-if="useUser().getUser">{{ useUser().getUser.email }}</p>
     <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
   </div>
 </template>
