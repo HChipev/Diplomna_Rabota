@@ -118,10 +118,12 @@ const email = ref("");
 const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-watch(useUser(), (user) => {
-  if (user) {
-    navigateTo("/account");
-  }
+onBeforeMount(() => {
+  watch(useUser(), (user) => {
+    if (user) {
+      navigateTo("/account");
+    }
+  });
 });
 function register() {
   if (password.value === confirmPassword.value) {
