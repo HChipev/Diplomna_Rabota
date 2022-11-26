@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
       console.log(useSupabaseUser());
       if (useSupabaseUser() && to.path === "/login") {
         return navigateTo("/account");
-      } else if (!useSupabaseUser() && to.path === "/account") {
+      } else if (!useSupabaseUser().value && to.path === "/account") {
         return navigateTo("/login");
       }
     },
