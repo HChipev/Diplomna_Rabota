@@ -118,8 +118,8 @@ const email = ref("");
 const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-onBeforeMount(() => {
-  if (useSupabaseUser()) {
+onBeforeMount(async () => {
+  if (await useSupabaseClient().auth.getUser()) {
     navigateTo("/account");
   }
 });
