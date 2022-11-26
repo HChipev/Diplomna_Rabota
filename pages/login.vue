@@ -119,11 +119,9 @@ const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 onBeforeMount(() => {
-  watch(useUser(), (user) => {
-    if (user) {
-      navigateTo("/account");
-    }
-  });
+  if (user) {
+    navigateTo("/account");
+  }
 });
 function register() {
   if (password.value === confirmPassword.value) {
