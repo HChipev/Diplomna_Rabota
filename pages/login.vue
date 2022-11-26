@@ -118,11 +118,6 @@ const email = ref("");
 const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-onBeforeMount(async () => {
-  if (await useSupabaseClient().auth.getUser()) {
-    navigateTo("/account");
-  }
-});
 function register() {
   if (password.value === confirmPassword.value) {
     useRegister(email.value, phone.value, password.value);

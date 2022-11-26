@@ -1,9 +1,15 @@
 export default defineNuxtPlugin(() => {
   addRouteMiddleware(
     (to) => {
-      if (useUser().getUser && to.path === "/login") {
+      if (
+        useSupabaseClient().auth.getUser(useSupabaseToken()) &&
+        to.path === "/login"
+      ) {
         return navigateTo("/account");
-      } else if (!useUser().getUser && to.path === "/account") {
+      } else if (
+        !useSupabaseClient().auth.getUser(useSupabaseToken()) &&
+        to.path === "/account"
+      ) {
         return navigateTo("/login");
       }
     },
