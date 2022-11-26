@@ -119,7 +119,7 @@ const phone = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 onBeforeMount(() => {
-  if (user) {
+  if (useSupabaseUser()) {
     navigateTo("/account");
   }
 });
