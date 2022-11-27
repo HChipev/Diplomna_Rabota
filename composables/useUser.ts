@@ -1,6 +1,6 @@
 export const useUser = defineStore("user", {
   state: () => ({
-    user: useSupabaseUser(),
+    user: useSupabaseUser().value,
   }),
   getters: {
     getUser(state) {
