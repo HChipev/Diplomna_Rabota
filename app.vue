@@ -27,6 +27,7 @@ onMounted(() => {
   if (localStorage.getItem("user")) {
     useUser().setUser(parse(localStorage.getItem("user")));
   }
+  useUser().setUser(useSupabaseUser().value);
   if (process.client) {
     inBrowser.value = true;
   } else {
