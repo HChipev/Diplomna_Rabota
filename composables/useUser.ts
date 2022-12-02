@@ -1,6 +1,8 @@
 export const useUser = defineStore("user", {
   state: () => ({
-    user: useSupabaseUser().value,
+    user: useSupabaseClient()
+      .auth.getUser()
+      .then((user) => user),
   }),
   getters: {
     getUser(state) {
