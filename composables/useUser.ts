@@ -1,10 +1,12 @@
 export const useUser = defineStore("user", {
-  state: async () => ({
-    user: await useSupabaseClient().auth.getUser(),
+  state: () => ({
+    user: useSupabaseClient()
+      .auth.getUser()
+      .then((user) => (Object.keys(user).length !== 0 ? user : null)),
   }),
   getters: {
-    async getUser(state) {
-      return (await state).user;
+    getUser(state) {
+      return state.user;
     },
   },
   actions: {
