@@ -10,6 +10,7 @@
   </div>
 </template>
 <script setup>
+import { parse, stringify } from "flatted";
 const inBrowser = ref(false);
 useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
