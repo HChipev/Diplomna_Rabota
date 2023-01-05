@@ -8,6 +8,7 @@
 definePageMeta({
   middleware: ["auth-middleware"],
 });
+console.log(useUser().getUser.email);
 function logout() {
   useLogOut();
   console.log(useUser().getUser.email);

@@ -10,23 +10,23 @@
   </div>
 </template>
 <script setup>
-import { parse, stringify } from "flatted";
+// import { parse, stringify } from "flatted";
 const inBrowser = ref(false);
 useSupabaseClient().auth.onAuthStateChange((_, session) => {
   console.log("session changed");
   useUser().setUser(session);
 });
-watch(
-  useUser(),
-  (userVal) => {
-    localStorage.setItem("user", stringify(userVal));
-  },
-  { deep: true }
-);
+// watch(
+//   useUser(),
+//   (userVal) => {
+//     localStorage.setItem("user", stringify(userVal));
+//   },
+//   { deep: true }
+// );
 onMounted(() => {
-  if (localStorage.getItem("user")) {
-    useUser().setUser(parse(localStorage.getItem("user")));
-  }
+  // if (localStorage.getItem("user")) {
+  //   useUser().setUser(parse(localStorage.getItem("user")));
+  // }
   if (process.client) {
     inBrowser.value = true;
   } else {
