@@ -1,9 +1,9 @@
 <template>
-  <div v-if="inBrowser" id="flex-wrapper">
+  <div id="flex-wrapper">
     <header>
       <TheHeader />
     </header>
-    <NuxtPage />
+    <NuxtPage v-if="inBrowser" />
     <footer>
       <TheFooter />
     </footer>
