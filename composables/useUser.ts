@@ -12,7 +12,7 @@ export const useUser = defineStore("user", {
       this.user = payload ? payload.user : null;
     },
     async requestUser() {
-      this.user = useSupabaseUser().value;
+      this.user = useSupabaseClient().auth.getUser;
       console.log(this.user);
     },
   },
