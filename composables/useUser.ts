@@ -13,6 +13,7 @@ export const useUser = defineStore("user", {
     },
     async requestUser() {
       this.user = useSupabaseUser().value;
+      console.log(this.user);
     },
   },
 });
