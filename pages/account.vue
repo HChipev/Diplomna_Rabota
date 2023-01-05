@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="inBrowser">
     <p v-if="useUser().getUser">{{ useUser().getUser.email }}</p>
     <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
   </div>
@@ -14,6 +14,7 @@ function logout() {
   console.log(useUser().getUser.email);
   navigateTo("/");
 }
+const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
 .accent-button {

@@ -1,5 +1,8 @@
 <template>
-  <div class="container mt-auto d-flex justify-content-center align-items-center">
+  <div
+    v-if="inBrowser"
+    class="container mt-auto d-flex justify-content-center align-items-center"
+  >
     <div class="col-fluid-4 px-4 py-4 border rounded form">
       <form @submit.prevent="isLogInActive ? logIn() : register()">
         <div class="row mb-4">
@@ -25,7 +28,7 @@
           </div>
         </div>
 
-        <div v-if="inBrowser" class="row mt-3 justify-content-center align-items-center">
+        <div class="row mt-3 justify-content-center align-items-center">
           <div class="col-12 mb-2 fs-5 d-flex justify-content-center align-items-center">
             Sign in with:
           </div>
