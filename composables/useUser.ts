@@ -5,7 +5,6 @@ export const useUser = defineStore("user", {
   }),
   getters: {
     getUser(state) {
-      console.log(state.user);
       return state.user;
     },
   },
@@ -13,15 +12,15 @@ export const useUser = defineStore("user", {
     setUser(payload) {
       this.user = payload ? payload.user : null;
     },
-    async requestUser() {
-      this.loading = true;
-      const {
-        data: { session },
-        error,
-      } = await useSupabaseClient().auth.getSession();
-      this.user = session ? session.user : null;
-      console.log(this.user);
-      this.loading = false;
-    },
+    // async requestUser() {
+    //   this.loading = true;
+    //   const {
+    //     data: { session },
+    //     error,
+    //   } = await useSupabaseClient().auth.getSession();
+    //   this.user = session ? session.user : null;
+    //   console.log(this.user);
+    //   this.loading = false;
+    // },
   },
 });

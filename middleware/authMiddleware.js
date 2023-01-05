@@ -1,11 +1,16 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   console.log("beforeAwait");
-  await useUser().requestUser();
+  const {
+    data: { session },
+    error,
+  } = await useSupabaseClient().auth.getSession();
+  const user = session?.user;
+  useUser().setUser(session);
   console.log("afterAwait");
   console.log(useUser().getUser + "authMiddleware");
-  if (useUser().getUser && to.path === "/login") {
+  if (user && to.path === "/login") {
     return navigateTo("/account");
-  } else if (!useUser().getUser && to.path === "/account") {
+  } else if (!user && to.path === "/account") {
     return navigateTo("/login");
   }
 });
