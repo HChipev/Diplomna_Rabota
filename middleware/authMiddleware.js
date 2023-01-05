@@ -1,5 +1,5 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  useUser().requestUser();
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  await useUser().requestUser();
   console.log(useUser().getUser);
   console.log(useSupabaseClient());
   if (useUser().getUser && to.path === "/login") {
