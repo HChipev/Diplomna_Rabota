@@ -5,6 +5,9 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  middleware: ["auth-middleware"],
+});
 function logout() {
   useLogOut();
   console.log(useUser().getUser.email);

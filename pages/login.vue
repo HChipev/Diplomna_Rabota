@@ -112,6 +112,9 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  middleware: ["auth-middleware"],
+});
 const inBrowser = inject("inBrowser");
 const isLogInActive = ref(true);
 const email = ref("");

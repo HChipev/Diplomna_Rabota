@@ -61,7 +61,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
-  plugins: ["~/plugins/fontawesome.js", "~/plugins/authMiddleware.ts"],
+  plugins: ["~/plugins/fontawesome.js"],
   css: [
     "~/public/css/bootstrap.min.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
