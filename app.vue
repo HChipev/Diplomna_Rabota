@@ -1,5 +1,5 @@
 <template>
-  <div id="flex-wrapper">
+  <div v-if="inBrowser" id="flex-wrapper">
     <header>
       <TheHeader />
     </header>
