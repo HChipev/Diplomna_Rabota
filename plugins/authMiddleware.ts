@@ -1,7 +1,7 @@
 export default defineNuxtPlugin(() => {
   addRouteMiddleware(
-    (to) => {
-      useUser().requestUser();
+    async (to) => {
+      await useUser().requestUser();
       console.log(useUser().getUser);
       if (useUser().getUser && to.path === "/login") {
         return navigateTo("/account");
