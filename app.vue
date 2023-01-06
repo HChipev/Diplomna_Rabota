@@ -116,10 +116,10 @@ body {
     content: " ";
     display: block;
     position: absolute;
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #fff;
+    background: $primery-color;
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
