@@ -1,9 +1,8 @@
-export const useRegister = async (email, phone, password) => {
+export const useRegister = async (email, password) => {
   const client = useSupabaseClient();
   const { data, error } = await client.auth.signUp({
     email: email,
     password: password,
-    phone: phone,
   });
 };
 export const useLogIn = async (email, password) => {

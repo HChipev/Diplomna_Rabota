@@ -1,7 +1,15 @@
 <template>
   <div v-if="inBrowser">
     <p v-if="useUser().getUser">{{ useUser().getUser.email }}</p>
-    <ReuseableButton class="accent-button px-3" @click="logout">Log Out</ReuseableButton>
+    <p v-if="phone">{{ phone }}</p>
+    <ReuseableButton
+      class="accent-button px-3"
+      @click="updateUser(useUser().getUser.id, 'user', '1234567890')"
+      >Update Phone</ReuseableButton
+    >
+    <ReuseableButton class="accent-button px-3" @click="logout()"
+      >Log Out</ReuseableButton
+    >
   </div>
 </template>
 <script setup>
@@ -14,6 +22,8 @@ function logout() {
   console.log(useUser().getUser.email);
   navigateTo("/");
 }
+const phone = ref("");
+phone.value = await getPhone();
 const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
