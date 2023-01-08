@@ -24,8 +24,9 @@ function logout() {
 }
 const phone = ref("");
 onMounted(async () => {
-  if (inBrowser) phone.value = await getPhone();
+  phone.value = await getPhone();
 });
+
 const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
