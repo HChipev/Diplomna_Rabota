@@ -2,6 +2,7 @@ export async function updateUser(_id, _role, _phone) {
   const { data, error } = await useSupabaseClient()
     .from("user")
     .insert([{ id: _id, role: _role, phone: _phone }]);
+  console.log(data);
   console.log(useUser().getUser.id);
   console.log(error);
 }
