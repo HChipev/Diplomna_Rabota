@@ -23,9 +23,7 @@ function logout() {
   navigateTo("/");
 }
 const phone = ref("");
-onMounted(async () => {
-  phone.value = await getPhone();
-});
+phone.value = await getPhone();
 
 const inBrowser = inject("inBrowser");
 </script>
