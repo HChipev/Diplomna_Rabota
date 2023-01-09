@@ -23,8 +23,7 @@ function logout() {
   navigateTo("/");
 }
 const phone = ref("");
-phone.value = await getPhone();
-
+phone.value = await getUserData();
 const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
