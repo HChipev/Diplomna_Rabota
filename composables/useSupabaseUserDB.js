@@ -7,10 +7,15 @@ export async function updateUser(_id, _role, _phone) {
 }
 //*for getting data from supabase
 export async function getUserData() {
-  let { data, error } = await useSupabaseClient().from("user").select();
+  console.log(useUser().getUser.id);
+  let { data, error } = await useSupabaseClient()
+    .from("user")
+    .select()
+    .eq("user_id", useUser().getUser.id);
+
   if (data.length > 0) {
     console.log(data[0].phone);
-    return data[0].phone;
+    return data[0];
   }
   console.log(error);
   return "";

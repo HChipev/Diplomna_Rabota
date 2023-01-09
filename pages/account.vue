@@ -1,7 +1,12 @@
 <template>
   <div v-if="inBrowser">
     <p v-if="useUser().getUser">{{ useUser().getUser.email }}</p>
-    <p v-if="phone">{{ phone }}</p>
+    <p>
+      id: {{ useUserPData().getPData.id }} <br />
+      role: {{ useUserPData().getPData.role }} <br />
+      phone: {{ useUserPData().getPData.phone }} <br />
+      uid: {{ useUserPData().getPData.uid }}
+    </p>
     <ReuseableButton
       class="accent-button px-3"
       @click="updateUser(useUser().getUser.id, 'user', '1234567890')"
@@ -22,8 +27,8 @@ function logout() {
   console.log(useUser().getUser.email);
   navigateTo("/");
 }
-const phone = ref("");
-phone.value = await getUserData();
+useUserPData().setPData(await getUserData());
+
 const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
