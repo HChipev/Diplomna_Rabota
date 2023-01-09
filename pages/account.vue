@@ -26,18 +26,6 @@ const phone = ref("");
 phone.value = await getPhone();
 
 const inBrowser = inject("inBrowser");
-
-async function getPhone() {
-  let { data: user, error } = await useSupabaseClient()
-    .from("user")
-    .select("phone");
-  if (user.length > 0) {
-    console.log(user[0].phone);
-    return user[0].phone;
-  }
-  console.log(error);
-  return "";
-}
 </script>
 <style lang="scss" scoped>
 .accent-button {
