@@ -14,5 +14,6 @@ export async function getPhone() {
     console.log(user[0].phone);
     return user[0].phone;
   }
+  console.log(error);
   return "";
 }
