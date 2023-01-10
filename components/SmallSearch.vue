@@ -2,40 +2,37 @@
   <div class="container pb-2 pt-2">
     <form>
       <div class="row flex-nowrap">
-        <div class="col-5 d-flex flex-column align-items-start justify-content-center">
+        <div
+          class="col-5 d-flex flex-column align-items-start justify-content-center">
           <label class="label fs-4" for="category">Category</label>
           <select
             @change="selectionChanged($event)"
             id="category-dropbox"
             class="form-select mt-1 mb-5"
-            aria-label="Default select example"
-          >
+            aria-label="Default select example">
             <option value="Cars">Cars</option>
             <option value="Parts">Parts</option>
           </select>
         </div>
-        <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
+        <div
+          class="col-1 d-flex pb-1 align-items-center justify-content-center">
           <img
             v-if="carSearch"
             class="cat-icon"
             src="../assets/car-icon.svg"
-            alt="category-icon"
-          />
+            alt="category-icon" />
           <img
             v-else
             class="cat-icon"
             src="../assets/parts-icon.svg"
-            alt="category-icon"
-          />
+            alt="category-icon" />
         </div>
-        <div class="col-6" align="end">
+        <div class="col-6 d-flex justify-content-end pe-1">
           <img
             id="logo"
-            class="mb-3"
+            class="mb-3 w-44"
             src="../assets/logo.svg"
-            alt="logo"
-            style="width: 174px"
-          />
+            alt="logo" />
         </div>
       </div>
       <div class="row">
@@ -70,7 +67,7 @@ form {
     padding-right: 0;
   }
   .cat-icon {
-    width: 45px;
+    min-width: 45px;
     height: 45px;
   }
   #category-dropbox {
@@ -102,6 +99,7 @@ form {
   }
   .cat-icon {
     margin-top: 1.25rem;
+    min-width: 35px !important;
     height: 45px !important;
   }
 }
@@ -110,7 +108,7 @@ form {
   #logo {
     max-width: 100px;
     margin-top: 0.5em;
-    margin-bottom: 0 !important;
+    margin-bottom: 0.1em;
   }
   .cat-icon {
     margin-top: 1.25rem;

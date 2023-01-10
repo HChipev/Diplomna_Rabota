@@ -84,6 +84,7 @@ export default defineNuxtConfig({
       },
     ],
     ["@nuxtjs/supabase"],
+    ["@nuxtjs/tailwindcss"],
   ],
   buildModules: ["@nuxtjs/style-resources"],
   vite: {

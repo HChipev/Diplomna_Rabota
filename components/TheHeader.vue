@@ -1,22 +1,26 @@
 <template>
   <nav>
-    <div class="logo-container d-flex align-items-center justify-content-center">
+    <div
+      class="logo-container d-flex align-items-center justify-content-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
     <div v-if="inBrowser" class="navbar-container">
       <ul
         :class="menuShow ? 'active' : 'not-active'"
-        @click="(menuShow = false), (clicked = false)"
-      >
+        @click="(menuShow = false), (clicked = false)">
         <li>
           <NuxtLink to="/" class="nav-button" @click="scrollToTop">
-            <font-awesome-icon class="me-1" icon="fa-solid fa-house" />Home</NuxtLink
+            <font-awesome-icon
+              class="me-1"
+              icon="fa-solid fa-house" />Home</NuxtLink
           >
         </li>
 
         <li>
           <NuxtLink to="/search" class="nav-button" @click="scrollToTop"
-            ><font-awesome-icon class="me-1" icon="fa-magnifying-glass" />Search</NuxtLink
+            ><font-awesome-icon
+              class="me-1"
+              icon="fa-magnifying-glass" />Search</NuxtLink
           >
         </li>
 
@@ -29,7 +33,8 @@
         <li>
           <!--//todo proveka dali profila e kopuvach -->
           <NuxtLink to="/my-listings" class="nav-button" @click="scrollToTop"
-            ><font-awesome-icon icon="fa-solid fa-warehouse" /> My Listings</NuxtLink
+            ><font-awesome-icon icon="fa-solid fa-warehouse" /> My
+            Listings</NuxtLink
           >
         </li>
       </ul>
@@ -38,8 +43,7 @@
         to="/cart"
         v-if="useUser().getUser !== null"
         id="cart-button"
-        @click="scrollToTop"
-      >
+        @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
@@ -50,10 +54,12 @@
         @click="scrollToTop"
         ><img
           v-if="useUser().getUser !== null"
-          height="30"
+          class="h-7"
           src="../assets/profile-pic-icon.png"
-          alt="profile-pic"
-        /><font-awesome-icon v-else class="me-1" icon="fa-solid fa-user" />{{
+          alt="profile-pic" /><font-awesome-icon
+          v-else
+          class="me-1"
+          icon="fa-solid fa-user" />{{
           useUser().getUser !== null ? "" : "Log In"
         }}</NuxtLink
       >
@@ -65,9 +71,11 @@
             //! menuShow value is changed
             (menuShow = isMenuShown())
         "
-        class="menu-button"
-      >
-        <font-awesome-icon v-if="!clicked" class="bars" icon="fa-solid fa-bars" />
+        class="menu-button">
+        <font-awesome-icon
+          v-if="!clicked"
+          class="bars"
+          icon="fa-solid fa-bars" />
         <font-awesome-icon v-else class="x" icon="fa-solid fa-xmark" />
       </ReuseableButton>
     </div>
@@ -159,9 +167,11 @@ nav {
       }
     }
     &.router-link-active {
-      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
+      box-shadow: 0.075em 0.08em 1px $primery-color,
+        -0.075em -0.08em 1px $accent-color;
       &:hover {
-        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
+        box-shadow: 0.075em 0.08em 1px $accent-color,
+          -0.075em -0.08em 1px $primery-color;
       }
     }
   }
@@ -190,12 +200,14 @@ nav {
     }
 
     &.router-link-active {
-      box-shadow: 0.075em 0.08em 1px $primery-color, -0.075em -0.08em 1px $accent-color;
+      box-shadow: 0.075em 0.08em 1px $primery-color,
+        -0.075em -0.08em 1px $accent-color;
       border-radius: $card-border-radius;
       &:hover {
         color: $primery-color;
         background: $accent-color;
-        box-shadow: 0.075em 0.08em 1px $accent-color, -0.075em -0.08em 1px $primery-color;
+        box-shadow: 0.075em 0.08em 1px $accent-color,
+          -0.075em -0.08em 1px $primery-color;
       }
     }
   }

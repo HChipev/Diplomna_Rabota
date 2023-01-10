@@ -2,15 +2,15 @@
   <div class="container pb-2 pt-2">
     <form :class="isAdvancedShown ? 'pb-1' : ''">
       <div class="row flex-nowrap">
-        <div class="col-5 d-flex flex-column align-items-start justify-content-center">
+        <div
+          class="col-5 d-flex flex-column align-items-start justify-content-center">
           <label class="label fs-4" for="category">Category</label>
           <select
             @change="selectionChanged($event)"
             id="category-dropbox"
             class="form-select mt-1 mb-1"
             :class="!carSearch ? 'mb-5' : ''"
-            aria-label="Default select example"
-          >
+            aria-label="Default select example">
             <option value="Cars">Cars</option>
             <option value="Parts">Parts</option>
           </select>
@@ -20,8 +20,7 @@
               :checked="carsOnParts"
               class="form-check-input mt-1 mb-4"
               type="checkbox"
-              aria-label="cars-on-parts"
-            />
+              aria-label="cars-on-parts" />
             <label
               @click="checkboxSelected()"
               class="checkbox-label ms-1 text-nowrap"
@@ -30,34 +29,30 @@
             >
           </div>
         </div>
-        <div class="col-1 d-flex pb-1 align-items-center justify-content-center">
+        <div
+          class="col-1 d-flex pb-1 align-items-center justify-content-center">
           <img
             v-if="carSearch && !carsOnParts"
             class="cat-icon"
             src="../assets/car-icon.svg"
-            alt="category-icon"
-          />
+            alt="category-icon" />
           <img
             v-if="carSearch && carsOnParts"
             class="cat-icon"
             src="../assets/car-on-parts-icon.svg"
-            alt="category-icon"
-          />
+            alt="category-icon" />
           <img
             v-else-if="!carSearch"
             class="cat-icon"
             src="../assets/parts-icon.svg"
-            alt="category-icon"
-          />
+            alt="category-icon" />
         </div>
-        <div class="col-6" align="end">
+        <div class="col-6 d-flex justify-content-end pe-1">
           <img
             id="logo"
-            class="mb-3"
+            class="mb-3 w-44"
             src="../assets/logo.svg"
-            alt="logo"
-            style="width: 174px"
-          />
+            alt="logo" />
         </div>
       </div>
       <div class="row">
@@ -76,14 +71,16 @@
               v-if="!isAdvancedShown"
               class="px-1"
               icon="fa-solid fa-chevron-down" />
-            <font-awesome-icon v-else class="px-1" icon="fa-solid fa-chevron-up"
+            <font-awesome-icon
+              v-else
+              class="px-1"
+              icon="fa-solid fa-chevron-up"
           /></ReuseableButton>
         </div>
       </div>
       <div
         v-if="isAdvancedShown && carSearch && !carsOnParts"
-        class="row mt-3 border-top"
-      >
+        class="row mt-3 border-top">
         <AdvancedSearch />
       </div>
     </form>
@@ -126,8 +123,8 @@ form {
     padding-right: 0;
   }
   .cat-icon {
-    width: 50px;
-    height: 50px;
+    min-width: 45px;
+    height: 45px;
   }
   .form-check-input {
     border-color: $accent-color;
@@ -154,7 +151,7 @@ form {
 @media (max-width: 575px) {
   #logo {
     max-width: 154px;
-    margin-bottom: 0 !important;
+    margin-bottom: 0.1em;
   }
   .label {
     font-size: 16px !important;
@@ -169,7 +166,8 @@ form {
     max-width: 144px;
   }
   .cat-icon {
-    height: 40px !important;
+    height: 35px !important;
+    min-width: 35px !important;
     margin-right: 0.5em;
   }
 }
