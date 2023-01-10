@@ -8,17 +8,13 @@
         <div class="col-6 ps-1">
           <div class="card-body p-2">
             <h5 class="card-title">{{ title }}</h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <p id="description">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore aut
-                  architecto iusto quod facilis eum hic, sed quidem, vero mollitia,
-                  deserunt nam. Qui sed eligendi tenetur et dolor vero consequuntur?
-                </p>
-              </li>
-              <li class="list-group-item"><p id="price">Price</p></li>
-            </ul>
-            <p class="text-muted">08/2005, Petrol<br />Sofia</p>
+            <p id="description">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+              aut architecto iusto quod facilis eum hic, sed quidem, vero
+              mollitia, deserunt nam. Qui sed eligendi tenetur et dolor vero
+              consequuntur?
+            </p>
+            <p id="price">Price</p>
           </div>
         </div>
       </div>
@@ -54,18 +50,15 @@ function openListing() {
     height: 100%;
     border-radius: $card-border-radius;
   }
-  .text-muted {
-    font-size: 12px;
-    color: $text-muted-color !important;
-    text-align: start;
-  }
   #price {
+    text-align: left;
     margin-top: 0.25em;
     font-weight: bold;
     font-size: 20px;
     color: maroon;
   }
   #description {
+    text-align: left;
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -82,6 +75,9 @@ function openListing() {
   }
 
   .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid $border-color;
     border-radius: $card-border-radius;
   }
