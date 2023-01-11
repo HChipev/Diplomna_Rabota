@@ -11,7 +11,7 @@ config.autoAddCss = false;
 // can add other styles or just individual icons.
 library.add(fas);
 library.add(fab);
-library.add(far);
+//library.add(far);
 
 // Register the component globally
 export default defineNuxtPlugin((nuxtApp) => {
