@@ -1,22 +1,47 @@
 <template>
   <div class="flex mx-1 m-4 w-auto" @click="openListing()">
     <div
-      class="card flex p-1 rounded border border-border-color"
-      style="max-width: 40rem">
-      <div class="flex">
+      class="card flex p-1 rounded border border-border-color w-full max-h-44 sm:max-h-48 lg:max-h-52">
+      <div class="flex w-full">
         <div class="flex flex-1 pr-1">
           <img src="https://picsum.photos/1080/1900" alt="car-image" />
         </div>
         <div class="flex flex-1 pl-1">
-          <div class="card-body p-2">
-            <h5 class="text-2xl text-center">{{ title }}</h5>
-            <p id="description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
-              aut architecto iusto quod facilis eum hic, sed quidem, vero
-              mollitia, deserunt nam. Qui sed eligendi tenetur et dolor vero
-              consequuntur?
-            </p>
-            <p id="price">Price</p>
+          <div class="card-body min-w-full p-2">
+            <div class="flex flex-col max-h-16">
+              <div class="flex justify-between border-b border-border-color">
+                <div class="flex flex-col">
+                  <h1 class="text-3xl whitespace-nowrap">{{ title }}</h1>
+                  <h1 class="text-lx whitespace-nowrap">{{ model }}</h1>
+                </div>
+                <font-awesome-icon
+                  v-if="stared"
+                  @click="addToWishlist()"
+                  class="text-2xl mr-0.5 mt-1"
+                  icon="fa-solid fa-star" />
+                <font-awesome-icon
+                  v-else
+                  @click="addToWishlist()"
+                  class="text-2xl mr-0.5 mt-1"
+                  icon="fa-regular fa-star" />
+              </div>
+            </div>
+            <div class="flex">
+              <div class="flex flex-1 flex-col justify-end">
+                <p class="text-sm md:text-lg text-text-muted-color">200hp</p>
+                <p class="text-sm md:text-lg text-text-muted-color">Year</p>
+                <p class="text-sm md:text-lg text-text-muted-color">Engine</p>
+                <p
+                  class="text-sm mb-0.5 md:mb-0 md:text-lg text-text-muted-color">
+                  210000km
+                </p>
+              </div>
+              <div class="flex flex-1 flex-col items-end justify-end">
+                <h1 class="text-lg md:text-2xl font-semibold text-accent-color">
+                  $100,000
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -24,84 +49,46 @@
   </div>
 </template>
 <script setup>
-const title = ref("Card Title");
-function openListing() {
-  useRouter().push("/search/results/" + title.value.replaceAll(" ", "-"));
-}
+  const title = ref("Card Title");
+  const model = ref("Model");
+  const stared = ref(false);
+  let addingToWishlist = false;
+  function openListing() {
+    if (addingToWishlist) return;
+    useRouter().push("/search/results/" + title.value.replaceAll(" ", "-"));
+  }
+  function addToWishlist() {
+    addingToWishlist = true;
+    setTimeout(() => {
+      addingToWishlist = false;
+    }, 100);
+    stared.value = !stared.value;
+  }
 </script>
 <style lang="scss" scoped>
-.card {
-  background-color: $primery-lighter-color;
-  border-color: $border-color;
-  color: white;
-  height: 220px;
-  min-width: 300px;
-  p {
-    margin: 0;
-  }
-  div {
-    height: 100%;
-  }
-  img {
-    // min-width: 195px;
-    width: 100%;
-    height: 100%;
-    border-radius: $card-border-radius;
-  }
-  #price {
-    text-align: left;
-    margin-top: 0.25em;
-    font-weight: bold;
-    font-size: 20px;
-    color: maroon;
-  }
-  #description {
-    text-align: left;
-    font-size: 14px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-  }
-
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid $border-color;
-    border-radius: $card-border-radius;
-    // min-width: 168px;
-  }
-}
-
-@media (max-width: 422px) {
-  .card-body {
-    margin: 0;
-    padding-block: 1.5em;
-    & > * {
-      & > * {
-        margin: 0.2em;
-        padding: 0;
-      }
+  .card {
+    background-color: $primery-lighter-color;
+    border-color: $border-color;
+    color: white;
+    height: 220px;
+    min-width: 300px;
+    p {
+      margin: 0;
     }
-    #description {
-      -webkit-line-clamp: 3;
+    div {
+      height: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: $card-border-radius;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid $border-color;
+      border-radius: $card-border-radius;
     }
   }
-}
-
-@media (max-width: 330px) {
-  .card-body {
-    margin: 0;
-    padding-block: 0.5em;
-    & > * {
-      & > * {
-        margin: 0.2em;
-        padding: 0;
-      }
-    }
-  }
-}
 </style>

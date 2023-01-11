@@ -1,26 +1,31 @@
 <template>
-  <div class="container">
+  <div class="container mx-auto px-5 sm:px-28">
     <!-- car hero -->
     <div
-      class="mt-1 mx-auto max-w-7xl object-cover space-y-4 px-4 xs:px-8 sm:px-10 lg:px-16 pb-16 w-4/5">
+      class="mx-auto mt-4 max-w-7xl lg:space-y-4 px-4 lg:8 xl:px-10 pb-16 w-full lg:w-3/5">
       <img
         class="w-full"
-        src="https://picsum.photos/1080/1900"
+        src="https://picsum.photos/1900/1080"
         alt="car-image" />
-      <h1 class="mt-10 text-4xl">{{ useRoute().params.name }}</h1>
-      <h1 class="text-2xl content-start mt-0.5">Model</h1>
-      <div class="flex mt-2 border-bottom pb-2 justify-between">
-        <div class="flex text-muted">
-          <p class="mr-2">2013</p>
-          <p class="mr-2">|</p>
-          <p class="mr-2">Diesel</p>
-          <p class="mr-2">|</p>
-          <p class="mr-2">235hp</p>
-          <p class="mr-2">|</p>
-          <p class="mr-2">230000km</p>
+      <div class="mt-5 xl:mt-10">
+        <h1 class="text-xl xl:text-4xl whitespace-nowrap">
+          {{ useRoute().params.name }}
+        </h1>
+        <h1 class="text-lg xl:text-2xl content-start mt-0.5">Model</h1>
+      </div>
+      <div
+        class="flex text-xs md:text-base xl:text-lg mt-2 border-b border-accent-color pb-2 justify-between">
+        <div class="flex text-text-muted-color">
+          <p class="mr-0.5 sm:mr-2">2013</p>
+          <p class="mr-0.5 sm:mr-2">|</p>
+          <p class="mr-0.5 sm:mr-2">Diesel</p>
+          <p class="mr-0.5 sm:mr-2">|</p>
+          <p class="mr-0.5 sm:mr-2">235hp</p>
+          <p class="mr-0.5 sm:mr-2">|</p>
+          <p class="mr-0.5 sm:mr-2">230000km</p>
         </div>
         <div>
-          <p class="font-bold text-3xl price">Price</p>
+          <p class="font-bold xl:text-3xl">$100,000</p>
         </div>
       </div>
     </div>
@@ -28,16 +33,10 @@
 </template>
 <script setup></script>
 <style scoped lang="scss">
-img {
-  max-height: 30rem;
-}
-.price {
-  color: $accent-color;
-}
-p {
-  margin: 0;
-}
-.text-muted {
-  color: $text-muted-color !important;
-}
+  img {
+    max-height: 25rem;
+  }
+  p {
+    margin: 0;
+  }
 </style>

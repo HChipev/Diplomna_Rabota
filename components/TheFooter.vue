@@ -22,7 +22,7 @@
           © 2022 4ip's Auto, Inc
         </p>
       </div>
-      <div class="flex flex-1 justify-end px-2 min-h-full">
+      <div class="flex flex-1 justify-end pl-2 pr-2 lg:pr-5 min-h-full">
         <ul class="nav justify-end list-unstyled flex flex-nowrap">
           <li class="ml-3">
             <a
@@ -64,47 +64,47 @@
 </template>
 <script setup></script>
 <style lang="scss">
-.footer {
-  min-width: 260px;
-  border-color: $accent-color !important;
-  background: $black;
-  .internal-ul {
-    transition: all 0.3s ease;
-    padding-left: 0;
-    list-style-type: none;
-    li {
-      ::before {
-        vertical-align: -5%;
-        content: url("../assets/gear-icon.svg");
-        padding-right: 0.25em;
-      }
+  .footer {
+    min-width: 260px;
+    border-color: $accent-color !important;
+    background: $black;
+    .internal-ul {
+      transition: all 0.3s ease;
+      padding-left: 0;
+      list-style-type: none;
+      li {
+        ::before {
+          vertical-align: -5%;
+          content: url("../assets/gear-icon.svg");
+          padding-right: 0.25em;
+        }
 
-      .internal-links {
-        color: $text-muted-color;
-        text-decoration: none;
-        &:hover {
-          color: $accent-color;
+        .internal-links {
+          color: $text-muted-color;
+          text-decoration: none;
+          &:hover {
+            color: $accent-color;
+          }
         }
       }
     }
-  }
-  .external-link-icons {
-    min-width: 18px;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
-    transition: all 0.3s ease;
-    &:hover {
-      -webkit-filter: grayscale(0);
-      filter: grayscale(0);
+    .external-link-icons {
+      min-width: 18px;
+      -webkit-filter: grayscale(1);
+      filter: grayscale(1);
+      transition: all 0.3s ease;
+      &:hover {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+      }
     }
   }
-}
-@media screen and (max-width: 380px) {
-  .logo-text {
-    width: 128px !important;
+  @media screen and (max-width: 380px) {
+    .logo-text {
+      width: 128px !important;
+    }
+    .copyright {
+      font-size: 0.75rem !important;
+    }
   }
-  .copyright {
-    font-size: 0.75rem !important;
-  }
-}
 </style>
