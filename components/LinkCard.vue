@@ -59,9 +59,9 @@
   }
   function addToWishlist() {
     addingToWishlist = true;
-    setTimeout(() => {
-      addingToWishlist = false;
-    }, 100);
+    // setTimeout(() => {
+    //   addingToWishlist = false;
+    // }, 100);
     stared.value = !stared.value;
   }
 </script>
