@@ -1,21 +1,22 @@
 <template>
-  <div class="container pb-2 pt-2">
-    <form>
-      <div class="row flex-nowrap">
-        <div
-          class="col-5 d-flex flex-column align-items-start justify-content-center">
-          <label class="label fs-4" for="category">Category</label>
+  <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
+    <form class="sm:p-3 p-2">
+      <div class="flex flex-nowrap">
+        <div class="flex-auto flex flex-col justify-center">
+          <label class="label sm:text-2xl text-lg" for="category"
+            >Category</label
+          >
           <select
             @change="selectionChanged($event)"
             id="category-dropbox"
-            class="form-select mt-1 mb-5"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-11"
             aria-label="Default select example">
             <option value="Cars">Cars</option>
             <option value="Parts">Parts</option>
           </select>
         </div>
         <div
-          class="col-1 d-flex pb-1 align-items-center justify-content-center">
+          class="flex-auto flex pb-1 pl-0.5 sm:pl-5 items-center justify-start">
           <img
             v-if="carSearch"
             class="cat-icon"
@@ -27,7 +28,7 @@
             src="../assets/parts-icon.svg"
             alt="category-icon" />
         </div>
-        <div class="col-6 d-flex justify-content-end pe-1">
+        <div class="flex flex-auto justify-end pr-1">
           <img
             id="logo"
             class="mb-3 w-44"
@@ -35,7 +36,7 @@
             alt="logo" />
         </div>
       </div>
-      <div class="row">
+      <div class="flex flex-col sm:flex-row">
         <SearchCars v-if="carSearch" />
         <SearchParts v-else />
       </div>
@@ -63,12 +64,23 @@ form {
   border: 1px solid $border-color;
   border-radius: 6px;
   padding: 1rem;
+
   .col-6:has(#logo) {
     padding-right: 0;
   }
   .cat-icon {
     min-width: 45px;
     height: 45px;
+    margin-left: 0.25em;
+  }
+  .form-check-input {
+    border-color: $accent-color;
+    &:checked {
+      background-color: $accent-color;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    }
   }
   #category-dropbox {
     border-color: $primery-darker-color;
@@ -77,42 +89,34 @@ form {
     }
   }
 }
-
 @media (max-width: 767px) {
-  #logo {
-    max-width: 124px;
-  }
   .cat-icon {
-    margin-top: 1.55rem;
-    margin-left: 1em;
-  }
-  #category-dropbox {
-    margin-bottom: 1rem !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    margin-left: 0.5em;
+    margin-bottom: 0.1rem;
   }
 }
 @media (max-width: 575px) {
-  .label {
-    font-size: 16px !important;
-  }
-  #category-dropbox {
-    margin-bottom: 1rem !important;
-  }
-  .cat-icon {
-    margin-top: 1.25rem;
-    min-width: 35px !important;
-    height: 45px !important;
-  }
-}
-
-@media (max-width: 375px) {
   #logo {
-    max-width: 100px;
-    margin-top: 0.5em;
+    max-width: 134px !important;
+    margin-left: 1em;
     margin-bottom: 0.1em;
   }
   .cat-icon {
-    margin-top: 1.25rem;
-    height: 35px !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .cat-icon {
+    margin-right: 0.5em;
+  }
+}
+@media (max-width: 350px) {
+  #logo {
+    margin-top: 0.5em;
+    max-width: 104px;
   }
 }
 </style>

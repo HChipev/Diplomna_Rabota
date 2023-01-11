@@ -1,13 +1,15 @@
 <template>
-  <div class="col-lg-6 mt-4" align="center" @click="openListing()">
-    <div class="card p-1" style="max-width: 40rem">
-      <div class="row">
-        <div class="col-6 pe-1">
+  <div class="flex mx-1 m-4 w-auto" @click="openListing()">
+    <div
+      class="card flex p-1 rounded border border-border-color"
+      style="max-width: 40rem">
+      <div class="flex">
+        <div class="flex flex-1 pr-1">
           <img src="https://picsum.photos/1080/1900" alt="car-image" />
         </div>
-        <div class="col-6 ps-1">
+        <div class="flex flex-1 pl-1">
           <div class="card-body p-2">
-            <h5 class="card-title">{{ title }}</h5>
+            <h5 class="text-2xl text-center">{{ title }}</h5>
             <p id="description">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
               aut architecto iusto quod facilis eum hic, sed quidem, vero
@@ -28,17 +30,12 @@ function openListing() {
 }
 </script>
 <style lang="scss" scoped>
-.ps-1 {
-  padding-left: 0.15em !important;
-}
-.pe-1 {
-  padding-right: 0.15em !important;
-}
 .card {
   background-color: $primery-lighter-color;
   border-color: $border-color;
   color: white;
   height: 220px;
+  min-width: 300px;
   p {
     margin: 0;
   }
@@ -46,6 +43,7 @@ function openListing() {
     height: 100%;
   }
   img {
+    // min-width: 195px;
     width: 100%;
     height: 100%;
     border-radius: $card-border-radius;
@@ -67,12 +65,6 @@ function openListing() {
     -webkit-box-orient: vertical;
     white-space: normal;
   }
-  .list-group-item {
-    text-align: start;
-    background: none;
-    padding: 0;
-    color: white;
-  }
 
   .card-body {
     display: flex;
@@ -80,6 +72,7 @@ function openListing() {
     justify-content: space-between;
     border: 1px solid $border-color;
     border-radius: $card-border-radius;
+    // min-width: 168px;
   }
 }
 
@@ -98,6 +91,7 @@ function openListing() {
     }
   }
 }
+
 @media (max-width: 330px) {
   .card-body {
     margin: 0;

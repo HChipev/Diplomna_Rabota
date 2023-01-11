@@ -8,7 +8,8 @@
         src="https://picsum.photos/1080/1900"
         alt="car-image" />
       <h1 class="mt-10 text-4xl">{{ useRoute().params.name }}</h1>
-      <div class="flex mt-1 border-bottom pb-2 justify-between">
+      <h1 class="text-2xl content-start mt-0.5">Model</h1>
+      <div class="flex mt-2 border-bottom pb-2 justify-between">
         <div class="flex text-muted">
           <p class="mr-2">2013</p>
           <p class="mr-2">|</p>

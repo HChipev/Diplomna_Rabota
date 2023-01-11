@@ -63,14 +63,8 @@ export default defineNuxtConfig({
   },
   plugins: ["~/plugins/fontawesome.js"],
   css: [
-    "~/public/css/bootstrap.min.css",
+    "~/assets/css/tailwind.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
-  ],
-  scrips: [
-    {
-      src: "~/public/js/bootstrap.bundle.min.js",
-      type: "text/javascript",
-    },
   ],
   modules: [
     [
@@ -87,6 +81,16 @@ export default defineNuxtConfig({
     ["@nuxtjs/tailwindcss"],
   ],
   buildModules: ["@nuxtjs/style-resources"],
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
+      },
+    },
+  },
   vite: {
     css: {
       preprocessorOptions: {

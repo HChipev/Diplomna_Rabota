@@ -50,7 +50,7 @@ provide("inBrowser", inBrowser);
 <style lang="scss" global>
 body {
   margin: 0;
-  min-width: 260px;
+  min-width: 320px;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",

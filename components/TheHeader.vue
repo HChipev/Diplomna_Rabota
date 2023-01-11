@@ -1,7 +1,6 @@
 <template>
   <nav>
-    <div
-      class="logo-container d-flex align-items-center justify-content-center">
+    <div class="logo-container flex items-center justify-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
     <div v-if="inBrowser" class="navbar-container">
@@ -11,7 +10,7 @@
         <li>
           <NuxtLink to="/" class="nav-button" @click="scrollToTop">
             <font-awesome-icon
-              class="me-1"
+              class="mr-1"
               icon="fa-solid fa-house" />Home</NuxtLink
           >
         </li>
@@ -19,7 +18,7 @@
         <li>
           <NuxtLink to="/search" class="nav-button" @click="scrollToTop"
             ><font-awesome-icon
-              class="me-1"
+              class="mr-1"
               icon="fa-magnifying-glass" />Search</NuxtLink
           >
         </li>
@@ -54,11 +53,11 @@
         @click="scrollToTop"
         ><img
           v-if="useUser().getUser !== null"
-          class="h-7"
+          class="h-7 items-center justify-center"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic" /><font-awesome-icon
           v-else
-          class="me-1"
+          class="mx-1"
           icon="fa-solid fa-user" />{{
           useUser().getUser !== null ? "" : "Log In"
         }}</NuxtLink
@@ -71,7 +70,7 @@
             //! menuShow value is changed
             (menuShow = isMenuShown())
         "
-        class="menu-button">
+        class="menu-button ml-1">
         <font-awesome-icon
           v-if="!clicked"
           class="bars"
@@ -229,7 +228,7 @@ nav {
     .navbar-container {
       ul.active {
         position: absolute;
-        top: 3em;
+        top: 3.7em;
         right: 0px;
         background-color: $black;
         padding: 0;

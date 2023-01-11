@@ -1,36 +1,37 @@
 <template>
-  <div class="container pb-2 pt-2">
-    <form :class="isAdvancedShown ? 'pb-1' : ''">
-      <div class="row flex-nowrap">
-        <div
-          class="col-5 d-flex flex-column align-items-start justify-content-center">
-          <label class="label fs-4" for="category">Category</label>
+  <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
+    <form class="sm:p-3 p-2" :class="isAdvancedShown ? 'pb-1' : ''">
+      <div class="flex flex-nowrap">
+        <div class="flex-auto flex flex-col justify-center">
+          <label class="label sm:text-2xl text-lg" for="category"
+            >Category</label
+          >
           <select
             @change="selectionChanged($event)"
             id="category-dropbox"
-            class="form-select mt-1 mb-1"
-            :class="!carSearch ? 'mb-5' : ''"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2"
+            :class="!carSearch ? 'mb-11' : ''"
             aria-label="Default select example">
             <option value="Cars">Cars</option>
             <option value="Parts">Parts</option>
           </select>
-          <div v-if="carSearch" class="d-flex flex-nowrap">
+          <div v-if="carSearch" class="flex flex-nowrap">
             <input
               @change="checkboxSelected()"
               :checked="carsOnParts"
-              class="form-check-input mt-1 mb-4"
+              class="w-5 h-5 text-accent-color rounded-md bg-white border-accent-color checked:bg-accent-color focus:ring-accent-color focus:outline-none mt-1 mb-4"
               type="checkbox"
               aria-label="cars-on-parts" />
             <label
               @click="checkboxSelected()"
-              class="checkbox-label ms-1 text-nowrap"
+              class="ml-2 text-nowrap"
               for="checkbox"
               >On Parts</label
             >
           </div>
         </div>
         <div
-          class="col-1 d-flex pb-1 align-items-center justify-content-center">
+          class="flex-auto flex pb-1 pl-0.5 sm:pl-5 items-center justify-start">
           <img
             v-if="carSearch && !carsOnParts"
             class="cat-icon"
@@ -47,7 +48,7 @@
             src="../assets/parts-icon.svg"
             alt="category-icon" />
         </div>
-        <div class="col-6 d-flex justify-content-end pe-1">
+        <div class="flex flex-auto justify-end pr-1">
           <img
             id="logo"
             class="mb-3 w-44"
@@ -55,16 +56,16 @@
             alt="logo" />
         </div>
       </div>
-      <div class="row">
+      <div class="flex flex-col sm:flex-row">
         <SearchCars v-if="carSearch" />
         <SearchParts v-else />
       </div>
-      <div class="row flex-nowrap">
-        <div class="col-12 d-flex align-items-center justify-content-center">
+      <div class="flex-nowrap">
+        <div class="flex items-center justify-center">
           <ReuseableButton
             @click="showAdvanced()"
             :class="isAdvancedShown ? 'active' : ''"
-            class="dropdown-button px-2 mt-2 d-flex align-items-center justify-content-center flex-nowrap"
+            class="dropdown-button px-2 mt-2 flex items-center justify-center flex-nowrap"
             v-if="inBrowser && carSearch && !carsOnParts"
             >Advanced
             <font-awesome-icon
@@ -78,9 +79,7 @@
           /></ReuseableButton>
         </div>
       </div>
-      <div
-        v-if="isAdvancedShown && carSearch && !carsOnParts"
-        class="row mt-3 border-top">
+      <div v-if="isAdvancedShown && carSearch && !carsOnParts" class="mt-3">
         <AdvancedSearch />
       </div>
     </form>
@@ -119,12 +118,14 @@ form {
   border: 1px solid $border-color;
   border-radius: 6px;
   padding: 1rem;
+
   .col-6:has(#logo) {
     padding-right: 0;
   }
   .cat-icon {
     min-width: 45px;
     height: 45px;
+    margin-left: 0.25em;
   }
   .form-check-input {
     border-color: $accent-color;
@@ -144,17 +145,17 @@ form {
 }
 @media (max-width: 767px) {
   .cat-icon {
-    margin-left: 1em;
+    height: 35px !important;
+    min-width: 35px !important;
+    margin-left: 0.5em;
     margin-bottom: 0.1rem;
   }
 }
 @media (max-width: 575px) {
   #logo {
-    max-width: 154px;
+    max-width: 134px !important;
+    margin-left: 1em;
     margin-bottom: 0.1em;
-  }
-  .label {
-    font-size: 16px !important;
   }
   .cat-icon {
     margin-bottom: 0.5rem;
@@ -162,12 +163,7 @@ form {
 }
 
 @media (max-width: 400px) {
-  #logo {
-    max-width: 144px;
-  }
   .cat-icon {
-    height: 35px !important;
-    min-width: 35px !important;
     margin-right: 0.5em;
   }
 }

@@ -1,54 +1,58 @@
 <template>
-  <div class="container-fluid">
-    <div class="footer row pt-3 px-1 pb-1 mt-4 border-top">
-      <div class="col-4 d-flex flex-column align-items-start justify-content-start">
-        <ul class="internal-ul">
+  <div class="w-screen min-w-min">
+    <div class="footer flex pt-3 px-2 py-1 mt-4 border-t">
+      <div
+        class="flex flex-1 flex-col items-start justify-start px-2 min-h-full">
+        <ul class="internal-ul whitespace-nowrap">
           <li>
             <NuxtLink to="/about" class="internal-links">About</NuxtLink>
           </li>
         </ul>
       </div>
-      <div class="col-4 d-flex flex-column align-items-center justify-content-end">
-        <a href="/" class="d-flex align-items-center justify-content-between"
+      <div
+        class="flex flex-1 flex-col items-center justify-end px-2 min-h-full">
+        <a href="/" class="flex items-center justify-between"
           ><img
-            class="logo-text"
-            width="194"
+            class="logo-text w-48"
             src="../assets/text-logo.svg"
             alt="text-logo-footer"
         /></a>
-        <p class="text-center text-muted pt-3 text-nowrap">© 2022 4ip's Auto, Inc</p>
+        <p
+          class="copyright text-center whitespace-nowrap text-text-muted-color pt-3">
+          © 2022 4ip's Auto, Inc
+        </p>
       </div>
-      <div class="col-4 d-flex justify-content-end">
-        <ul class="nav justify-content-end list-unstyled d-flex flex-nowrap">
-          <li class="ms-3">
+      <div class="flex flex-1 justify-end px-2 min-h-full">
+        <ul class="nav justify-end list-unstyled flex flex-nowrap">
+          <li class="ml-3">
             <a
-              class="align-items-center justify-content-center"
+              class="items-center justify-center"
               href="https://instagram.com/_hchipev_/"
               target="_blank"
               ><img
-                class="external-link-icons"
+                class="external-link-icons w-7"
                 src="../assets/instagram-icon.svg"
                 alt="instagram-logo"
             /></a>
           </li>
-          <li class="ms-3">
+          <li class="ml-3">
             <a
-              class="align-items-center justify-content-center"
+              class="items-center justify-center"
               href="https://www.linkedin.com/in/hristo-chipev-122217208/"
               target="_blank"
               ><img
-                class="external-link-icons"
+                class="external-link-icons w-7"
                 src="../assets/linkedin-icon.svg"
                 alt="linkedIn-logo"
             /></a>
           </li>
-          <li class="ms-3">
+          <li class="ml-3">
             <a
-              class="align-items-center justify-content-center"
+              class="items-center justify-center"
               href="https://github.com/HChipev"
               target="_blank"
               ><img
-                class="external-link-icons"
+                class="external-link-icons w-7"
                 src="../assets/github-icon.svg"
                 alt="github-logo"
             /></a>
@@ -61,6 +65,7 @@
 <script setup></script>
 <style lang="scss">
 .footer {
+  min-width: 260px;
   border-color: $accent-color !important;
   background: $black;
   .internal-ul {
@@ -84,7 +89,7 @@
     }
   }
   .external-link-icons {
-    width: 24px;
+    min-width: 18px;
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
     transition: all 0.3s ease;
@@ -94,23 +99,12 @@
     }
   }
 }
-@media (max-width: 500px) {
-  .internal-ul {
-    min-width: 120px;
-  }
+@media screen and (max-width: 380px) {
   .logo-text {
-    width: 124px;
+    width: 128px !important;
   }
-  .external-link-icons {
-    width: 20px !important;
-  }
-}
-@media (max-width: 370px) {
-  .col-4 {
-    padding: 0;
-  }
-  li:has(.external-link-icons) {
-    margin-left: 0.5em !important;
+  .copyright {
+    font-size: 0.75rem !important;
   }
 }
 </style>

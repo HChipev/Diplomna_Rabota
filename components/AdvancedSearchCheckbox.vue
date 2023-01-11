@@ -1,13 +1,12 @@
 <template>
-  <div class="d-flex flex-nowrap">
+  <div class="flex items-center mb-4">
     <input
-      class="form-check-input mt-1 mb-4"
+      class="w-5 h-5 ml-2 text-accent-color rounded-md bg-white border-accent-color focus:ring-accent-color focus:outline-none"
       @change="check(extraName)"
       :checked="checked"
-      type="checkbox"
-    />
+      type="checkbox" />
     <label
-      class="checkbox-label ms-1 text-nowrap"
+      class="ml-2 font-medium text-white"
       @click="check(extraName)"
       for="checkbox"
       >{{ extraName }}</label
@@ -34,13 +33,13 @@ function check(extraName) {
 }
 </script>
 <style lang="scss" scoped>
-.form-check-input {
-  border-color: $accent-color !important;
-  &:checked {
-    background-color: $accent-color;
-  }
-  &:focus {
-    box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
-  }
-}
+// .form-check-input {
+//   border-color: $accent-color !important;
+//   &:checked {
+//     background-color: $accent-color;
+//   }
+//   &:focus {
+//     box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+//   }
+// }
 </style>
