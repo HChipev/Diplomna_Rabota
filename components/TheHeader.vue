@@ -117,6 +117,7 @@
     display: flex;
     justify-content: space-between;
     position: fixed;
+    min-height: 60px;
     top: 0;
     left: 0;
     right: 0;
@@ -228,7 +229,7 @@
       .navbar-container {
         ul.active {
           position: absolute;
-          top: 3.7em;
+          top: 3.75em;
           right: 0px;
           background-color: $black;
           padding: 0;
