@@ -4,6 +4,9 @@ export const useRegister = async (email, password) => {
     email: email,
     password: password,
   });
+  if (!error) {
+    useUser().setUser(data.session);
+  }
 };
 export const useLogIn = async (email, password) => {
   const client = useSupabaseClient();
@@ -11,11 +14,15 @@ export const useLogIn = async (email, password) => {
     email: email,
     password: password,
   });
+  if (!error) {
+    useUser().setUser(data.session);
+  }
 };
 export const useLogOut = async () => {
   const client = useSupabaseClient();
   const { error } = await client.auth.signOut();
   if (!error) {
+    useUser().setUser(null);
     localStorage.removeItem("user");
   }
 };
@@ -30,8 +37,4 @@ export const useGoogleSignIn = async () => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: "google",
   });
-};
-export const useSignOut = async () => {
-  const client = useSupabaseClient();
-  const { error } = await client.auth.signOut();
 };
