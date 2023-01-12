@@ -24,8 +24,9 @@
 <script setup>
   import { parse, stringify } from "flatted";
   const inBrowser = ref(false);
-  useSupabaseClient().auth.onAuthStateChange((_, session) => {
+  useSupabaseClient().auth.onAuthStateChange((event, session) => {
     console.log("session changed");
+    event === "SIGNED_OUT" && useUser().setUser(null);
     useUser().setUser(session);
   });
   watch(
