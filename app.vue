@@ -32,7 +32,7 @@
     },
     [useSupabaseClient()]
   );
-  watchEffect(
+  watch(
     useUser(),
     (userVal) => {
       if (userVal !== null) {
