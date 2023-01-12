@@ -24,15 +24,22 @@
 <script setup>
   import { parse, stringify } from "flatted";
   const inBrowser = ref(false);
-  useSupabaseClient().auth.onAuthStateChange((event, session) => {
-    console.log("session changed");
-    event === "SIGNED_OUT" && useUser().setUser(null);
-    useUser().setUser(session);
-  });
-  watch(
+  useSupabaseClient().auth.onAuthStateChange(
+    (event, session) => {
+      console.log("session changed");
+      event === "SIGNED_OUT" && useUser().setUser(null);
+      event === "SIGNED_IN" && useUser().setUser(session);
+    },
+    [useSupabaseClient()]
+  );
+  watchEffect(
     useUser(),
     (userVal) => {
-      localStorage.setItem("user", stringify(userVal));
+      if (userVal !== null) {
+        localStorage.setItem("user", stringify(userVal));
+      } else {
+        console.log("user is null");
+      }
     },
     { deep: true }
   );
