@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="noSelect">
     <div class="flex items-center justify-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
@@ -234,6 +234,7 @@
           background-color: $black;
           padding: 0;
           border-end-start-radius: $border-radius;
+          transition: right 0.8s ease;
           li {
             display: block;
             padding-block: 0.5em;
@@ -244,12 +245,11 @@
               text-align: end;
               padding-inline: 2em 0.5em;
               margin: 0;
-
+              border-radius: 0;
+              border-start-start-radius: 5em;
+              border-end-start-radius: 5em;
               &:hover {
                 border: 1px solid $black;
-                border-radius: 0;
-                border-start-start-radius: 5em;
-                border-end-start-radius: 5em;
                 background: $accent-color;
                 background: linear-gradient(
                   90deg,
@@ -267,7 +267,29 @@
           }
         }
         ul.not-active {
-          display: none;
+          position: absolute;
+          top: 3.75em;
+          right: -100%;
+          background-color: $black;
+          padding: 0;
+          border-end-start-radius: $border-radius;
+          transition: right 1.6s ease;
+          li {
+            display: block;
+            white-space: nowrap;
+            padding-block: 0.5em;
+            padding-inline: 1em 0.25em;
+            .nav-button {
+              display: block;
+              background: none;
+              text-align: end;
+              padding-inline: 2em 0.5em;
+              margin: 0;
+              border-radius: 0;
+              border-start-start-radius: 5em;
+              border-end-start-radius: 5em;
+            }
+          }
         }
       }
       #cart-button {
