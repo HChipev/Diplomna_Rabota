@@ -1,6 +1,6 @@
 <template>
   <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
-    <form class="sm:p-3 p-2" :class="isAdvancedShown ? 'pb-1' : ''">
+    <form class="sm:p-3 p-2 noSelect" :class="isAdvancedShown ? 'pb-1' : ''">
       <div class="flex flex-nowrap">
         <div class="flex-auto flex flex-col justify-center">
           <label class="label sm:text-2xl text-lg" for="category"
@@ -87,90 +87,90 @@
 </template>
 
 <script setup>
-const carSearch = ref(true);
-const selectionChanged = (event) => {
-  if (event.target.value === "Cars") {
-    carSearch.value = true;
-  } else {
-    carSearch.value = false;
+  const carSearch = ref(true);
+  const selectionChanged = (event) => {
+    if (event.target.value === "Cars") {
+      carSearch.value = true;
+    } else {
+      carSearch.value = false;
+    }
+  };
+
+  const carsOnParts = ref(false);
+  function checkboxSelected() {
+    carsOnParts.value = !carsOnParts.value;
   }
-};
 
-const carsOnParts = ref(false);
-function checkboxSelected() {
-  carsOnParts.value = !carsOnParts.value;
-}
+  const inBrowser = inject("inBrowser");
 
-const inBrowser = inject("inBrowser");
-
-const isAdvancedShown = ref(false);
-function showAdvanced() {
-  isAdvancedShown.value = !isAdvancedShown.value;
-}
-const extras = {};
-provide("extras", extras);
-provide("onParts", carsOnParts);
+  const isAdvancedShown = ref(false);
+  function showAdvanced() {
+    isAdvancedShown.value = !isAdvancedShown.value;
+  }
+  const extras = {};
+  provide("extras", extras);
+  provide("onParts", carsOnParts);
 </script>
 
 <style lang="scss" scoped>
-form {
-  background-color: $primery-lighter-color;
-  border: 1px solid $border-color;
-  border-radius: 6px;
-  padding: 1rem;
+  form {
+    background-color: $primery-lighter-color;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding: 1rem;
 
-  .col-6:has(#logo) {
-    padding-right: 0;
-  }
-  .cat-icon {
-    min-width: 45px;
-    height: 45px;
-    margin-left: 0.25em;
-  }
-  .form-check-input {
-    border-color: $accent-color;
-    &:checked {
-      background-color: $accent-color;
+    .col-6:has(#logo) {
+      padding-right: 0;
     }
-    &:focus {
-      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+    .cat-icon {
+      min-width: 45px;
+      height: 45px;
+      margin-left: 0.25em;
+    }
+    .form-check-input {
+      border-color: $accent-color;
+      &:checked {
+        background-color: $accent-color;
+      }
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+      }
+    }
+    #category-dropbox {
+      border-color: $primery-darker-color;
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+      }
     }
   }
-  #category-dropbox {
-    border-color: $primery-darker-color;
-    &:focus {
-      box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
+  @media (max-width: 767px) {
+    .cat-icon {
+      height: 35px !important;
+      min-width: 35px !important;
+      margin-left: 0.5em;
+      margin-bottom: 0.1rem;
     }
   }
-}
-@media (max-width: 767px) {
-  .cat-icon {
-    height: 35px !important;
-    min-width: 35px !important;
-    margin-left: 0.5em;
-    margin-bottom: 0.1rem;
+  @media (max-width: 575px) {
+    #logo {
+      max-width: 134px !important;
+      margin-left: 1em;
+      margin-bottom: 0.1em;
+    }
+    .cat-icon {
+      margin-bottom: 0.5rem;
+    }
   }
-}
-@media (max-width: 575px) {
-  #logo {
-    max-width: 134px !important;
-    margin-left: 1em;
-    margin-bottom: 0.1em;
-  }
-  .cat-icon {
-    margin-bottom: 0.5rem;
-  }
-}
 
-@media (max-width: 400px) {
-  .cat-icon {
-    margin-right: 0.5em;
+  @media (max-width: 400px) {
+    .cat-icon {
+      margin-right: 0.5em;
+    }
   }
-}
-@media (max-width: 350px) {
-  #logo {
-    margin-top: 0.5em;
-    max-width: 104px;
+  @media (max-width: 350px) {
+    #logo {
+      margin-top: 0.5em;
+      max-width: 104px;
+    }
   }
-}
 </style>

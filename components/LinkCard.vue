@@ -1,5 +1,7 @@
 <template>
-  <div class="flex mx-1 m-4 w-auto" @click="openListing()">
+  <div
+    class="flex mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105 hover:shadow-sm hover:shadow-white"
+    @click="openListing()">
     <div
       class="card flex p-1 rounded border border-border-color w-full max-h-44 sm:max-h-48 lg:max-h-52">
       <div class="flex w-full">
@@ -55,6 +57,7 @@
   let addingToWishlist = false;
   function openListing() {
     if (addingToWishlist) return;
+    scrollToTop();
     useRouter().push("/search/results/" + title.value.replaceAll(" ", "-"));
   }
   function addToWishlist() {
