@@ -245,7 +245,8 @@
               text-align: end;
               padding-inline: 2em 0.5em;
               margin: 0;
-              border-radius: 0;
+              border-start-end-radius: 0px;
+              border-end-end-radius: 0px;
               border-start-start-radius: 5em;
               border-end-start-radius: 5em;
               &:hover {
@@ -286,7 +287,8 @@
               text-align: end;
               padding-inline: 2em 0.5em;
               margin: 0;
-              border-radius: 0;
+              border-start-end-radius: 0px;
+              border-end-end-radius: 0px;
               border-start-start-radius: 5em;
               border-end-start-radius: 5em;
             }
