@@ -268,6 +268,7 @@
         }
         ul.not-active {
           position: absolute;
+          overflow: hidden;
           top: 3.75em;
           right: -100%;
           background-color: $black;
