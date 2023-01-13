@@ -1,8 +1,8 @@
 <template>
   <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
-    <form class="sm:p-3 p-2 noSelect" :class="isAdvancedShown ? 'pb-1' : ''">
+    <form class="sm:p-3 p-2" :class="isAdvancedShown ? 'pb-1' : ''">
       <div class="flex flex-nowrap">
-        <div class="flex-auto flex flex-col justify-center">
+        <div class="flex-auto flex flex-col justify-center noSelect">
           <label class="label sm:text-2xl text-lg" for="category"
             >Category</label
           >
@@ -31,36 +31,32 @@
           </div>
         </div>
         <div
-          class="flex-auto flex pb-1 pl-0.5 sm:pl-5 items-center justify-start">
+          class="flex-auto flex pb-1 pl-0.5 sm:pl-5 items-center justify-start noSelect">
           <img
             v-if="carSearch && !carsOnParts"
             class="cat-icon"
-            src="../assets/car-icon.svg"
+            src="~assets/car-icon.svg"
             alt="category-icon" />
           <img
             v-if="carSearch && carsOnParts"
             class="cat-icon"
-            src="../assets/car-on-parts-icon.svg"
+            src="~assets/car-on-parts-icon.svg"
             alt="category-icon" />
           <img
             v-else-if="!carSearch"
             class="cat-icon"
-            src="../assets/parts-icon.svg"
+            src="~assets/parts-icon.svg"
             alt="category-icon" />
         </div>
         <div class="flex flex-auto justify-end pr-1">
-          <img
-            id="logo"
-            class="mb-3 w-44"
-            src="../assets/logo.svg"
-            alt="logo" />
+          <img id="logo" class="mb-3 w-44" src="~assets/logo.svg" alt="logo" />
         </div>
       </div>
-      <div class="flex flex-col sm:flex-row">
+      <div class="flex flex-col sm:flex-row noSelect">
         <SearchCars v-if="carSearch" />
         <SearchParts v-else />
       </div>
-      <div class="flex-nowrap">
+      <div class="flex-nowrap noSelect">
         <div class="flex items-center justify-center">
           <ReuseableButton
             @click="showAdvanced()"
@@ -80,7 +76,7 @@
         </div>
       </div>
       <div v-if="isAdvancedShown && carSearch && !carsOnParts" class="mt-3">
-        <AdvancedSearch />
+        <SearchBigAdvancedParameters />
       </div>
     </form>
   </div>

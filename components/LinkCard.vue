@@ -58,7 +58,7 @@
   function openListing() {
     if (addingToWishlist) return;
     scrollToTop();
-    useRouter().push("/search/results/" + title.value.replaceAll(" ", "-"));
+    navigateTo("/search/results/cars/" + title.value.replaceAll(" ", "-"));
   }
   function addToWishlist() {
     addingToWishlist = true;

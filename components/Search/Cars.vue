@@ -129,23 +129,23 @@
   </div>
 </template>
 <script setup>
-const carParams = useCarParams();
-const { make, model, maxPrice, year, engineType, gearboxType, region, city } =
-  storeToRefs(carParams);
-const extras = inject("extras");
-const onParts = inject("onParts");
-carParams.setExtras(extras);
-carParams.setOnParts(onParts);
-function searchForCars() {
-  if (onParts.value) {
-    carParams.setExtras({});
-  } else {
-    carParams.setExtras(extras);
+  const carParams = useCarParams();
+  const { make, model, maxPrice, year, engineType, gearboxType, region, city } =
+    storeToRefs(carParams);
+  const extras = inject("extras");
+  const onParts = inject("onParts");
+  carParams.setExtras(extras);
+  carParams.setOnParts(onParts);
+  function searchForCars() {
+    if (onParts.value) {
+      carParams.setExtras({});
+    } else {
+      carParams.setExtras(extras);
+    }
+    console.log(carParams.getCar);
+    navigateTo("/search/results/cars");
   }
-  console.log(carParams.getCar);
-  useRouter().push("/search/results/cars");
-}
 </script>
 <style lang="scss" scoped>
-//
+  //
 </style>

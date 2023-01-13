@@ -19,7 +19,7 @@
         /></a>
         <p
           class="copyright text-center whitespace-nowrap text-text-muted-color pt-3">
-          © 2022 4ip's Auto, Inc
+          © {{ new Date().getFullYear() }} 4ip's Auto, Inc
         </p>
       </div>
       <div class="flex flex-1 justify-end pl-2 pr-2 lg:pr-5 min-h-full">

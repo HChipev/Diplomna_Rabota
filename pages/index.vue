@@ -1,6 +1,6 @@
 <template>
   <main>
-    <SmallSearch />
+    <SearchSmallParameters />
     <TwoColGrid />
   </main>
 </template>
