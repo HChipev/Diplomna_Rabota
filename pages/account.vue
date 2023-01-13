@@ -18,22 +18,31 @@
   </div>
 </template>
 <script setup>
-definePageMeta({
-  middleware: ["auth-middleware"],
-});
-console.log(useUser().getUser.email);
-function logout() {
-  useLogOut();
+  useHead({
+    title: "My Account",
+    meta: [
+      {
+        name: "description",
+        content: "Account page",
+      },
+    ],
+  });
+  definePageMeta({
+    middleware: ["auth-middleware"],
+  });
   console.log(useUser().getUser.email);
-  navigateTo("/");
-}
-useUserPData().setPData(await getUserData());
+  function logout() {
+    useLogOut();
+    console.log(useUser().getUser.email);
+    navigateTo("/");
+  }
+  useUserPData().setPData(await getUserData());
 
-const inBrowser = inject("inBrowser");
+  const inBrowser = inject("inBrowser");
 </script>
 <style lang="scss" scoped>
-.accent-button {
-  min-height: 0;
-  font-size: 22px;
-}
+  .accent-button {
+    min-height: 0;
+    font-size: 22px;
+  }
 </style>

@@ -109,91 +109,100 @@
   </div>
 </template>
 <script setup>
-definePageMeta({
-  middleware: ["auth-middleware"],
-});
-const inBrowser = inject("inBrowser");
-const isLogInActive = ref(true);
-const email = ref("");
-const phone = ref("");
-const password = ref("");
-const confirmPassword = ref("");
-async function register() {
-  if (password.value === confirmPassword.value) {
-    useRegister(email.value, password.value);
+  useHead({
+    title: "Login",
+    meta: [
+      {
+        name: "description",
+        content: "Login page.",
+      },
+    ],
+  });
+  definePageMeta({
+    middleware: ["auth-middleware"],
+  });
+  const inBrowser = inject("inBrowser");
+  const isLogInActive = ref(true);
+  const email = ref("");
+  const phone = ref("");
+  const password = ref("");
+  const confirmPassword = ref("");
+  async function register() {
+    if (password.value === confirmPassword.value) {
+      useRegister(email.value, password.value);
+      navigateTo("/");
+    }
+  }
+  function logIn() {
+    useLogIn(email.value, password.value);
     navigateTo("/");
   }
-}
-function logIn() {
-  useLogIn(email.value, password.value);
-  navigateTo("/");
-}
 </script>
 <style lang="scss" scoped>
-.form {
-  background: $primery-lighter-color;
-  .accent-button {
-    min-height: 2.5em;
-    font-size: 18px;
-  }
-  hr {
-    border-radius: $border-radius;
-    border: none;
-    background: $accent-color;
-    opacity: 0.75;
-    min-height: 3px;
-    width: 10rem;
-    margin-block: 0.5em;
-    transition: all 0.5s ease;
-    &.register {
-      transform: translateX(122%);
-    }
-  }
-  .o-auth-wrapper {
-    transition: all 0.5s ease;
-    &:hover {
-      cursor: pointer;
-      animation: wiggle 0.5s ease-in-out;
-      border-color: $accent-color !important;
-      background: $accent-color;
-
-      @keyframes wiggle {
-        0% {
-          transform: rotate(0deg);
-        }
-        25% {
-          transform: rotate(3.5deg);
-        }
-        35% {
-          transform: rotate(1.5deg);
-        }
-        45% {
-          transform: rotate(0deg);
-        }
-        55% {
-          transform: rotate(-1.5deg);
-        }
-        75% {
-          transform: rotate(-3.5deg);
-        }
-        85% {
-          transform: rotate(-1.5deg);
-        }
-        100% {
-          transform: rotate(0deg);
-        }
-      }
-    }
-  }
-}
-@media (max-width: 640px) {
   .form {
+    background: $primery-lighter-color;
+    .accent-button {
+      min-height: 2.5em;
+      font-size: 18px;
+    }
     hr {
-      width: 7.5rem;
+      border-radius: $border-radius;
+      border: none;
+      background: $accent-color;
+      opacity: 0.75;
+      min-height: 3px;
+      width: 10rem;
+      margin-block: 0.5em;
+      transition: all 0.5s ease;
       &.register {
-        transform: translateX(103%);
+        transform: translateX(122%);
+      }
+    }
+    .o-auth-wrapper {
+      transition: all 0.5s ease;
+      &:hover {
+        cursor: pointer;
+        animation: wiggle 0.5s ease-in-out;
+        border-color: $accent-color !important;
+        background: $accent-color;
+
+        @keyframes wiggle {
+          0% {
+            transform: rotate(0deg);
+          }
+          25% {
+            transform: rotate(3.5deg);
+          }
+          35% {
+            transform: rotate(1.5deg);
+          }
+          45% {
+            transform: rotate(0deg);
+          }
+          55% {
+            transform: rotate(-1.5deg);
+          }
+          75% {
+            transform: rotate(-3.5deg);
+          }
+          85% {
+            transform: rotate(-1.5deg);
+          }
+          100% {
+            transform: rotate(0deg);
+          }
+        }
       }
     }
   }
-}
+  @media (max-width: 640px) {
+    .form {
+      hr {
+        width: 7.5rem;
+        &.register {
+          transform: translateX(103%);
+        }
+      }
+    }
+  }
 </style>

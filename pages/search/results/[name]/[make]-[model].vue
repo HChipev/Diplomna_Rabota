@@ -33,7 +33,11 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+  useHead({
+    title: useRoute().params.make + " " + useRoute().params.model,
+  });
+</script>
 <style scoped lang="scss">
   img {
     max-height: 25rem;
