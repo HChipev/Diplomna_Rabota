@@ -1,8 +1,5 @@
 <template>
-  <div id="flex-wrapper">
-    <header>
-      <TheHeader />
-    </header>
+  <NuxtLayout>
     <NuxtPage v-if="inBrowser" />
     <div v-else id="loader">
       <div class="lds-roller">
@@ -16,10 +13,7 @@
         <div></div>
       </div>
     </div>
-    <footer>
-      <TheFooter />
-    </footer>
-  </div>
+  </NuxtLayout>
 </template>
 <script setup>
   import { parse, stringify } from "flatted";
@@ -63,16 +57,6 @@
     padding-top: 4.5rem;
     color: $text-color;
     overflow-x: hidden;
-    #flex-wrapper {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-
-    footer {
-      margin-top: auto;
-    }
     a {
       -webkit-user-select: none;
       -ms-user-select: none;
@@ -90,12 +74,6 @@
       user-select: none;
     }
 
-    .form-control {
-      &:focus {
-        border-color: $accent-color !important;
-        box-shadow: 0 0 0 0.25rem rgb(128 0 0 / 25%);
-      }
-    }
     //* loading animation */
     #loader {
       display: flex;
