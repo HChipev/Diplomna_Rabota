@@ -1,18 +1,20 @@
 <template>
   <div>
     <div
-      class="container w-full mx-28"
+      class="flex flex-col justify-center mx-12 sm:mx-28"
       v-if="
         useRoute().path === '/search/results/cars' ||
         useRoute().path === '/search/results/parts'
       ">
       <hr />
 
-      <div v-if="useRoute().params.name === 'cars'">
-        <div>{{ carParams.getCar }}</div>
-      </div>
-      <div v-else-if="useRoute().params.name === 'parts'">
-        <div>{{ partParams.getPart }}</div>
+      <div class="flex justify-center items-center px-12">
+        <div v-if="useRoute().params.name === 'cars'">
+          {{ carParams.getCar }}
+        </div>
+        <div v-if="useRoute().params.name === 'parts'">
+          {{ partParams.getPart }}
+        </div>
       </div>
     </div>
     <NuxtPage />
@@ -26,8 +28,7 @@
       useRoute().params.name !== "cars" &&
       useRoute().params.name !== "parts"
     ) {
-      console.log("error");
-      createError({ statusCode: 404, statusMessage: "Page Not Found" });
+      throwError({ statusCode: 404, message: "Page not found" });
     }
   });
 </script>
