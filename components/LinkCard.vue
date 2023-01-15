@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105 hover:shadow-sm hover:shadow-white"
+    class="flex mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105"
     @click="openListing()">
     <div
       class="card flex p-1 rounded border border-border-color w-full max-h-44 sm:max-h-48 lg:max-h-52">
@@ -13,7 +13,9 @@
             <div class="flex flex-col max-h-16">
               <div class="flex justify-between border-b border-border-color">
                 <div class="flex flex-col">
-                  <h1 class="text-3xl whitespace-nowrap">{{ car.make }}</h1>
+                  <h1 class="text-xl sm:text-2xl md:text-3xl whitespace-nowrap">
+                    {{ car.make }}
+                  </h1>
                   <h1 class="text-lx whitespace-nowrap">{{ car.model }}</h1>
                 </div>
                 <font-awesome-icon
@@ -43,7 +45,8 @@
                 </p>
               </div>
               <div class="flex flex-1 flex-col items-end justify-end">
-                <h1 class="text-lg md:text-2xl font-semibold text-accent-color">
+                <h1
+                  class="text-sm sm:text-lg md:text-2xl font-semibold text-accent-color">
                   ${{ car.price }}
                 </h1>
               </div>
