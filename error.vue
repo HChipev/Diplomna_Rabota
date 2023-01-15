@@ -1,10 +1,12 @@
 <template>
   <div>
     <NuxtLayout v-if="inBrowser">
-      <div class="flex flex-col m-auto justify-center items-center">
+      <div
+        v-if="error"
+        class="flex flex-col m-auto justify-center items-center">
         <h1 class="text-9xl">{{ error.statusCode }}</h1>
         <h1 class="text-5xl my-5">
-          {{ error.statusCode ? "Page not found" : "There was an error" }}
+          {{ error.message }}
         </h1>
         <img
           class="m-auto p-5 sm:p-0"
@@ -28,8 +30,13 @@
 </template>
 <script setup>
   import { parse, stringify } from "flatted";
+  useHead({
+    titleTemplate: "%s | 4ip's Auto ",
+    title: useError().value.message.substring(0, 14),
+  });
+
   const inBrowser = ref(false);
-  defineProps(["error"]);
+  const error = useError();
   useSupabaseClient().auth.onAuthStateChange((event, session) => {
     console.log("session changed");
     useUser().setUser(session);

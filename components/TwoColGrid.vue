@@ -1,9 +1,13 @@
 <template>
   <div class="container mx-auto px-3 sm:px-28">
     <div class="grid grid-col-1 xl:grid-cols-2 mt-2">
-      <LinkCard v-for="n in 6" />
+      <LinkCard v-for="car in cars" :key="car.id" :car="car" />
     </div>
   </div>
 </template>
-<script setup></script>
-<style lang="scss"></style>
+<script setup>
+  const { cars } = useCars();
+</script>
+<style lang="scss" scoped>
+  //
+</style>

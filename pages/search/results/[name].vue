@@ -28,7 +28,10 @@
       useRoute().params.name !== "cars" &&
       useRoute().params.name !== "parts"
     ) {
-      throwError({ statusCode: 404, message: "Page not found" });
+      throwError({
+        statusCode: 404,
+        message: "Page not found: " + useRoute().path,
+      });
     }
   });
 </script>

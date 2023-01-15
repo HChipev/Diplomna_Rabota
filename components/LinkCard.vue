@@ -6,15 +6,15 @@
       class="card flex p-1 rounded border border-border-color w-full max-h-44 sm:max-h-48 lg:max-h-52">
       <div class="flex w-full">
         <div class="flex flex-1 pr-1">
-          <img src="https://picsum.photos/1080/1900" alt="car-image" />
+          <img :src="car.url" alt="car-image" />
         </div>
         <div class="flex flex-1 pl-1">
           <div class="card-body min-w-full p-2">
             <div class="flex flex-col max-h-16">
               <div class="flex justify-between border-b border-border-color">
                 <div class="flex flex-col">
-                  <h1 class="text-3xl whitespace-nowrap">{{ title }}</h1>
-                  <h1 class="text-lx whitespace-nowrap">{{ model }}</h1>
+                  <h1 class="text-3xl whitespace-nowrap">{{ car.make }}</h1>
+                  <h1 class="text-lx whitespace-nowrap">{{ car.model }}</h1>
                 </div>
                 <font-awesome-icon
                   v-if="stared"
@@ -30,17 +30,21 @@
             </div>
             <div class="flex">
               <div class="flex flex-1 flex-col justify-end">
-                <p class="text-sm md:text-lg text-text-muted-color">200hp</p>
-                <p class="text-sm md:text-lg text-text-muted-color">Year</p>
+                <p class="text-sm md:text-lg text-text-muted-color">
+                  {{ car.hp }}hp
+                </p>
+                <p class="text-sm md:text-lg text-text-muted-color">
+                  {{ car.year }}
+                </p>
                 <p class="text-sm md:text-lg text-text-muted-color">Engine</p>
                 <p
                   class="text-sm mb-0.5 md:mb-0 md:text-lg text-text-muted-color">
-                  210000km
+                  {{ car.milage }}km
                 </p>
               </div>
               <div class="flex flex-1 flex-col items-end justify-end">
                 <h1 class="text-lg md:text-2xl font-semibold text-accent-color">
-                  $100,000
+                  ${{ car.price }}
                 </h1>
               </div>
             </div>
@@ -51,14 +55,20 @@
   </div>
 </template>
 <script setup>
-  const title = ref("Card Title");
-  const model = ref("Model");
+  const props = defineProps({ car: Object });
   const stared = ref(false);
   let addingToWishlist = false;
-  function openListing() {
+  async function openListing() {
     if (addingToWishlist) return;
     scrollToTop();
-    navigateTo("/search/results/cars/" + title.value.replaceAll(" ", "-"));
+    navigateTo(
+      "/search/results/cars/" +
+        props.car.make.replaceAll(" ", "_") +
+        "-" +
+        props.car.model +
+        "/" +
+        props.car.id
+    );
   }
   function addToWishlist() {
     addingToWishlist = true;

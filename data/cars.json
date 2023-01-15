@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "make": "Range Rover",
+    "model": "Sport",
+    "price": "84,777",
+    "url": "https://www.carhelpcanada.com/wp-content/uploads/2019/12/2020-Range-Rover-Evoque-2.jpg",
+    "year": "2020",
+    "milage": "14,666",
+    "hp": "300",
+    "features": [
+      "No Accidents",
+      "Low KM",
+      "Vehicle Detailed",
+      "Leather Interior"
+    ],
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis odio et laboriosam!"
+  },
+  {
+    "id": 2,
+    "make": "Rolls Royce",
+    "model": "Phantom",
+    "price": "455,000",
+    "url": "https://robbreport.com/wp-content/uploads/2021/03/1-5.jpg?w=1000",
+    "year": "2021",
+    "milage": "53,666",
+    "hp": "680",
+    "features": [
+      "No Accidents",
+      "Low KM",
+      "Vehicle Detailed",
+      "Leather Interior"
+    ],
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis odio et laboriosam! Numquam ut rem, blanditiis est rerum tenetur maxime delectus"
+  },
+  {
+    "id": 4,
+    "make": "Porsche",
+    "model": "Cayenne",
+    "price": "180,434",
+    "url": "https://www.topgear.com/sites/default/files/cars-car/carousel/2021/02/pcgb20_1441_fine.jpg",
+    "year": "2019",
+    "milage": "0",
+    "hp": "550",
+    "features": [
+      "No Accidents",
+      "Low KM",
+      "Vehicle Detailed",
+      "Leather Interior"
+    ],
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis odio et"
+  }
+]
