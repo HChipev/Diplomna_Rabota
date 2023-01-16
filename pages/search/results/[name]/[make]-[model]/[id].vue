@@ -26,13 +26,7 @@
   if (!car.value) {
     throwError({
       statusCode: 404,
-      message:
-        useRoute().params.make.replaceAll("_", " ") +
-        " " +
-        useRoute().params.model +
-        " with ID of " +
-        useRoute().params.id +
-        " not found",
+      message: "Car not found",
     });
   }
 </script>

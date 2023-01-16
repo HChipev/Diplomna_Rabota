@@ -5,13 +5,20 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="make">Make</label>
         <select
+          @change="
+            //! If the user selects a make, get the models for that make
+            $event.target.options.selectedIndex > 0
+              ? getModels($event.target.options.selectedIndex)
+              : (make = 'All'),
+              (model = 'All')
+          "
           v-model="make"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>All</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="m in makes" :value="m.make" :key="m.id">
+            {{ m.make }}
+          </option>
         </select>
       </div>
       <div
@@ -22,9 +29,9 @@
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>All</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="m in models">
+            {{ m.model }}
+          </option>
         </select>
       </div>
     </div>
@@ -134,6 +141,16 @@
     storeToRefs(carParams);
   const extras = inject("extras");
   const onParts = inject("onParts");
+
+  const makes = ref(await getMakesData());
+  const models = ref([]);
+
+  async function getModels(index) {
+    console.log(index);
+    const model_id = makes.value[index - 1].model_id;
+    models.value = await getModelsData(model_id);
+  }
+
   carParams.setExtras(extras);
   carParams.setOnParts(onParts);
   function searchForCars() {
