@@ -32,7 +32,10 @@
   import { parse, stringify } from "flatted";
   useHead({
     titleTemplate: "%s | 4ip's Auto ",
-    title: useError().value.message.substring(0, 14),
+    title:
+      useError().value.statusCode === "404"
+        ? useError().value.message.substring(0, 14)
+        : useError().value.message,
   });
 
   const inBrowser = ref(false);

@@ -3,7 +3,7 @@
     class="flex mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105"
     @click="openListing()">
     <div
-      class="card flex p-1 rounded border border-border-color w-full max-h-44 sm:max-h-48 lg:max-h-52">
+      class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
       <div class="flex w-full">
         <div class="flex flex-1 pr-1">
           <img :src="car.url" alt="car-image" />
@@ -13,10 +13,12 @@
             <div class="flex flex-col max-h-16">
               <div class="flex justify-between border-b border-border-color">
                 <div class="flex flex-col">
-                  <h1 class="text-xl sm:text-2xl md:text-3xl whitespace-nowrap">
+                  <h1 class="text-lg sm:text-xl md:text-2xl whitespace-nowrap">
                     {{ car.make }}
                   </h1>
-                  <h1 class="text-lx whitespace-nowrap">{{ car.model }}</h1>
+                  <h1 class="text-base whitespace-nowrap -mt-2 sm:mt-0">
+                    {{ car.model }}
+                  </h1>
                 </div>
                 <font-awesome-icon
                   v-if="stared"
@@ -32,21 +34,26 @@
             </div>
             <div class="flex">
               <div class="flex flex-1 flex-col justify-end">
-                <p class="text-sm md:text-lg text-text-muted-color">
+                <p
+                  class="text-xs sm:text-sm md:text-base text-text-muted-color">
                   {{ car.hp }}hp
                 </p>
-                <p class="text-sm md:text-lg text-text-muted-color">
+                <p
+                  class="text-xs sm:text-sm md:text-base text-text-muted-color">
                   {{ car.year }}
                 </p>
-                <p class="text-sm md:text-lg text-text-muted-color">Engine</p>
                 <p
-                  class="text-sm mb-0.5 md:mb-0 md:text-lg text-text-muted-color">
+                  class="text-xs sm:text-sm md:text-base text-text-muted-color">
+                  Engine
+                </p>
+                <p
+                  class="text-xs sm:text-sm mb-0.5 md:mb-0 md:text-base text-text-muted-color">
                   {{ car.milage }}km
                 </p>
               </div>
               <div class="flex flex-1 flex-col items-end justify-end">
                 <h1
-                  class="text-sm sm:text-lg md:text-2xl font-semibold text-accent-color">
+                  class="text-sm sm:text-base md:text-2xl font-semibold text-accent-color">
                   ${{ car.price }}
                 </h1>
               </div>
