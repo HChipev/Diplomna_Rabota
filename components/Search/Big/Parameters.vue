@@ -90,6 +90,7 @@
     } else {
       carSearch.value = false;
     }
+    useRouter().replace({ query: null });
   };
 
   const carsOnParts = ref(false);

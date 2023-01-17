@@ -1,13 +1,19 @@
 export const usePartParams = defineStore("partParams", {
   state: () => ({
-    partType: "All",
-    part: "All",
-    make: "All",
-    model: "All",
-    maxPrice: "All",
-    year: "All",
-    region: "All",
-    city: "All",
+    partType: "Any",
+    part: "Any",
+    make: "Any",
+    model: "Any",
+    priceRange: {
+      min: "",
+      max: "",
+    },
+    year: {
+      min: "",
+      max: "",
+    },
+    region: "Any",
+    city: "Any",
   }),
   getters: {
     getPart: (state) => {
@@ -20,7 +26,7 @@ export const usePartParams = defineStore("partParams", {
         " " +
         state.model +
         " " +
-        state.maxPrice +
+        state.priceRange +
         " " +
         state.year +
         " " +
@@ -41,7 +47,7 @@ export const usePartParams = defineStore("partParams", {
           " " +
           this.model +
           " " +
-          this.maxPrice +
+          this.priceRange +
           " " +
           this.year +
           " " +

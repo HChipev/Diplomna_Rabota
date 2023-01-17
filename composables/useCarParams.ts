@@ -1,13 +1,19 @@
 export const useCarParams = defineStore("carParams", {
   state: () => ({
-    make: "All",
-    model: "All",
-    maxPrice: "All",
-    year: "All",
-    engineType: "All",
-    gearboxType: "All",
-    region: "All",
-    city: "All",
+    make: "Any",
+    model: "Any",
+    priceRange: {
+      min: "",
+      max: "",
+    },
+    year: {
+      min: "",
+      max: "",
+    },
+    engineType: "Any",
+    gearboxType: "Any",
+    region: "Any",
+    city: "Any",
     onParts: false,
     extras: {},
   }),
@@ -18,7 +24,7 @@ export const useCarParams = defineStore("carParams", {
         " " +
         state.model +
         " " +
-        state.maxPrice +
+        state.priceRange +
         " " +
         state.year +
         " " +
@@ -49,7 +55,7 @@ export const useCarParams = defineStore("carParams", {
           " " +
           this.model +
           " " +
-          this.maxPrice +
+          this.priceRange +
           " " +
           this.year +
           " " +

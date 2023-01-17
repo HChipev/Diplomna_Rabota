@@ -48,6 +48,7 @@
     } else {
       carSearch.value = false;
     }
+    useRouter().replace({ query: null });
   };
 
   provide("extras", {});
