@@ -50,9 +50,6 @@
     }
     useRouter().replace({ query: null });
   };
-
-  provide("extras", {});
-  provide("onParts", false);
 </script>
 
 <style lang="scss" scoped>

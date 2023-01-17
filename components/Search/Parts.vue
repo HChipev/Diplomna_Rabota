@@ -5,7 +5,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="make">Part Type</label>
         <select
-          v-model="partType"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -19,7 +18,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="model">Part</label>
         <select
-          v-model="part"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -34,7 +32,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="make">Make</label>
         <select
-          v-model="make"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -48,7 +45,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="model">Model</label>
         <select
-          v-model="model"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -61,7 +57,7 @@
     <div class="flex flex-col sm:flex-row">
       <div
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color relative">
-        <label class="mt-1" for="max-price">Min - Max Price</label>
+        <label class="mt-1" for="max-price">Min-Max Price</label>
         <h3
           @click="updateDropdowns('price')"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2 mr-3 pl-2">
@@ -89,7 +85,7 @@
       </div>
       <div
         class="relative flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
-        <label class="mt-1" for="year">Min - Max Year</label>
+        <label class="mt-1" for="year">Min-Max Year</label>
         <h3
           @click="updateDropdowns('year')"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2">
@@ -123,7 +119,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="region">Region</label>
         <select
-          v-model="region"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -138,7 +133,6 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="city-village">City/Village</label>
         <select
-          v-model="city"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
@@ -161,9 +155,6 @@
   </div>
 </template>
 <script setup>
-  const partParams = usePartParams();
-  const { partType, part, make, model, priceRange, year, region, city } =
-    storeToRefs(partParams);
   const dropdowns = ref({
     price: false,
     year: false,
@@ -236,7 +227,6 @@
     });
   }
   function searchForParts() {
-    partParams.printPart();
     useRouter().push("/search/results/parts");
   }
 </script>

@@ -15,12 +15,10 @@
 </template>
 <script setup>
   const checked = ref(false);
-
+  const extras = reactive({});
   defineProps({
     extraName: String,
   });
-
-  const extras = inject("extras");
 
   function check(extraName) {
     checked.value = !checked.value;
