@@ -11,5 +11,8 @@
       },
     ],
   });
+  definePageMeta({
+    middleware: ["my-listings-middleware"],
+  });
 </script>
 <style lang="scss"></style>

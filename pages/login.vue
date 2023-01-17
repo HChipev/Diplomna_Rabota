@@ -123,6 +123,7 @@
   });
   const inBrowser = inject("inBrowser");
   const isLogInActive = ref(true);
+
   const email = ref("");
   const phone = ref("");
   const password = ref("");

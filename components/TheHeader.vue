@@ -28,18 +28,10 @@
             ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
           >
         </li>
-
-        <li>
-          <!--//todo proveka dali profila e kopuvach -->
-          <NuxtLink to="/my-listings" class="nav-button" @click="scrollToTop"
-            ><font-awesome-icon icon="fa-solid fa-warehouse" /> My
-            Listings</NuxtLink
-          >
-        </li>
       </ul>
 
       <NuxtLink
-        to="/cart"
+        to="/account/cart"
         v-if="useUser().getUser !== null"
         id="cart-button"
         @click="scrollToTop">

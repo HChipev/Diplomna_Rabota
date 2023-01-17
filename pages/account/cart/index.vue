@@ -5,5 +5,8 @@
   useHead({
     title: "Cart",
   });
+  definePageMeta({
+    middleware: ["cart-middleware"],
+  });
 </script>
 <style lang="scss"></style>
