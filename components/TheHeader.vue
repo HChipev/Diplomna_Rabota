@@ -124,7 +124,7 @@
     background: $primery-darker-color;
     border-bottom: 1px solid $accent-color;
     padding: 10px;
-    z-index: 1;
+    z-index: 20;
     .navbar-container {
       display: flex;
       justify-content: center;
