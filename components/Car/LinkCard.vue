@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105"
+    class="flex md:px-2 mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105"
     @click="openListing()">
     <div
       class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
