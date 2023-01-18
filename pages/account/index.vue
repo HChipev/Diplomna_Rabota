@@ -1,6 +1,6 @@
 <template>
   <div v-if="inBrowser">
-    <div class="flex gap-12 justify-center items-center mx-28 w-screen">
+    <div class="flex gap-12 justify-center items-center mx-28 max-w-full">
       <!-- //*future side bar start -->
       <div class="flex flex-col gap-3 justify-start items-center">
         <NuxtLink

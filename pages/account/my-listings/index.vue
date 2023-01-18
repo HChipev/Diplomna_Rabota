@@ -1,7 +1,23 @@
 <template>
-  <div>Text my listings</div>
+  <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl md:text-6xl">My Listings</h1>
+      <NuxtLink
+        to="/account/my-listings/create"
+        class="w-9 h-9 flex justify-center items-center rounded-full bg-accent-color text-white hover:bg-white hover:text-accent-color transition-all font-bold cursor-pointer"
+        ><font-awesome-icon icon="fa-solid fa-plus"
+      /></NuxtLink>
+    </div>
+    <div class="shadow shadow-white rounded p-3 mt-5">
+      <CarListingCard
+        v-for="listing in listings"
+        :key="listing.id"
+        :listing="listing" />
+    </div>
+  </div>
 </template>
 <script setup>
+  const { listings } = useCars();
   useHead({
     title: "My Listings",
     meta: [
