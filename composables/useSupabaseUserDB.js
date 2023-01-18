@@ -34,11 +34,11 @@ export async function getMakesData() {
   }
 }
 //*for getting models data from supabase
-export async function getModelsData(model_id) {
+export async function getModelsData(make_id) {
   let { data, error } = await useSupabaseClient()
     .from("models")
     .select("model")
-    .eq("model_id", model_id)
+    .eq("make_id", make_id)
     .order("model", { ascending: true });
   if (error) {
     console.log(error);
