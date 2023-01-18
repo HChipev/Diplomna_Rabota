@@ -23,35 +23,46 @@
           >
         </li>
 
-        <li>
-          <NuxtLink to="/add-listing" class="nav-button" @click="scrollToTop"
+        <li v-if="useUser().getUser">
+          <NuxtLink
+            to="/account/my-listings/create"
+            class="nav-button"
+            @click="scrollToTop"
             ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
+          >
+        </li>
+        <li v-if="useUser().getUser">
+          <NuxtLink
+            to="/account/my-listings"
+            class="nav-button"
+            @click="scrollToTop"
+            ><font-awesome-icon icon="fa-solid fa-list" /> My Listings</NuxtLink
           >
         </li>
       </ul>
 
       <NuxtLink
         to="/account/cart"
-        v-if="useUser().getUser !== null"
+        v-if="useUser().getUser"
         id="cart-button"
         @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <NuxtLink
-        :to="useUser().getUser !== null ? '/account' : '/login'"
-        :class="useUser().getUser !== null ? 'loggedIn' : ''"
+        :to="useUser().getUser ? '/account' : '/login'"
+        :class="useUser().getUser ? 'loggedIn' : ''"
         class="nav-button"
         @click="scrollToTop"
         ><img
-          v-if="useUser().getUser !== null"
+          v-if="useUser().getUser"
           class="h-7 items-center justify-center"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic" /><font-awesome-icon
           v-else
           class="mx-1"
           icon="fa-solid fa-user" />{{
-          useUser().getUser !== null ? "" : "Log In"
+          useUser().getUser ? "" : "Log In"
         }}</NuxtLink
       >
 

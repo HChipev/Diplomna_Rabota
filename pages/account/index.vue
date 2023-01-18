@@ -3,11 +3,6 @@
     <div class="flex gap-12 justify-center items-center mx-28 max-w-full">
       <!-- //*future side bar start -->
       <div class="flex flex-col gap-3 justify-start items-center">
-        <NuxtLink
-          to="/account/my-listings"
-          class="accent-button text-center w-full"
-          >My Listings</NuxtLink
-        >
         <ReuseableButton
           class="accent-button w-full px-2"
           @click="updateUser(useUser().getUser.id, 'user', '1234567890')"
@@ -18,7 +13,6 @@
         >
       </div>
       <!-- //*future side bar end -->
-      <!-- <p v-if="useUser().getUser"></p> -->
       <p>
         id: {{ useUserPData().getPData.id }} <br />
         role: {{ useUserPData().getPData.role }} <br />

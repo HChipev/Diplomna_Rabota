@@ -6,7 +6,7 @@
     title: "Cart",
   });
   definePageMeta({
-    middleware: ["cart-middleware"],
+    middleware: ["user-protected-pages-middleware"],
   });
 </script>
 <style lang="scss"></style>

@@ -30,7 +30,7 @@
     ],
   });
   definePageMeta({
-    middleware: ["my-listings-middleware"],
+    middleware: ["user-protected-pages-middleware"],
   });
 </script>
 <style lang="scss"></style>

@@ -106,6 +106,18 @@
   </div>
 </template>
 <script setup>
+  useHead({
+    title: "Add Listing",
+    meta: [
+      {
+        name: "description",
+        content: "Put your car up for sale!",
+      },
+    ],
+  });
+  definePageMeta({
+    middleware: ["user-protected-pages-middleware"],
+  });
   const { makes } = useCars();
   const carInfo = useState("carInfo", () => {
     return {

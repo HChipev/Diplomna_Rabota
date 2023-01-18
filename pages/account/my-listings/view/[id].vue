@@ -9,5 +9,9 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+  definePageMeta({
+    middleware: ["user-protected-pages-middleware"],
+  });
+</script>
 <style lang=""></style>
