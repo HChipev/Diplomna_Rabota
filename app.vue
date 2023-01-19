@@ -38,6 +38,7 @@
     } else {
       inBrowser.value = false;
     }
+    window.scrollTo(0, 0);
   });
   provide("inBrowser", inBrowser);
 </script>

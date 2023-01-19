@@ -70,7 +70,6 @@
   let addingToWishlist = false;
   async function openListing() {
     if (addingToWishlist) return;
-    scrollToTop();
     navigateTo(
       "/search/results/cars/" +
         props.car.make.replaceAll(" ", "_") +

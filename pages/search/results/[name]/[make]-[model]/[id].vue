@@ -16,6 +16,9 @@
       " " +
       useRoute().params.model,
   });
+  onMounted(() => {
+    window.scrollTo(0, 0);
+  });
   const car = computed(() => {
     return cars.find((car) => {
       return (
