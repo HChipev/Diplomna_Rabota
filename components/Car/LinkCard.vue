@@ -71,7 +71,7 @@
   async function openListing() {
     if (addingToWishlist) return;
     navigateTo(
-      "/search/results/cars/" +
+      "/search/results/" +
         props.car.make.replaceAll(" ", "_") +
         "-" +
         props.car.model +

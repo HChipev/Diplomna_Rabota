@@ -227,7 +227,7 @@
     });
   }
   function searchForParts() {
-    useRouter().push("/search/results/parts");
+    useRouter().push("/search/results");
   }
 </script>
 <style lang="scss" scoped>

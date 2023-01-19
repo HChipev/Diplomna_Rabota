@@ -247,7 +247,7 @@
     });
   }
   function searchForCars() {
-    navigateTo("/search/results/cars");
+    navigateTo("/search/results");
   }
 </script>
 <style lang="scss" scoped>
