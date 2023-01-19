@@ -3,11 +3,11 @@
     <NuxtLayout v-if="inBrowser">
       <div
         v-if="error"
-        class="flex flex-col m-auto justify-center items-center">
+        class="flex flex-col max-w-full m-auto justify-center items-center px-5 overflow-hidden">
         <h1 class="text-9xl">{{ error.statusCode }}</h1>
-        <h1 class="text-5xl my-5">
+        <p class="text-base sm:text-3xl my-5 text-center break-words">
           {{ error.message }}
-        </h1>
+        </p>
         <img
           class="m-auto p-5 sm:p-0"
           src="~assets/broken-car-error.svg"
