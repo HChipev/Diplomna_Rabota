@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div v-if="car" class="container mx-auto px-5 sm:px-28">
-      <CarDetailsHero :car="car" :route="useRoute()" />
+    <div v-if="car" class="container mx-auto px-5 sm:px-20 xl:px-28">
+      <CarDetailsHero :car="car" />
+      <CarDetailsFeatures :car="car" />
+      <CarDetailsDescription :car="car" />
+      <CarDetailsContactForm />
     </div>
   </div>
 </template>
