@@ -8,7 +8,7 @@
           @change="
             //! If the user selects a make, get the models for that make
             $event.target.options.selectedIndex > 0
-              ? getModels($event.target.options.selectedIndex)
+              ? getModels($event)
               : (models = [])
           "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
@@ -174,8 +174,8 @@
     max: "",
   });
 
-  async function getModels(index) {
-    console.log(index);
+  async function getModels(e) {
+    const index = e.target.selectedIndex;
     models.value = await getModelsData(makes.value[index - 1].make_id);
   }
 
