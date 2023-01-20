@@ -1,10 +1,16 @@
 <template>
   <main>
     <SearchSmallParameters />
-    <TwoColGrid />
+    <TwoColGrid :cars="cars" />
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+  const cars = await useFetchCars();
+  watchEffect(() => useRoute().query, await refreshNuxtData());
+  onMounted(() => {
+    window.scrollTo(0, 0);
+  });
+</script>
 
 <style lang="scss"></style>

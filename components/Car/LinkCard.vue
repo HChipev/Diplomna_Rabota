@@ -5,10 +5,10 @@
     <div
       class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
       <div class="flex w-full">
-        <div class="flex flex-1 pr-1">
+        <div class="flex pr-1">
           <img :src="car.url" alt="car-image" />
         </div>
-        <div class="flex flex-1 pl-1">
+        <div class="flex flex-grow pl-1 min-w-[160px]">
           <div class="card-body min-w-full p-2">
             <div class="flex flex-col max-h-16">
               <div class="flex justify-between border-b border-border-color">
@@ -23,13 +23,13 @@
                 <font-awesome-icon
                   v-if="stared"
                   @click="addToWishlist()"
-                  class="text-2xl mr-0.5 mt-1"
-                  icon="fa-solid fa-star" />
+                  class="text-2xl text-accent-color ml-2 mr-0.5 mt-1"
+                  icon="fa-solid fa-heart" />
                 <font-awesome-icon
                   v-else
                   @click="addToWishlist()"
-                  class="text-2xl mr-0.5 mt-1"
-                  icon="fa-regular fa-star" />
+                  class="text-2xl ml-2 mr-0.5 mt-1"
+                  icon="fa-regular fa-heart" />
               </div>
             </div>
             <div class="flex">
@@ -103,6 +103,7 @@
     img {
       width: 100%;
       height: 100%;
+      max-width: 450px;
       border-radius: $card-border-radius;
     }
 

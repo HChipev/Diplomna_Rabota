@@ -1,5 +1,29 @@
 <template>
-  <div>Results page</div>
+  <div>
+    <OneColumnGrid v-if="cars.length" :cars="cars" />
+    <div v-else class="flex mt-20">
+      <h1 class="text-3xl text-text-muted-color mx-auto">
+        No cars found with this filters
+      </h1>
+    </div>
+  </div>
 </template>
-<script setup></script>
+<script setup>
+  const cars = await useFetchCars({
+    make: useRoute().query.make,
+    model: useRoute().query.model,
+    minPrice: useRoute().query.minPrice,
+    maxPrice: useRoute().query.maxPrice,
+    minYear: useRoute().query.minYear,
+    maxYear: useRoute().query.maxYear,
+    engine: useRoute().query.engine,
+    gearbox: useRoute().query.gearbox,
+    region: useRoute().query.region,
+    city: useRoute().query.city,
+  });
+  watchEffect(() => useRoute().query, await refreshNuxtData());
+  onMounted(() => {
+    window.scrollTo(0, 0);
+  });
+</script>
 <style lang=""></style>

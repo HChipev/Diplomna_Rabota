@@ -1,15 +1,32 @@
 <template>
   <div>
-    <div v-if="car" class="container mx-auto px-5 sm:px-20 xl:px-28">
+    <div
+      v-if="car"
+      class="container mx-auto px-5 sm:px-20 xl:px-28">
       <CarDetailsHero :car="car" />
       <CarDetailsFeatures :car="car" />
       <CarDetailsDescription :car="car" />
       <CarDetailsContactForm />
     </div>
+    <div v-else id="loader">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
-  const { cars } = useCars();
+  const car = await useFetchCar(useRoute().params);
+
+  watchEffect(() => useRoute().params, await refreshNuxtData());
+
   useHead({
     title:
       useRoute().params.make.replaceAll("_", " ") +
@@ -19,20 +36,11 @@
   onMounted(() => {
     window.scrollTo(0, 0);
   });
-  const car = computed(() => {
-    return cars.find((car) => {
-      return (
-        car.id === parseInt(useRoute().params.id) &&
-        car.make === useRoute().params.make.replaceAll("_", " ") &&
-        car.model === useRoute().params.model
-      );
-    });
-  });
 
   if (!car.value) {
     throwError({
       statusCode: 404,
-      message: "Car not found",
+      message: "Car does not exist",
     });
   }
 </script>
