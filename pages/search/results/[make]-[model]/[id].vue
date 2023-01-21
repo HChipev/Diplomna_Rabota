@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="car"
-      class="container mx-auto px-5 sm:px-20 xl:px-28">
+    <div v-if="car" class="container mx-auto px-5 sm:px-20 xl:px-28">
       <CarDetailsHero :car="car" />
       <CarDetailsFeatures :car="car" />
       <CarDetailsDescription :car="car" />
@@ -33,10 +31,6 @@
       " " +
       useRoute().params.model,
   });
-  onMounted(() => {
-    window.scrollTo(0, 0);
-  });
-
   if (!car.value) {
     throwError({
       statusCode: 404,

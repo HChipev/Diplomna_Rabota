@@ -8,7 +8,7 @@
         :class="menuShow ? 'active' : 'not-active'"
         @click="(menuShow = false), (clicked = false)">
         <li>
-          <NuxtLink to="/" class="nav-button" @click="scrollToTop">
+          <NuxtLink to="/" class="nav-button">
             <font-awesome-icon
               class="mr-1"
               icon="fa-solid fa-house" />Home</NuxtLink
@@ -16,7 +16,7 @@
         </li>
 
         <li>
-          <NuxtLink to="/search" class="nav-button" @click="scrollToTop"
+          <NuxtLink to="/search" class="nav-button"
             ><font-awesome-icon
               class="mr-1"
               icon="fa-magnifying-glass" />Search</NuxtLink
@@ -24,28 +24,18 @@
         </li>
 
         <li v-if="useUser().getUser">
-          <NuxtLink
-            to="/account/my-listings/create"
-            class="nav-button"
-            @click="scrollToTop"
+          <NuxtLink to="/account/my-listings/create" class="nav-button"
             ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
           >
         </li>
         <li v-if="useUser().getUser">
-          <NuxtLink
-            to="/account/my-listings"
-            class="nav-button"
-            @click="scrollToTop"
+          <NuxtLink to="/account/my-listings" class="nav-button"
             ><font-awesome-icon icon="fa-solid fa-list" /> My Listings</NuxtLink
           >
         </li>
       </ul>
 
-      <NuxtLink
-        to="/account/cart"
-        v-if="useUser().getUser"
-        id="cart-button"
-        @click="scrollToTop">
+      <NuxtLink to="/account/cart" v-if="useUser().getUser" id="cart-button">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
@@ -53,7 +43,6 @@
         :to="useUser().getUser ? '/account' : '/login'"
         :class="useUser().getUser ? 'loggedIn' : ''"
         class="nav-button"
-        @click="scrollToTop"
         ><img
           v-if="useUser().getUser"
           class="h-7 items-center justify-center"
