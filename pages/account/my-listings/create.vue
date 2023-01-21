@@ -17,11 +17,12 @@
               :options="makes"
               name="model"
               @selectChange="onChange" />
-            <CarAddSelect
+            <CarAddInput
               title="Year *"
-              :options="makes"
+              :type="'number'"
+              placeholder="Year"
               name="year"
-              @selectChange="onChange" />
+              @inputChange="onChange" />
           </div>
           <div class="flex flex-col sm:flex-row">
             <CarAddSelect
@@ -44,6 +45,7 @@
           <div class="flex flex-col sm:flex-row">
             <CarAddInput
               v-for="input in inputs"
+              :type="input.type"
               :key="input.id"
               :title="input.title"
               :name="input.name"
@@ -142,18 +144,21 @@
     {
       id: 1,
       title: "Mileage *",
+      type: "number",
       name: "mileage",
       placeholder: "Mileage",
     },
     {
       id: 2,
       title: "Price *",
+      type: "number",
       name: "price",
       placeholder: "Price",
     },
     {
       id: 3,
       title: "Horsepower *",
+      type: "number",
       name: "hp",
       placeholder: "Horsepower",
     },

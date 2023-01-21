@@ -3,7 +3,7 @@
     <label class="label sm:text-xl text-base" for="option">{{ title }}</label>
     <input
       v-model="state"
-      type="text"
+      :type="type"
       class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-11"
       :placeholder="placeholder"
       :name="name"
@@ -14,6 +14,7 @@
   const props = defineProps({
     title: String,
     name: String,
+    type: String,
     placeholder: String,
   });
   const state = ref("");
