@@ -48,7 +48,7 @@
                 </p>
                 <p
                   class="text-xs sm:text-sm mb-0.5 md:mb-0 md:text-base text-text-muted-color">
-                  {{ car.milage }}km
+                  {{ car.mileage }}km
                 </p>
               </div>
               <div class="flex flex-1 flex-col items-end justify-end">

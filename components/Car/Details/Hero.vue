@@ -32,7 +32,7 @@
           <p class="mr-0.5 sm:mr-2">|</p>
           <p class="mr-0.5 sm:mr-2">{{ car.hp }}hp</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">{{ car.milage }}km</p>
+          <p class="mr-0.5 sm:mr-2">{{ car.mileage }}km</p>
           <p class="mr-0.5 sm:mr-2">|</p>
           <p class="mr-0.5 sm:mr-2">AWD</p>
           <p class="mr-0.5 sm:mr-2">|</p>

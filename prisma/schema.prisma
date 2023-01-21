@@ -9,7 +9,6 @@ datasource db {
   schemas  = ["auth", "public"]
 }
 
-//! auth schema start
 model audit_log_entries {
   instance_id String?   @db.Uuid
   id          String    @id @db.Uuid
@@ -230,9 +229,6 @@ model auth_users {
   @@schema("auth")
 }
 
-//! auth schema end
-
-//* public schema start
 model cars {
   id            BigInt       @id @unique @default(autoincrement())
   user_id       BigInt
@@ -242,7 +238,7 @@ model cars {
   engine_id     BigInt
   gearbox_id    BigInt
   horsepower    Decimal      @db.Decimal
-  milage        Decimal      @db.Decimal
+  mileage       Decimal      @db.Decimal
   drivetrain_id BigInt
   region_id     BigInt
   color_id      BigInt
@@ -358,8 +354,6 @@ model public_users {
   @@map("users")
   @@schema("public")
 }
-
-//* public schema end
 
 enum aal_level {
   aal1

@@ -1,12 +1,33 @@
 <template>
   <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <div class="p-4 border border-border-color rounded-md">
-      <div class="mb-8">
-        <h1 class="text-3xl md:text-6xl mx-5">Create a New Listing</h1>
+      <div class="flex items-center mb-8">
+        <h1 class="text-3xl md:text-6xl ml-5">Create a New Listing</h1>
+        <div class="flex mx-5 max-w-[60px] sm:max-w-[80px] md:max-w-[120px]">
+          <img
+            v-if="carOnParts"
+            src="~assets/car-on-parts-icon.svg"
+            alt="Car on parts" />
+          <img v-else src="~assets/car-icon.svg" alt="Car" />
+        </div>
       </div>
       <div class="p-1 sm:pt-4 -mt-3 sm:mt-5 flex flex-col">
         <div class="rounded-lg border border-border-color pt-5 mb-5">
-          <div class="flex flex-col sm:flex-row">
+          <div class="flex px-2 sm:px-4 sm:mx-1">
+            <input
+              @change="checkboxSelected(), onChange(carOnParts, 'is_on_parts')"
+              :checked="carOnParts"
+              class="w-7 h-7 text-accent-color rounded-md bg-white border-accent-color checked:bg-accent-color focus:ring-accent-color focus:outline-none mt-1 mb-4"
+              type="checkbox"
+              aria-label="cars-on-parts" />
+            <label
+              @click="checkboxSelected(), onChange(carOnParts, 'is_on_parts')"
+              class="ml-2 text-nowrap text-2xl"
+              for="checkbox"
+              >On Parts *</label
+            >
+          </div>
+          <div class="grid sm:grid-cols-3 grid-cols-1">
             <CarAddSelect
               title="Make *"
               :options="makes"
@@ -19,12 +40,11 @@
               @selectChange="onChange" />
             <CarAddInput
               title="Year *"
-              :type="'number'"
+              :type="'text'"
               placeholder="Year"
               name="year"
               @inputChange="onChange" />
-          </div>
-          <div class="flex flex-col sm:flex-row">
+
             <CarAddSelect
               title="Engine *"
               :options="makes"
@@ -37,12 +57,29 @@
               @selectChange="onChange" />
 
             <CarAddSelect
+              title="Drivetrain *"
+              :options="makes"
+              name="drivetrain"
+              @selectChange="onChange" />
+
+            <CarAddSelect
+              title="Region *"
+              :options="makes"
+              name="region"
+              @selectChange="onChange" />
+
+            <CarAddSelect
+              title="City *"
+              :options="makes"
+              name="city"
+              @selectChange="onChange" />
+
+            <CarAddSelect
               title="Color"
               :options="makes"
               name="color"
               @selectChange="onChange" />
-          </div>
-          <div class="flex flex-col sm:flex-row">
+
             <CarAddInput
               v-for="input in inputs"
               :type="input.type"
@@ -120,6 +157,10 @@
   definePageMeta({
     middleware: ["user-protected-pages-middleware"],
   });
+  const carOnParts = ref(false);
+  function checkboxSelected() {
+    carOnParts.value = !carOnParts.value;
+  }
   const { makes } = useCars();
   const carInfo = useState("carInfo", () => {
     return {
@@ -131,9 +172,13 @@
       hp: "",
       engine: "",
       gearbox: "",
+      drivetrain: "",
+      region: "",
+      city: "",
       features: "",
       color: "",
       description: "",
+      is_on_parts: false,
       image: null,
     };
   });
@@ -144,21 +189,21 @@
     {
       id: 1,
       title: "Mileage *",
-      type: "number",
+      type: "text",
       name: "mileage",
       placeholder: "Mileage",
     },
     {
       id: 2,
       title: "Price *",
-      type: "number",
+      type: "text",
       name: "price",
       placeholder: "Price",
     },
     {
       id: 3,
       title: "Horsepower *",
-      type: "number",
+      type: "text",
       name: "hp",
       placeholder: "Horsepower",
     },
