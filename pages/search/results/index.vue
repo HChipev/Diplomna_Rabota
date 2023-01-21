@@ -2,7 +2,7 @@
   <div>
     <OneColumnGrid v-if="cars.length" :cars="cars" />
     <div v-else class="flex mt-20">
-      <h1 class="text-3xl text-text-muted-color mx-auto">
+      <h1 class="text-xl sm:text-3xl text-text-muted-color mx-auto">
         No cars found with this filters
       </h1>
     </div>
@@ -21,6 +21,6 @@
     region: useRoute().query.region,
     city: useRoute().query.city,
   });
-  watchEffect(() => useRoute().query, await refreshNuxtData());
+  watchEffect(() => useRoute().query, refreshNuxtData());
 </script>
 <style lang=""></style>

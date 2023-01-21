@@ -56,7 +56,7 @@
             placeholder="Max" />
           <button
             @click.prevent="onPriceChange"
-            class="bg-white border border-accent-color text-accent-color rounded focus:ring-accent-color focus:border-accent-color py-0.5 px-3 text-xl">
+            class="bg-white border border-accent-color text-accent-color rounded-md focus:ring-accent-color focus:border-accent-color py-0.5 px-3 text-xl transition-all duration-300 hover:translate-x-1 hover:-translate-y-1 hover:bg-accent-color hover:text-white">
             Apply
           </button>
         </div>
@@ -84,7 +84,7 @@
             placeholder="Max" />
           <button
             @click.prevent="onYearChange"
-            class="bg-white border border-accent-color text-accent-color rounded focus:ring-accent-color focus:border-accent-color py-0.5 px-3 text-xl">
+            class="bg-white border border-accent-color text-accent-color rounded-md focus:ring-accent-color focus:border-accent-color py-0.5 px-3 text-xl transition-all duration-300 hover:translate-x-1 hover:-translate-y-1 hover:bg-accent-color hover:text-white">
             Apply
           </button>
         </div>

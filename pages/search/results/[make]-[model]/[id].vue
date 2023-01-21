@@ -23,7 +23,7 @@
 <script setup>
   const car = await useFetchCar(useRoute().params);
 
-  watchEffect(() => useRoute().params, await refreshNuxtData());
+  watchEffect(() => useRoute().params, refreshNuxtData());
 
   useHead({
     title:
