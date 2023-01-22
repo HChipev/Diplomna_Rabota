@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup>
-  const { listings } = useCars();
+  const listings = await useFetchMyListings(useSupabaseUser().value.id);
   useHead({
     title: "My Listings",
     meta: [

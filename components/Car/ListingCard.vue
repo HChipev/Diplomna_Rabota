@@ -12,10 +12,10 @@
         <div>
           <div class="flex flex-col md:flex-row">
             <h1 class="text-base sm:text-2xl whitespace-nowrap">
-              {{ listing.make }}
+              {{ listing.Make.make }}
             </h1>
             <h1 class="text-sm sm:text-2xl whitespace-nowrap md:ml-2">
-              {{ listing.model }}
+              {{ listing.Model.model }}
             </h1>
           </div>
           <p class="text-accent-color text-base sm:text-lg font-bold">

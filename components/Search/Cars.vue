@@ -176,7 +176,7 @@
 
   async function getModels(e) {
     const index = e.target.selectedIndex;
-    models.value = await getModelsData(makes.value[index - 1].make_id);
+    models.value = await getModelsData(makes.value[index - 1].id);
   }
 
   const updateDropdowns = (key) => {

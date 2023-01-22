@@ -23,7 +23,7 @@ export async function getUserData() {
 //*for getting makes data from supabase
 export async function getMakesData() {
   let { data, error } = await useSupabaseClient()
-    .from("makes")
+    .from("Make")
     .select()
     .order("make", { ascending: true });
   if (error) {
@@ -36,9 +36,9 @@ export async function getMakesData() {
 //*for getting models data from supabase
 export async function getModelsData(make_id) {
   let { data, error } = await useSupabaseClient()
-    .from("models")
+    .from("Model")
     .select("model")
-    .eq("make_id", make_id)
+    .eq("makeId", make_id)
     .order("model", { ascending: true });
   if (error) {
     console.log(error);

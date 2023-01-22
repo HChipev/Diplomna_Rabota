@@ -14,10 +14,10 @@
       </div>
       <!-- //*future side bar end -->
       <p>
-        id: {{ useUserPData().getPData.id }} <br />
+        <!-- id: {{ useUserPData().getPData.id }} <br />
         role: {{ useUserPData().getPData.role }} <br />
         phone: {{ useUserPData().getPData.phone }} <br />
-        uid: {{ useUserPData().getPData.uid }} <br />
+        uid: {{ useUserPData().getPData.uid }} <br /> -->
         email: {{ useUser().getUser ? useUser().getUser.email : null }} <br />
       </p>
     </div>
@@ -41,7 +41,7 @@
     console.log(useUser().getUser.email);
     navigateTo("/");
   }
-  useUserPData().setPData(await getUserData());
+  //useUserPData().setPData(await getUserData());
 
   const inBrowser = inject("inBrowser");
 </script>
