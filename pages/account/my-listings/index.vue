@@ -9,7 +9,9 @@
           ><font-awesome-icon icon="fa-solid fa-plus"
         /></NuxtLink>
       </div>
-      <div class="border border-border-color rounded-lg p-3 mt-5">
+      <div
+        v-if="listings.length !== 0"
+        class="border border-border-color rounded-lg p-3 mt-5">
         <CarListingCard
           v-for="listing in listings"
           :key="listing.id"
@@ -20,6 +22,7 @@
 </template>
 <script setup>
   const listings = await useFetchMyListings(useSupabaseUser().value.id);
+  console.log(listings.value);
   useHead({
     title: "My Listings",
     meta: [

@@ -5,7 +5,7 @@
       <div class="flex flex-col gap-3 justify-start items-center">
         <ReuseableButton
           class="accent-button w-full px-2"
-          @click="updateUser(useUser().getUser.id, 'user', '1234567890')"
+          @click="updateUser(useSupabaseUser().value.id, 'user', '1234567890')"
           >Update Phone</ReuseableButton
         >
         <ReuseableButton class="accent-button w-full" @click="logout()"
@@ -18,12 +18,14 @@
         role: {{ useUserPData().getPData.role }} <br />
         phone: {{ useUserPData().getPData.phone }} <br />
         uid: {{ useUserPData().getPData.uid }} <br /> -->
-        email: {{ useUser().getUser ? useUser().getUser.email : null }} <br />
+        email:
+        {{ useSupabaseUser().value ? useSupabaseUser().value.email : null }}
+        <br />
       </p>
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
   useHead({
     title: "My Account",
     meta: [
@@ -37,8 +39,8 @@
     middleware: ["auth-middleware"],
   });
   function logout() {
-    useLogOut();
-    console.log(useUser().getUser.email);
+    useSupabaseAuthClient().auth.signOut();
+    console.log(useSupabaseUser().value.email);
     navigateTo("/");
   }
   //useUserPData().setPData(await getUserData());

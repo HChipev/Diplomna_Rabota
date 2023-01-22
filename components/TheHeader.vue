@@ -23,35 +23,38 @@
           >
         </li>
 
-        <li v-if="useUser().getUser">
+        <li v-if="useSupabaseUser().value">
           <NuxtLink to="/account/my-listings/create" class="nav-button"
             ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
           >
         </li>
-        <li v-if="useUser().getUser">
+        <li v-if="useSupabaseUser().value">
           <NuxtLink to="/account/my-listings" class="nav-button"
             ><font-awesome-icon icon="fa-solid fa-list" /> My Listings</NuxtLink
           >
         </li>
       </ul>
 
-      <NuxtLink to="/account/cart" v-if="useUser().getUser" id="cart-button">
+      <NuxtLink
+        to="/account/cart"
+        v-if="useSupabaseUser().value"
+        id="cart-button">
         <font-awesome-icon icon="fa-solid fa-cart-shopping"
       /></NuxtLink>
 
       <NuxtLink
-        :to="useUser().getUser ? '/account' : '/login'"
-        :class="useUser().getUser ? 'loggedIn' : ''"
+        :to="useSupabaseUser().value ? '/account' : '/login'"
+        :class="useSupabaseUser().value ? 'loggedIn' : ''"
         class="nav-button"
         ><img
-          v-if="useUser().getUser"
+          v-if="useSupabaseUser().value"
           class="h-7 items-center justify-center"
           src="../assets/profile-pic-icon.png"
           alt="profile-pic" /><font-awesome-icon
           v-else
           class="mx-1"
           icon="fa-solid fa-user" />{{
-          useUser().getUser ? "" : "Log In"
+          useSupabaseUser().value ? "" : "Log In"
         }}</NuxtLink
       >
 
@@ -72,7 +75,7 @@
     </div>
   </nav>
 </template>
-<script setup>
+<script setup lang="ts">
   const clicked = ref(false);
   const menuShow = ref(null);
   const windowWidth = ref(0);

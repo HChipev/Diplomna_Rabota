@@ -37,7 +37,7 @@
           <div class="flex flex-col sm:flex-row justify-between w-full">
             <div class="flex justify-center items-center">
               <div
-                @click="useFacebookSignIn()"
+                @click="facebookLogIn()"
                 class="border border-border-color rounded sm:mr-3 pl-1 w-full sm:pr-16 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon
                   class="text-xl flex"
@@ -48,7 +48,7 @@
 
             <div class="flex justify-center items-center">
               <div
-                @click="useGoogleSignIn()"
+                @click="googleLogIn()"
                 class="border border-border-color rounded mt-2 sm:mt-0 sm:ml-3 pl-1 w-full sm:pr-20 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon class="text-xl" icon="fa-brands fa-google" />
                 <label class="ml-2">Google</label>
@@ -108,7 +108,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
   useHead({
     title: "Login",
     meta: [
@@ -130,13 +130,29 @@
   const confirmPassword = ref("");
   async function register() {
     if (password.value === confirmPassword.value) {
-      useRegister(email.value, password.value);
+      useSupabaseAuthClient().auth.signUp({
+        email: email.value,
+        password: password.value,
+      });
       navigateTo("/");
     }
   }
   function logIn() {
-    useLogIn(email.value, password.value);
+    useSupabaseAuthClient().auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
     navigateTo("/");
+  }
+  function googleLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
+      provider: "google",
+    });
+  }
+  function facebookLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
+      provider: "facebook",
+    });
   }
 </script>
 <style lang="scss" scoped>
