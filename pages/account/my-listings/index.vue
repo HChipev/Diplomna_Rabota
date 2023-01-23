@@ -20,7 +20,7 @@
 </template>
 <script setup>
   const user_id = useSupabaseUser().value.id;
-  const listings = ref(await useFetchMyListings(user_id));
+  const listings = ref(useFetchMyListings(user_id));
   watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",

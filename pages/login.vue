@@ -144,10 +144,11 @@
     });
     navigateTo("/");
   }
-  function googleLogIn() {
-    useSupabaseAuthClient().auth.signInWithOAuth({
+  async function googleLogIn() {
+    let { data, error } = await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
+    console.log(data, error);
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
