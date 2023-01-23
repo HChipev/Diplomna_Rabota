@@ -27,7 +27,7 @@
       listings.value = [];
     }
   });
-  watchEffect(() => useSupabaseUser(), refreshNuxtData());
+  //watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",
     meta: [
