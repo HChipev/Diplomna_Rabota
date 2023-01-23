@@ -5,7 +5,6 @@ export default async function useFetchMyListings(user_id) {
       statusCode: error.value.statusCode,
       message: error.value.statusMessage,
     });
-    return null;
   }
   return data;
 }
