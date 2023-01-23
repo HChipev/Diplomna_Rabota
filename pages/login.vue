@@ -144,11 +144,13 @@
     });
     navigateTo("/");
   }
-  function googleLogIn() {
-    useSupabaseAuthClient().auth.signInWithOAuth({
+  async function googleLogIn() {
+    await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
+    console.log("google");
     window.location.reload();
+    console.log("after reload");
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
