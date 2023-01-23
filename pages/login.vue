@@ -144,17 +144,14 @@
     });
     navigateTo("/");
   }
-  async function googleLogIn() {
-    const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
-      provider: "google",
-    });
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("google");
-      window.location.reload();
-      console.log("after reload");
-    }
+  function googleLogIn() {
+    useSupabaseAuthClient()
+      .auth.signInWithOAuth({
+        provider: "google",
+      })
+      .finally(() => {
+        navigateTo("/");
+      });
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
