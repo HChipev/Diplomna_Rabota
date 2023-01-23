@@ -149,7 +149,8 @@
       .auth.signInWithOAuth({
         provider: "google",
       })
-      .finally(() => {
+      .then(() => {
+        console.log("google");
         navigateTo("/");
       });
   }
