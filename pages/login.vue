@@ -145,18 +145,19 @@
     navigateTo("/");
   }
   function googleLogIn() {
-    useSupabaseAuthClient()
-      .auth.signInWithOAuth({
-        provider: "google",
-      })
-      .then(() => {
-        console.log("google");
-        navigateTo("/");
-      });
+    useSupabaseAuthClient().auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "https://4ips-auto.vercel.app",
+      },
+    });
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
+      options: {
+        redirectTo: "https://4ips-auto.vercel.app",
+      },
     });
   }
 </script>
