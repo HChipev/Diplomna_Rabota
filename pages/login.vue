@@ -37,7 +37,7 @@
           <div class="flex flex-col sm:flex-row justify-between w-full">
             <div class="flex justify-center items-center">
               <div
-                @click.prevent="facebookLogIn"
+                @click="facebookLogIn()"
                 class="border border-border-color rounded sm:mr-3 pl-1 w-full sm:pr-16 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon
                   class="text-xl flex"
@@ -48,7 +48,7 @@
 
             <div class="flex justify-center items-center">
               <div
-                @click.prevent="googleLogIn"
+                @click="googleLogIn()"
                 class="border border-border-color rounded mt-2 sm:mt-0 sm:ml-3 pl-1 w-full sm:pr-20 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon class="text-xl" icon="fa-brands fa-google" />
                 <label class="ml-2">Google</label>
@@ -144,16 +144,16 @@
     });
     navigateTo("/");
   }
-  const googleLogIn = async () => {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
+  function googleLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
-  };
-  const facebookLogIn = async () => {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
+  }
+  function facebookLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
-  };
+  }
 </script>
 <style lang="scss" scoped>
   .form {
