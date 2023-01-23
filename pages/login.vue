@@ -37,7 +37,7 @@
           <div class="flex flex-col sm:flex-row justify-between w-full">
             <div class="flex justify-center items-center">
               <div
-                @click="facebookLogIn"
+                @click.prevent="facebookLogIn"
                 class="border border-border-color rounded sm:mr-3 pl-1 w-full sm:pr-16 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon
                   class="text-xl flex"
@@ -48,7 +48,7 @@
 
             <div class="flex justify-center items-center">
               <div
-                @click="googleLogIn"
+                @click.prevent="googleLogIn"
                 class="border border-border-color rounded mt-2 sm:mt-0 sm:ml-3 pl-1 w-full sm:pr-20 py-1 flex flex-nowrap items-center o-auth-wrapper">
                 <font-awesome-icon class="text-xl" icon="fa-brands fa-google" />
                 <label class="ml-2">Google</label>
