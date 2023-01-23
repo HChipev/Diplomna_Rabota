@@ -148,6 +148,7 @@
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
+    window.location.reload();
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
