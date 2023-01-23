@@ -144,19 +144,21 @@
     });
     navigateTo("/");
   }
-  function googleLogIn() {
-    useSupabaseClient().auth.signInWithOAuth({
+  async function googleLogIn() {
+    const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
-
-    location.reload();
+    if (error) {
+      console.log(error);
+    }
   }
-  function facebookLogIn() {
-    useSupabaseClient().auth.signInWithOAuth({
+  async function facebookLogIn() {
+    const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
-
-    location.reload();
+    if (error) {
+      console.log(error);
+    }
   }
 </script>
 <style lang="scss" scoped>
