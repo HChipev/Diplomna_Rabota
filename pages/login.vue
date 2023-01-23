@@ -148,9 +148,8 @@
     const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
-    if (error) {
-      console.log(error);
-    }
+
+    console.log(error);
   }
   async function facebookLogIn() {
     const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
