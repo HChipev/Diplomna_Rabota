@@ -21,8 +21,8 @@
   </div>
 </template>
 <script setup>
-  const listings = await useFetchMyListings(useSupabaseUser().value.id);
-  console.log(listings.value);
+  const listings = ref(await useFetchMyListings(useSupabaseUser().value.id));
+  watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",
     meta: [
