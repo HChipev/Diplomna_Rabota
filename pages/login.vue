@@ -134,6 +134,7 @@
         email: email.value,
         password: password.value,
       });
+      navigateTo("/");
     }
   }
   function logIn() {
@@ -141,7 +142,7 @@
       email: email.value,
       password: password.value,
     });
-    // location.reload();
+    navigateTo("/");
   }
   function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
