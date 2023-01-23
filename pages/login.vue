@@ -137,14 +137,14 @@
       navigateTo("/");
     }
   }
-  function logIn() {
+  async function logIn() {
     useSupabaseAuthClient().auth.signInWithPassword({
       email: email.value,
       password: password.value,
     });
     navigateTo("/");
   }
-  function googleLogIn() {
+  async function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
