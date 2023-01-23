@@ -1,9 +1,10 @@
-export default function useFetchMyListings(user_id) {
-  const { data, error } = useFetch(`/api/car/listings/user/${user_id}`);
-  console.log("data", data);
-  console.log("error", error);
+export default async function useFetchMyListings(user_id) {
+  const { data, error } = await useFetch(`/api/car/listings/user/${user_id}`);
   if (error.value) {
-    throwError({ ...error.value, message: "Error fetching cars" });
+    throwError({
+      statusCode: error.value.statusCode,
+      message: error.value.statusMessage,
+    });
   }
   return data;
 }

@@ -20,7 +20,12 @@
 </template>
 <script setup>
   const user_id = useSupabaseUser().value.id;
-  const listings = ref(useFetchMyListings(user_id));
+  const listings = await useFetchMyListings(user_id);
+  useSupabaseAuthClient().auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || session === null) {
+      listings.value = [];
+    }
+  });
   watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",
