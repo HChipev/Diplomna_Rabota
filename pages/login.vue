@@ -145,14 +145,14 @@
     navigateTo("/");
   }
   function googleLogIn() {
-    useSupabaseAuthClient().auth.signInWithOAuth({
+    useSupabaseClient().auth.signInWithOAuth({
       provider: "google",
     });
 
     location.reload();
   }
   function facebookLogIn() {
-    useSupabaseAuthClient().auth.signInWithOAuth({
+    useSupabaseClient().auth.signInWithOAuth({
       provider: "facebook",
     });
 
