@@ -148,11 +148,13 @@
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
+    navigateTo("/");
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
+    navigateTo("/");
   }
 </script>
 <style lang="scss" scoped>
