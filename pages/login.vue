@@ -144,20 +144,17 @@
     });
     navigateTo("/");
   }
-  async function googleLogIn() {
-    const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
+  function googleLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
 
-    console.log(error);
+    console.log("test");
   }
-  async function facebookLogIn() {
-    const { error } = await useSupabaseAuthClient().auth.signInWithOAuth({
+  function facebookLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
-    if (error) {
-      console.log(error);
-    }
   }
 </script>
 <style lang="scss" scoped>
