@@ -134,7 +134,6 @@
         email: email.value,
         password: password.value,
       });
-      navigateTo("/");
     }
   }
   function logIn() {
@@ -142,19 +141,21 @@
       email: email.value,
       password: password.value,
     });
-    navigateTo("/");
+    // location.reload();
   }
   function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
-    navigateTo("/");
+
+    location.reload();
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
-    navigateTo("/");
+
+    location.reload();
   }
 </script>
 <style lang="scss" scoped>
