@@ -1,21 +1,19 @@
 <template>
-  <ClientOnly>
-    <NuxtLayout>
-      <NuxtPage v-if="inBrowser" />
-      <div v-else id="loader">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+  <NuxtLayout>
+    <NuxtPage v-if="inBrowser" />
+    <div v-else id="loader">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-    </NuxtLayout>
-  </ClientOnly>
+    </div>
+  </NuxtLayout>
 </template>
 <script setup>
   const inBrowser = ref(false);
