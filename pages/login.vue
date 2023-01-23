@@ -144,14 +144,14 @@
     });
     navigateTo("/");
   }
-  async function googleLogIn() {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
+  function googleLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
     navigateTo("/");
   }
-  async function facebookLogIn() {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
+  function facebookLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
     navigateTo("/");
