@@ -128,7 +128,7 @@
   const phone = ref("");
   const password = ref("");
   const confirmPassword = ref("");
-  async function register() {
+  function register() {
     if (password.value === confirmPassword.value) {
       useSupabaseAuthClient().auth.signUp({
         email: email.value,
@@ -137,14 +137,14 @@
       navigateTo("/");
     }
   }
-  async function logIn() {
+  function logIn() {
     useSupabaseAuthClient().auth.signInWithPassword({
       email: email.value,
       password: password.value,
     });
     navigateTo("/");
   }
-  async function googleLogIn() {
+  function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });

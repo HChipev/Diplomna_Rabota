@@ -18,7 +18,7 @@
 <script setup>
   const inBrowser = ref(false);
   onMounted(() => {
-    if (process.client && window.location) {
+    if (process.client) {
       inBrowser.value = true;
     } else {
       inBrowser.value = false;
