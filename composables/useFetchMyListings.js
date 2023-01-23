@@ -3,7 +3,7 @@ export default async function useFetchMyListings(user_id) {
   console.log("data", data);
   console.log("error", error);
   if (error.value) {
-    throwError({ ...error.value, message: error.value.message });
+    throwError({ ...error.value, message: error.value.statusMessage });
   }
   return data;
 }
