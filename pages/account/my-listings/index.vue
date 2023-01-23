@@ -9,9 +9,7 @@
           ><font-awesome-icon icon="fa-solid fa-plus"
         /></NuxtLink>
       </div>
-      <div
-        v-if="listings.length !== 0"
-        class="border border-border-color rounded-lg p-3 mt-5">
+      <div class="border border-border-color rounded-lg p-3 mt-5">
         <CarListingCard
           v-for="listing in listings"
           :key="listing.id"
@@ -21,7 +19,8 @@
   </div>
 </template>
 <script setup>
-  const listings = ref(await useFetchMyListings(useSupabaseUser().value.id));
+  const user_id = (await useSupabaseAuthClient().auth.getUser()).data.user.id;
+  const listings = ref(await useFetchMyListings(user_id));
   watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",
