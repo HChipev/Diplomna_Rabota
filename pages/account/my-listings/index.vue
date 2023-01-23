@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup>
-  const user_id = (await useSupabaseAuthClient().auth.getUser()).data.user.id;
+  const user_id = useSupabaseUser().value.id;
   const listings = ref(await useFetchMyListings(user_id));
   watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({

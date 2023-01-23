@@ -145,8 +145,6 @@
     navigateTo("/");
   }
   function googleLogIn() {
-    console.log("test");
-    navigateTo("/");
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });

@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <NuxtPage v-if="inBrowser" />
+    <NuxtPage v-if="inBrowser && useSupabaseAuthClient()" />
     <div v-else id="loader">
       <div class="lds-roller">
         <div></div>
