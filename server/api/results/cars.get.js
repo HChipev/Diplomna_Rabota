@@ -1,4 +1,5 @@
-import carsImport from "~/data/cars.json";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 export default defineEventHandler((event) => {
   const {
     make,
@@ -12,57 +13,58 @@ export default defineEventHandler((event) => {
     region,
     city,
   } = getQuery(event);
-  let cars = carsImport;
-  if (make) {
-    cars = cars.filter((car) => {
-      return car.make.toLowerCase() === make.toLowerCase();
-    });
+  const filters = {};
+  if (minPrice || maxPrice) {
+    filters.price = {};
+    if (minPrice) {
+      filters.price.gte = parseInt(minPrice);
+    }
+    if (maxPrice) {
+      filters.price.lte = parseInt(maxPrice);
+    }
   }
-  if (model) {
-    cars = cars.filter((car) => {
-      return car.model.toLowerCase() === model.toLowerCase();
-    });
+  if (minYear || maxYear) {
+    filters.year = {};
+    if (minYear) {
+      filters.year.gte = parseInt(minYear);
+    }
+    if (maxYear) {
+      filters.year.lte = parseInt(maxYear);
+    }
   }
-  if (minPrice) {
-    cars = cars.filter((car) => {
-      return car.price >= parseInt(minPrice);
-    });
-  }
-  if (maxPrice) {
-    cars = cars.filter((car) => {
-      return car.price <= parseInt(maxPrice);
-    });
-  }
-  if (minYear) {
-    cars = cars.filter((car) => {
-      return car.year >= parseInt(minYear);
-    });
-  }
-  if (maxYear) {
-    cars = cars.filter((car) => {
-      return car.year <= parseInt(maxYear);
-    });
-  }
-  if (engine) {
-    cars = cars.filter((car) => {
-      return car.engine.toLowerCase() === engine.toLowerCase();
-    });
-  }
-  if (gearbox) {
-    cars = cars.filter((car) => {
-      return car.gearbox.toLowerCase() === gearbox.toLowerCase();
-    });
-  }
-  if (region) {
-    cars = cars.filter((car) => {
-      return car.region.toLowerCase() === region.toLowerCase();
-    });
-  }
-  if (city) {
-    cars = cars.filter((car) => {
-      return car.city.toLowerCase() === city.toLowerCase();
-    });
-  }
-
-  return cars;
+  return prisma.car.findMany({
+    where: {
+      Make: {
+        make: {
+          equals: make,
+        },
+      },
+      Model: {
+        model: {
+          equals: model,
+        },
+      },
+      Engine: {
+        engine: {
+          equals: engine,
+        },
+      },
+      Gearbox: {
+        gearbox: {
+          equals: gearbox,
+        },
+      },
+      Region: {
+        region: {
+          equals: region,
+        },
+      },
+      City: {
+        city: {
+          equals: city,
+        },
+      },
+      ...filters,
+    },
+  });
 });
