@@ -147,11 +147,17 @@
   function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: "http://4ips-auto.vercel.app/provider?refresh=true",
+      },
     });
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
+      options: {
+        redirectTo: "http://4ips-auto.vercel.app/provider?refresh=true",
+      },
     });
   }
 </script>
