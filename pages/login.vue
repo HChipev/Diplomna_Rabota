@@ -147,17 +147,11 @@
   function googleLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: window.location.origin,
-      },
     });
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
-      options: {
-        redirectTo: window.location.origin,
-      },
     });
   }
 </script>
