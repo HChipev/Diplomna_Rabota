@@ -35,7 +35,7 @@
               @selectChange="onChange" />
             <CarAddSelect
               title="Model *"
-              :options="makes"
+              :options="models"
               name="model"
               @selectChange="onChange" />
             <CarAddInput
@@ -47,36 +47,36 @@
 
             <CarAddSelect
               title="Engine *"
-              :options="makes"
+              :options="engines"
               name="engine"
               @selectChange="onChange" />
             <CarAddSelect
               title="Gearbox *"
-              :options="makes"
+              :options="gearboxes"
               name="gearbox"
               @selectChange="onChange" />
 
             <CarAddSelect
               title="Drivetrain *"
-              :options="makes"
+              :options="drivetrains"
               name="drivetrain"
               @selectChange="onChange" />
 
             <CarAddSelect
               title="Region *"
-              :options="makes"
+              :options="regions"
               name="region"
               @selectChange="onChange" />
 
             <CarAddSelect
               title="City *"
-              :options="makes"
+              :options="cities"
               name="city"
               @selectChange="onChange" />
 
             <CarAddSelect
               title="Color"
-              :options="makes"
+              :options="colors"
               name="color"
               @selectChange="onChange" />
 
@@ -99,46 +99,61 @@
             placeholder="Describe your car in a few words..."
             @inputChange="onChange" />
         </div>
-        <div
-          class="border border-border-color border-b-0 rounded-t-lg flex items-center justify-center py-2 mt-1">
-          <p class="flex items-center justify-center text-2xl">Extras</p>
+        <ReuseableButton
+          :class="showFeatures ? 'active' : ''"
+          class="dropdown-button mx-auto mb-5 px-8"
+          @click="showFeatures = !showFeatures"
+          >Show Features</ReuseableButton
+        >
+        <div v-if="showFeatures">
+          <div
+            class="border border-border-color border-b-0 rounded-t-lg flex items-center justify-center py-2 mt-1">
+            <p class="flex items-center justify-center text-2xl">Extras</p>
+          </div>
+          <div class="flex w-full pb-2">
+            <div class="flex-1 border border-border-color">
+              <div class="flex flex-col">
+                <p class="flex items-center justify-center text-lg pt-1 mb-3">
+                  Safety
+                </p>
+                <SearchBigAdvancedParametersCheckbox
+                  v-for="n in 12"
+                  :extraName="n + 's'" />
+
+                <p
+                  class="flex items-center justify-center text-lg pt-1 mb-3 border-t border-border-color">
+                  Exterior
+                </p>
+                <SearchBigAdvancedParametersCheckbox
+                  v-for="n in 11"
+                  :extraName="n + 'e'" />
+
+                <p
+                  class="flex items-center justify-center text-lg pt-1 mb-3 border-t border-border-color">
+                  Other
+                </p>
+                <SearchBigAdvancedParametersCheckbox
+                  v-for="n in 7"
+                  :extraName="n + 'o'" />
+              </div>
+            </div>
+
+            <div class="flex-1 border border-border-color">
+              <div class="flex flex-col">
+                <p class="flex items-center justify-center pt-1 mb-3">
+                  Comfort
+                </p>
+                <SearchBigAdvancedParametersCheckbox
+                  v-for="n in 26"
+                  :extraName="n + 'c'" />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="flex w-full pb-2">
-          <div class="flex-1 border border-border-color">
-            <div class="flex flex-col">
-              <p class="flex items-center justify-center text-lg pt-1 mb-3">
-                Safety
-              </p>
-              <SearchBigAdvancedParametersCheckbox
-                v-for="n in 12"
-                :extraName="n + 's'" />
-
-              <p
-                class="flex items-center justify-center text-lg pt-1 mb-3 border-t border-border-color">
-                Exterior
-              </p>
-              <SearchBigAdvancedParametersCheckbox
-                v-for="n in 11"
-                :extraName="n + 'e'" />
-
-              <p
-                class="flex items-center justify-center text-lg pt-1 mb-3 border-t border-border-color">
-                Other
-              </p>
-              <SearchBigAdvancedParametersCheckbox
-                v-for="n in 7"
-                :extraName="n + 'o'" />
-            </div>
-          </div>
-
-          <div class="flex-1 border border-border-color">
-            <div class="flex flex-col">
-              <p class="flex items-center justify-center pt-1 mb-3">Comfort</p>
-              <SearchBigAdvancedParametersCheckbox
-                v-for="n in 26"
-                :extraName="n + 'c'" />
-            </div>
-          </div>
+        <div class="flex justify-center">
+          <ReuseableButton class="primery-button px-24 sm:px-32 mx-auto mt-5">
+            Submit
+          </ReuseableButton>
         </div>
       </div>
     </div>
@@ -158,10 +173,23 @@
     middleware: ["user-protected-pages-middleware"],
   });
   const carOnParts = ref(false);
+  const showFeatures = ref(false);
+  const regionId = ref("1");
+  const makeId = ref("1");
   function checkboxSelected() {
     carOnParts.value = !carOnParts.value;
   }
-  const { makes } = useCars();
+  const { data: makes } = await useFetch("/api/input/makes");
+  let { data: models } = await useFetch(`/api/input/models/${makeId.value}`);
+  const { data: engines } = await useFetch("/api/input/engines");
+  const { data: gearboxes } = await useFetch("/api/input/gearboxes");
+  const { data: drivetrains } = await useFetch("/api/input/drivetrains");
+  const { data: regions } = await useFetch("/api/input/regions");
+  const { data: cities } = await useFetch(
+    `/api/input/cities/${regionId.value}`
+  );
+  const { data: colors } = await useFetch("/api/input/colors");
+
   const carInfo = useState("carInfo", () => {
     return {
       make: "",

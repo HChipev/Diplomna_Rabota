@@ -4,7 +4,7 @@
     <div
       contenteditable
       role="textarea"
-      class="block p-2.5 w-full text-lg min-h-[100px] bg-white text-black rounded-lg shadow-sm border border-border-color focus:ring-accent-color focus:border-accent-color mt-2 mb-11"
+      class="block p-2.5 w-full text-lg min-h-[100px] bg-white text-black rounded-lg shadow-sm border border-border-color focus:ring-accent-color focus:border-accent-color mt-2 mb-5"
       :placeholder="placeholder"
       :name="name"
       @input="onInput($event)"></div>
