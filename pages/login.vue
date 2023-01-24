@@ -148,7 +148,7 @@
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "https://4ips-auto.vercel.app",
+        redirectTo: window.location.origin,
       },
     });
   }
@@ -156,7 +156,7 @@
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
       options: {
-        redirectTo: "https://4ips-auto.vercel.app",
+        redirectTo: window.location.origin,
       },
     });
   }
