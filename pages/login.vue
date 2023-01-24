@@ -144,17 +144,14 @@
     });
     navigateTo("/");
   }
-  async function googleLogIn() {
-    const { data, error } = await useSupabaseClient().auth.signInWithOAuth({
+  function googleLogIn() {
+    useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
   }
   function facebookLogIn() {
     useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
-      options: {
-        redirectTo: "/",
-      },
     });
   }
 </script>
