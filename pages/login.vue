@@ -145,15 +145,12 @@
     navigateTo("/");
   }
   async function googleLogIn() {
-    const { data, error } = await useSupabaseAuthClient().auth.signInWithOAuth({
+    await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "google",
     });
-    setTimeout(() => {
-      console.log(data);
-    }, 10000);
   }
-  function facebookLogIn() {
-    useSupabaseAuthClient().auth.signInWithOAuth({
+  async function facebookLogIn() {
+    await useSupabaseAuthClient().auth.signInWithOAuth({
       provider: "facebook",
     });
   }
