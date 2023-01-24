@@ -11,6 +11,7 @@
       </div>
       <div class="border border-border-color rounded-lg p-3 mt-5">
         <CarListingCard
+          v-if="!loading"
           v-for="listing in listings"
           :key="listing.id"
           :listing="listing" />
@@ -21,12 +22,12 @@
 <script setup>
   const user_id = useSupabaseUser().value.id;
   const listings = await useFetchMyListings(user_id);
+  console.log(listings.value);
   useSupabaseAuthClient().auth.onAuthStateChange((event, session) => {
     if (event === "SIGNED_OUT" || session === null) {
       listings.value = [];
     }
   });
-  watchEffect(() => useSupabaseUser(), refreshNuxtData());
   useHead({
     title: "My Listings",
     meta: [
