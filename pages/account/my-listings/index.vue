@@ -11,7 +11,6 @@
       </div>
       <div class="border border-border-color rounded-lg p-3 mt-5">
         <CarListingCard
-          v-if="!loading"
           v-for="listing in listings"
           :key="listing.id"
           :listing="listing" />
