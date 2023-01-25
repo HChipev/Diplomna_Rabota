@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const { user_id } = event.context.params;
   console.log(user_id, "api uid");
 
-  const { data, error } = await prisma.car.findMany({
+  return await prisma.car.findMany({
     where: {
       userId: user_id,
     },
@@ -23,12 +23,12 @@ export default defineEventHandler(async (event) => {
       price: true,
     },
   });
-  if (error) {
-    throw createError({
-      statusCode: 412,
-      statusMessage: "Error fetching listings",
-    });
-  }
+  // if (error) {
+  //   throw createError({
+  //     statusCode: 412,
+  //     statusMessage: "Error fetching listings",
+  //   });
+  // }
 
-  return data;
+  // return data;
 });
