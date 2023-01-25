@@ -151,10 +151,18 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <ReuseableButton class="primery-button px-24 sm:px-32 mx-auto mt-5">
-            Submit
+          <ReuseableButton
+            :disabled="isButtonDisabled"
+            :class="
+              isButtonDisabled
+                ? 'disabled hover:shadow-none bg-gray-500  border-gray-500  text-lg sm:text-2xl px-6 sm:px-16 '
+                : 'primery-button'
+            "
+            class="px-24 sm:px-32 mx-auto mt-5">
+            {{ isButtonDisabled ? "Please fill all require fields" : "Submit" }}
           </ReuseableButton>
         </div>
+        {{ carInfo }}
       </div>
     </div>
   </div>
@@ -174,13 +182,14 @@
   });
   const carOnParts = ref(false);
   const showFeatures = ref(false);
-  const regionId = ref("1");
-  const makeId = ref("1");
+  const regionId = ref(0);
+  const makeId = ref(0);
   function checkboxSelected() {
     carOnParts.value = !carOnParts.value;
   }
+
   const { data: makes } = await useFetch("/api/input/makes");
-  let { data: models } = await useFetch(`/api/input/models/${makeId.value}`);
+  const { data: models } = await useFetch(`/api/input/models/${makeId.value}`);
   const { data: engines } = await useFetch("/api/input/engines");
   const { data: gearboxes } = await useFetch("/api/input/gearboxes");
   const { data: drivetrains } = await useFetch("/api/input/drivetrains");
@@ -189,6 +198,13 @@
     `/api/input/cities/${regionId.value}`
   );
   const { data: colors } = await useFetch("/api/input/colors");
+
+  watchEffect(async () => {
+    models.value = await $fetch(`/api/input/models/${makeId.value}`).then(
+      (cities.value = await $fetch(`/api/input/cities/${regionId.value}`))
+    );
+    console.log(cities.value);
+  });
 
   const carInfo = useState("carInfo", () => {
     return {
@@ -210,9 +226,6 @@
       image: null,
     };
   });
-  function onChange(value, name) {
-    carInfo.value[name] = value;
-  }
   const inputs = [
     {
       id: 1,
@@ -236,5 +249,34 @@
       placeholder: "Horsepower",
     },
   ];
+
+  const isButtonDisabled = computed(() => {
+    for (let key in carInfo.value) {
+      if (
+        !carInfo.value[key] &&
+        key !== "features" &&
+        key !== "image" &&
+        key !== "description" &&
+        key !== "color" &&
+        key !== "is_on_parts"
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  function onChange(value, name) {
+    if (name === "make") {
+      carInfo.value.model = "";
+      makeId.value = value.id ? value.id : 0;
+    }
+    if (name === "region") {
+      carInfo.value.city = "";
+      regionId.value = value.id ? value.id : 0;
+      console.log(value.id + "onChange" + regionId.value);
+    }
+    carInfo.value[name] = value;
+  }
 </script>
 <style lang=""></style>

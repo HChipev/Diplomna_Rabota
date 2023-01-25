@@ -5,7 +5,11 @@
       v-model="state"
       @change="onChange"
       class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-11">
-      <option v-for="option in options" :key="option.id" :value="option.name">
+      <option selected>Choose option</option>
+      <option
+        v-for="option in options"
+        :key="option.id"
+        :value="{ id: option.id, value: option.name }">
         {{ option.name }}
       </option>
     </select>
@@ -17,10 +21,14 @@
     options: Array,
     name: String,
   });
-  const state = ref("");
+  const state = ref("Choose option");
   const emits = defineEmits(["selectChange"]);
   function onChange() {
-    emits("selectChange", state.value, props.name);
+    if (state.value === "Choose option") {
+      emits("selectChange", "", props.name);
+    } else {
+      emits("selectChange", state.value, props.name);
+    }
   }
 </script>
 <style lang=""></style>

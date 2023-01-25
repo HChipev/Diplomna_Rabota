@@ -35,6 +35,7 @@
       transform: translateY(-0.25em) translateX(0.25em);
     }
   }
+
   .primery-button {
     min-height: 50px;
     color: $primery-color;
@@ -48,6 +49,18 @@
       border-color: $primery-darker-color;
       box-shadow: -0.4em 0.5em 0.6em -0.3em black;
       transform: translateY(-0.25em) translateX(0.25em);
+    }
+  }
+  .disabled {
+    min-height: 50px;
+    color: $primery-color;
+    border: 1px solid $accent-color;
+    border-radius: 1em;
+    background: $accent-color;
+    font-size: 28px;
+    transition: all 0.5s ease;
+    &:hover {
+      animation: shake 1500ms ease-in-out infinite;
     }
   }
   .dropdown-button {
@@ -86,6 +99,26 @@
         box-shadow: -0.3em 0.35em 0.7em -0.2em $black;
         transform: translateY(-0.1em) translateX(0.1em);
       }
+    }
+  }
+  @keyframes shake {
+    10% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-0.3em);
+    }
+    40% {
+      transform: translateX(0.3em);
+    }
+    60% {
+      transform: translateX(-0.3em);
+    }
+    80% {
+      transform: translateX(0.3em);
+    }
+    90% {
+      transform: translateX(0);
     }
   }
 </style>
