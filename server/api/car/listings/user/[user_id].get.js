@@ -11,12 +11,12 @@ export default defineEventHandler(async (event) => {
     select: {
       Make: {
         select: {
-          make: true,
+          name: true,
         },
       },
       Model: {
         select: {
-          model: true,
+          name: true,
         },
       },
       id: true,
