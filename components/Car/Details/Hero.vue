@@ -5,18 +5,25 @@
     <div class="flex justify-between mt-4 xl:mt-6">
       <div class="flex flex-col">
         <h1 class="text-xl xl:text-4xl whitespace-nowrap">
-          {{ car.make }}
+          {{ car.Make.name }}
         </h1>
         <h1 class="text-lg xl:text-2xl content-start -mt-0.5 sm:mt-0.5">
-          {{ car.model }}
+          {{ car.Model.name }}
         </h1>
       </div>
       <div class="flex flex-col">
         <p class="text-xs sm:text-sm text-text-muted-color">
-          Posted on 12.01.2023
+          Posted on
+          {{
+            car.createdAt.split("T")[0] +
+            " " +
+            car.createdAt.split("T")[1].split(".")[0]
+          }}
         </p>
         <div class="flex items-end justify-end">
-          <h1 class="text-sm sm:text-lg text-right">Region, City</h1>
+          <h1 class="text-sm sm:text-lg text-right">
+            {{ car.Region.name + ", " + car.City.name }}
+          </h1>
         </div>
       </div>
     </div>
@@ -26,17 +33,17 @@
         <div class="flex flex-wrap">
           <p class="mr-0.5 sm:mr-2">{{ car.year }}</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">Diesel</p>
+          <p class="mr-0.5 sm:mr-2">{{ car.Engine.name }}</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">Manual</p>
+          <p class="mr-0.5 sm:mr-2">{{ car.Gearbox.name }}</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">{{ car.hp }}hp</p>
+          <p class="mr-0.5 sm:mr-2">{{ car.horsepower }}hp</p>
           <p class="mr-0.5 sm:mr-2">|</p>
           <p class="mr-0.5 sm:mr-2">{{ car.mileage }}km</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">AWD</p>
+          <p class="mr-0.5 sm:mr-2">{{ car.Drivetrain.name }}</p>
           <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">Color</p>
+          <p v-if="car.Color" class="mr-0.5 sm:mr-2">{{ car.Color.name }}</p>
         </div>
       </div>
       <div class="flex items-end sm:items-center">

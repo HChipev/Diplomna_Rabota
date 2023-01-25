@@ -14,10 +14,10 @@
               <div class="flex justify-between border-b border-border-color">
                 <div class="flex flex-col">
                   <h1 class="text-lg sm:text-xl md:text-2xl whitespace-nowrap">
-                    {{ car.make }}
+                    {{ car.Make.name }}
                   </h1>
                   <h1 class="text-base whitespace-nowrap -mt-2 sm:mt-0">
-                    {{ car.model }}
+                    {{ car.Model.name }}
                   </h1>
                 </div>
                 <font-awesome-icon
@@ -36,7 +36,7 @@
               <div class="flex flex-1 flex-col justify-end">
                 <p
                   class="text-xs sm:text-sm md:text-base text-text-muted-color">
-                  {{ car.hp }}hp
+                  {{ car.horsepower }}hp
                 </p>
                 <p
                   class="text-xs sm:text-sm md:text-base text-text-muted-color">
@@ -44,7 +44,7 @@
                 </p>
                 <p
                   class="text-xs sm:text-sm md:text-base text-text-muted-color">
-                  Engine
+                  {{ car.Engine.name }}
                 </p>
                 <p
                   class="text-xs sm:text-sm mb-0.5 md:mb-0 md:text-base text-text-muted-color">
@@ -70,14 +70,7 @@
   let addingToWishlist = false;
   async function openListing() {
     if (addingToWishlist) return;
-    navigateTo(
-      "/search/results/" +
-        props.car.make.replaceAll(" ", "_") +
-        "-" +
-        props.car.model +
-        "/" +
-        props.car.id
-    );
+    navigateTo("/search/results/" + props.car.id);
   }
   function addToWishlist() {
     addingToWishlist = true;

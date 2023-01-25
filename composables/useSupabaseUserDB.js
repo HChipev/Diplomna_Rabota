@@ -25,7 +25,7 @@ export async function getMakesData() {
   let { data, error } = await useSupabaseClient()
     .from("Make")
     .select()
-    .order("make", { ascending: true });
+    .order("name", { ascending: true });
   if (error) {
     console.log(error);
     return;
@@ -37,9 +37,9 @@ export async function getMakesData() {
 export async function getModelsData(make_id) {
   let { data, error } = await useSupabaseClient()
     .from("Model")
-    .select("model")
+    .select("name")
     .eq("makeId", make_id)
-    .order("model", { ascending: true });
+    .order("name", { ascending: true });
   if (error) {
     console.log(error);
     return;

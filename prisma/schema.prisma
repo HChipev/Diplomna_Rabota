@@ -40,56 +40,56 @@ model Car {
 
 model Make {
   id    Int     @id @default(autoincrement())
-  make  String
+  name  String
   Car   Car[]
   Model Model[]
 }
 
 model Model {
   id     Int    @id @default(autoincrement())
-  model  String
+  name   String
   makeId Int
   make   Make   @relation(fields: [makeId], references: [id])
   Car    Car[]
 }
 
 model Engine {
-  id     Int    @id @default(autoincrement())
-  engine String
-  Car    Car[]
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
 }
 
 model Gearbox {
-  id      Int    @id @default(autoincrement())
-  gearbox String
-  Car     Car[]
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
 }
 
 model Drivetrain {
-  id         Int    @id @default(autoincrement())
-  drivetrain String
-  Car        Car[]
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
 }
 
 model Region {
-  id     Int    @id @default(autoincrement())
-  region String
-  Car    Car[]
-  City   City[]
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+  City City[]
 }
 
 model City {
   id       Int    @id @default(autoincrement())
-  city     String
+  name     String
   region   Region @relation(fields: [regionId], references: [id])
   regionId Int
   Car      Car[]
 }
 
 model Color {
-  id    Int    @id @default(autoincrement())
-  color String
-  Car   Car[]
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
 }
 
 model Message {

@@ -5,8 +5,8 @@
       v-model="state"
       @change="onChange"
       class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-11">
-      <option v-for="option in options" :key="option.id" :value="option">
-        {{ option }}
+      <option v-for="option in options" :key="option.id" :value="option.name">
+        {{ option.name }}
       </option>
     </select>
   </div>

@@ -3,7 +3,9 @@
     <div v-if="car" class="container mx-auto px-5 sm:px-20 xl:px-28">
       <CarDetailsHero :car="car" />
       <CarDetailsFeatures :car="car" />
-      <CarDetailsDescription :car="car" />
+      <CarDetailsDescription
+        v-if="car.description"
+        :description="car.description" />
       <CarDetailsContactForm />
     </div>
     <div v-else id="loader">
@@ -26,10 +28,7 @@
   watchEffect(() => useRoute().params, refreshNuxtData());
 
   useHead({
-    title:
-      useRoute().params.make.replaceAll("_", " ") +
-      " " +
-      useRoute().params.model,
+    title: car.value.Make.name + " " + car.value.Model.name,
   });
   if (!car.value) {
     throwError({

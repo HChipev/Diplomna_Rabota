@@ -35,36 +35,54 @@ export default defineEventHandler((event) => {
   return prisma.car.findMany({
     where: {
       Make: {
-        make: {
+        name: {
           equals: make,
         },
       },
       Model: {
-        model: {
+        name: {
           equals: model,
         },
       },
       Engine: {
-        engine: {
+        name: {
           equals: engine,
         },
       },
       Gearbox: {
-        gearbox: {
+        name: {
           equals: gearbox,
         },
       },
       Region: {
-        region: {
+        name: {
           equals: region,
         },
       },
       City: {
-        city: {
+        name: {
           equals: city,
         },
       },
       ...filters,
+    },
+    select: {
+      Make: {},
+      Model: {},
+      Engine: {},
+      Gearbox: {},
+      Drivetrain: {},
+      Region: {},
+      City: {},
+      Color: {},
+      id: true,
+      year: true,
+      price: true,
+      horsepower: true,
+      mileage: true,
+      description: true,
+      createdAt: true,
+      isOnParts: true,
     },
   });
 });

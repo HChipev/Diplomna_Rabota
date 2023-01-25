@@ -7,6 +7,24 @@ export default defineEventHandler(async (event) => {
     where: {
       id: parseInt(id),
     },
+    select: {
+      Make: {},
+      Model: {},
+      Engine: {},
+      Gearbox: {},
+      Drivetrain: {},
+      Region: {},
+      City: {},
+      Color: {},
+      id: true,
+      year: true,
+      price: true,
+      horsepower: true,
+      mileage: true,
+      description: true,
+      createdAt: true,
+      isOnParts: true,
+    },
   });
 
   if (!car) {
