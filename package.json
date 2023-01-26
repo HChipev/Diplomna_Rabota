@@ -5,8 +5,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "build_deploy": "nuxt build && npx prisma generate"
+    "postinstall": "nuxt prepare && prisma generate"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
