@@ -12,10 +12,10 @@
         <div>
           <div class="flex flex-col md:flex-row">
             <h1 class="text-base sm:text-2xl whitespace-nowrap">
-              {{ listing.Make.make }}
+              {{ listing.Make.name }}
             </h1>
             <h1 class="text-sm sm:text-2xl whitespace-nowrap md:ml-2">
-              {{ listing.Model.model }}
+              {{ listing.Model.name }}
             </h1>
           </div>
           <p class="text-accent-color text-base sm:text-lg font-bold">
@@ -25,6 +25,7 @@
       </div>
       <div class="p-1 pr-2 flex flex-col sm:flex-row">
         <font-awesome-icon
+          @click.prevent="emits('deleteClick', listing.id)"
           class="text-white hover:text-accent-color font-bold cursor-pointer"
           icon="fa-solid fa-trash" />
       </div>
@@ -32,8 +33,7 @@
   </NuxtLink>
 </template>
 <script setup>
-  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
   const props = defineProps({ listing: Object });
+  const emits = defineEmits(["deleteClick"]);
 </script>
 <style lang=""></style>

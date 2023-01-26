@@ -13,20 +13,15 @@
         <CarListingCard
           v-for="listing in listings"
           :key="listing.id"
-          :listing="listing" />
+          :listing="listing"
+          @deleteClick="handleDelete" />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-  const user_id = useSupabaseUser().value.id;
-  const listings = await useFetchMyListings(user_id);
-  console.log(listings.value);
-  useSupabaseAuthClient().auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT" || session === null) {
-      listings.value = [];
-    }
-  });
+  import { on } from "events";
+
   useHead({
     title: "My Listings",
     meta: [
@@ -39,5 +34,19 @@
   definePageMeta({
     middleware: ["user-protected-pages-middleware"],
   });
+
+  const user_id = useSupabaseUser().value.id;
+  const { data: listings, refresh } = await useFetch(
+    `/api/car/listings/user/${user_id}`
+  );
+  onBeforeMount(async () => {
+    refreshNuxtData();
+  });
+  async function handleDelete(id) {
+    await $fetch(`/api/car/listings/${id}`, {
+      method: "DELETE",
+    });
+    refresh();
+  }
 </script>
 <style lang="scss"></style>

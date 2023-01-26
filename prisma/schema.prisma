@@ -12,20 +12,12 @@ model Car {
   id           Int        @id @default(autoincrement())
   userId       String
   makeId       Int
-  Make         Make       @relation(fields: [makeId], references: [id])
   modelId      Int
-  Model        Model      @relation(fields: [modelId], references: [id])
-  Engine       Engine     @relation(fields: [engineId], references: [id])
   engineId     Int
-  Gearbox      Gearbox    @relation(fields: [gearboxId], references: [id])
   gearboxId    Int
-  Drivetrain   Drivetrain @relation(fields: [drivetrainId], references: [id])
   drivetrainId Int
-  Region       Region     @relation(fields: [regionId], references: [id])
   regionId     Int
-  City         City       @relation(fields: [cityId], references: [id])
   cityId       Int
-  Color        Color?     @relation(fields: [colorId], references: [id])
   colorId      Int?
   year         Int
   mileage      Int
@@ -35,6 +27,14 @@ model Car {
   isOnParts    Boolean
   horsepower   Int
   createdAt    DateTime   @default(now())
+  City         City       @relation(fields: [cityId], references: [id])
+  Color        Color?     @relation(fields: [colorId], references: [id])
+  Drivetrain   Drivetrain @relation(fields: [drivetrainId], references: [id])
+  Engine       Engine     @relation(fields: [engineId], references: [id])
+  Gearbox      Gearbox    @relation(fields: [gearboxId], references: [id])
+  Make         Make       @relation(fields: [makeId], references: [id])
+  Model        Model      @relation(fields: [modelId], references: [id])
+  Region       Region     @relation(fields: [regionId], references: [id])
   Message      Message[]
 }
 
@@ -49,8 +49,8 @@ model Model {
   id     Int    @id @default(autoincrement())
   name   String
   makeId Int
-  make   Make   @relation(fields: [makeId], references: [id])
   Car    Car[]
+  make   Make   @relation(fields: [makeId], references: [id])
 }
 
 model Engine {
@@ -81,9 +81,9 @@ model Region {
 model City {
   id       Int    @id @default(autoincrement())
   name     String
-  region   Region @relation(fields: [regionId], references: [id])
   regionId Int
   Car      Car[]
+  region   Region @relation(fields: [regionId], references: [id])
 }
 
 model Color {
@@ -98,6 +98,6 @@ model Message {
   email     String
   message   String
   carId     Int
-  Car       Car      @relation(fields: [carId], references: [id])
   createdAt DateTime @default(now())
+  Car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
 }

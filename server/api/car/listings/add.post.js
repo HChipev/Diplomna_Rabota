@@ -19,7 +19,7 @@ const schema = Joi.object({
   horsepower: Joi.number().integer().min(0).required(),
   mileage: Joi.number().integer().min(0).required(),
   features: Joi.array().items(Joi.string()),
-  description: Joi.string(),
+  description: Joi.string().empty(""),
   isOnParts: Joi.boolean().required(),
   userId: Joi.string().required(),
 });

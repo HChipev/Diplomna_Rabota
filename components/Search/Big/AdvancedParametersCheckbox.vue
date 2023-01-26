@@ -15,19 +15,15 @@
 </template>
 <script setup>
   const checked = ref(false);
-  const extras = reactive({});
+  const emits = defineEmits(["onCheckboxChange"]);
   defineProps({
     extraName: String,
   });
 
   function check(extraName) {
     checked.value = !checked.value;
-    if (checked.value) {
-      extras[extraName] = checked.value;
-    } else {
-      delete extras[extraName];
-    }
-    console.log(extraName);
+    emits("onCheckboxChange", checked.value, extraName, "features");
+    // console.log(extraName);
   }
 </script>
 <style lang="scss" scoped>
