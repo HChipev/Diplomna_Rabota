@@ -42,40 +42,60 @@ export default defineEventHandler((event) => {
       filters.year.lte = parseInt(maxYear);
     }
   }
+
+  if (make) {
+    filters.make = "";
+    filters.make = make;
+  }
+  if (model) {
+    filters.model = "";
+    filters.model = model;
+  }
+  if (engine) {
+    filters.engine = "";
+    filters.engine = engine;
+  }
+  if (gearbox) {
+    filters.gearbox = "";
+    filters.gearbox = gearbox;
+  }
+  console.log(filters);
   return prisma.car.findMany({
+    // where: {
+    //   Make: {
+    //     name: {
+    //       equals: make,
+    //     },
+    //   },
+    //   Model: {
+    //     name: {
+    //       equals: model,
+    //     },
+    //   },
+    //   Engine: {
+    //     name: {
+    //       equals: engine,
+    //     },
+    //   },
+    //   Gearbox: {
+    //     name: {
+    //       equals: gearbox,
+    //     },
+    //   },
+    //   Region: {
+    //     name: {
+    //       equals: region,
+    //     },
+    //   },
+    //   City: {
+    //     name: {
+    //       equals: city,
+    //     },
+    //   },
     where: {
-      Make: {
-        name: {
-          equals: make,
-        },
-      },
-      Model: {
-        name: {
-          equals: model,
-        },
-      },
-      Engine: {
-        name: {
-          equals: engine,
-        },
-      },
-      Gearbox: {
-        name: {
-          equals: gearbox,
-        },
-      },
-      Region: {
-        name: {
-          equals: region,
-        },
-      },
-      City: {
-        name: {
-          equals: city,
-        },
-      },
       ...filters,
     },
+
     select: {
       Make: {},
       Model: {},
