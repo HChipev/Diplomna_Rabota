@@ -21,7 +21,9 @@
     region: useRoute().query.region,
     city: useRoute().query.city,
   };
-  const cars = await useFetchCars(filter);
+  const { data: cars } = await useFetch(`/api/results/cars`, {
+    params: filter,
+  });
 
   console.log(useRoute().params);
   console.log(cars.value);
