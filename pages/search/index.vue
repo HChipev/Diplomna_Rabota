@@ -13,5 +13,6 @@
       },
     ],
   });
+  useRouter().replace({ query: null });
 </script>
 <style lang="scss"></style>

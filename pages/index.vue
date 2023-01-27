@@ -7,7 +7,7 @@
 
 <script setup>
   const cars = await useFetchCars();
-  watchEffect(() => useRoute().query, refreshNuxtData());
+  useRouter().replace({ query: null });
 </script>
 
 <style lang="scss"></style>

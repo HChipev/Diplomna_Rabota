@@ -8,8 +8,12 @@ export default defineEventHandler((event) => {
     maxPrice,
     minYear,
     maxYear,
+    minMileage,
+    maxMileage,
+    color,
     engine,
     gearbox,
+    derivetrain,
     region,
     city,
   } = getQuery(event);
@@ -43,22 +47,49 @@ export default defineEventHandler((event) => {
     }
   }
 
+  if (minMileage || maxMileage) {
+    filters.mileage = {};
+    if (minMileage) {
+      filters.mileage.gte = parseInt(minMileage);
+    }
+    if (maxMileage) {
+      filters.mileage.lte = parseInt(maxMileage);
+    }
+  }
+
   if (make) {
-    filters.make = "";
-    filters.make = make;
+    filters.makeId = "";
+    filters.makeId = parseInt(make);
   }
   if (model) {
-    filters.model = "";
-    filters.model = model;
+    filters.modelId = "";
+    filters.modelId = parseInt(model);
   }
   if (engine) {
-    filters.engine = "";
-    filters.engine = engine;
+    filters.engineId = "";
+    filters.engineId = parseInt(engine);
   }
   if (gearbox) {
-    filters.gearbox = "";
-    filters.gearbox = gearbox;
+    filters.gearboxId = "";
+    filters.gearboxId = parseInt(gearbox);
   }
+  if (derivetrain) {
+    filters.derivetrainId = "";
+    filters.derivetrainId = parseInt(derivetrain);
+  }
+  if (region) {
+    filters.regionId = "";
+    filters.regionId = parseInt(region);
+  }
+  if (city) {
+    filters.cityId = "";
+    filters.cityId = parseInt(city);
+  }
+  if (color) {
+    filters.colorId = "";
+    filters.colorId = parseInt(color);
+  }
+
   console.log(filters);
   return prisma.car.findMany({
     // where: {

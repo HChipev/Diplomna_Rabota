@@ -8,11 +8,12 @@
           @change="
             $event.target.value !== 'Any'
               ? (makeId = $event.target.value)
-              : (makeId = 0)
+              : (makeId = 0),
+              queryMake($event.target.value)
           "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
+          <option selected value="0">Any</option>
           <option v-for="m in makes" :value="m.id" :key="m.id">
             {{ m.name }}
           </option>
@@ -168,7 +169,8 @@
           @change="
             $event.target.value !== 'Any'
               ? (regionId = $event.target.value)
-              : (regionId = 0)
+              : (regionId = 0),
+              queryRegion($event.target.value)
           "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
@@ -220,6 +222,24 @@
   </div>
 </template>
 <script setup>
+  function queryMake(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        make: id,
+      },
+    });
+  }
+  function queryRegion(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        region: id,
+      },
+    });
+  }
   const props = defineProps({
     features: Array,
   });
