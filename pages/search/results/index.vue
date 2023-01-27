@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-  const cars = await useFetchCars({
+  const filter = {
     make: useRoute().query.make,
     model: useRoute().query.model,
     minPrice: useRoute().query.minPrice,
@@ -20,7 +20,10 @@
     gearbox: useRoute().query.gearbox,
     region: useRoute().query.region,
     city: useRoute().query.city,
-  });
+  };
+  const cars = await useFetchCars(filter);
+
+  console.log(useRoute().params);
   console.log(cars.value);
 </script>
 <style lang=""></style>

@@ -13,6 +13,16 @@ export default defineEventHandler((event) => {
     region,
     city,
   } = getQuery(event);
+  console.log(
+    make,
+    model,
+    minPrice,
+    maxPrice,
+    minYear,
+    maxYear,
+    engine,
+    gearbox
+  );
   const filters = {};
   if (minPrice || maxPrice) {
     filters.price = {};

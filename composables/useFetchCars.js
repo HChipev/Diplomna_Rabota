@@ -4,6 +4,7 @@ export default async function useFetchCars(filters) {
       ...filters,
     },
   });
+  console.log(filters);
   if (error.value) {
     throwError({ ...error.value, message: "Error fetching cars" });
   }
