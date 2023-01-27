@@ -22,7 +22,7 @@
     city: useRoute().query.city,
   };
   const { data: cars } = await useFetch(`/api/results/cars`, {
-    query: filter,
+    params: filter,
   });
 
   console.log(useRoute().query);
