@@ -28,8 +28,11 @@
   const { data: cars } = await useFetch(`/api/results/cars`, {
     params: filter,
   });
+  watchEffect(() => {
+    refreshNuxtData();
+    console.log("sdasfasdf");
+  });
 
-  console.log(useRoute().query);
   console.log(cars.value);
 </script>
 <style lang=""></style>
