@@ -1,5 +1,5 @@
 <template>
-  <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
+  <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <form class="sm:p-3 p-2">
       <div class="flex flex-nowrap">
         <div class="flex-auto flex flex-col justify-center noSelect">

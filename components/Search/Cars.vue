@@ -35,11 +35,11 @@
       <div
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color relative">
         <label class="mt-1" for="max-price">Min-Max Price</label>
-        <h3
+        <input
+          readonly
           @click="updateDropdowns('price')"
-          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2 mr-3 pl-2">
-          {{ priceRangeText }}
-        </h3>
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2 focus-visible:outline-0"
+          v-model="priceRangeText" />
         <div
           v-if="dropdowns.price"
           class="absolute flex flex-col bg-white shadow rounded-lg focus:ring-accent-color focus:border-accent-color border border-accent-color top-20 left-0 right-0 px-3 py-3 mr-2.5 text-black z-10">
@@ -63,11 +63,11 @@
       <div
         class="relative flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="year">Min-Max Year</label>
-        <h3
+        <input
+          readonly
           @click="updateDropdowns('year')"
-          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2">
-          {{ yearRangeText }}
-        </h3>
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2 focus-visible:outline-0"
+          v-model="yearRangeText" />
         <div
           v-if="dropdowns.year"
           class="absolute flex flex-col bg-white shadow rounded-lg focus:ring-accent-color focus:border-accent-color border border-accent-color top-20 left-0 right-0 px-3 py-3 mr-2.5 text-black z-10">
@@ -131,11 +131,12 @@
       <div
         class="relative flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="mileage">Min-Max Mileage</label>
-        <h3
+        <input
+          readonly
           @click="updateDropdowns('mileage')"
-          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2">
-          {{ mileageRangeText }}
-        </h3>
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2 focus-visible:outline-0"
+          v-model="mileageRangeText" />
+
         <div
           v-if="dropdowns.mileage"
           class="absolute flex flex-col bg-white shadow rounded-lg focus:ring-accent-color focus:border-accent-color border border-accent-color top-20 left-0 right-0 px-3 py-3 mr-2.5 text-black z-10">
@@ -219,6 +220,9 @@
   </div>
 </template>
 <script setup>
+  const props = defineProps({
+    features: Array,
+  });
   const dropdowns = ref({
     price: false,
     year: false,

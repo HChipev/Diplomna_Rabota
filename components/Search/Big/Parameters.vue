@@ -1,5 +1,5 @@
 <template>
-  <div class="container pb-2 pt-2 mx-auto px-3 sm:px-28">
+  <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <form class="sm:p-3 p-2" :class="isAdvancedShown ? 'pb-1' : ''">
       <div class="flex flex-nowrap">
         <div class="flex-auto flex flex-col justify-center noSelect">
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="flex flex-col sm:flex-row noSelect">
-        <SearchCars v-if="carSearch" />
+        <SearchCars v-if="carSearch" :features="features" />
         <SearchParts v-else />
       </div>
       <div class="flex-nowrap noSelect">
@@ -84,6 +84,9 @@
 
 <script setup>
   const carSearch = ref(true);
+  const features = ref([]);
+  const carsOnParts = ref(false);
+  const isAdvancedShown = ref(false);
   const selectionChanged = (event) => {
     if (event.target.value === "Cars") {
       carSearch.value = true;
@@ -93,20 +96,25 @@
     useRouter().replace({ query: null });
   };
 
-  const carsOnParts = ref(false);
   function checkboxSelected() {
     carsOnParts.value = !carsOnParts.value;
   }
 
   const inBrowser = inject("inBrowser");
 
-  const isAdvancedShown = ref(false);
   function showAdvanced() {
     isAdvancedShown.value = !isAdvancedShown.value;
   }
 
-  function onCheckboxChange(checked, extraName, type) {
-    console.log("checkbox changed", checked, extraName, type);
+  function onCheckboxChange(checked, extraName) {
+    if (checked) {
+      console.log("checked");
+      features.value = [...features.value, extraName];
+    } else {
+      console.log("unchecked");
+      const index = features.value.indexOf(extraName);
+      features.value.splice(index, 1);
+    }
   }
 </script>
 
