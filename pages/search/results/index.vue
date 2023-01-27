@@ -9,25 +9,24 @@
   </div>
 </template>
 <script setup>
-  const filter = computed(() => {
-    return {
-      make: useRoute().query.make,
-      model: useRoute().query.model,
-      minPrice: useRoute().query.minPrice,
-      maxPrice: useRoute().query.maxPrice,
-      minYear: useRoute().query.minYear,
-      maxYear: useRoute().query.maxYear,
-      engine: useRoute().query.engine,
-      gearbox: useRoute().query.gearbox,
-      region: useRoute().query.region,
-      city: useRoute().query.city,
-      minMileage: useRoute().query.minMileage,
-      maxMileage: useRoute().query.maxMileage,
-    };
-  });
-  console.log(filter.value);
+  const filter = {
+    make: useRoute().query.make,
+    model: useRoute().query.model,
+    minPrice: useRoute().query.minPrice,
+    maxPrice: useRoute().query.maxPrice,
+    minYear: useRoute().query.minYear,
+    maxYear: useRoute().query.maxYear,
+    engine: useRoute().query.engine,
+    gearbox: useRoute().query.gearbox,
+    region: useRoute().query.region,
+    city: useRoute().query.city,
+    minMileage: useRoute().query.minMileage,
+    maxMileage: useRoute().query.maxMileage,
+  };
+
+  console.log(filter);
   const { data: cars } = await useFetch(`/api/results/cars`, {
-    params: filter.value,
+    params: filter,
   });
 
   console.log(useRoute().query);
