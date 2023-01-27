@@ -25,7 +25,7 @@
     params: filter,
   });
 
-  console.log(useRoute().params);
+  console.log(useRoute().query);
   console.log(cars.value);
 </script>
 <style lang=""></style>
