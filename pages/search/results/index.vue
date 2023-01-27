@@ -21,6 +21,7 @@
     region: useRoute().query.region,
     city: useRoute().query.city,
   });
+  console.log(cars.value);
   watchEffect(() => useRoute().query, refreshNuxtData());
 </script>
 <style lang=""></style>
