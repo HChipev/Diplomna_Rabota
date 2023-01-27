@@ -20,8 +20,6 @@
   </div>
 </template>
 <script setup>
-  import { on } from "events";
-
   useHead({
     title: "My Listings",
     meta: [
@@ -36,7 +34,7 @@
   });
 
   const user_id = useSupabaseUser().value.id;
-  const { data: listings, refresh } = await useFetch(
+  const { data: listings } = await useFetch(
     `/api/car/listings/user/${user_id}`
   );
   onBeforeMount(async () => {
@@ -46,7 +44,7 @@
     await $fetch(`/api/car/listings/${id}`, {
       method: "DELETE",
     });
-    refresh();
+    listings.value = listings.value.filter((listing) => listing.id !== id);
   }
 </script>
 <style lang="scss"></style>

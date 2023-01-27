@@ -76,7 +76,7 @@
         </div>
       </div>
       <div v-if="isAdvancedShown && carSearch && !carsOnParts" class="mt-3">
-        <SearchBigAdvancedParameters />
+        <SearchBigAdvancedParameters @onCheckboxChange="onCheckboxChange" />
       </div>
     </form>
   </div>
@@ -103,6 +103,10 @@
   const isAdvancedShown = ref(false);
   function showAdvanced() {
     isAdvancedShown.value = !isAdvancedShown.value;
+  }
+
+  function onCheckboxChange(checked, extraName, type) {
+    console.log("checkbox changed", checked, extraName, type);
   }
 </script>
 

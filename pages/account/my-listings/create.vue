@@ -31,7 +31,6 @@
             <CarAddSelect
               title="Make *"
               :options="makes"
-              :parentState="carInfo.make.value"
               name="make"
               @selectChange="onChange" />
             <CarAddSelect

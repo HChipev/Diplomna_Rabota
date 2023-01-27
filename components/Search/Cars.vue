@@ -6,16 +6,15 @@
         <label class="mt-1" for="make">Make</label>
         <select
           @change="
-            //! If the user selects a make, get the models for that make
-            $event.target.options.selectedIndex > 0
-              ? getModels($event)
-              : (models = [])
+            $event.target.value !== 'Any'
+              ? (makeId = $event.target.value)
+              : (makeId = 0)
           "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option v-for="m in makes" :value="m.make" :key="m.id">
-            {{ m.make }}
+          <option v-for="m in makes" :value="m.id" :key="m.id">
+            {{ m.name }}
           </option>
         </select>
       </div>
@@ -26,8 +25,8 @@
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option v-for="m in models">
-            {{ m.model }}
+          <option v-for="m in models" :key="m.id" :value="m.name">
+            {{ m.name }}
           </option>
         </select>
       </div>
@@ -73,12 +72,12 @@
           v-if="dropdowns.year"
           class="absolute flex flex-col bg-white shadow rounded-lg focus:ring-accent-color focus:border-accent-color border border-accent-color top-20 left-0 right-0 px-3 py-3 mr-2.5 text-black z-10">
           <input
-            v-model="year.min"
+            v-model="yearRange.min"
             type="number"
             class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mb-2"
             placeholder="Min" />
           <input
-            v-model="year.max"
+            v-model="yearRange.max"
             type="number"
             class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2"
             placeholder="Max" />
@@ -98,9 +97,9 @@
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="e in engines" :key="e.id" :value="e.name">
+            {{ e.name }}
+          </option>
         </select>
       </div>
       <div
@@ -110,10 +109,52 @@
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="g in gearboxes" :key="g.id" :value="g.name">
+            {{ g.name }}
+          </option>
         </select>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row">
+      <div
+        class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
+        <label class="mt-1" for="engine">Color</label>
+        <select
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
+          aria-label="Default select example">
+          <option selected>Any</option>
+          <option v-for="c in colors" :key="c.id" :value="c.name">
+            {{ c.name }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="relative flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
+        <label class="mt-1" for="mileage">Min-Max Mileage</label>
+        <h3
+          @click="updateDropdowns('mileage')"
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color py-1.5 mt-2 mb-2.5 mr-3 pl-2">
+          {{ mileageRangeText }}
+        </h3>
+        <div
+          v-if="dropdowns.mileage"
+          class="absolute flex flex-col bg-white shadow rounded-lg focus:ring-accent-color focus:border-accent-color border border-accent-color top-20 left-0 right-0 px-3 py-3 mr-2.5 text-black z-10">
+          <input
+            v-model="mileageRange.min"
+            type="number"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mb-2"
+            placeholder="Min" />
+          <input
+            v-model="mileageRange.max"
+            type="number"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2"
+            placeholder="Max" />
+          <button
+            @click.prevent="onMileageChange"
+            class="bg-white border border-accent-color text-accent-color rounded-md focus:ring-accent-color focus:border-accent-color py-0.5 px-3 text-xl transition-all duration-300 hover:translate-x-1 hover:-translate-y-1 hover:bg-accent-color hover:text-white">
+            Apply
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -123,12 +164,17 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="region">Region</label>
         <select
+          @change="
+            $event.target.value !== 'Any'
+              ? (regionId = $event.target.value)
+              : (regionId = 0)
+          "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="r in regions" :key="r.id" :value="r.id">
+            {{ r.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -140,15 +186,29 @@
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
           <option selected>Any</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option v-for="c in cities" :key="c.id" :value="c.name">
+            {{ c.name }}
+          </option>
         </select>
       </div>
     </div>
     <div class="flex flex-col sm:flex-row">
       <div
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
+        <label class="mt-1" for="gearbox">Drivetrain Type</label>
+        <select
+          class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
+          aria-label="Default select example">
+          <option selected>Any</option>
+          <option v-for="d in drivetrains" :key="d.id" :value="d.name">
+            {{ d.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row">
+      <div
+        class="flex flex-col flex-1 justify-center border-t border-border-color">
         <ReuseableButton
           @click="searchForCars()"
           class="accent-button mt-3 sm:mt-8 mr-3"
@@ -162,10 +222,11 @@
   const dropdowns = ref({
     price: false,
     year: false,
+    mileage: false,
   });
-  const makes = ref(await getMakesData());
-  const models = ref([]);
-  const year = ref({
+  const makeId = ref(0);
+  const regionId = ref(0);
+  const yearRange = ref({
     min: "",
     max: "",
   });
@@ -173,11 +234,10 @@
     min: "",
     max: "",
   });
-
-  async function getModels(e) {
-    const index = e.target.selectedIndex;
-    models.value = await getModelsData(makes.value[index - 1].id);
-  }
+  const mileageRange = ref({
+    min: "",
+    max: "",
+  });
 
   const updateDropdowns = (key) => {
     dropdowns.value[key] = !dropdowns.value[key];
@@ -191,6 +251,8 @@
       return `From $${minPrice}`;
     } else if (!minPrice && maxPrice) {
       return `To $${maxPrice}`;
+    } else if (minPrice === maxPrice) {
+      return `$${minPrice}`;
     } else {
       return `$${minPrice} - $${maxPrice}`;
     }
@@ -204,8 +266,25 @@
       return `From ${minYear}`;
     } else if (!minYear && maxYear) {
       return `To ${maxYear}`;
+    } else if (minYear === maxYear) {
+      return `${minYear}`;
     } else {
       return `${minYear} - ${maxYear}`;
+    }
+  });
+  const mileageRangeText = computed(() => {
+    const minMileage = useRoute().query.minMileage;
+    const maxMileage = useRoute().query.maxMileage;
+    if (!minMileage && !maxMileage) {
+      return "Any";
+    } else if (minMileage && !maxMileage) {
+      return `From ${minMileage} km`;
+    } else if (!minMileage && maxMileage) {
+      return `To ${maxMileage} km`;
+    } else if (minMileage === maxMileage) {
+      return `${minMileage} km`;
+    } else {
+      return `${minMileage}km - ${maxMileage} km`;
     }
   });
   function onPriceChange() {
@@ -226,26 +305,61 @@
   }
   function onYearChange() {
     if (
-      (year.value.min < 1930 && year.value.min !== "") ||
-      year.value.min > new Date().getFullYear() ||
-      year.value.max > new Date().getFullYear() ||
-      (year.value.max < 1930 && year.value.max !== "")
+      (yearRange.value.min < 1930 && yearRange.value.min !== "") ||
+      yearRange.value.min > new Date().getFullYear() ||
+      yearRange.value.max > new Date().getFullYear() ||
+      (yearRange.value.max < 1930 && yearRange.value.max !== "")
     ) {
       return;
     }
 
-    if (year.value.min && year.value.max) {
-      if (year.value.max < year.value.min) return;
+    if (yearRange.value.min && yearRange.value.max) {
+      if (yearRange.value.max < yearRange.value.min) return;
     }
     updateDropdowns("year");
     useRouter().push({
       query: {
         ...useRoute().query,
-        minYear: year.value.min,
-        maxYear: year.value.max,
+        minYear: yearRange.value.min,
+        maxYear: yearRange.value.max,
       },
     });
   }
+  function onMileageChange() {
+    if (mileageRange.value.min < 0 || mileageRange.value.max < 0) {
+      return;
+    }
+    if (mileageRange.value.min && mileageRange.value.max) {
+      if (mileageRange.value.max < mileageRange.value.min) return;
+    }
+    updateDropdowns("mileage");
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        minMileage: mileageRange.value.min,
+        maxMileage: mileageRange.value.max,
+      },
+    });
+  }
+
+  const { data: makes } = await useFetch("/api/input/makes");
+  const { data: models } = await useFetch(`/api/input/models/${makeId.value}`);
+  const { data: engines } = await useFetch("/api/input/engines");
+  const { data: gearboxes } = await useFetch("/api/input/gearboxes");
+  const { data: drivetrains } = await useFetch("/api/input/drivetrains");
+  const { data: regions } = await useFetch("/api/input/regions");
+  const { data: cities } = await useFetch(
+    `/api/input/cities/${regionId.value}`
+  );
+  const { data: colors } = await useFetch("/api/input/colors");
+
+  watchEffect(async () => {
+    models.value = await $fetch(`/api/input/models/${makeId.value}`).then(
+      (cities.value = await $fetch(`/api/input/cities/${regionId.value}`))
+    );
+    console.log(cities.value);
+  });
+
   function searchForCars() {
     navigateTo({ path: "/search/results", query: useRoute().query });
   }
