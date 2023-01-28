@@ -23,10 +23,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="model">Model</label>
         <select
+          @change="queryModel($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="m in models" :key="m.id" :value="m.name">
+          <option selected value="0">Any</option>
+          <option v-for="m in models" :key="m.id" :value="m.id">
             {{ m.name }}
           </option>
         </select>
@@ -95,10 +96,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="engine">Engine Type</label>
         <select
+          @change="queryEngine($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="e in engines" :key="e.id" :value="e.name">
+          <option selected value="0">Any</option>
+          <option v-for="e in engines" :key="e.id" :value="e.id">
             {{ e.name }}
           </option>
         </select>
@@ -107,10 +109,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="gearbox">Gearbox Type</label>
         <select
+          @change="queryGearbox($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="g in gearboxes" :key="g.id" :value="g.name">
+          <option selected value="0">Any</option>
+          <option v-for="g in gearboxes" :key="g.id" :value="g.id">
             {{ g.name }}
           </option>
         </select>
@@ -121,10 +124,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="engine">Color</label>
         <select
+          @change="queryColor($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="c in colors" :key="c.id" :value="c.name">
+          <option selected value="0">Any</option>
+          <option v-for="c in colors" :key="c.id" :value="c.id">
             {{ c.name }}
           </option>
         </select>
@@ -174,7 +178,7 @@
           "
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
+          <option selected value="0">Any</option>
           <option v-for="r in regions" :key="r.id" :value="r.id">
             {{ r.name }}
           </option>
@@ -186,10 +190,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="city-village">City/Village</label>
         <select
+          @change="queryCity($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="c in cities" :key="c.id" :value="c.name">
+          <option selected value="0">Any</option>
+          <option v-for="c in cities" :key="c.id" :value="c.id">
             {{ c.name }}
           </option>
         </select>
@@ -200,10 +205,11 @@
         class="flex flex-col flex-1 mb-2 justify-center border-t border-border-color">
         <label class="mt-1" for="gearbox">Drivetrain Type</label>
         <select
+          @change="queryDrivetrain($event.target.value)"
           class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color mt-2 mb-2 mr-3"
           aria-label="Default select example">
-          <option selected>Any</option>
-          <option v-for="d in drivetrains" :key="d.id" :value="d.name">
+          <option selected value="0">Any</option>
+          <option v-for="d in drivetrains" :key="d.id" :value="d.id">
             {{ d.name }}
           </option>
         </select>
@@ -228,6 +234,17 @@
       query: {
         ...useRoute().query,
         make: id,
+        model: "",
+      },
+    });
+  }
+  function queryModel(id) {
+    id == 0 ? (id = "") : (id = id);
+    console.log(id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        model: id,
       },
     });
   }
@@ -237,6 +254,52 @@
       query: {
         ...useRoute().query,
         region: id,
+        city: "",
+      },
+    });
+  }
+  function queryCity(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        city: id,
+      },
+    });
+  }
+  function queryEngine(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        engine: id,
+      },
+    });
+  }
+  function queryGearbox(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        gearbox: id,
+      },
+    });
+  }
+  function queryDrivetrain(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        drivetrain: id,
+      },
+    });
+  }
+  function queryColor(id) {
+    id == 0 ? (id = "") : (id = id);
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        color: id,
       },
     });
   }

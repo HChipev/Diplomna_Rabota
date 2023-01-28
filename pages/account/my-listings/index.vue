@@ -1,5 +1,5 @@
 <template>
-  <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
+  <div v-if="listings" class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <div class="p-4 border border-border-color rounded-md">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl md:text-6xl">My Listings</h1>
@@ -18,6 +18,7 @@
       </div>
     </div>
   </div>
+  <Loader v-else />
 </template>
 <script setup>
   useHead({
@@ -34,11 +35,16 @@
   });
 
   const user_id = useSupabaseUser().value.id;
-  const { data: listings } = await useFetch(
-    `/api/car/listings/user/${user_id}`
+  const { data: listings } = await useAsyncData("listings", () =>
+    $fetch(`/api/car/listings/user/${user_id}`)
   );
-  onBeforeMount(async () => {
-    refreshNuxtData();
+  listings.value = undefined;
+  const refresh = () => refreshNuxtData("listings");
+  onMounted(() => {
+    refresh();
+  });
+  onBeforeUnmount(() => {
+    listings.value = undefined;
   });
   async function handleDelete(id) {
     await $fetch(`/api/car/listings/${id}`, {
