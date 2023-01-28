@@ -35,10 +35,6 @@
     car.value = undefined;
     console.log(car.value, "asdasdasd");
   });
-
-  onMounted(() => {
-    window.scrollTo(0, 0);
-  });
 </script>
 <style scoped lang="scss">
   img {
