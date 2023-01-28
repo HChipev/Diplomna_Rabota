@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (to.path !== from.path && process.client) {
+  useNuxtApp().hook("page:finish", () => {
     window.scrollTo(0, 0);
-  }
+  });
 });
