@@ -4,7 +4,7 @@
 
     <div v-else class="container mx-auto px-5 sm:px-20 xl:px-28">
       <CarDetailsHero :car="car" />
-      <CarDetailsFeatures :car="car" />
+      <CarDetailsFeatures v-if="car.features.length" :features="car.features" />
       <CarDetailsDescription
         v-if="car.description"
         :description="car.description" />

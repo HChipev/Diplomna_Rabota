@@ -9,17 +9,17 @@
       class="ml-2 font-medium text-white"
       @click="check(extraName)"
       for="checkbox"
-      >{{ extraName }}</label
+      >{{ extraName.feature }}</label
     >
   </div>
 </template>
 <script setup>
   const checked = ref(false);
   const emits = defineEmits(["onCheckboxChange"]);
-  defineProps({
-    extraName: String,
+  const props = defineProps({
+    extraName: Object,
   });
-
+  console.log(props.extraName);
   function check(extraName) {
     checked.value = !checked.value;
     emits("onCheckboxChange", checked.value, extraName, "features");

@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
       mileage: true,
       description: true,
       createdAt: true,
+      features: true,
       isOnParts: true,
     },
   });

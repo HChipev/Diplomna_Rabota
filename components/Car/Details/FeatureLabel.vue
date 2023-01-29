@@ -4,13 +4,13 @@
       class="text-lg text-accent-color"
       icon="fa-solid fa-check" />
     <p class="ml-2 font-medium text-text-muted-color">
-      {{ extraName }}
+      {{ extraName.feature }}
     </p>
   </div>
 </template>
 <script setup>
-  defineProps({
-    extraName: String,
+  const props = defineProps({
+    extraName: Object,
   });
 </script>
 <style lang="scss" scoped>
