@@ -8,7 +8,7 @@
       <CarDetailsDescription
         v-if="car.description"
         :description="car.description" />
-      <CarDetailsContactForm />
+      <CarDetailsContactForm :carOwner="car.userId" />
     </div>
   </div>
 </template>
