@@ -12,6 +12,8 @@
   </div>
 </template>
 <script setup>
+  import { use } from "h3";
+
   const filter = {
     make: useRoute().query.make,
     model: useRoute().query.model,
@@ -30,6 +32,7 @@
   };
 
   console.log(filter);
+  console.log(useRoute().query.features);
   const { data: cars } = await useAsyncData("cars", () =>
     $fetch(`/api/results/cars`, {
       params: filter,
@@ -45,6 +48,6 @@
   onBeforeUnmount(() => {
     cars.value = undefined;
   });
-  console.log(cars.value);
+  // console.log(cars.value);
 </script>
 <style lang=""></style>

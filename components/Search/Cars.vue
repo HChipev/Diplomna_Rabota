@@ -303,9 +303,9 @@
       },
     });
   }
-  const props = defineProps({
-    features: Array,
-  });
+  // const props = defineProps({
+  //   features: Array,
+  // });
   const dropdowns = ref({
     price: false,
     year: false,

@@ -108,13 +108,21 @@
 
   function onCheckboxChange(checked, extraName) {
     if (checked) {
-      console.log("checked");
+      // console.log("extraName: ", extraName);
       features.value = [...features.value, extraName];
     } else {
-      console.log("unchecked");
+      // console.log("unchecked");
       const index = features.value.indexOf(extraName);
       features.value.splice(index, 1);
     }
+    useRouter()
+      .options.scrollBehavior(window.screenX, window.screenY)
+      .push({
+        query: {
+          ...useRoute().query,
+          features: JSON.stringify(features.value),
+        },
+      });
   }
 </script>
 
