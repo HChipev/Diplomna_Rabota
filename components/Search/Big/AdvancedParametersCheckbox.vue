@@ -19,7 +19,7 @@
   const props = defineProps({
     extraName: Object,
   });
-  console.log(props.extraName);
+  // console.log(props.extraName);
   function check(extraName) {
     checked.value = !checked.value;
     emits("onCheckboxChange", checked.value, extraName, "features");

@@ -15,7 +15,7 @@
         <SearchBigAdvancedParametersCheckbox
           @onCheckboxChange="onCheckboxChange"
           v-for="feature in useSafetyFeatures().safetyFeatures"
-          :extraName="feature" />
+          :extraName="{ feature: feature, category: 'safety' }" />
 
         <p
           class="flex items-center justify-center text-base pt-1 mb-3 border-t border-border-color">
@@ -24,7 +24,7 @@
         <SearchBigAdvancedParametersCheckbox
           @onCheckboxChange="onCheckboxChange"
           v-for="feature in useExteriorFeatures().exteriorFeatures"
-          :extraName="feature" />
+          :extraName="{ feature: feature, category: 'exterior' }" />
 
         <p
           class="flex items-center justify-center text-base pt-1 mb-3 border-t border-border-color">
@@ -33,7 +33,7 @@
         <SearchBigAdvancedParametersCheckbox
           @onCheckboxChange="onCheckboxChange"
           v-for="feature in useOtherFeatures().otherFeatures"
-          :extraName="feature" />
+          :extraName="{ feature: feature, category: 'other' }" />
       </div>
     </div>
 
@@ -47,7 +47,7 @@
         <SearchBigAdvancedParametersCheckbox
           @onCheckboxChange="onCheckboxChange"
           v-for="feature in useComfortFeatures().comfortFeatures"
-          :extraName="feature" />
+          :extraName="{ feature: feature, category: 'comfort' }" />
       </div>
     </div>
   </div>
