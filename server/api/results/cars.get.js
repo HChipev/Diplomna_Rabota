@@ -84,8 +84,6 @@ export default defineEventHandler(async (event) => {
     features = JSON.parse(features);
   }
 
-  console.log(filters);
-  console.log(filters.features, "aghsdhjgad");
   const cars = await prisma.car.findMany({
     where: {
       ...filters,
@@ -117,25 +115,6 @@ export default defineEventHandler(async (event) => {
       isOnParts: true,
     },
   });
-
-  // if (features) {
-  //   cars.filter((car) => {
-  //     //console.log(features, "features");
-  //     // console.log(JSON.stringify(car.features), "car.features");
-  //     car.features.forEach((feature) => {
-  //       console.log(JSON.parse(features)[indexOf(feature)]);
-  //       if (feature === JSON.parse(features)[feature]) {
-  //         console.log("true");
-  //       }
-  //     });
-  //     // if (
-  //     //   JSON.stringify(car.features).split(",").includes(features.split(","))
-  //     // ) {
-  //     //   console.log("true");
-  //     //   return car;
-  //     // }
-  //   });
-  // }
 
   return cars;
 });
