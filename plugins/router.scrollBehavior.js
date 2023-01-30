@@ -3,7 +3,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     if (savedPosition) {
       return savedPosition;
     }
-
+    if (from.path === to.path) {
+      return { x: window.scrollX, y: window.scrollY };
+    }
     const findEl = async (hash, x = 0) => {
       return (
         document.querySelector(hash) ||

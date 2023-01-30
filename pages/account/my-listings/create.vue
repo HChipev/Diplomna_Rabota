@@ -312,7 +312,9 @@
         console.log(carInfo.value.features);
         return;
       } else {
-        const index = carInfo.value.features.indexOf(name);
+        const index = carInfo.value.features
+          .map((f) => f.feature)
+          .indexOf(name.feature);
         carInfo.value.features.splice(index, 1);
         console.log(carInfo.value.features);
         return;

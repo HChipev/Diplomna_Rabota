@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="flex flex-col sm:flex-row noSelect">
-        <SearchCars v-if="carSearch" :features="features" />
+        <SearchCars v-if="carSearch" />
         <SearchParts v-else />
       </div>
       <div class="flex-nowrap noSelect">
@@ -112,17 +112,17 @@
       features.value = [...features.value, extraName];
     } else {
       // console.log("unchecked");
-      const index = features.value.indexOf(extraName);
+      const index = features.value
+        .map((f) => f.feature)
+        .indexOf(extraName.feature);
       features.value.splice(index, 1);
     }
-    useRouter()
-      .options.scrollBehavior(window.screenX, window.screenY)
-      .push({
-        query: {
-          ...useRoute().query,
-          features: JSON.stringify(features.value),
-        },
-      });
+    useRouter().push({
+      query: {
+        ...useRoute().query,
+        features: JSON.stringify(features.value),
+      },
+    });
   }
 </script>
 
