@@ -12,8 +12,6 @@
   </div>
 </template>
 <script setup>
-  import { use } from "h3";
-
   const filter = {
     make: useRoute().query.make,
     model: useRoute().query.model,
@@ -29,6 +27,7 @@
     color: useRoute().query.color,
     region: useRoute().query.region,
     city: useRoute().query.city,
+    features: useRoute().query.features,
   };
 
   console.log(filter);

@@ -23,7 +23,7 @@ model Car {
   mileage      Int
   price        Int
   description  String?
-  features     Json[]
+  features     Json?
   isOnParts    Boolean
   horsepower   Int
   createdAt    DateTime   @default(now())

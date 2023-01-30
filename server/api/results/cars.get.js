@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-export default defineEventHandler((event) => {
-  const {
+export default defineEventHandler(async (event) => {
+  let {
     make,
     model,
     minPrice,
@@ -16,6 +16,7 @@ export default defineEventHandler((event) => {
     derivetrain,
     region,
     city,
+    features,
   } = getQuery(event);
   const filters = {};
   if (minPrice || maxPrice) {
@@ -79,44 +80,23 @@ export default defineEventHandler((event) => {
     filters.colorId = "";
     filters.colorId = parseInt(color);
   }
+  if (features) {
+    features = JSON.parse(features);
+  }
 
   console.log(filters);
-  return prisma.car.findMany({
-    // where: {
-    //   Make: {
-    //     name: {
-    //       equals: make,
-    //     },
-    //   },
-    //   Model: {
-    //     name: {
-    //       equals: model,
-    //     },
-    //   },
-    //   Engine: {
-    //     name: {
-    //       equals: engine,
-    //     },
-    //   },
-    //   Gearbox: {
-    //     name: {
-    //       equals: gearbox,
-    //     },
-    //   },
-    //   Region: {
-    //     name: {
-    //       equals: region,
-    //     },
-    //   },
-    //   City: {
-    //     name: {
-    //       equals: city,
-    //     },
-    //   },
+  console.log(filters.features, "aghsdhjgad");
+  const cars = await prisma.car.findMany({
     where: {
       ...filters,
+      ...(features
+        ? {
+            features: {
+              hasSome: features,
+            },
+          }
+        : {}),
     },
-
     select: {
       Make: {},
       Model: {},
@@ -133,7 +113,29 @@ export default defineEventHandler((event) => {
       mileage: true,
       description: true,
       createdAt: true,
+      features: true,
       isOnParts: true,
     },
   });
+
+  // if (features) {
+  //   cars.filter((car) => {
+  //     //console.log(features, "features");
+  //     // console.log(JSON.stringify(car.features), "car.features");
+  //     car.features.forEach((feature) => {
+  //       console.log(JSON.parse(features)[indexOf(feature)]);
+  //       if (feature === JSON.parse(features)[feature]) {
+  //         console.log("true");
+  //       }
+  //     });
+  //     // if (
+  //     //   JSON.stringify(car.features).split(",").includes(features.split(","))
+  //     // ) {
+  //     //   console.log("true");
+  //     //   return car;
+  //     // }
+  //   });
+  // }
+
+  return cars;
 });
