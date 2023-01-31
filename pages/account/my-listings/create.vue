@@ -349,6 +349,7 @@
         body,
       });
     } catch (error) {
+      console.log(error);
       errorMessage.value = error.statusMessage;
       return;
     }
