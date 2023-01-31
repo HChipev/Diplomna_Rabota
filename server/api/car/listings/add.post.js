@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     console.log(error);
     throw createError({
       statusCode: 412,
-      statusMessage: error.message,
+      message: error.message,
     });
   }
   const {
