@@ -26,7 +26,7 @@
     .eq("id", props.carOwner)
     .single();
   const fullName = user.firstName + " " + user.lastName;
-  console.log(fullName);
+  // console.log(fullName);
 </script>
 <style lang="scss">
   [contenteditable][placeholder]:empty:before {

@@ -9,120 +9,6 @@ datasource db {
   schemas  = ["auth", "public"]
 }
 
-model Car {
-  id           Int        @id @default(autoincrement())
-  userId       String
-  makeId       Int
-  modelId      Int
-  engineId     Int
-  gearboxId    Int
-  drivetrainId Int
-  regionId     Int
-  cityId       Int
-  colorId      Int?
-  year         Int
-  mileage      Int
-  price        Int
-  description  String?
-  features     Json[]
-  isOnParts    Boolean
-  horsepower   Int
-  createdAt    DateTime   @default(now())
-  City         City       @relation(fields: [cityId], references: [id])
-  Color        Color?     @relation(fields: [colorId], references: [id])
-  Drivetrain   Drivetrain @relation(fields: [drivetrainId], references: [id])
-  Engine       Engine     @relation(fields: [engineId], references: [id])
-  Gearbox      Gearbox    @relation(fields: [gearboxId], references: [id])
-  Make         Make       @relation(fields: [makeId], references: [id])
-  Model        Model      @relation(fields: [modelId], references: [id])
-  Region       Region     @relation(fields: [regionId], references: [id])
-  Message      Message[]
-
-  @@schema("public")
-}
-
-model Make {
-  id    Int     @id @default(autoincrement())
-  name  String
-  Car   Car[]
-  Model Model[]
-
-  @@schema("public")
-}
-
-model Model {
-  id     Int    @id @default(autoincrement())
-  name   String
-  makeId Int
-  Car    Car[]
-  make   Make   @relation(fields: [makeId], references: [id])
-
-  @@schema("public")
-}
-
-model Engine {
-  id   Int    @id @default(autoincrement())
-  name String
-  Car  Car[]
-
-  @@schema("public")
-}
-
-model Gearbox {
-  id   Int    @id @default(autoincrement())
-  name String
-  Car  Car[]
-
-  @@schema("public")
-}
-
-model Drivetrain {
-  id   Int    @id @default(autoincrement())
-  name String
-  Car  Car[]
-
-  @@schema("public")
-}
-
-model Region {
-  id   Int    @id @default(autoincrement())
-  name String
-  Car  Car[]
-  City City[]
-
-  @@schema("public")
-}
-
-model City {
-  id       Int    @id @default(autoincrement())
-  name     String
-  regionId Int
-  Car      Car[]
-  region   Region @relation(fields: [regionId], references: [id])
-
-  @@schema("public")
-}
-
-model Color {
-  id   Int    @id @default(autoincrement())
-  name String
-  Car  Car[]
-
-  @@schema("public")
-}
-
-model Message {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  message   String
-  carId     Int
-  createdAt DateTime @default(now())
-  Car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
-
-  @@schema("public")
-}
-
 model audit_log_entries {
   instance_id String?   @db.Uuid
   id          String    @id @db.Uuid
@@ -341,12 +227,127 @@ model users {
   @@schema("auth")
 }
 
+model Car {
+  id           Int        @id @default(autoincrement())
+  userId       String
+  makeId       Int
+  modelId      Int
+  engineId     Int
+  gearboxId    Int
+  drivetrainId Int
+  regionId     Int
+  cityId       Int
+  colorId      Int?
+  year         Int
+  mileage      Int
+  price        Int
+  description  String?
+  features     Json[]
+  isOnParts    Boolean
+  horsepower   Int
+  createdAt    DateTime   @default(now())
+  City         City       @relation(fields: [cityId], references: [id])
+  Color        Color?     @relation(fields: [colorId], references: [id])
+  Drivetrain   Drivetrain @relation(fields: [drivetrainId], references: [id])
+  Engine       Engine     @relation(fields: [engineId], references: [id])
+  Gearbox      Gearbox    @relation(fields: [gearboxId], references: [id])
+  Make         Make       @relation(fields: [makeId], references: [id])
+  Model        Model      @relation(fields: [modelId], references: [id])
+  Region       Region     @relation(fields: [regionId], references: [id])
+  Message      Message[]
+
+  @@schema("public")
+}
+
+model City {
+  id       Int    @id @default(autoincrement())
+  name     String
+  regionId Int
+  Car      Car[]
+  Region   Region @relation(fields: [regionId], references: [id])
+
+  @@schema("public")
+}
+
+model Color {
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+
+  @@schema("public")
+}
+
+model Drivetrain {
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+
+  @@schema("public")
+}
+
+model Engine {
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+
+  @@schema("public")
+}
+
+model Gearbox {
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+
+  @@schema("public")
+}
+
+model Make {
+  id    Int     @id @default(autoincrement())
+  name  String
+  Car   Car[]
+  Model Model[]
+
+  @@schema("public")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  carId     Int
+  createdAt DateTime @default(now())
+  Car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+  @@schema("public")
+}
+
+model Model {
+  id     Int    @id @default(autoincrement())
+  name   String
+  makeId Int
+  Car    Car[]
+  Make   Make   @relation(fields: [makeId], references: [id])
+
+  @@schema("public")
+}
+
+model Region {
+  id   Int    @id @default(autoincrement())
+  name String
+  Car  Car[]
+  City City[]
+
+  @@schema("public")
+}
+
 model User {
   id        String @id(map: "user_pkey") @db.Uuid
   email     String
   firstName String
   lastName  String
-  users     users  @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  phone     String
+  users     users  @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }

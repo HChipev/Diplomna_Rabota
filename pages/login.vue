@@ -11,7 +11,11 @@
               <ReuseableButton
                 :class="isLogInActive ? '' : 'not-active'"
                 class="primery-button-nav py-1 px-9 sm:px-14 mr-2 whitespace-nowrap"
-                @click="!isLogInActive ? (isLogInActive = !isLogInActive) : ''"
+                @click="
+                  !isLogInActive
+                    ? (isLogInActive = !isLogInActive)((err = ''))
+                    : ''
+                "
                 >Log In</ReuseableButton
               >
             </div>
@@ -68,6 +72,26 @@
         </div>
 
         <div v-if="!isLogInActive" class="flex flex-col">
+          <label class="mt-2" for="phone">First Name</label>
+          <input
+            v-model="firstName"
+            type="text"
+            id="firstName"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color"
+            placeholder="First Name" />
+        </div>
+
+        <div v-if="!isLogInActive" class="flex flex-col">
+          <label class="mt-2" for="phone">Last Name</label>
+          <input
+            v-model="lastName"
+            type="text"
+            id="lastName"
+            class="bg-white border border-accent-color text-black rounded-lg focus:ring-accent-color focus:border-accent-color"
+            placeholder="Last Name" />
+        </div>
+
+        <div v-if="!isLogInActive" class="flex flex-col">
           <label class="mt-2" for="phone">Phone</label>
           <input
             v-model="phone"
@@ -98,6 +122,7 @@
         </div>
 
         <div class="flex flex-col mt-3 justify-center items-center">
+          <h3 v-if="err" class="text-red-600 text-center">{{ err }}</h3>
           <ReuseableButton
             type="submit"
             class="accent-button w-full text-nowrap mt-4"
@@ -108,7 +133,8 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
+  import Joi from "joi";
   useHead({
     title: "Login",
     meta: [
@@ -123,18 +149,64 @@
   });
   const inBrowser = inject("inBrowser");
   const isLogInActive = ref(true);
-
   const email = ref("");
   const phone = ref("");
+  const firstName = ref("");
+  const lastName = ref("");
   const password = ref("");
   const confirmPassword = ref("");
-  function register() {
-    if (password.value === confirmPassword.value) {
-      useSupabaseAuthClient().auth.signUp({
-        email: email.value,
-        password: password.value,
-      });
-      navigateTo("/");
+  const err = ref("");
+
+  async function register() {
+    const schema = Joi.object({
+      email: Joi.string()
+        .email({
+          minDomainSegments: 2,
+          tlds: { allow: ["com", "net", "bg"] },
+        })
+        .required(),
+      password: Joi.string().min(8).required(),
+      firstName: Joi.string().min(3).required(),
+      lastName: Joi.string().min(3).required(),
+      phone: Joi.string().min(10).required(),
+    });
+    const { error } = schema.validate({
+      email: email.value,
+      password: password.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      phone: phone.value,
+    });
+
+    if (!error) {
+      if (password.value === confirmPassword.value) {
+        const { data, error } = await useSupabaseAuthClient().auth.signUp({
+          email: email.value,
+          password: password.value,
+        });
+
+        if (error) {
+          err.value = error.message;
+        } else {
+          const { error } = await useSupabaseClient()
+            .from("User")
+            .insert([
+              {
+                id: data.user.id,
+                email: email.value,
+                firstName: firstName.value,
+                lastName: lastName.value,
+                phone: phone.value,
+              },
+            ]);
+          console.log(error);
+          navigateTo("/");
+        }
+      } else {
+        err.value = "Passwords don't match";
+      }
+    } else {
+      err.value = error.message;
     }
   }
   function logIn() {
