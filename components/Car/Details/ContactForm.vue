@@ -9,7 +9,7 @@
         role="textarea"
         contenteditable
         class="block p-2.5 w-full text-lg min-h-[120px] bg-white text-black rounded-lg shadow-sm border border-border-color focus:ring-accent-color focus:border-accent-color"
-        :placeholder="'Send ' + user + ' a message...'"></div>
+        :placeholder="'Send ' + fullName + ' a message...'"></div>
       <ReuseableButton class="primery-button text-xl px-5 mt-4"
         >Send message</ReuseableButton
       >
@@ -20,7 +20,13 @@
   const props = defineProps({
     carOwner: String,
   });
-  const user = "placeholder";
+  const { data: user, error } = await useSupabaseClient()
+    .from("User")
+    .select("firstName,lastName")
+    .eq("id", props.carOwner)
+    .single();
+  const fullName = user.firstName + " " + user.lastName;
+  console.log(fullName);
 </script>
 <style lang="scss">
   [contenteditable][placeholder]:empty:before {
