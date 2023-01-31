@@ -351,6 +351,8 @@
         navigateTo("/account/my-listings");
       })
       .catch((error) => {
+        console.log(error);
+        console.log(error.message);
         console.log(error.statusMessage);
         errorMessage.value = error.statusMessage;
         return;
