@@ -343,17 +343,18 @@
       userId: useSupabaseUser().value.id,
     };
 
-    try {
-      await $fetch("/api/car/listings/add", {
-        method: "POST",
-        body,
+    await $fetch("/api/car/listings/add", {
+      method: "POST",
+      body,
+    })
+      .then(() => {
+        navigateTo("/account/my-listings");
+      })
+      .catch((error) => {
+        console.log(error.statusMessage);
+        errorMessage.value = error.statusMessage;
+        return;
       });
-    } catch (error) {
-      console.log(error.statusMessage);
-      errorMessage.value = error.statusMessage;
-      return;
-    }
-    navigateTo("/account/my-listings");
   }
 </script>
 <style lang=""></style>
