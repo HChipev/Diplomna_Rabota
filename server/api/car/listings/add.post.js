@@ -30,8 +30,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { error, value } = schema.validate(body);
   if (error) {
-    console.log(error);
-    throw new createError({
+    throw createError({
       statusCode: 412,
       statusMessage: error.message,
     });
