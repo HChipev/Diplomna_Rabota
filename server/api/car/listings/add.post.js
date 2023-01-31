@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   const { error, value } = schema.validate(body);
   if (error) {
     console.log(error);
-    throw createError({
+    throw new createError({
       statusCode: 412,
       statusMessage: error.message,
     });
