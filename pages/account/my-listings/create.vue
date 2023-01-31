@@ -344,14 +344,15 @@
     };
 
     try {
-      const res = await $fetch("/api/car/listings/add", {
+      await $fetch("/api/car/listings/add", {
         method: "POST",
         body,
       });
-      navigateTo("/account/my-listings");
-    } catch (err) {
-      errorMessage.value = err.statusMessage;
+    } catch (error) {
+      errorMessage.value = error.statusMessage;
+      return;
     }
+    navigateTo("/account/my-listings");
   }
 </script>
 <style lang=""></style>
