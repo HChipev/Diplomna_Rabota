@@ -348,11 +348,11 @@
         method: "POST",
         body,
       });
+      navigateTo("/account/my-listings");
     } catch (error) {
-      console.log(...error);
       errorMessage.value = error.statusMessage;
+      console.log(error);
     }
-    navigateTo("/account/my-listings");
   }
 </script>
 <style lang=""></style>
