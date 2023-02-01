@@ -346,10 +346,9 @@
     await $fetch("/api/car/listings/add", {
       method: "POST",
       body,
-    }).then((data) => {
-      console.log(data);
-      if (data.statusCode) {
-        errorMessage.value = data.body.message;
+    }).then((res) => {
+      if (res.statusCode) {
+        errorMessage.value = res.body.message;
       } else {
         navigateTo("/account/my-listings");
       }
