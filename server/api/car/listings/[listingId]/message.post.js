@@ -17,10 +17,10 @@ export default defineEventHandler(async (event) => {
   const { listingId } = event.context.params;
   const { error } = schema.validate(body);
   if (error) {
-    throw createError({
+    return {
       statusCode: 412,
-      statusMessage: error.message,
-    });
+      body: { message: error.message },
+    };
   }
 
   const { email, message, name, phone } = body;

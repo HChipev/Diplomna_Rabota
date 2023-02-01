@@ -69,10 +69,16 @@
           name: name,
           phone: phone,
         },
+      }).then((res) => {
+        if (res.statusCode === 412) {
+          errorMessage.value = res.body.message;
+          successMessage.value = "";
+        } else {
+          message.value = "";
+          errorMessage.value = "";
+          successMessage.value = "Message sent!";
+        }
       });
-      message.value = "";
-      errorMessage.value = "";
-      successMessage.value = "Message sent!";
     } catch (err) {
       errorMessage.value = err.statusMessage;
       successMessage.value = "";
