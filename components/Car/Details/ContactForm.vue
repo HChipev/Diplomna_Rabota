@@ -13,7 +13,7 @@
         :placeholder="'Send ' + fullName + ' a message...'">
         {{ message }}
       </div>
-      <div :class="errorMessage ? 'text-red-500' : 'text-green-500'">
+      <div :class="errorMessage ? 'text-red-600' : 'text-green-600'">
         {{ errorMessage ? errorMessage : successMessage }}
       </div>
       <ReuseableButton

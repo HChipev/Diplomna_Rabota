@@ -122,7 +122,9 @@
         </div>
 
         <div class="flex flex-col mt-3 justify-center items-center">
-          <h3 v-if="err" class="text-red-600 text-center">{{ err }}</h3>
+          <h3 v-if="err" class="text-red-600 text-center max-w-[345px]">
+            {{ err }}
+          </h3>
           <ReuseableButton
             type="submit"
             class="accent-button w-full text-nowrap mt-4"
