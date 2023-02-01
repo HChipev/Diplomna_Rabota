@@ -4,7 +4,7 @@
     <div :class="disabled ? 'relative p-3' : 'border-t border-accent-color'">
       <div
         v-if="disabled"
-        class="absolute bg-gray-500 opacity-80 rounded-md top-0 left-0 w-full h-full text-2xl text-accent-color flex justify-center items-center">
+        class="absolute bg-gray-500 opacity-80 rounded-md top-0 left-0 w-full h-full text-lg sm:text-2xl text-accent-color flex justify-center items-center">
         Register to send messages!
       </div>
       <label
