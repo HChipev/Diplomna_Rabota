@@ -24,7 +24,7 @@
               @click="checkboxSelected(), onChange(carOnParts, 'isOnParts')"
               class="ml-2 text-nowrap text-2xl"
               for="checkbox"
-              >On Parts *</label
+              >On Parts</label
             >
           </div>
           <div class="grid sm:grid-cols-3 grid-cols-1">
