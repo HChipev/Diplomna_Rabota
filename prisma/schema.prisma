@@ -314,6 +314,7 @@ model Message {
   id        Int      @id @default(autoincrement())
   name      String
   email     String
+  phone     String
   message   String
   carId     Int
   createdAt DateTime @default(now())

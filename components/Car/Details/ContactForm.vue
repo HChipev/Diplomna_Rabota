@@ -6,11 +6,25 @@
         >Your message</label
       >
       <div
+        @input="message = $event.target.innerText"
         role="textarea"
         contenteditable
-        class="block p-2.5 w-full text-lg min-h-[120px] bg-white text-black rounded-lg shadow-sm border border-border-color focus:ring-accent-color focus:border-accent-color"
-        :placeholder="'Send ' + fullName + ' a message...'"></div>
-      <ReuseableButton class="primery-button text-xl px-5 mt-4"
+        class="block p-2.5 w-full text-lg min-h-[120px] bg-white text-black rounded-lg shadow-sm border border-color focus:ring-accent-color focus:border-accent-color"
+        :placeholder="'Send ' + fullName + ' a message...'">
+        {{ message }}
+      </div>
+      <div :class="errorMessage ? 'text-red-500' : 'text-green-500'">
+        {{ errorMessage ? errorMessage : successMessage }}
+      </div>
+      <ReuseableButton
+        @click="onSubmit"
+        :disabled="disableButton"
+        :class="
+          disableButton
+            ? 'disabled hover:shadow-none bg-gray-500  border-gray-500'
+            : 'primery-button'
+        "
+        class="text-xl px-5 mt-4"
         >Send message</ReuseableButton
       >
     </div>
@@ -20,13 +34,50 @@
   const props = defineProps({
     carOwner: String,
   });
-  const { data: user, error } = await useSupabaseClient()
+  const message = ref("");
+  const errorMessage = ref("");
+  const successMessage = ref("");
+  const disableButton = computed(() => {
+    if (message.value.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  const { data: user } = await useSupabaseClient()
     .from("User")
     .select("firstName,lastName")
     .eq("id", props.carOwner)
     .single();
   const fullName = user.firstName + " " + user.lastName;
-  // console.log(fullName);
+
+  async function onSubmit() {
+    try {
+      const { data } = await useSupabaseClient()
+        .from("User")
+        .select("firstName,lastName,phone,email")
+        .eq("id", useSupabaseUser().value.id)
+        .single();
+      const name = data.firstName + " " + data.lastName;
+      const email = data.email;
+      const phone = data.phone;
+      await $fetch(`/api/car/listings/${useRoute().params.id}/message`, {
+        method: "POST",
+        body: {
+          message: message.value,
+          email: email,
+          name: name,
+          phone: phone,
+        },
+      });
+      message.value = "";
+      errorMessage.value = "";
+      successMessage.value = "Message sent!";
+    } catch (err) {
+      errorMessage.value = err.statusMessage;
+      successMessage.value = "";
+    }
+  }
 </script>
 <style lang="scss">
   [contenteditable][placeholder]:empty:before {

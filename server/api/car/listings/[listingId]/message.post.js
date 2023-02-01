@@ -7,8 +7,9 @@ const schema = Joi.object({
       tlds: { allow: ["com", "net", "bg"] },
     })
     .required(),
-  message: Joi.string().required(),
+  message: Joi.string().min(3).required(),
   name: Joi.string().required(),
+  phone: Joi.string().min(10).required(),
 });
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
@@ -18,17 +19,18 @@ export default defineEventHandler(async (event) => {
   if (error) {
     throw createError({
       statusCode: 412,
-      message: error.message,
+      statusMessage: error.message,
     });
   }
 
-  const { email, message, name } = body;
+  const { email, message, name, phone } = body;
 
   return prisma.message.create({
     data: {
       email,
       message,
       name,
+      phone,
       carId: parseInt(listingId),
     },
   });
