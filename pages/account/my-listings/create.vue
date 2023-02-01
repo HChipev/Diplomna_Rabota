@@ -346,17 +346,14 @@
     await $fetch("/api/car/listings/add", {
       method: "POST",
       body,
-    })
-      .then(() => {
+    }).then((data) => {
+      console.log(data);
+      if (data.statusCode) {
+        errorMessage.value = data.body.message;
+      } else {
         navigateTo("/account/my-listings");
-      })
-      .catch((error) => {
-        errorMessage.value = error.statusMessage;
-        console.log(error);
-        console.log(error.statusMessage);
-        console.log(error.message);
-        console.log(error.statusCode);
-      });
+      }
+    });
   }
 </script>
 <style lang=""></style>
