@@ -354,7 +354,7 @@
         errorMessage.value = error.statusMessage;
         console.log(error);
         console.log(error.statusMessage);
-        console.log(error.statusText);
+        console.log(error.message);
         console.log(error.statusCode);
       });
   }
