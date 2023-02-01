@@ -350,10 +350,16 @@
       .then(() => {
         navigateTo("/account/my-listings");
       })
-      .catch((error) => {
-        errorMessage.value = error.statusMessage;
-        console.log(error);
-        console.log(error.statusMessage);
+      .catch((err) => {
+        console.log(err);
+        console.log(
+          err.statusCode +
+            " " +
+            err.message +
+            " tva det mi trqbva" +
+            err.statusMessage
+        );
+        errorMessage.value = err.message;
       });
   }
 </script>
