@@ -13,7 +13,7 @@
                 class="primery-button-nav py-1 px-9 sm:px-14 mr-2 whitespace-nowrap"
                 @click="
                   !isLogInActive
-                    ? (isLogInActive = !isLogInActive)((err = ''))
+                    ? ((isLogInActive = !isLogInActive), (err = ''))
                     : ''
                 "
                 >Log In</ReuseableButton
