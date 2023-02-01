@@ -353,6 +353,9 @@
       .catch((error) => {
         errorMessage.value = error.statusMessage;
         console.log(error);
+        console.log(error.statusMessage);
+        console.log(error.statusText);
+        console.log(error.statusCode);
       });
   }
 </script>
