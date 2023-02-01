@@ -98,6 +98,21 @@
 
   function checkboxSelected() {
     carsOnParts.value = !carsOnParts.value;
+    if (carsOnParts.value) {
+      useRouter().push({
+        query: {
+          ...useRoute().query,
+          carsOnParts: true,
+        },
+      });
+    } else {
+      useRouter().push({
+        query: {
+          ...useRoute().query,
+          carsOnParts: false,
+        },
+      });
+    }
   }
 
   const inBrowser = inject("inBrowser");

@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
     region,
     city,
     features,
+    carsOnParts,
   } = getQuery(event);
   const filters = {};
   if (minPrice || maxPrice) {
@@ -80,20 +81,18 @@ export default defineEventHandler(async (event) => {
     filters.colorId = "";
     filters.colorId = parseInt(color);
   }
-  if (features) {
-    features = JSON.parse(features);
+  if (carsOnParts) {
+    filters.isOnParts = carsOnParts === "true" ? true : false;
+  }
+  if (features && features !== "[]") {
+    filters.features = {
+      hasSome: JSON.parse(features),
+    };
   }
 
   const cars = await prisma.car.findMany({
     where: {
       ...filters,
-      ...(features
-        ? {
-            features: {
-              hasSome: features,
-            },
-          }
-        : {}),
     },
     select: {
       Make: {},

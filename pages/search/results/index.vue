@@ -28,6 +28,7 @@
     region: useRoute().query.region,
     city: useRoute().query.city,
     features: useRoute().query.features,
+    carsOnParts: useRoute().query.carsOnParts,
   };
 
   console.log(filter);
