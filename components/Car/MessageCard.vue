@@ -1,16 +1,18 @@
 <template>
   <div class="even:bg-primery-lighter-color p-4">
-    <h1 class="font-bold text-2xl">Hristo Chipev</h1>
+    <h1 class="font-bold text-2xl">{{ message.name }}</h1>
     <p class="text-gray-400">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quis
-      alias voluptatem velit quod eos ipsam expedita repellendus voluptatum
-      reiciendis!
+      {{ message.message }}
     </p>
     <div class="flex items-center mt-4">
-      <p class="text-accent-color mr-10">email</p>
-      <p class="text-blue-500">555-555-5555</p>
+      <p class="text-accent-color font-medium mr-10">{{ message.email }}</p>
+      <p class="text-blue-500">{{ message.phone }}</p>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+  const props = defineProps({
+    message: Object,
+  });
+</script>
 <style lang=""></style>

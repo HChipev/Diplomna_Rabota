@@ -1,14 +1,23 @@
 <template>
   <div
     class="mx-auto mt-4 max-w-7xl lg:space-y-4 px-4 lg:px-8 xl:px-10 w-full pb-16 2xl:w-3/5">
-    <div class="border-t border-accent-color">
-      <label for="message" class="block mb-2 mt-4 sm:text-2xl font-medium"
+    <div :class="disabled ? 'relative p-3' : 'border-t border-accent-color'">
+      <div
+        v-if="disabled"
+        class="absolute bg-gray-500 opacity-80 rounded-md top-0 left-0 w-full h-full text-2xl text-accent-color flex justify-center items-center">
+        Register to send messages!
+      </div>
+      <label
+        for="message"
+        :class="disabled ? 'noSelect' : ''"
+        class="block mb-2 mt-4 sm:text-2xl font-medium"
         >Your message</label
       >
       <div
         @input="message = $event.target.innerText"
         role="textarea"
-        contenteditable
+        :contenteditable="!disabled"
+        :class="disabled ? 'noSelect' : ''"
         class="block p-2.5 w-full text-lg min-h-[120px] bg-white text-black rounded-lg shadow-sm border border-color focus:ring-accent-color focus:border-accent-color"
         :placeholder="'Send ' + fullName + ' a message...'">
         {{ message }}
@@ -20,19 +29,30 @@
         @click="onSubmit"
         :disabled="disableButton"
         :class="
-          disableButton
+          (disableButton
             ? 'disabled hover:shadow-none bg-gray-500  border-gray-500'
-            : 'primery-button'
+            : 'primery-button',
+          disabled
+            ? 'noSelect disabled hover:shadow-none bg-gray-500  border-gray-500'
+            : 'primery-button')
         "
         class="text-xl px-5 mt-4"
         >Send message</ReuseableButton
       >
     </div>
+    <!-- <div v-else class="relative">
+       
+        <label for="message" class="block mb-2 mt-4 sm:text-2xl font-medium"
+          >Your message</label
+        >
+      </div>
+    </div> -->
   </div>
 </template>
 <script setup>
   const props = defineProps({
     carOwner: String,
+    disabled: Boolean,
   });
   const message = ref("");
   const errorMessage = ref("");

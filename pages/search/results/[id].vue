@@ -8,7 +8,10 @@
       <CarDetailsDescription
         v-if="car.description"
         :description="car.description" />
-      <CarDetailsContactForm :carOwner="car.userId" />
+      <CarDetailsContactForm
+        v-if="!isMyCar"
+        :disabled="disableContactForm"
+        :carOwner="car.userId" />
     </div>
   </div>
 </template>
@@ -18,6 +21,21 @@
   );
   car.value = undefined;
   const refresh = () => refreshNuxtData("car");
+  const disableContactForm = computed(() => {
+    if (useSupabaseUser().value) {
+      return false;
+    }
+    return true;
+  });
+  const isMyCar = computed(() => {
+    if (useSupabaseUser().value) {
+      if (car.value.userId === useSupabaseUser().value.id) {
+        return true;
+      }
+    }
+    return false;
+  });
+
   onMounted(async () => {
     await refresh();
     if (!car.value) {
