@@ -1,5 +1,7 @@
 <template>
-  <div v-if="listings" class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
+  <div
+    v-if="carsListings.length > 0 || partsListings.length > 0"
+    class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <div class="p-4 border border-border-color rounded-md">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl md:text-6xl">My Listings</h1>
@@ -9,12 +11,25 @@
           ><font-awesome-icon icon="fa-solid fa-plus"
         /></NuxtLink>
       </div>
-      <div class="border border-border-color rounded-lg p-3 mt-5">
-        <CarListingCard
-          v-for="listing in listings"
-          :key="listing.id"
-          :listing="listing"
-          @deleteClick="handleDelete" />
+      <div v-if="carsListings.length > 0" class="mt-5">
+        <h1 class="text-xl sm:text-3xl m-2 ml-3">Cars</h1>
+        <div class="border border-border-color rounded-lg p-3">
+          <CarListingCard
+            v-for="listing in carsListings"
+            :key="listing.id"
+            :listing="listing"
+            @deleteClick="handleDeleteCar" />
+        </div>
+      </div>
+      <div v-if="partsListings.length > 0" class="mt-5">
+        <h1 class="text-xl sm:text-3xl m-2 ml-3">Parts</h1>
+        <div class="border border-border-color rounded-lg p-3">
+          <PartListingCard
+            v-for="listing in partsListings"
+            :key="listing.id"
+            :listing="listing"
+            @deleteClick="handleDeletePart" />
+        </div>
       </div>
     </div>
   </div>
@@ -35,22 +50,39 @@
   });
 
   const user_id = useSupabaseUser().value.id;
-  const { data: listings } = await useAsyncData("listings", () =>
+  const { data: carsListings } = await useAsyncData("carsListings", () =>
     $fetch(`/api/car/listings/user/${user_id}`)
   );
-  listings.value = undefined;
-  const refresh = () => refreshNuxtData("listings");
-  onMounted(() => {
-    refresh();
+  const { data: partsListings } = await useAsyncData("partsListings", () =>
+    $fetch(`/api/part/listings/user/${user_id}`)
+  );
+  console.log(partsListings.value);
+  carsListings.value = [];
+  partsListings.value = [];
+  const refresh = () => refreshNuxtData(["carsListings", "partsListings"]);
+  onMounted(async () => {
+    await refresh();
+    console.log(partsListings.value);
   });
   onBeforeUnmount(() => {
-    listings.value = undefined;
+    carsListings.value = [];
+    partsListings.value = [];
   });
-  async function handleDelete(id) {
+  async function handleDeleteCar(id) {
     await $fetch(`/api/car/listings/${id}`, {
       method: "DELETE",
     });
-    listings.value = listings.value.filter((listing) => listing.id !== id);
+    carsListings.value = carsListings.value.filter(
+      (listing) => listing.id !== id
+    );
+  }
+  async function handleDeletePart(id) {
+    await $fetch(`/api/part/listings/${id}`, {
+      method: "DELETE",
+    });
+    partsListings.value = partsListings.value.filter(
+      (listing) => listing.id !== id
+    );
   }
 </script>
 <style lang="scss"></style>

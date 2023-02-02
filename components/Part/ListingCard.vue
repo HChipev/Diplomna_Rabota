@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     class="cursor-default"
-    :to="`/account/my-listings/view/car/${listing.id}`">
+    :to="`/account/my-listings/view/part/${listing.id}`">
     <div
       class="shadow bg-primery-lighter-color shadow-gray-300 flex rounded overflow-hidden justify-between mb-4">
       <div class="flex">
@@ -12,9 +12,17 @@
         <div>
           <div class="flex flex-col md:flex-row">
             <h1 class="text-base sm:text-2xl whitespace-nowrap">
-              {{ listing.Make.name }}
+              {{ listing.PartType.name }}
             </h1>
             <h1 class="text-sm sm:text-2xl whitespace-nowrap md:ml-2">
+              {{ listing.PartName.name }}
+            </h1>
+          </div>
+          <div class="flex flex-col md:flex-row text-text-muted-color">
+            <h1 class="text-sm sm:text-lg whitespace-nowrap">
+              {{ listing.Make.name }}
+            </h1>
+            <h1 class="text-sm sm:text-lg whitespace-nowrap md:ml-2">
               {{ listing.Model.name }}
             </h1>
           </div>
@@ -24,9 +32,7 @@
         </div>
       </div>
       <div class="p-1 pr-2 flex flex-col sm:flex-row">
-        <img
-          class="w-6 h-6 mr-2"
-          :src="listing.isOnParts ? onPartsIcon : carIcon" />
+        <img class="w-6 h-6 mr-2" src="~assets/parts-icon.svg" />
         <font-awesome-icon
           @click.prevent="emits('deleteClick', listing.id)"
           class="text-white hover:text-accent-color font-bold cursor-pointer mt-1"
@@ -36,8 +42,6 @@
   </NuxtLink>
 </template>
 <script setup>
-  import onPartsIcon from "~/assets/car-on-parts-icon.svg";
-  import carIcon from "~/assets/car-icon.svg";
   const props = defineProps({ listing: Object });
   const emits = defineEmits(["deleteClick"]);
 </script>

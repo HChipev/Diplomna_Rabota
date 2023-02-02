@@ -51,7 +51,11 @@
                   {{ car.mileage }}km
                 </p>
               </div>
-              <div class="flex flex-1 flex-col items-end justify-end">
+              <div class="flex flex-1 flex-col items-end justify-between">
+                <img
+                  class="w-6 h-6 sm:w-8 sm:h-8 mt-2"
+                  :src="car.isOnParts ? onPartsIcon : carIcon"
+                  alt="type-of-listing" />
                 <h1
                   class="text-sm sm:text-base md:text-2xl font-semibold text-accent-color">
                   ${{ car.price }}
@@ -65,6 +69,8 @@
   </div>
 </template>
 <script setup>
+  import onPartsIcon from "~/assets/car-on-parts-icon.svg";
+  import carIcon from "~/assets/car-icon.svg";
   const props = defineProps({ car: Object });
   const stared = ref(false);
   let addingToWishlist = false;

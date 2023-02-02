@@ -2,8 +2,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   const { user_id } = event.context.params;
-
-  return await prisma.car.findMany({
+  console.log(user_id);
+  return await prisma.part.findMany({
     where: {
       userId: user_id,
     },
@@ -18,9 +18,18 @@ export default defineEventHandler(async (event) => {
           name: true,
         },
       },
+      PartType: {
+        select: {
+          name: true,
+        },
+      },
+      PartName: {
+        select: {
+          name: true,
+        },
+      },
       id: true,
       price: true,
-      isOnParts: true,
     },
   });
 });
