@@ -440,15 +440,21 @@
   );
   const { data: colors } = await useFetch("/api/input/colors");
 
-  watchEffect(async () => {
-    models.value = await $fetch(`/api/input/models/${makeId.value}`).then(
-      (cities.value = await $fetch(`/api/input/cities/${regionId.value}`))
-    );
-    console.log(cities.value);
-  });
+  watch(
+    () => makeId.value,
+    async (id) => {
+      models.value = id !== 0 ? await $fetch(`/api/input/models/${id}`) : [];
+    }
+  );
+  watch(
+    () => regionId.value,
+    async (id) => {
+      cities.value = id !== 0 ? await $fetch(`/api/input/cities/${id}`) : [];
+    }
+  );
 
   function searchForCars() {
-    navigateTo({ path: "/search/results", query: useRoute().query });
+    navigateTo({ path: "/search/results/cars", query: useRoute().query });
   }
 </script>
 <style lang="scss" scoped>
