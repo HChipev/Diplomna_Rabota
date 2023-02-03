@@ -74,6 +74,7 @@ export default defineEventHandler(async (event) => {
       year: true,
       price: true,
       createdAt: true,
+      images: true,
     },
   });
 

@@ -158,7 +158,11 @@
         {{ errorMessage }}
       </p>
     </div>
-    {{ carInfo }}
+    {{
+      carInfo.image.map((image) => {
+        return image.name;
+      })
+    }}
   </div>
 </template>
 <script setup>
@@ -313,6 +317,10 @@
       }
     }
     if (name === "image") {
+      if (type === "remove") {
+        carInfo.value.image.splice(value, 1);
+        return;
+      }
       carInfo.value.image = [...carInfo.value.image, value];
       return;
     }

@@ -1,7 +1,46 @@
 <template>
   <div
     class="mx-auto mt-4 max-w-7xl lg:space-y-4 px-4 lg:px-8 xl:px-10 w-full 2xl:w-3/5">
-    <img class="w-full" :src="part.url" alt="part-image" />
+    <div @mousewheel.prevent="scrollPreviews" class="relative">
+      <div class="relative border border-border-color rounded-lg">
+        <p
+          class="absolute top-2 left-2 text-lg transition-all duration-500 opacity-50 hover:opacity-100 cursor-default">
+          <font-awesome-icon icon="far-regular fa-camera" />
+          {{ currentImage + 1 + "/" + part.images.length }}
+        </p>
+        <div class="flex justify-center items-center aspect-video rounded-lg">
+          <img
+            :src="`${entry}/storage/v1/object/public/images/${part.images[currentImage]}`"
+            class="rounded-lg aspect-video"
+            alt="part-image" />
+        </div>
+        <div v-if="part.images.length > 1">
+          <div
+            @click="prevImage"
+            class="absolute top-[calc(50%-23px)] sm:top-[50%] bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-r-lg">
+            <font-awesome-icon icon="fa-solid fa-chevron-left" />
+          </div>
+          <div
+            @click="nextImage"
+            class="absolute top-[calc(50%-23px)] sm:top-[50%] right-0 bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-l-lg">
+            <font-awesome-icon icon="fa-solid fa-chevron-right" />
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="part.images.length > 1"
+        id="imagesPreview"
+        class="flex py-2 overflow-x-auto scrollbar-hide">
+        <img
+          v-for="(image, index) in part.images"
+          @click="currentImage = index"
+          :key="index"
+          :src="`${entry}/storage/v1/object/public/images/${part.images[index]}`"
+          class="h-20 aspect-video object-cover rounded-lg mx-2 transition-all duration-500"
+          :class="index === currentImage ? 'scale-110 mx-4' : 'opacity-30 '"
+          :alt="`image-${index}`" />
+      </div>
+    </div>
     <div class="flex justify-between mt-4 xl:mt-6">
       <div class="flex flex-col">
         <h1 class="text-xl xl:text-4xl whitespace-nowrap">
@@ -51,5 +90,36 @@
   </div>
 </template>
 <script setup>
+  const entry = useRuntimeConfig().public.supabase.url;
   const props = defineProps({ part: Object });
+  const currentImage = ref(0);
+  function prevImage() {
+    if (currentImage.value === 0) {
+      currentImage.value = props.part.images.length - 1;
+      document.getElementById("imagesPreview").scrollLeft =
+        document.getElementById("imagesPreview").scrollWidth;
+    } else {
+      currentImage.value--;
+    }
+  }
+  function nextImage() {
+    if (currentImage.value === props.part.images.length - 1) {
+      currentImage.value = 0;
+      document.getElementById("imagesPreview").scrollLeft = 0;
+    } else {
+      currentImage.value++;
+    }
+  }
+  function scrollPreviews(e) {
+    if (props.part.images.length <= 1) {
+      return;
+    }
+    if (e.deltaY > 0) {
+      document.getElementById("imagesPreview").scrollLeft += 100;
+      nextImage();
+    } else {
+      document.getElementById("imagesPreview").scrollLeft -= 100;
+      prevImage();
+    }
+  }
 </script>

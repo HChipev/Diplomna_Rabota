@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
       features: true,
       isOnParts: true,
       userId: true,
+      images: true,
     },
   });
 

@@ -19,6 +19,7 @@
             class="text-text-muted-color text-center text-sm sm:text-xl">
             No cars listed yet.
           </h1>
+
           <CarListingCard
             v-for="listing in carsListings"
             :key="listing.id"
@@ -41,6 +42,11 @@
             @deleteClick="handleDeletePart" />
         </div>
       </div>
+      <p
+        v-if="errorMessage"
+        class="text-red-600 text-center text-sm sm:text-xl mt-2">
+        {{ errorMessage }}
+      </p>
     </div>
   </div>
   <Loader v-else />
@@ -58,7 +64,7 @@
   definePageMeta({
     middleware: ["user-protected-pages-middleware"],
   });
-
+  const errorMessage = ref("");
   const user_id = useSupabaseUser().value.id;
   const { data: carsListings } = await useAsyncData("carsListings", () =>
     $fetch(`/api/car/listings/user/${user_id}`)
@@ -79,20 +85,51 @@
     partsListings.value = undefined;
   });
   async function handleDeleteCar(id) {
+    const imagesForDeletion = carsListings.value.find(
+      (listing) => listing.id === id
+    ).images;
+    console.log(imagesForDeletion);
     await $fetch(`/api/car/listings/${id}`, {
       method: "DELETE",
-    });
-    carsListings.value = carsListings.value.filter(
-      (listing) => listing.id !== id
-    );
+    })
+      .then(async () => {
+        carsListings.value = carsListings.value.filter(
+          (listing) => listing.id !== id
+        );
+        for (let i = 0; i < imagesForDeletion.length; i++) {
+          await useSupabaseClient()
+            .storage.from("images")
+            .remove(imagesForDeletion[i]);
+        }
+        errorMessage.value = "";
+      })
+      .catch((err) => {
+        errorMessage.value = err.message;
+        window.scrollTo(0, window.innerHeight);
+      });
   }
   async function handleDeletePart(id) {
+    const imagesForDeletion = partsListings.value.find(
+      (listing) => listing.id === id
+    ).images;
     await $fetch(`/api/part/listings/${id}`, {
       method: "DELETE",
-    });
-    partsListings.value = partsListings.value.filter(
-      (listing) => listing.id !== id
-    );
+    })
+      .then(async () => {
+        partsListings.value = partsListings.value.filter(
+          (listing) => listing.id !== id
+        );
+        for (let i = 0; i < imagesForDeletion.length; i++) {
+          await useSupabaseClient()
+            .storage.from("images")
+            .remove(imagesForDeletion[i]);
+        }
+        errorMessage.value = "";
+      })
+      .catch((err) => {
+        errorMessage.value = err.message;
+        window.scrollTo(0, window.innerHeight);
+      });
   }
 </script>
 <style lang="scss"></style>

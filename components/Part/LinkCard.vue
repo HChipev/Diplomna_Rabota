@@ -6,7 +6,10 @@
       class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
       <div class="flex w-full">
         <div class="flex pr-1">
-          <img :src="part.url" alt="part-image" />
+          <img
+            :src="`${entry}/storage/v1/object/public/images/${part.images[currentImage]}`"
+            class="aspect-video"
+            alt="part-image" />
         </div>
         <div class="flex flex-grow pl-1 min-w-[160px]">
           <div class="card-body min-w-full p-2">
@@ -60,7 +63,9 @@
   </div>
 </template>
 <script setup>
+  const entry = useRuntimeConfig().public.supabase.url;
   const props = defineProps({ part: Object });
+  const currentImage = ref(0);
   const stared = ref(false);
   let addingToWishlist = false;
   async function openListing() {
@@ -74,6 +79,21 @@
     }, 100);
     stared.value = !stared.value;
   }
+  function slideShow() {
+    if (currentImage.value < props.part.images.length - 1) {
+      currentImage.value++;
+    } else {
+      currentImage.value = 0;
+    }
+    if (props.part.images.length > 1) {
+      setTimeout(slideShow, 5000);
+    }
+  }
+  onMounted(() => {
+    if (props.part.images.length > 1) {
+      setTimeout(slideShow, 5000);
+    }
+  });
 </script>
 <style lang="scss" scoped>
   .card {

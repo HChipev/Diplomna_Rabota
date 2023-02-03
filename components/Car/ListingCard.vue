@@ -6,7 +6,7 @@
       class="shadow bg-primery-lighter-color shadow-gray-300 flex rounded overflow-hidden justify-between mb-4">
       <div class="flex">
         <img
-          :src="listing.url"
+          :src="`${entry}/storage/v1/object/public/images/${listing.images[0]}`"
           alt="car-image"
           class="w-32 min-[390px]:w-46 min-[435px]:w-52 sm:w-80 mr-3 h-36 sm:h-44" />
         <div>
@@ -38,6 +38,7 @@
 <script setup>
   import onPartsIcon from "~/assets/car-on-parts-icon.svg";
   import carIcon from "~/assets/car-icon.svg";
+  const entry = useRuntimeConfig().public.supabase.url;
   const props = defineProps({ listing: Object });
   const emits = defineEmits(["deleteClick"]);
 </script>

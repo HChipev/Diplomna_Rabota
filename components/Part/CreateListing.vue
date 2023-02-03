@@ -73,7 +73,11 @@
         {{ errorMessage }}
       </p>
     </div>
-    {{ partInfo }}
+    {{
+      partInfo.image.map((img) => {
+        return img.name;
+      })
+    }}
   </div>
 </template>
 <script setup>
@@ -179,7 +183,7 @@
     return false;
   });
 
-  function onChange(value, name) {
+  function onChange(value, name, type) {
     if (name === "make") {
       partInfo.value.model = "";
       makeId.value = value.id ? value.id : 0;
@@ -193,6 +197,10 @@
       partTypeId.value = value.id ? value.id : 0;
     }
     if (name === "image") {
+      if (type === "remove") {
+        partInfo.value.image.splice(value, 1);
+        return;
+      }
       partInfo.value.image = [...partInfo.value.image, value];
       return;
     }

@@ -21,6 +21,7 @@ export default defineEventHandler(async (event) => {
       id: true,
       price: true,
       isOnParts: true,
+      images: true,
     },
   });
 });
