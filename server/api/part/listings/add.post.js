@@ -14,6 +14,7 @@ const schema = Joi.object({
     .max(new Date().getFullYear())
     .required(),
   price: Joi.number().integer().min(0).required(),
+  images: Joi.array().items(Joi.string()).required(),
   description: Joi.string().empty(""),
   userId: Joi.string().required(),
 });
@@ -38,6 +39,7 @@ export default defineEventHandler(async (event) => {
     price,
     description,
     userId,
+    images,
   } = value;
 
   const part = await prisma.part.create({
@@ -52,6 +54,7 @@ export default defineEventHandler(async (event) => {
       price,
       description,
       userId,
+      images,
     },
   });
 

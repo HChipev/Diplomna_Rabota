@@ -162,6 +162,7 @@
   </div>
 </template>
 <script setup>
+  import { v4 as uuidv4 } from "uuid";
   useHead({
     title: "Add Listing",
     meta: [
@@ -226,7 +227,7 @@
       color: "",
       description: "",
       isOnParts: false,
-      image: null,
+      image: [],
     };
   });
   const inputs = [
@@ -267,7 +268,7 @@
       } else if (carInfo.value[key] && key === "features") {
         carInfo.value[key] = [];
       } else if (carInfo.value[key]) {
-        carInfo.value[key] = null;
+        carInfo.value[key] = [];
       }
     }
   });
@@ -277,13 +278,15 @@
       if (
         !carInfo.value[key] &&
         key !== "features" &&
-        key !== "image" &&
         key !== "description" &&
         key !== "color" &&
         key !== "isOnParts"
       ) {
         return true;
       }
+    }
+    if (carInfo.value.image.length <= 0) {
+      return true;
     }
     return false;
   });
@@ -296,26 +299,38 @@
     if (name === "region") {
       carInfo.value.city = "";
       regionId.value = value.id ? value.id : 0;
-      console.log(value.id + "onChange" + regionId.value);
     }
     if (type === "features") {
       if (value) {
         carInfo.value.features = [...carInfo.value.features, name];
-        console.log(carInfo.value.features);
         return;
       } else {
         const index = carInfo.value.features
           .map((f) => f.feature)
           .indexOf(name.feature);
         carInfo.value.features.splice(index, 1);
-        console.log(carInfo.value.features);
         return;
       }
+    }
+    if (name === "image") {
+      carInfo.value.image = [...carInfo.value.image, value];
+      return;
     }
     carInfo.value[name] = value;
   }
 
   async function handleSubmit() {
+    const imagesData = [];
+    for (let i = 0; i < carInfo.value.image.length; i++) {
+      const fileName = uuidv4();
+      const { data, error } = await useSupabaseClient()
+        .storage.from("images")
+        .upload("public/car/" + fileName, carInfo.value.image[i]);
+      if (error) {
+        return (errorMessage.value = error.message);
+      }
+      imagesData.push(data.path);
+    }
     const body = {
       makeId: carInfo.value.make.id,
       modelId: carInfo.value.model.id,
@@ -333,17 +348,32 @@
       mileage: parseInt(carInfo.value.mileage),
       horsepower: parseInt(carInfo.value.hp),
       userId: useSupabaseUser().value.id,
+      images: imagesData,
     };
 
     await $fetch("/api/car/listings/add", {
       method: "POST",
       body,
-    }).then((res) => {
-      if (res.statusCode) {
-        errorMessage.value = res.body.message;
-      } else {
-        navigateTo("/account/my-listings");
-      }
-    });
+    })
+      .then(async (res) => {
+        if (res.statusCode) {
+          errorMessage.value = res.body.message;
+          for (let i = 0; i < imagesData.length; i++) {
+            await useSupabaseClient()
+              .storage.from("images")
+              .remove(imagesData[i]);
+          }
+        } else {
+          navigateTo("/account/my-listings");
+        }
+      })
+      .catch(async (err) => {
+        errorMessage.value = err.message;
+        for (let i = 0; i < imagesData.length; i++) {
+          await useSupabaseClient()
+            .storage.from("images")
+            .remove(imagesData[i]);
+        }
+      });
   }
 </script>

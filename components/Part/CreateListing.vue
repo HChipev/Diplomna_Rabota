@@ -77,6 +77,7 @@
   </div>
 </template>
 <script setup>
+  import { v4 as uuidv4 } from "uuid";
   useHead({
     title: "Add Listing",
     meta: [
@@ -136,7 +137,7 @@
       region: "",
       city: "",
       description: "",
-      image: null,
+      image: [],
     };
   });
   const inputs = [
@@ -158,19 +159,22 @@
 
   onMounted(() => {
     for (let key in partInfo.value) {
-      if (partInfo.value[key] && key !== "image") {
+      if (!partInfo.value[key] && key !== "image") {
         partInfo.value[key] = "";
       } else {
-        partInfo.value[key] = null;
+        partInfo.value[key] = [];
       }
     }
   });
 
   const isButtonDisabled = computed(() => {
     for (let key in partInfo.value) {
-      if (!partInfo.value[key] && key !== "image" && key !== "description") {
+      if (!partInfo.value[key] && key !== "description") {
         return true;
       }
+    }
+    if (partInfo.value.image.length <= 0) {
+      return true;
     }
     return false;
   });
@@ -183,17 +187,31 @@
     if (name === "region") {
       partInfo.value.city = "";
       regionId.value = value.id ? value.id : 0;
-      console.log(value.id + "onChange" + regionId.value);
     }
     if (name === "partType") {
       partInfo.value.partName = "";
       partTypeId.value = value.id ? value.id : 0;
+    }
+    if (name === "image") {
+      partInfo.value.image = [...partInfo.value.image, value];
+      return;
     }
 
     partInfo.value[name] = value;
   }
 
   async function handleSubmit() {
+    const imagesData = [];
+    for (let i = 0; i < partInfo.value.image.length; i++) {
+      const fileName = uuidv4();
+      const { data, error } = await useSupabaseClient()
+        .storage.from("images")
+        .upload("public/part/" + fileName, partInfo.value.image[i]);
+      if (error) {
+        return (errorMessage.value = error.message);
+      }
+      imagesData.push(data.path);
+    }
     const body = {
       makeId: partInfo.value.make.id,
       modelId: partInfo.value.model.id,
@@ -205,17 +223,32 @@
       price: parseInt(partInfo.value.price),
       year: parseInt(partInfo.value.year),
       userId: useSupabaseUser().value.id,
+      images: imagesData,
     };
 
     await $fetch("/api/part/listings/add", {
       method: "POST",
       body,
-    }).then((res) => {
-      if (res.statusCode) {
-        errorMessage.value = res.body.message;
-      } else {
-        navigateTo("/account/my-listings");
-      }
-    });
+    })
+      .then(async (res) => {
+        if (res.statusCode) {
+          errorMessage.value = res.body.message;
+          for (let i = 0; i < imagesData.length; i++) {
+            await useSupabaseClient()
+              .storage.from("images")
+              .remove(imagesData[i]);
+          }
+        } else {
+          navigateTo("/account/my-listings");
+        }
+      })
+      .catch(async (err) => {
+        errorMessage.value = err.message;
+        for (let i = 0; i < imagesData.length; i++) {
+          await useSupabaseClient()
+            .storage.from("images")
+            .remove(imagesData[i]);
+        }
+      });
   }
 </script>

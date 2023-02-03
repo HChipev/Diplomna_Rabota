@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="carsListings.length > 0 || partsListings.length > 0"
+    v-if="carsListings || partsListings"
     class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
     <div class="p-4 border border-border-color rounded-md">
       <div class="flex justify-between items-center mb-8">
@@ -11,9 +11,14 @@
           ><font-awesome-icon icon="fa-solid fa-plus"
         /></NuxtLink>
       </div>
-      <div v-if="carsListings.length > 0" class="mt-5">
+      <div v-if="carsListings" class="mt-5">
         <h1 class="text-xl sm:text-3xl m-2 ml-3">Cars</h1>
         <div class="border border-border-color rounded-lg p-3">
+          <h1
+            v-if="carsListings.length <= 0"
+            class="text-text-muted-color text-center text-sm sm:text-xl">
+            No cars listed yet.
+          </h1>
           <CarListingCard
             v-for="listing in carsListings"
             :key="listing.id"
@@ -21,9 +26,14 @@
             @deleteClick="handleDeleteCar" />
         </div>
       </div>
-      <div v-if="partsListings.length > 0" class="mt-5">
+      <div v-if="partsListings" class="mt-5">
         <h1 class="text-xl sm:text-3xl m-2 ml-3">Parts</h1>
         <div class="border border-border-color rounded-lg p-3">
+          <h1
+            v-if="partsListings.length <= 0"
+            class="text-text-muted-color text-center text-sm sm:text-xl">
+            No parts listed yet.
+          </h1>
           <PartListingCard
             v-for="listing in partsListings"
             :key="listing.id"
@@ -57,16 +67,16 @@
     $fetch(`/api/part/listings/user/${user_id}`)
   );
   console.log(partsListings.value);
-  carsListings.value = [];
-  partsListings.value = [];
+  carsListings.value = undefined;
+  partsListings.value = undefined;
   const refresh = () => refreshNuxtData(["carsListings", "partsListings"]);
   onMounted(async () => {
     await refresh();
     console.log(partsListings.value);
   });
   onBeforeUnmount(() => {
-    carsListings.value = [];
-    partsListings.value = [];
+    carsListings.value = undefined;
+    partsListings.value = undefined;
   });
   async function handleDeleteCar(id) {
     await $fetch(`/api/car/listings/${id}`, {

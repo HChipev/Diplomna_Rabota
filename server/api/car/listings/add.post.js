@@ -21,6 +21,7 @@ const schema = Joi.object({
   features: Joi.array().items(
     Joi.object().keys({ feature: Joi.string(), category: Joi.string() })
   ),
+  images: Joi.array().items(Joi.string()).required(),
   description: Joi.string().empty(""),
   isOnParts: Joi.boolean().required(),
   userId: Joi.string().required(),
@@ -52,6 +53,7 @@ export default defineEventHandler(async (event) => {
     description,
     isOnParts,
     userId,
+    images,
   } = value;
 
   const car = await prisma.Car.create({
@@ -72,6 +74,7 @@ export default defineEventHandler(async (event) => {
       description,
       isOnParts,
       userId,
+      images,
     },
   });
 

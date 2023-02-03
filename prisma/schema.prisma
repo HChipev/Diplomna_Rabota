@@ -246,6 +246,7 @@ model Car {
   isOnParts    Boolean
   horsepower   Int
   createdAt    DateTime   @default(now())
+  images       String[]
   City         City       @relation(fields: [cityId], references: [id])
   Color        Color?     @relation(fields: [colorId], references: [id])
   Drivetrain   Drivetrain @relation(fields: [drivetrainId], references: [id])
@@ -270,15 +271,16 @@ model Part {
   cityId      Int
   year        Int
   price       Int
-  description String?
   createdAt   DateTime  @default(now())
+  description String?
+  images      String[]
+  Message     Message[]
   City        City      @relation(fields: [cityId], references: [id])
   Make        Make      @relation(fields: [makeId], references: [id])
   Model       Model     @relation(fields: [modelId], references: [id])
   PartName    PartName  @relation(fields: [partNameId], references: [id])
   PartType    PartType  @relation(fields: [partTypeId], references: [id])
   Region      Region    @relation(fields: [regionId], references: [id])
-  Message     Message[]
 
   @@schema("public")
 }
@@ -307,8 +309,8 @@ model City {
   name     String
   regionId Int
   Car      Car[]
-  Part     Part[]
   Region   Region @relation(fields: [regionId], references: [id])
+  Part     Part[]
 
   @@schema("public")
 }
@@ -349,8 +351,8 @@ model Make {
   id    Int     @id @default(autoincrement())
   name  String
   Car   Car[]
-  Part  Part[]
   Model Model[]
+  Part  Part[]
 
   @@schema("public")
 }
@@ -359,13 +361,13 @@ model Message {
   id        Int      @id @default(autoincrement())
   name      String
   email     String
-  phone     String
   message   String
   carId     Int?
-  partId    Int?
   createdAt DateTime @default(now())
-  Part      Part?    @relation(fields: [partId], references: [id], onDelete: Cascade)
+  phone     String
+  partId    Int?
   Car       Car?     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  Part      Part?    @relation(fields: [partId], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }
@@ -375,8 +377,8 @@ model Model {
   name   String
   makeId Int
   Car    Car[]
-  Part   Part[]
   Make   Make   @relation(fields: [makeId], references: [id])
+  Part   Part[]
 
   @@schema("public")
 }
@@ -385,8 +387,8 @@ model Region {
   id   Int    @id @default(autoincrement())
   name String
   Car  Car[]
-  Part Part[]
   City City[]
+  Part Part[]
 
   @@schema("public")
 }
