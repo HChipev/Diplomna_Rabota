@@ -30,7 +30,7 @@
     <div
       class="flex text-xs md:text-base xl:text-lg mt-2 border-b border-accent-color pb-2 justify-between">
       <div class="flex flex-col sm:flex-row text-text-muted-color">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap items-end">
           <p class="mr-0.5 sm:mr-2 text-white">
             {{ part.Make.name + " " + part.Model.name }}
           </p>
@@ -39,7 +39,13 @@
         </div>
       </div>
       <div class="flex items-end sm:items-center">
-        <p class="font-bold xl:text-3xl">${{ part.price }}</p>
+        <div class="flex flex-col items-end">
+          <img
+            src="~assets/parts-icon.svg"
+            class="w-6 h-6 md:w-8 md:h-8"
+            alt="type-of-listing" />
+          <p class="font-bold xl:text-3xl">${{ part.price }}</p>
+        </div>
       </div>
     </div>
   </div>

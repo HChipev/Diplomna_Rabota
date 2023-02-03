@@ -30,7 +30,7 @@
     <div
       class="flex text-xs md:text-base xl:text-lg mt-2 border-b border-accent-color pb-2 justify-between">
       <div class="flex flex-col sm:flex-row text-text-muted-color">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap items-end">
           <p class="mr-0.5 sm:mr-2">{{ car.year }}</p>
           <p class="mr-0.5 sm:mr-2">|</p>
           <p class="mr-0.5 sm:mr-2">{{ car.Engine.name }}</p>
@@ -42,16 +42,24 @@
           <p class="mr-0.5 sm:mr-2">{{ car.mileage }}km</p>
           <p class="mr-0.5 sm:mr-2">|</p>
           <p class="mr-0.5 sm:mr-2">{{ car.Drivetrain.name }}</p>
-          <p class="mr-0.5 sm:mr-2">|</p>
+          <p v-if="car.Color" class="mr-0.5 sm:mr-2">|</p>
           <p v-if="car.Color" class="mr-0.5 sm:mr-2">{{ car.Color.name }}</p>
         </div>
       </div>
       <div class="flex items-end sm:items-center">
-        <p class="font-bold xl:text-3xl">${{ car.price }}</p>
+        <div class="flex flex-col items-end">
+          <img
+            :src="car.isOnParts ? onPartsIcon : carIcon"
+            class="w-6 h-6 md:w-8 md:h-8"
+            alt="type-of-listing" />
+          <p class="font-bold xl:text-3xl">${{ car.price }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+  import onPartsIcon from "~/assets/car-on-parts-icon.svg";
+  import carIcon from "~/assets/car-icon.svg";
   const props = defineProps({ car: Object });
 </script>
