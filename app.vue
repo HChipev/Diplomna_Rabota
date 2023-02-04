@@ -13,6 +13,40 @@
     }
   });
   provide("inBrowser", inBrowser);
+  //! realtime data updates
+  const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
+  const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
+  const refreshMessages = () => refreshNuxtData("messages");
+  useSupabaseClient()
+    .channel("public:Car")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "Car" },
+      () => {
+        refreshCars();
+      }
+    )
+    .subscribe();
+  useSupabaseClient()
+    .channel("public:Part")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "Part" },
+      () => {
+        refreshParts();
+      }
+    )
+    .subscribe();
+  useSupabaseClient()
+    .channel("public:Message")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "Message" },
+      () => {
+        refreshMessages();
+      }
+    )
+    .subscribe();
 </script>
 <style lang="scss" global>
   body {
