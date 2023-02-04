@@ -68,14 +68,12 @@
     </div>
     <div
       class="flex text-xs md:text-base xl:text-lg mt-2 border-b border-accent-color pb-2 justify-between">
-      <div class="flex flex-col sm:flex-row text-text-muted-color">
-        <div class="flex flex-wrap items-end">
-          <p class="mr-0.5 sm:mr-2 text-white">
-            {{ part.Make.name + " " + part.Model.name }}
-          </p>
-          <p class="mr-0.5 sm:mr-2">|</p>
-          <p class="mr-0.5 sm:mr-2">{{ part.year }}</p>
-        </div>
+      <div class="flex flex-wrap items-end text-text-muted-color mr-6">
+        <p class="mr-0.5 sm:mr-2 text-white">
+          {{ part.Make.name + " " + part.Model.name }}
+        </p>
+        <p class="mr-0.5 sm:mr-2">|</p>
+        <p class="mr-0.5 sm:mr-2">{{ part.year }}</p>
       </div>
       <div class="flex items-end sm:items-center">
         <div class="flex flex-col items-end">
