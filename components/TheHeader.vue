@@ -85,9 +85,6 @@
   const inBrowser = inject("inBrowser");
 
   if (useSupabaseUser().value) {
-    profilePic.value = useSupabaseUser().value.user_metadata.avatar_url
-      ? useSupabaseUser().value.user_metadata.avatar_url
-      : defaultProfilePic;
     await useSupabaseClient()
       .from("User")
       .select("image")

@@ -34,33 +34,6 @@
           </div>
         </div>
 
-        <div class="flex flex-col my-3 justify-center items-center">
-          <div class="flex flex-1 mb-2 text-xl justify-center items-center">
-            Sign in with:
-          </div>
-          <div class="flex flex-col sm:flex-row justify-between w-full">
-            <div class="flex justify-center items-center">
-              <div
-                @click="facebookLogIn()"
-                class="border border-border-color rounded sm:mr-3 pl-1 w-full sm:pr-16 py-1 flex flex-nowrap items-center o-auth-wrapper">
-                <font-awesome-icon
-                  class="text-xl flex"
-                  icon="fa-brands fa-square-facebook" />
-                <label class="ml-2">Facebook</label>
-              </div>
-            </div>
-
-            <div class="flex justify-center items-center">
-              <div
-                @click="googleLogIn()"
-                class="border border-border-color rounded mt-2 sm:mt-0 sm:ml-3 pl-1 w-full sm:pr-20 py-1 flex flex-nowrap items-center o-auth-wrapper">
-                <font-awesome-icon class="text-xl" icon="fa-brands fa-google" />
-                <label class="ml-2">Google</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="flex flex-col">
           <label class="mt-2" for="email">Email</label>
           <input
@@ -124,7 +97,7 @@
         <div class="flex flex-col mt-3 justify-center items-center">
           <h3
             v-if="err"
-            class="text-red-600 text-center max-w-[245px] sm:max-w-[345px]">
+            class="text-red-600 text-center max-w-[245px] sm:max-w-[325px]">
             {{ err }}
           </h3>
           <ReuseableButton
@@ -213,22 +186,16 @@
       err.value = error.message;
     }
   }
-  function logIn() {
-    useSupabaseAuthClient().auth.signInWithPassword({
+  async function logIn() {
+    const { error } = await useSupabaseAuthClient().auth.signInWithPassword({
       email: email.value,
       password: password.value,
     });
-    navigateTo("/");
-  }
-  async function googleLogIn() {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
-      provider: "google",
-    });
-  }
-  async function facebookLogIn() {
-    await useSupabaseAuthClient().auth.signInWithOAuth({
-      provider: "facebook",
-    });
+    if (error) {
+      err.value = error.message;
+    } else {
+      navigateTo("/");
+    }
   }
 </script>
 <style lang="scss" scoped>
@@ -248,43 +215,7 @@
       margin-block: 0.5em;
       transition: all 0.5s ease;
       &.register {
-        transform: translateX(122%);
-      }
-    }
-    .o-auth-wrapper {
-      transition: all 0.5s ease;
-      &:hover {
-        cursor: pointer;
-        animation: wiggle 0.5s ease-in-out;
-        border-color: $accent-color !important;
-        background: $accent-color;
-
-        @keyframes wiggle {
-          0% {
-            transform: rotate(0deg);
-          }
-          25% {
-            transform: rotate(3.5deg);
-          }
-          35% {
-            transform: rotate(1.5deg);
-          }
-          45% {
-            transform: rotate(0deg);
-          }
-          55% {
-            transform: rotate(-1.5deg);
-          }
-          75% {
-            transform: rotate(-3.5deg);
-          }
-          85% {
-            transform: rotate(-1.5deg);
-          }
-          100% {
-            transform: rotate(0deg);
-          }
-        }
+        transform: translateX(103%);
       }
     }
   }
@@ -292,9 +223,6 @@
     .form {
       hr {
         width: 7.5rem;
-        &.register {
-          transform: translateX(103%);
-        }
       }
     }
   }
