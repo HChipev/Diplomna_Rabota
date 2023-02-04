@@ -1,7 +1,7 @@
 <template>
   <div
     class="mx-auto mt-4 max-w-7xl lg:space-y-4 px-4 lg:px-8 xl:px-10 w-full 2xl:w-3/5">
-    <div @mousewheel.prevent="scrollPreviews" class="relative">
+    <div @mousewheel.prevent="scrollPreviews">
       <div class="relative border border-border-color rounded-lg">
         <p
           class="absolute top-2 left-2 text-lg transition-all duration-500 opacity-50 hover:opacity-100 cursor-default">
@@ -17,12 +17,12 @@
         <div v-if="part.images.length > 1">
           <div
             @click="prevImage"
-            class="absolute top-[calc(50%-23px)] sm:top-[50%] bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-r-lg">
+            class="absolute top-[calc(50%-23px)] sm:top-[45%] bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-r-lg">
             <font-awesome-icon icon="fa-solid fa-chevron-left" />
           </div>
           <div
             @click="nextImage"
-            class="absolute top-[calc(50%-23px)] sm:top-[50%] right-0 bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-l-lg">
+            class="absolute top-[calc(50%-23px)] sm:top-[45%] right-0 bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-l-lg">
             <font-awesome-icon icon="fa-solid fa-chevron-right" />
           </div>
         </div>
