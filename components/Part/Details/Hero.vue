@@ -11,7 +11,7 @@
         <div class="flex justify-center items-center aspect-video rounded-lg">
           <img
             :src="`${entry}/storage/v1/object/public/images/${part.images[currentImage]}`"
-            class="rounded-lg aspect-video"
+            class="rounded-lg h-full"
             alt="part-image" />
         </div>
         <div v-if="part.images.length > 1">
