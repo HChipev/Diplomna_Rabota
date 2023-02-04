@@ -214,7 +214,7 @@
       const fileName = uuidv4();
       const { data, error } = await useSupabaseClient()
         .storage.from("images")
-        .upload("public/part/" + fileName, partInfo.value.image[i]);
+        .upload("public/parts/" + fileName, partInfo.value.image[i]);
       if (error) {
         return (errorMessage.value = error.message);
       }

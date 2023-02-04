@@ -333,7 +333,7 @@
       const fileName = uuidv4();
       const { data, error } = await useSupabaseClient()
         .storage.from("images")
-        .upload("public/car/" + fileName, carInfo.value.image[i]);
+        .upload("public/cars/" + fileName, carInfo.value.image[i]);
       if (error) {
         return (errorMessage.value = error.message);
       }

@@ -48,8 +48,8 @@
         class="nav-button"
         ><img
           v-if="useSupabaseUser().value"
-          class="h-7 items-center justify-center"
-          src="../assets/profile-pic-icon.png"
+          class="h-8 w-8 items-center justify-center rounded-full"
+          :src="profilePic"
           alt="profile-pic" /><font-awesome-icon
           v-else
           class="mx-1"
@@ -75,11 +75,36 @@
     </div>
   </nav>
 </template>
-<script setup lang="ts">
+<script setup>
+  import defaultProfilePic from "../assets/profile-pic-icon.png";
+  const entry = useRuntimeConfig().public.supabase.url;
   const clicked = ref(false);
+  const profilePic = ref("");
   const menuShow = ref(null);
   const windowWidth = ref(0);
   const inBrowser = inject("inBrowser");
+
+  if (useSupabaseUser().value) {
+    profilePic.value = useSupabaseUser().value.user_metadata.avatar_url
+      ? useSupabaseUser().value.user_metadata.avatar_url
+      : defaultProfilePic;
+    await useSupabaseClient()
+      .from("User")
+      .select("image")
+      .eq("id", useSupabaseUser().value.id)
+      .single()
+      .then((res) => {
+        if (res.data.image) {
+          profilePic.value = `${entry}/storage/v1/object/public/images/${res.data.image}`;
+        } else {
+          profilePic.value = defaultProfilePic;
+        }
+      })
+      .catch((err) => {
+        profilePic.value = defaultProfilePic;
+      });
+  }
+  console.log("profilePic.value", profilePic.value);
 
   if (process.client) {
     windowWidth.value = window.innerWidth;
