@@ -58,13 +58,15 @@
         errorMessage.value = `Only image files are allowed!\n${file.files[i].name} is not an image file!`;
         break;
       }
+      image.image.push(file.files[i]);
+      emits("imageChange", file.files[i], "image");
+    }
+    for (let i = 0; i < image.image.length; i++) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        image.preview.push(e.target.result);
+        image.preview[i] = e.target.result;
       };
-      image.image.push(file.files[i]);
-      reader.readAsDataURL(file.files[i]);
-      emits("imageChange", file.files[i], "image");
+      reader.readAsDataURL(image.image[i]);
     }
   }
   function removeImage(index) {
