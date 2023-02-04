@@ -17,12 +17,12 @@
         <div v-if="car.images.length > 1">
           <div
             @click="prevImage"
-            class="absolute top-[calc(50%-23px)] sm:top-[45%] bg-none transition-all duration-300 hover:bg-black w-8 h-14 flex justify-center items-center rounded-r-lg">
+            class="absolute top-[calc(50%-23px)] sm:top-[45%] bg-none transition-all duration-300 hover:bg-accent-color w-8 h-14 flex justify-center items-center rounded-r-lg">
             <font-awesome-icon icon="fa-solid fa-chevron-left" />
           </div>
           <div
             @click="nextImage"
-            class="absolute top-[calc(50%-23px)] sm:top-[45%] right-0 bg-none transition-all duration-500 hover:bg-black w-8 h-14 flex justify-center items-center rounded-l-lg">
+            class="absolute top-[calc(50%-23px)] sm:top-[45%] right-0 bg-none transition-all duration-500 hover:bg-accent-color w-8 h-14 flex justify-center items-center rounded-l-lg">
             <font-awesome-icon icon="fa-solid fa-chevron-right" />
           </div>
         </div>
