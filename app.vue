@@ -17,6 +17,7 @@
   const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
   const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
   const refreshMessages = () => refreshNuxtData("messages");
+  const refreshUser = () => refreshNuxtData(["user", "userImage"]);
   useSupabaseClient()
     .channel("public:Car")
     .on(
@@ -44,6 +45,16 @@
       { event: "*", schema: "public", table: "Message" },
       () => {
         refreshMessages();
+      }
+    )
+    .subscribe();
+  useSupabaseClient()
+    .channel("public:User")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "User" },
+      () => {
+        refreshUser();
       }
     )
     .subscribe();

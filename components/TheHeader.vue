@@ -47,16 +47,13 @@
         :class="useSupabaseUser().value ? 'loggedIn' : ''"
         class="nav-button"
         ><img
-          v-if="useSupabaseUser().value"
+          v-if="useSupabaseUser().value && profilePic"
           class="h-8 w-8 items-center justify-center rounded-full"
           :src="profilePic"
-          alt="profile-pic" /><font-awesome-icon
-          v-else
-          class="mx-1"
-          icon="fa-solid fa-user" />{{
-          useSupabaseUser().value ? "" : "Log In"
-        }}</NuxtLink
-      >
+          alt="profile-pic" />
+        <font-awesome-icon v-else class="mx-1" icon="fa-solid fa-user" />
+        {{ useSupabaseUser().value ? "" : "Log In" }}
+      </NuxtLink>
 
       <ReuseableButton
         v-if="windowWidth <= 900 && inBrowser"
@@ -79,29 +76,29 @@
   import defaultProfilePic from "../assets/profile-pic-icon.png";
   const entry = useRuntimeConfig().public.supabase.url;
   const clicked = ref(false);
-  const profilePic = ref("");
   const menuShow = ref(null);
   const windowWidth = ref(0);
   const inBrowser = inject("inBrowser");
 
-  if (useSupabaseUser().value) {
-    await useSupabaseClient()
-      .from("User")
-      .select("image")
-      .eq("id", useSupabaseUser().value.id)
-      .single()
-      .then((res) => {
-        if (res.data.image) {
-          profilePic.value = `${entry}/storage/v1/object/public/images/${res.data.image}`;
-        } else {
-          profilePic.value = defaultProfilePic;
-        }
-      })
-      .catch((err) => {
-        profilePic.value = defaultProfilePic;
-      });
-  }
-  console.log("profilePic.value", profilePic.value);
+  const { data: profilePic } = useAsyncData(
+    "userImage",
+    async () => {
+      const { data, error } = await useSupabaseClient()
+        .from("User")
+        .select("image")
+        .eq("id", useSupabaseUser().value.id)
+        .single();
+      if (!error) {
+        console.log(data.image);
+        return data.image
+          ? `${entry}/storage/v1/object/public/images/${data.image}`
+          : defaultProfilePic;
+      } else {
+        return defaultProfilePic;
+      }
+    },
+    { watch: [useSupabaseUser()] }
+  );
 
   if (process.client) {
     windowWidth.value = window.innerWidth;
@@ -118,7 +115,9 @@
       window.addEventListener("resize", onWidthChange);
     }
   });
-  onUnmounted(() => window.removeEventListener("resize", onWidthChange));
+  onBeforeUnmount(() => {
+    window.removeEventListener("resize", onWidthChange);
+  });
   //* checking if menu should be active
   function isMenuShown() {
     if (clicked.value === true && windowWidth.value <= 900) {

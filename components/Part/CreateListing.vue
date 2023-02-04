@@ -64,7 +64,7 @@
         :class="
           isButtonDisabled
             ? 'disabled hover:shadow-none bg-gray-500  border-gray-500 text-base sm:text-2xl px-6 sm:px-16 '
-            : 'primery-button'
+            : 'primery-button hover:shadow-sm hover:shadow-white'
         "
         class="px-20 sm:px-32 mx-auto mt-2">
         {{ isButtonDisabled ? "Please fill all require fields" : "Submit" }}
