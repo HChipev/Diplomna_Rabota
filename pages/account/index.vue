@@ -101,31 +101,39 @@
           <div
             class="flex flex-col rounded-lg px-0 sm:px-3 pt-3 pb-1 sm:pb-3 m-1 sm:m-4 shadow-sm shadow-white">
             <h1 class="text-lg sm:text-2xl text-center">Saved Listings</h1>
-            <h1
-              class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
-              :class="savedCars.length > 0 ? '-mb-2' : ''">
-              Saved Cars
-            </h1>
+            <div v-if="savedCars !== undefined">
+              <h1
+                class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
+                :class="
+                  savedCars.length > 0 || !savedCars === undefined
+                    ? '-mb-2'
+                    : ''
+                ">
+                Saved Cars
+              </h1>
 
-            <h1
-              v-if="savedCars.length <= 0"
-              class="text-lg text-center border border-border-color rounded-lg">
-              No saved cars.
-            </h1>
-            <OneColumnGridAccount v-else :cars="savedCars" />
+              <h1
+                v-if="savedCars.length <= 0 || savedCars === undefined"
+                class="text-lg text-center border border-border-color rounded-lg">
+                No saved cars.
+              </h1>
+              <OneColumnGridAccount v-else :cars="savedCars" />
+            </div>
             <!--//* ---------------------Parts------------------------------ -->
-            <h1
-              class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
-              :class="savedParts.length > 0 ? '-mb-2' : ''">
-              Saved Parts
-            </h1>
+            <div v-if="savedParts !== undefined">
+              <h1
+                class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
+                :class="savedParts.length > 0 ? '-mb-2' : ''">
+                Saved Parts
+              </h1>
 
-            <h1
-              v-if="savedParts.length <= 0"
-              class="text-lg text-center border border-border-color rounded-lg">
-              No saved parts.
-            </h1>
-            <OneColumnGridAccount v-else :parts="savedParts" />
+              <h1
+                v-if="savedParts.length <= 0"
+                class="text-lg text-center border border-border-color rounded-lg">
+                No saved parts.
+              </h1>
+              <OneColumnGridAccount v-else :parts="savedParts" />
+            </div>
           </div>
         </div>
       </div>

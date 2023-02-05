@@ -402,8 +402,8 @@ model User {
   image        String?
   bgImage      String?
   role         String   @default("user")
-  savedCarsId  Int[]
-  savedPartsId Int[]
+  savedCarsId  Int[]    @default([])
+  savedPartsId Int[]    @default([])
   createdAt    DateTime @default(now())
   users        users    @relation(fields: [id], references: [id], onDelete: Cascade)
 
