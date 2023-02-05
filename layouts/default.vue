@@ -4,7 +4,7 @@
       <TheHeader />
     </header>
     <slot />
-    <footer class="mt-auto">
+    <footer class="mt-auto z-20">
       <TheFooter />
     </footer>
   </div>

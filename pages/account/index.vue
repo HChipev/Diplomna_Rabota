@@ -1,18 +1,40 @@
 <template>
   <div>
+    <ChangeNameModal
+      @closeModal="isModalOpen = false"
+      :user="user"
+      v-if="isModalOpen" />
     <div
       v-if="user"
-      class="flex gap-12 justify-center items-center mx-2 sm:mx-12 lg:mx-28 max-w-full">
+      class="flex gap-12 justify-center items-center mx-2 sm:mx-12 lg:mx-28 max-w-full"
+      :class="isModalOpen ? 'noSelect' : ''">
       <div
         class="relative flex p-2 sm:p-5 w-full h-full rounded-md shadow-md shadow-white">
         <div
           class="flex flex-col rounded-xl shadow-sm shadow-white overflow-hidden w-full">
-          <div class="w-full h-24 sm:h-32 md:h-40">
+          <div class="relative w-full h-24 sm:h-32 md:h-40">
             <img
               class="w-full h-full object-cover"
-              src="~assets/account-background.jpg"
+              :src="
+                user.bgImage
+                  ? `${entry}/storage/v1/object/public/images/${user.bgImage}`
+                  : defaultBackgroundPic
+              "
               alt="gradient-image" />
+            <div
+              class="absolute transition-all duration-500 bg-black opacity-0 hover:opacity-75 top-0 w-full h-full rounded-t-lg flex flex-col justify-center items-center">
+              <font-awesome-icon
+                class="text-xl sm:text-3xl text-white"
+                icon="fa-solid fa-camera" />
+              <h1 class="text-white text-sm sm:text-lg">Change Background</h1>
+              <input
+                type="file"
+                class="opacity-0 absolute cursor-pointer w-full h-full top-0 rounded-t-lg"
+                accept="image/*"
+                @change="onBgImageUpload" />
+            </div>
           </div>
+
           <div
             class="absolute top-20 sm:top-28 left-3 sm:left-9 w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 bg-black rounded-full">
             <img
@@ -38,7 +60,7 @@
             </div>
           </div>
           <div
-            class="w-fill h-auto md:h-36 my-2 pl-20 sm:pl-32 md:pl-44 bg-primery-darker-color">
+            class="w-fill h-auto pt-2 mb-2 pl-20 sm:pl-32 md:pl-44 bg-primery-darker-color">
             <div class="flex justify-between">
               <div class="flex flex-col whitespace-nowrap">
                 <h1 class="text-lg md:text-2xl font-semibold text-white">
@@ -51,8 +73,13 @@
                   {{ user.phone }}
                 </h1>
                 <ReuseableButton
-                  class="text-sm sm:text-lg mt-2 primery-button hover:shadow-sm hover:shadow-white"
-                  @click="logout()"
+                  class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
+                  @click="isModalOpen = true"
+                  >Edit Personal Info</ReuseableButton
+                >
+                <ReuseableButton
+                  class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
+                  @click="logout"
                   >Logout</ReuseableButton
                 >
               </div>
@@ -80,7 +107,9 @@
 <script setup>
   import { v4 as uuidv4 } from "uuid";
   import defaultProfilePic from "~/assets/profile-pic-icon.png";
+  import defaultBackgroundPic from "~/assets/account-background.svg";
   const entry = useRuntimeConfig().public.supabase.url;
+  const isModalOpen = ref(false);
   useHead({
     title: "My Account",
     meta: [
@@ -126,6 +155,28 @@
       const { error } = await useSupabaseClient()
         .from("User")
         .update({ image: data.path })
+        .eq("id", useSupabaseUser().value.id);
+      if (error) {
+        console.log(error);
+      }
+    }
+  }
+  async function onBgImageUpload(e) {
+    const fileName = uuidv4();
+    const file = e.target.files[0];
+    await useSupabaseClient().storage.from("images").remove(user.value.bgImage);
+
+    const { data, error } = await useSupabaseClient()
+      .storage.from("images")
+      .upload("public/users/" + fileName, file);
+    if (error) {
+      await useSupabaseClient()
+        .storage.from("images")
+        .remove("public/users/" + fileName);
+    } else {
+      const { error } = await useSupabaseClient()
+        .from("User")
+        .update({ bgImage: data.path })
         .eq("id", useSupabaseUser().value.id);
       if (error) {
         console.log(error);

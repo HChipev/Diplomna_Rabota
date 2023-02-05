@@ -145,7 +145,7 @@
       password: Joi.string().min(8).required(),
       firstName: Joi.string().min(3).required(),
       lastName: Joi.string().min(3).required(),
-      phone: Joi.string().min(10).required(),
+      phone: Joi.string().min(10).max(10).required(),
     });
     const { error } = schema.validate({
       email: email.value,
