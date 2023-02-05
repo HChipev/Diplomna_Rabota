@@ -17,7 +17,15 @@
   const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
   const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
   const refreshMessages = () => refreshNuxtData("messages");
-  const refreshUser = () => refreshNuxtData(["user", "userImage"]);
+  const refreshUser = () =>
+    refreshNuxtData([
+      "user",
+      "userImage",
+      "userFromCarCard",
+      "userFromPartCard",
+      "savedCars",
+      "savedParts",
+    ]);
   useSupabaseClient()
     .channel("public:Car")
     .on(

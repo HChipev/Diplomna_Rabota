@@ -1,8 +1,13 @@
 <template>
   <div
-    class="flex md:px-2 mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105"
-    @mouseup="openListing()">
+    class="relative flex md:px-2 mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105">
+    <font-awesome-icon
+      :icon="saved ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
+      class="absolute top-3 sm:top-4 right-3 sm:right-6 text-2xl sm:text-3xl z-10"
+      :class="saved ? 'text-accent-color' : 'text-white'"
+      @click="addToWishlist()" />
     <div
+      @click="openListing()"
       class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
       <div class="flex w-full">
         <div class="flex pr-1">
@@ -23,16 +28,6 @@
                     {{ car.Model.name }}
                   </h1>
                 </div>
-                <font-awesome-icon
-                  v-if="stared"
-                  @click="addToWishlist()"
-                  class="text-2xl text-accent-color ml-2 mr-0.5 mt-1"
-                  icon="fa-solid fa-heart" />
-                <font-awesome-icon
-                  v-else
-                  @click="addToWishlist()"
-                  class="text-2xl ml-2 mr-0.5 mt-1"
-                  icon="fa-regular fa-heart" />
               </div>
             </div>
             <div class="flex">
@@ -77,18 +72,29 @@
   const entry = useRuntimeConfig().public.supabase.url;
   const props = defineProps({ car: Object });
   const currentImage = ref(0);
-  const stared = ref(false);
-  let addingToWishlist = false;
-  async function openListing() {
-    if (addingToWishlist) return;
+
+  const { data: user } = await useAsyncData("userFromCarCard", async () => {
+    const { data, error } = await useSupabaseClient()
+      .from("User")
+      .select("savedCarsId")
+      .eq("id", useSupabaseUser().value.id)
+      .single();
+    if (!error) {
+      return data;
+    }
+  });
+  const refresh = () => refreshNuxtData("userFromCarCard");
+  const saved = computed(() => {
+    return user.value ? user.value.savedCarsId.includes(props.car.id) : false;
+  });
+  function openListing() {
     navigateTo("/search/results/cars/" + props.car.id);
   }
-  function addToWishlist() {
-    addingToWishlist = true;
-    setTimeout(() => {
-      addingToWishlist = false;
-    }, 100);
-    stared.value = !stared.value;
+  async function addToWishlist() {
+    await $fetch(`/api/car/listings/user/saved/${useSupabaseUser().value.id}`, {
+      method: "PUT",
+      body: JSON.stringify({ carId: props.car.id }),
+    });
   }
   function slideShow() {
     if (currentImage.value < props.car.images.length - 1) {
@@ -100,10 +106,14 @@
       setTimeout(slideShow, 5000);
     }
   }
-  onMounted(() => {
+  onMounted(async () => {
+    await refresh();
     if (props.car.images.length > 1) {
       setTimeout(slideShow, 5000);
     }
+  });
+  onBeforeUnmount(() => {
+    user.value = undefined;
   });
 </script>
 <style lang="scss" scoped>

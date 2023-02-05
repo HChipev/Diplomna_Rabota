@@ -8,8 +8,7 @@
       v-if="user"
       class="flex gap-12 justify-center items-center mx-2 sm:mx-12 lg:mx-28 max-w-full"
       :class="isModalOpen ? 'noSelect' : ''">
-      <div
-        class="relative flex p-2 sm:p-5 w-full h-full rounded-md shadow-md shadow-white">
+      <div class="relative flex sm:p-5 w-full h-full rounded-md">
         <div
           class="flex flex-col rounded-xl shadow-sm shadow-white overflow-hidden w-full">
           <div class="relative w-full h-24 sm:h-32 md:h-40">
@@ -60,7 +59,7 @@
             </div>
           </div>
           <div
-            class="w-fill h-auto pt-2 mb-2 pl-20 sm:pl-32 md:pl-44 bg-primery-darker-color">
+            class="w-fill h-auto py-2 mb-2 pl-20 sm:pl-32 md:pl-44 bg-primery-darker-color">
             <div class="flex justify-between">
               <div class="flex flex-col whitespace-nowrap">
                 <h1 class="text-lg md:text-2xl font-semibold text-white">
@@ -74,14 +73,15 @@
                 </h1>
                 <ReuseableButton
                   class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
-                  @click="isModalOpen = true"
-                  >Edit Personal Info</ReuseableButton
-                >
+                  @click="isModalOpen = true">
+                  <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+                  Edit Profile
+                </ReuseableButton>
                 <ReuseableButton
                   class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
-                  @click="logout"
-                  >Logout</ReuseableButton
-                >
+                  @click="logout">
+                  Sign Out
+                </ReuseableButton>
               </div>
               <div class="flex mt-1 ml-6 mr-2 sm:mr-8">
                 <h1 class="text-xs md:text-base text-text-muted-color">
@@ -97,6 +97,35 @@
                 </h1>
               </div>
             </div>
+          </div>
+          <div
+            class="flex flex-col rounded-lg px-0 sm:px-3 pt-3 pb-1 sm:pb-3 m-1 sm:m-4 shadow-sm shadow-white">
+            <h1 class="text-lg sm:text-2xl text-center">Saved Listings</h1>
+            <h1
+              class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
+              :class="savedCars.length > 0 ? '-mb-2' : ''">
+              Saved Cars
+            </h1>
+
+            <h1
+              v-if="savedCars.length <= 0"
+              class="text-lg text-center border border-border-color rounded-lg">
+              No saved cars.
+            </h1>
+            <OneColumnGridAccount v-else :cars="savedCars" />
+            <!--//* ---------------------Parts------------------------------ -->
+            <h1
+              class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
+              :class="savedParts.length > 0 ? '-mb-2' : ''">
+              Saved Parts
+            </h1>
+
+            <h1
+              v-if="savedParts.length <= 0"
+              class="text-lg text-center border border-border-color rounded-lg">
+              No saved parts.
+            </h1>
+            <OneColumnGridAccount v-else :parts="savedParts" />
           </div>
         </div>
       </div>
@@ -183,11 +212,30 @@
       }
     }
   }
+
+  const { data: savedCars } = await useAsyncData(
+    "savedCars",
+    async () =>
+      await $fetch(`/api/car/listings/user/saved/${useSupabaseUser().value.id}`)
+  );
+
+  const { data: savedParts } = await useAsyncData(
+    "savedParts",
+    async () =>
+      await $fetch(
+        `/api/part/listings/user/saved/${useSupabaseUser().value.id}`
+      )
+  );
+  const refreshSaved = () => refreshNuxtData(["savedCars", "savedParts"]);
+
   onMounted(async () => {
     await refresh();
+    await refreshSaved();
   });
   onBeforeUnmount(async () => {
     user.value = undefined;
+    savedCars.value = undefined;
+    savedParts.value = undefined;
   });
 </script>
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@
           <font-awesome-icon
             @click="closeModal"
             class="text-white text-2xl ml-3 hover:text-red-600 font-bold cursor-pointer"
-            icon="fa-solid fa-times" />
+            icon="fa-solid fa-xmark" />
         </div>
         <div class="flex flex-col">
           <label class="mt-2" for="firstName">First Name</label>

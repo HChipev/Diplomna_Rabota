@@ -394,16 +394,18 @@ model Region {
 }
 
 model User {
-  id        String   @id(map: "user_pkey") @db.Uuid
-  email     String
-  firstName String
-  lastName  String
-  phone     String
-  image     String?
-  bgImage   String?
-  role      String   @default("user")
-  createdAt DateTime @default(now())
-  users     users    @relation(fields: [id], references: [id], onDelete: Cascade)
+  id           String   @id(map: "user_pkey") @db.Uuid
+  email        String
+  firstName    String
+  lastName     String
+  phone        String
+  image        String?
+  bgImage      String?
+  role         String   @default("user")
+  savedCarsId  Int[]
+  savedPartsId Int[]
+  createdAt    DateTime @default(now())
+  users        users    @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }
