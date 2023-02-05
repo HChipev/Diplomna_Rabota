@@ -3,7 +3,7 @@
     class="relative flex md:px-2 mx-1 m-4 w-auto transition ease-linear duration-300 hover:scale-105">
     <font-awesome-icon
       :icon="saved ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
-      class="absolute top-3 sm:top-4 right-3 sm:right-6 text-2xl sm:text-3xl z-10"
+      class="absolute top-3 sm:top-4 right-3 sm:right-6 text-2xl sm:text-3xl"
       :class="saved ? 'text-accent-color' : 'text-white'"
       @click="addToWishlist()" />
     <div

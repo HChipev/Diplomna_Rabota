@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <ChangeNameModal
       @closeModal="isModalOpen = false"
       :user="user"
@@ -77,6 +77,12 @@
                   <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                   Edit Profile
                 </ReuseableButton>
+                <NuxtLink
+                  to="/account/sent-messages"
+                  class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white text-center">
+                  <font-awesome-icon icon="fa-solid fa-message" />
+                  Sent Messages
+                </NuxtLink>
                 <ReuseableButton
                   class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
                   @click="logout">
