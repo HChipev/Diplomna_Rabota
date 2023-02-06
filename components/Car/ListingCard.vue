@@ -1,7 +1,5 @@
 <template>
-  <NuxtLink
-    class="cursor-default"
-    :to="`/account/my-listings/view/car/${listing.id}`">
+  <NuxtLink :to="`/account/my-listings/view/car/${listing.id}`">
     <div
       class="shadow bg-primery-lighter-color shadow-gray-300 flex rounded overflow-hidden justify-between mb-4">
       <div class="flex">
@@ -29,7 +27,7 @@
           :src="listing.isOnParts ? onPartsIcon : carIcon" />
         <font-awesome-icon
           @click.prevent="emits('deleteClick', listing.id)"
-          class="text-white hover:text-accent-color font-bold cursor-pointer mt-1"
+          class="text-white hover:text-accent-color font-bold cursor-pointer mt-1 transition-all duration-300 ease-in-out"
           icon="fa-solid fa-trash" />
       </div>
     </div>

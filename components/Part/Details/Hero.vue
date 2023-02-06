@@ -1,7 +1,7 @@
 <template>
   <div
     class="mx-auto mt-4 max-w-7xl lg:space-y-4 px-4 lg:px-8 xl:px-10 w-full 2xl:w-3/5">
-    <div @mousewheel.prevent="scrollPreviews">
+    <div @mousewheel="scrollPreviews">
       <div class="relative border border-border-color rounded-lg">
         <p
           class="absolute top-2 left-2 text-lg transition-all duration-500 opacity-50 hover:opacity-100 cursor-default">
@@ -111,6 +111,8 @@
   function scrollPreviews(e) {
     if (props.part.images.length <= 1) {
       return;
+    } else {
+      e.preventDefault();
     }
     if (e.deltaY > 0) {
       document.getElementById("imagesPreview").scrollLeft += 100;

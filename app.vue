@@ -16,7 +16,8 @@
   //! realtime data updates
   const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
   const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
-  const refreshMessages = () => refreshNuxtData("messages");
+  const refreshMessages = () =>
+    refreshNuxtData(["messages", "sentMessagesCars", "sentMessagesParts"]);
   const refreshUser = () =>
     refreshNuxtData([
       "user",

@@ -1,7 +1,5 @@
 <template>
-  <NuxtLink
-    class="cursor-default"
-    :to="`/account/my-listings/view/part/${listing.id}`">
+  <NuxtLink :to="`/account/my-listings/view/part/${listing.id}`">
     <div
       class="shadow bg-primery-lighter-color shadow-gray-300 flex rounded overflow-hidden justify-between mb-4">
       <div class="flex">
@@ -35,7 +33,7 @@
         <img class="w-6 h-6 mr-1" src="~assets/parts-icon.svg" />
         <font-awesome-icon
           @click.prevent="emits('deleteClick', listing.id)"
-          class="text-white hover:text-accent-color font-bold cursor-pointer mt-1"
+          class="text-white hover:text-accent-color font-bold cursor-pointer mt-1 transition-all duration-300 ease-in-out"
           icon="fa-solid fa-trash" />
       </div>
     </div>
