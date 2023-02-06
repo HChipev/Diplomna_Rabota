@@ -4,9 +4,20 @@
     <p class="text-gray-400">
       {{ message.message }}
     </p>
-    <div class="flex items-center mt-4">
-      <p class="text-accent-color font-medium mr-10">{{ message.email }}</p>
-      <p class="text-blue-500">{{ message.phone }}</p>
+    <div class="flex justify-between mt-4">
+      <div>
+        <p class="text-accent-color font-medium">{{ message.email }}</p>
+        <p class="text-blue-500">{{ message.phone }}</p>
+      </div>
+      <div class="flex items-end">
+        <p class="text-text-muted-color text-right">
+          {{
+            message.createdAt.split("T")[0] +
+            " " +
+            message.createdAt.split("T")[1].split(".")[0]
+          }}
+        </p>
+      </div>
     </div>
   </div>
 </template>

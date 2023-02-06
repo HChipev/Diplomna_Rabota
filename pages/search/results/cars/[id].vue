@@ -49,9 +49,7 @@
     // });
   });
   onBeforeUnmount(() => {
-    console.log("un");
     car.value = undefined;
-    console.log(car.value, "asdasdasd");
   });
 </script>
 <style scoped lang="scss">

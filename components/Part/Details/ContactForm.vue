@@ -77,6 +77,7 @@
       await $fetch(`/api/part/listings/${useRoute().params.id}/message`, {
         method: "POST",
         body: {
+          userId: useSupabaseUser().value.id,
           message: message.value,
           email: email,
           name: name,

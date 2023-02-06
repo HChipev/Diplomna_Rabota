@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
 const schema = Joi.object({
+  userId: Joi.string().required(),
   email: Joi.string()
     .email({
       minDomainSegments: 2,
@@ -23,10 +24,11 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  const { email, message, name, phone } = body;
+  const { email, message, name, phone, userId } = body;
 
   return prisma.message.create({
     data: {
+      userId,
       email,
       message,
       name,

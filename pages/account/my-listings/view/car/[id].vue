@@ -1,6 +1,6 @@
 <template>
   <div class="container pb-2 pt-2 mx-auto px-3 lg:px-28">
-    <div v-if="messages.length > 0" class="rounded shadow shadow-gray-500">
+    <div v-if="messages.length > 0" class="rounded shadow-sm shadow-white">
       <MessageCard
         v-for="message in messages"
         :key="message.id"

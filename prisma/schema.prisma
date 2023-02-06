@@ -359,6 +359,7 @@ model Make {
 
 model Message {
   id        Int      @id @default(autoincrement())
+  userId    String
   name      String
   email     String
   message   String
