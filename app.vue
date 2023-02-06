@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator color="maroon" />
     <NuxtPage v-if="inBrowser" />
   </NuxtLayout>
 </template>
