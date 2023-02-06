@@ -8,6 +8,12 @@
           <font-awesome-icon icon="far-regular fa-camera" />
           {{ currentImage + 1 + "/" + part.images.length }}
         </p>
+        <font-awesome-icon
+          v-if="user"
+          :icon="saved ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
+          class="absolute top-2 right-2 text-2xl sm:text-3xl opacity-50 hover:opacity-100 cursor-pointer"
+          :class="saved ? 'text-accent-color' : 'text-white'"
+          @click="addToWishlist()" />
         <div class="flex justify-center items-center aspect-video rounded-lg">
           <img
             :src="`${entry}/storage/v1/object/public/images/${part.images[currentImage]}`"
@@ -122,4 +128,33 @@
       prevImage();
     }
   }
+  const { data: user } = await useAsyncData("userFromPartCard", async () => {
+    const { data, error } = await useSupabaseClient()
+      .from("User")
+      .select("savedPartsId")
+      .eq("id", useSupabaseUser().value.id)
+      .single();
+    if (!error) {
+      return data;
+    }
+  });
+  const refresh = () => refreshNuxtData("userFromPartCard");
+  const saved = computed(() => {
+    return user.value ? user.value.savedPartsId.includes(props.part.id) : false;
+  });
+  async function addToWishlist() {
+    await $fetch(
+      `/api/part/listings/user/saved/${useSupabaseUser().value.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ partId: props.part.id }),
+      }
+    );
+  }
+  onMounted(async () => {
+    await refresh();
+  });
+  onBeforeUnmount(() => {
+    user.value = undefined;
+  });
 </script>

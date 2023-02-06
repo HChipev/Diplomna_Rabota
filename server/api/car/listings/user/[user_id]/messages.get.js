@@ -2,20 +2,45 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   const { user_id } = event.context.params;
-  const messages = await prisma.message.findMany({
+  const role = await prisma.user.findUnique({
     where: {
-      userId: user_id,
-      carId: {
-        not: null,
-      },
+      id: user_id,
     },
     select: {
-      id: true,
-      message: true,
-      createdAt: true,
-      carId: true,
+      role: true,
     },
   });
+  let messages;
+  if (role.role !== "admin") {
+    messages = await prisma.message.findMany({
+      where: {
+        userId: user_id,
+        carId: {
+          not: null,
+        },
+      },
+      select: {
+        id: true,
+        message: true,
+        createdAt: true,
+        carId: true,
+      },
+    });
+  } else {
+    messages = await prisma.message.findMany({
+      where: {
+        carId: {
+          not: null,
+        },
+      },
+      select: {
+        id: true,
+        message: true,
+        createdAt: true,
+        carId: true,
+      },
+    });
+  }
 
   const messageToCar = await prisma.car.findMany({
     where: {

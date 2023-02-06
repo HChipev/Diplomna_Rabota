@@ -94,7 +94,7 @@
       return;
     } else {
       errorMessage.value = "";
-      const { error } = await useSupabaseClient()
+      const { data: user, error } = await useSupabaseClient()
         .from("User")
         .update({
           firstName: firstName.value ? firstName.value : props.user.firstName,
@@ -102,8 +102,17 @@
           phone: phone.value ? phone.value : props.user.phone,
         })
         .match({ id: props.user.id });
-      if (error) {
-        errorMessage.value = error.message;
+      const { data: message, error2 } = await useSupabaseClient()
+        .from("Message")
+        .update({
+          name: `${firstName.value ? firstName.value : props.user.firstName} ${
+            lastName.value ? lastName.value : props.user.lastName
+          }`,
+          phone: phone.value ? phone.value : props.user.phone,
+        })
+        .match({ userId: props.user.id });
+      if (error || error2) {
+        errorMessage.value = error ? error.message : error2.message;
         return;
       }
     }
