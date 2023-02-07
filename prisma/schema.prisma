@@ -361,7 +361,7 @@ model Make {
 
 model Message {
   id        Int      @id @default(autoincrement())
-  userId    String
+  userId    String   @db.Uuid
   name      String
   email     String
   message   String
@@ -371,6 +371,7 @@ model Message {
   partId    Int?
   Car       Car?     @relation(fields: [carId], references: [id], onDelete: Cascade)
   Part      Part?    @relation(fields: [partId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }
@@ -397,21 +398,22 @@ model Region {
 }
 
 model User {
-  id           String   @id(map: "user_pkey") @db.Uuid
+  id           String    @id(map: "user_pkey") @db.Uuid
   email        String
   firstName    String
   lastName     String
   phone        String
   image        String?
   bgImage      String?
-  role         String   @default("user")
-  savedCarsId  Int[]    @default([])
-  savedPartsId Int[]    @default([])
-  cartItemsId  Int[]    @default([])
-  createdAt    DateTime @default(now())
+  role         String    @default("user")
+  savedCarsId  Int[]     @default([])
+  savedPartsId Int[]     @default([])
+  createdAt    DateTime  @default(now())
+  cartItemsId  Int[]     @default([])
   Car          Car[]
+  Message      Message[]
   Part         Part[]
-  users        users    @relation(fields: [id], references: [id], onDelete: Cascade)
+  users        users     @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }

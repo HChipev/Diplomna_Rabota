@@ -13,7 +13,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:url",
-          content: "https://4ips-auto.netlify.app",
+          content: "https://4ips-auto.vercel.app",
         },
         {
           property: "og:type",
@@ -61,7 +61,11 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     },
   },
-  plugins: ["~/plugins/fontawesome.js", "~/plugins/router.scrollBehavior.js"],
+  plugins: [
+    "~/plugins/fontawesome.js",
+    "~/plugins/router.scrollBehavior.js",
+    "~/plugins/sweetalert2.js",
+  ],
   css: [
     "~/assets/css/tailwind.css",
     "@fortawesome/fontawesome-svg-core/styles.css",

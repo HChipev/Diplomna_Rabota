@@ -88,7 +88,6 @@
     const imagesForDeletion = carsListings.value.find(
       (listing) => listing.id === id
     ).images;
-    console.log(imagesForDeletion);
     await $fetch(`/api/car/listings/${id}`, {
       method: "DELETE",
     })

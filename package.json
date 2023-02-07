@@ -34,6 +34,7 @@
     "joi": "^17.7.0",
     "pinia": "^2.0.23",
     "prisma": "^4.9.0",
+    "sweetalert2": "^11.7.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "uuid": "^9.0.0"
   }

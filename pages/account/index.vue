@@ -90,17 +90,26 @@
                 </ReuseableButton>
               </div>
               <div class="flex mt-1 ml-6 mr-2 sm:mr-8">
-                <h1 class="text-xs md:text-base text-text-muted-color">
-                  <span class="text-accent-color font-medium text-sm md:text-lg"
-                    >Joined on:</span
-                  >
-                  <br />
-                  {{
-                    user.createdAt.split("T")[0] +
-                    " " +
-                    user.createdAt.split("T")[1].split(".")[0]
-                  }}
-                </h1>
+                <div class="flex flex-col">
+                  <h1 class="text-xs md:text-base text-text-muted-color">
+                    <span
+                      class="text-accent-color font-medium text-sm md:text-lg"
+                      >Joined on:</span
+                    >
+                    <br />
+                    {{
+                      user.createdAt.split("T")[0] +
+                      " " +
+                      user.createdAt.split("T")[1].split(".")[0]
+                    }}
+                  </h1>
+                  <ReuseableButton
+                    class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white px-2"
+                    @click="deleteAccount">
+                    <font-awesome-icon icon="fa-solid fa-user-slash" />
+                    Delete Account
+                  </ReuseableButton>
+                </div>
               </div>
             </div>
           </div>
@@ -151,6 +160,8 @@
   import { v4 as uuidv4 } from "uuid";
   import defaultProfilePic from "~/assets/profile-pic-icon.png";
   import defaultBackgroundPic from "~/assets/account-background.svg";
+  import Swal from "sweetalert2";
+  import { use } from "h3";
   const entry = useRuntimeConfig().public.supabase.url;
   const isModalOpen = ref(false);
   useHead({
@@ -200,7 +211,13 @@
         .update({ image: data.path })
         .eq("id", useSupabaseUser().value.id);
       if (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          background: "#1a1a1a",
+          color: "#fff",
+        });
       }
     }
   }
@@ -222,7 +239,13 @@
         .update({ bgImage: data.path })
         .eq("id", useSupabaseUser().value.id);
       if (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          background: "#1a1a1a",
+          color: "#fff",
+        });
       }
     }
   }
@@ -241,6 +264,48 @@
       )
   );
   const refreshSaved = () => refreshNuxtData(["savedCars", "savedParts"]);
+
+  function deleteAccount() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      background: "#1a1a1a",
+      color: "#fff",
+      iconColor: "#d33",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await useSupabaseAuthClient().auth.signOut();
+        await $fetch(`/api/user/${useSupabaseUser().value.id}`, {
+          method: "DELETE",
+        })
+          .then(async () => {
+            navigateTo("/");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "Your account has been deleted.",
+              background: "#1a1a1a",
+              color: "#fff",
+              confirmButtonColor: "#3085d6",
+            });
+          })
+          .catch(() =>
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              background: "#1a1a1a",
+              color: "#fff",
+            })
+          );
+      }
+    });
+  }
 
   onMounted(async () => {
     await refresh();
