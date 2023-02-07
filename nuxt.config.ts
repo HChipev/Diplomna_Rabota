@@ -1,5 +1,11 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    private: {
+      supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
+    },
+  },
+
   app: {
     head: {
       charset: "utf-8",

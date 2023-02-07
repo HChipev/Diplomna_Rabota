@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  useRuntimeConfig().public.supabase.url,
+  useRuntimeConfig().private.supabaseServiceKey
 );
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {

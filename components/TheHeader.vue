@@ -36,13 +36,6 @@
       </ul>
 
       <NuxtLink
-        to="/account/cart"
-        v-if="useSupabaseUser().value"
-        id="cart-button">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping"
-      /></NuxtLink>
-
-      <NuxtLink
         :to="useSupabaseUser().value ? '/account' : '/login'"
         :class="useSupabaseUser().value ? 'loggedIn' : ''"
         class="nav-button"
@@ -201,32 +194,6 @@
         width: 25px;
       }
     }
-    #cart-button {
-      color: $primery-color;
-      padding: 0.3em 0.5em;
-      margin-left: 0.15em;
-      margin-right: 0.35em;
-      transition: all 0.3s ease;
-      > * {
-        font-size: 20px;
-      }
-      &:hover {
-        animation: jumpUp 0.35s ease-in;
-        color: $accent-color;
-      }
-
-      &.router-link-active {
-        box-shadow: 0.075em 0.08em 1px $primery-color,
-          -0.075em -0.08em 1px $accent-color;
-        border-radius: $card-border-radius;
-        &:hover {
-          color: $primery-color;
-          background: $accent-color;
-          box-shadow: 0.075em 0.08em 1px $accent-color,
-            -0.075em -0.08em 1px $primery-color;
-        }
-      }
-    }
     @keyframes jumpUp {
       0% {
         transform: translateY(0em);
@@ -310,12 +277,6 @@
             }
           }
         }
-      }
-      #cart-button {
-        padding-top: 0.15em;
-        padding-bottom: 0.05em;
-        padding-inline: 0.25em;
-        margin-right: 0.65em;
       }
       .loggedIn {
         margin-right: 0.65em !important;

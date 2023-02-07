@@ -409,7 +409,6 @@ model User {
   savedCarsId  Int[]     @default([])
   savedPartsId Int[]     @default([])
   createdAt    DateTime  @default(now())
-  cartItemsId  Int[]     @default([])
   Car          Car[]
   Message      Message[]
   Part         Part[]
