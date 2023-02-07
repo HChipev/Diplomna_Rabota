@@ -9,14 +9,13 @@ export default defineEventHandler(async (event) => {
       },
     },
     select: {
-      savedCarsId: true,
       id: true,
+      savedCarsId: true,
     },
   });
-  let removeSaved;
+
   for (let i = 0; i < savedCars.length; i++) {
-    console.log(savedCars[i].id);
-    removeSaved = await prisma.user.update({
+    await prisma.user.update({
       where: {
         id: savedCars[i].id,
       },
@@ -29,10 +28,11 @@ export default defineEventHandler(async (event) => {
       },
     });
   }
+
   const deletedCar = await prisma.car.delete({
     where: {
       id: parseInt(listingId),
     },
   });
-  return { deletedCar, removeSaved };
+  return deletedCar;
 });

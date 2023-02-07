@@ -229,7 +229,7 @@ model users {
 
 model Car {
   id           Int        @id @default(autoincrement())
-  userId       String
+  userId       String     @db.Uuid
   makeId       Int
   modelId      Int
   engineId     Int
@@ -255,6 +255,7 @@ model Car {
   Make         Make       @relation(fields: [makeId], references: [id])
   Model        Model      @relation(fields: [modelId], references: [id])
   Region       Region     @relation(fields: [regionId], references: [id])
+  User         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   Message      Message[]
 
   @@schema("public")
@@ -262,7 +263,7 @@ model Car {
 
 model Part {
   id          Int       @id @default(autoincrement())
-  userId      String
+  userId      String    @db.Uuid
   makeId      Int
   modelId     Int
   partTypeId  Int
@@ -281,6 +282,7 @@ model Part {
   PartName    PartName  @relation(fields: [partNameId], references: [id])
   PartType    PartType  @relation(fields: [partTypeId], references: [id])
   Region      Region    @relation(fields: [regionId], references: [id])
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }
@@ -405,7 +407,10 @@ model User {
   role         String   @default("user")
   savedCarsId  Int[]    @default([])
   savedPartsId Int[]    @default([])
+  cartItemsId  Int[]    @default([])
   createdAt    DateTime @default(now())
+  Car          Car[]
+  Part         Part[]
   users        users    @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@schema("public")
