@@ -11,11 +11,22 @@
       @click="openListing()"
       class="card flex p-1 rounded border border-border-color w-full max-h-36 sm:max-h-44 2xl:max-h-52">
       <div class="flex w-full">
-        <div class="flex pr-1">
+        <div class="relative flex pr-1">
           <img
             :src="`${entry}/storage/v1/object/public/images/${car.images[currentImage]}`"
             class="aspect-video"
             alt="car-image" />
+          <div
+            class="absolute bottom-1 right-2 flex flex-col justify-end items-end px-2 h-fit rounded bg-primery-lighter-color bg-opacity-80">
+            <p
+              class="text-xs sm:text-sm md:text-base whitespace-nowrap text-white text-ellipsis text-right">
+              {{ car.City.name }}
+            </p>
+            <p
+              class="text-xs sm:text-sm md:text-base whitespace-nowrap text-white text-ellipsis text-right">
+              {{ car.Region.name }}
+            </p>
+          </div>
         </div>
         <div class="flex flex-grow pl-1 min-w-[160px]">
           <div class="card-body min-w-full p-2">

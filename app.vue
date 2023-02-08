@@ -6,38 +6,20 @@
 </template>
 <script setup>
   const inBrowser = ref(false);
-  function findUserLocation() {
-    async function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(latitude, longitude);
-      let location;
-      await $fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${
-          useRuntimeConfig().public.googleMaps
-        }`
-      )
-        .then((res) => {
-          location = res.results[0].address_components[3].short_name;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const userLocation = ref(null);
 
-      console.log(location);
-    }
-    function error(error) {}
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-  onMounted(() => {
+  onMounted(async () => {
     if (process.client) {
       inBrowser.value = true;
-      findUserLocation();
+      userLocation.value = await useUserLocation();
+      console.log(userLocation.value);
     } else {
       inBrowser.value = false;
     }
   });
   provide("inBrowser", inBrowser);
+  provide("userLocation", userLocation);
+
   //! realtime data updates
   const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
   const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
