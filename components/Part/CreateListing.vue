@@ -234,6 +234,19 @@
       images: imagesData,
     };
 
+    partInfo.value = {
+      make: "",
+      model: "",
+      partType: "",
+      partName: "",
+      year: "",
+      price: "",
+      region: "",
+      city: "",
+      description: "",
+      image: [],
+    };
+
     await $fetch("/api/part/listings/add", {
       method: "POST",
       body,
