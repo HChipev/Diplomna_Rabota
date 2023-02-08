@@ -48,6 +48,5 @@
   onBeforeUnmount(() => {
     cars.value = undefined;
   });
-  // console.log(cars.value);
 </script>
 <style lang=""></style>

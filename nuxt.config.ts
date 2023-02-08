@@ -1,6 +1,9 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
+    public: {
+      googleMaps: process.env.GOOGLE_MAPS,
+    },
     private: {
       supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
     },

@@ -43,7 +43,6 @@
   onBeforeUnmount(() => {
     parts.value = undefined;
   });
-  // console.log(parts.value);
 </script>
 
 <style lang=""></style>
