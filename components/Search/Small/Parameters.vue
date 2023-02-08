@@ -33,8 +33,9 @@
         </div>
       </div>
       <div class="flex flex-col sm:flex-row noSelect">
-        <SearchCars v-if="carSearch" />
-        <SearchParts v-else />
+        <SearchCars @loaded="loading = false" v-if="carSearch" />
+        <SearchParts @loaded="loading = false" v-else />
+        <div v-if="loading">Loading</div>
       </div>
     </form>
   </div>
@@ -42,12 +43,14 @@
 
 <script setup>
   const carSearch = ref(true);
+  const loading = ref(true);
   const selectionChanged = (event) => {
     if (event.target.value == "Cars") {
       carSearch.value = true;
     } else {
       carSearch.value = false;
     }
+    loading.value = true;
     useRouter().replace({ query: null });
   };
 </script>

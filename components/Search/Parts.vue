@@ -233,7 +233,7 @@
       },
     });
   }
-
+  const emits = defineEmits(["loaded"]);
   const dropdowns = ref({
     price: false,
     year: false,
@@ -334,6 +334,7 @@
   const { data: cities } = await useFetch(
     `/api/input/cities/${regionId.value}`
   );
+  emits("loaded");
 
   watch(
     () => makeId.value,

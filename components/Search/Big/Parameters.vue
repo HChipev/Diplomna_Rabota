@@ -53,8 +53,9 @@
         </div>
       </div>
       <div class="flex flex-col sm:flex-row noSelect">
-        <SearchCars v-if="carSearch" />
-        <SearchParts v-else />
+        <SearchCars @loaded="loading = false" v-if="carSearch" />
+        <SearchParts @loaded="loading = false" v-else />
+        <div v-if="loading">Loading</div>
       </div>
       <div class="flex-nowrap noSelect">
         <div class="flex items-center justify-center">
@@ -84,6 +85,7 @@
 
 <script setup>
   const carSearch = ref(true);
+  const loading = ref(true);
   const features = ref([]);
   const carsOnParts = ref(false);
   const isAdvancedShown = ref(false);
@@ -93,6 +95,7 @@
     } else {
       carSearch.value = false;
     }
+    loading.value = true;
     useRouter().replace({ query: null });
   };
 

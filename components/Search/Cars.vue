@@ -303,9 +303,7 @@
       },
     });
   }
-  // const props = defineProps({
-  //   features: Array,
-  // });
+  const emits = defineEmits(["loaded"]);
   const dropdowns = ref({
     price: false,
     year: false,
@@ -439,6 +437,7 @@
     `/api/input/cities/${regionId.value}`
   );
   const { data: colors } = await useFetch("/api/input/colors");
+  emits("loaded");
 
   watch(
     () => makeId.value,
