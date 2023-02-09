@@ -7,6 +7,13 @@
 <script setup>
   const inBrowser = ref(false);
   const userLocation = ref(null);
+  useSupabaseAuthClient().auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_IN") {
+      if (useRoute().path === "/login") {
+        navigateTo("/");
+      }
+    }
+  });
 
   onMounted(async () => {
     if (process.client) {

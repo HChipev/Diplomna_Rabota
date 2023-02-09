@@ -219,6 +219,7 @@
           text: "Something went wrong!",
           background: "#1a1a1a",
           color: "#fff",
+          confirmButtonColor: "#3085d6",
         });
       }
     }
@@ -247,6 +248,7 @@
           text: "Something went wrong!",
           background: "#1a1a1a",
           color: "#fff",
+          confirmButtonColor: "#3085d6",
         });
       }
     }
@@ -303,6 +305,7 @@
               text: "Something went wrong!",
               background: "#1a1a1a",
               color: "#fff",
+              confirmButtonColor: "#3085d6",
             })
           );
       }

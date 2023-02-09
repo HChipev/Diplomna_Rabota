@@ -55,7 +55,8 @@
       <div class="flex flex-col sm:flex-row noSelect">
         <SearchCars @loaded="loading = false" v-if="carSearch" />
         <SearchParts @loaded="loading = false" v-else />
-        <div v-if="loading">Loading</div>
+        <SearchCarsSkeleton v-if="carSearch && loading" />
+        <SearchPartsSkeleton v-else-if="loading" />
       </div>
       <div class="flex-nowrap noSelect">
         <div class="flex items-center justify-center">

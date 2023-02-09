@@ -29,12 +29,21 @@
           </p>
         </div>
       </div>
-      <div class="p-1 pr-2 flex flex-col sm:flex-row">
-        <img class="w-6 h-6 mr-1" src="~assets/parts-icon.svg" />
-        <font-awesome-icon
-          @click.prevent="emits('deleteClick', listing.id)"
-          class="text-white hover:text-accent-color font-bold cursor-pointer mt-1 transition-all duration-300 ease-in-out"
-          icon="fa-solid fa-trash" />
+      <div class="flex flex-col justify-between items-end">
+        <div class="p-1 pr-2 flex flex-col sm:flex-row">
+          <img class="w-6 h-6 sm:mr-1" src="~assets/parts-icon.svg" />
+          <font-awesome-icon
+            @click.prevent="emits('deleteClick', listing.id)"
+            class="text-white hover:text-accent-color font-bold cursor-pointer mt-1 transition-all duration-300 ease-in-out"
+            icon="fa-solid fa-trash" />
+        </div>
+        <p class="text-sm sm:text-lg pr-1 pb-1 text-text-muted-color text-end">
+          {{
+            listing.createdAt.split("T")[0] +
+            " " +
+            listing.createdAt.split("T")[1].split(".")[0]
+          }}
+        </p>
       </div>
     </div>
   </NuxtLink>

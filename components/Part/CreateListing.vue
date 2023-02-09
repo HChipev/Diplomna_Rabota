@@ -98,6 +98,7 @@
   const regionId = ref(0);
   const makeId = ref(0);
   const partTypeId = ref(0);
+  const emits = defineEmits(["loaded"]);
 
   const { data: makes } = await useFetch("/api/input/makes");
   const { data: models } = await useFetch(`/api/input/models/${makeId.value}`);
@@ -109,6 +110,7 @@
   const { data: cities } = await useFetch(
     `/api/input/cities/${regionId.value}`
   );
+  emits("loaded");
 
   watch(
     () => makeId.value,

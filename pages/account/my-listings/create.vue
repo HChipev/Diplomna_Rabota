@@ -19,7 +19,8 @@
         </div>
       </div>
       <CarCreateListing v-if="addCar" @isOnPartsChange="isOnPartsChange" />
-      <PartCreateListing v-else />
+      <PartCreateListing @loaded="loading = false" v-else />
+      <PartCreateListingSkeleton v-if="loading && !addCar" />
     </div>
   </div>
 </template>
@@ -29,7 +30,9 @@
   import partIcon from "~/assets/parts-icon.svg";
   const carOnParts = ref(false);
   const addCar = ref(true);
+  const loading = ref(true);
   function isOnPartsChange(isOnParts) {
+    loading.value = true;
     carOnParts.value = isOnParts;
   }
 </script>

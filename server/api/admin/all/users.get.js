@@ -12,6 +12,7 @@ export default defineEventHandler(async (event) => {
       email: true,
       image: true,
       phone: true,
+      createdAt: true,
     },
   });
   return users;
