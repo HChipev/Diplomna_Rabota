@@ -1,7 +1,14 @@
 <template>
   <div>
     <div v-if="cars">
-      <OneColumnGrid v-if="cars.length" :cars="cars" />
+      <div v-if="cars.length">
+        <OneColumnGrid :cars="paginatedCars" />
+        <Pagination
+          v-if="totalPages > 1"
+          :currentPage="currentPage"
+          :totalPages="totalPages"
+          @switchPage="switchPage" />
+      </div>
       <div v-else class="flex mt-20">
         <h1 class="text-xl sm:text-3xl text-text-muted-color mx-auto">
           No cars found with this filters.
@@ -40,6 +47,19 @@
   );
   cars.value = undefined;
   const refresh = () => refreshNuxtData("cars");
+  const currentPage = ref(1);
+  const perPage = 10;
+  const totalPages = computed(() => Math.ceil(cars.value.length / perPage));
+  const paginatedCars = computed(() => {
+    const start = (currentPage.value - 1) * perPage;
+    const end = start + perPage;
+    return cars.value.slice(start, end);
+  });
+
+  function switchPage(page) {
+    currentPage.value = page;
+  }
+
   onMounted(() => {
     setTimeout(() => {
       refresh();
