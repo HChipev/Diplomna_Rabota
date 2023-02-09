@@ -33,6 +33,7 @@
       "userFromPartCard",
       "savedCars",
       "savedParts",
+      "allUser",
     ]);
   useSupabaseClient()
     .channel("public:Car")

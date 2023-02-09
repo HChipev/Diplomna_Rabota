@@ -83,6 +83,13 @@
                   <font-awesome-icon icon="fa-solid fa-message" />
                   Sent Messages
                 </NuxtLink>
+                <NuxtLink
+                  v-if="user.role === 'admin'"
+                  to="/account/delete-users"
+                  class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white text-center">
+                  <font-awesome-icon icon="fa-solid fa-users-slash" />
+                  Delete Users
+                </NuxtLink>
                 <ReuseableButton
                   class="text-xs sm:text-base mt-2 primery-button hover:shadow-sm hover:shadow-white"
                   @click="logout">
@@ -119,16 +126,12 @@
             <div v-if="savedCars !== undefined">
               <h1
                 class="text-base sm:text-lg mt-2 ml-1 sm:ml-6"
-                :class="
-                  savedCars.length > 0 || !savedCars === undefined
-                    ? '-mb-2'
-                    : ''
-                ">
+                :class="savedCars.length > 0 ? '-mb-2' : ''">
                 Saved Cars
               </h1>
 
               <h1
-                v-if="savedCars.length <= 0 || savedCars === undefined"
+                v-if="savedCars.length <= 0"
                 class="text-lg text-center border border-border-color rounded-lg">
                 No saved cars.
               </h1>
@@ -161,7 +164,6 @@
   import defaultProfilePic from "~/assets/profile-pic-icon.png";
   import defaultBackgroundPic from "~/assets/account-background.svg";
   import Swal from "sweetalert2";
-  import { use } from "h3";
   const entry = useRuntimeConfig().public.supabase.url;
   const isModalOpen = ref(false);
   useHead({
