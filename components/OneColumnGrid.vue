@@ -1,14 +1,10 @@
 <template>
   <div class="container mx-auto px-3 sm:px-24 lg:px-48 xl:px-40">
-    <CarLinkCard
-      v-if="cars"
-      v-for="(car, index) in cars"
-      :key="index"
-      :car="car" />
+    <CarLinkCard v-if="cars" v-for="car in cars" :key="car.id" :car="car" />
     <PartLinkCard
       v-if="parts"
-      v-for="(part, index) in parts"
-      :key="index"
+      v-for="part in parts"
+      :key="part.id"
       :part="part" />
   </div>
 </template>
