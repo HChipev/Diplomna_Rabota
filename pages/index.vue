@@ -14,13 +14,11 @@
     refresh();
   });
 
-  const { data: cars } = await useAsyncData("cars", async () => {
+  const { data: cars } = useAsyncData("cars", async () => {
     if (userLocation.value) {
-      return await $fetch(`/api/user/location/cars/${userLocation.value}`);
+      return $fetch(`/api/user/location/cars/${userLocation.value}`);
     } else {
-      return (await $fetch(`/api/results/cars`)).length > 6
-        ? (await $fetch(`/api/results/cars`)).splice(0, 6)
-        : await $fetch(`/api/results/cars`);
+      return $fetch(`/api/results/cars`);
     }
   });
   cars.value = undefined;

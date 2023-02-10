@@ -10,20 +10,16 @@
       alt="user-image" />
     <div class="flex w-full justify-between">
       <div class="flex flex-col ml-3">
-        <h1 class="text-lg sm:text-2xl">
-          {{ user.firstName + " " + user.lastName }}
-        </h1>
-        <p class="text-sm sm:text-lg text-text-muted-color">{{ user.email }}</p>
-        <p class="text-sm sm:text-lg font-bold text-accent-color">
-          {{ user.phone }}
-        </p>
+        <h1 class="text-2xl">{{ user.firstName + " " + user.lastName }}</h1>
+        <p class="text-lg text-text-muted-color">{{ user.email }}</p>
+        <p class="text-lg font-bold text-accent-color">{{ user.phone }}</p>
       </div>
       <div class="flex flex-col justify-between items-end">
         <font-awesome-icon
           @click="deleteUser(user.id, user.firstName + ' ' + user.lastName)"
-          class="text-base sm:text-xl text-white hover:text-accent-color transition-all duration-500"
+          class="text-xl text-white hover:text-accent-color transition-all duration-500"
           icon="fa-solid fa-trash" />
-        <p class="text-sm sm:text-lg text-text-muted-color text-right">
+        <p class="text-lg text-text-muted-color">
           {{
             user.createdAt.split("T")[0] +
             " " +
