@@ -8,10 +8,15 @@
           <CarMyMessagesCard
             @deleteClick="deleteMessage"
             v-if="sentMessagesCars.length > 0"
-            v-for="message in sentMessagesCars"
-            :key="message.id"
+            v-for="(message, index) in paginatedMessagesCars"
+            :key="index"
             :message="message" />
           <h1 v-else class="m-3 text-lg">No sent messages.</h1>
+          <Pagination
+            v-if="messagesCarsTotalPages > 1"
+            :currentPage="carsCurrentPage"
+            :totalPages="messagesCarsTotalPages"
+            @switchPage="switchCarsPage" />
         </div>
       </div>
       <div class="flex flex-col mt-5">
@@ -20,10 +25,15 @@
           <PartMyMessagesCard
             @deleteClick="deleteMessage"
             v-if="sentMessagesParts.length > 0"
-            v-for="message in sentMessagesParts"
-            :key="message.id"
+            v-for="(message, index) in paginatedMessagesParts"
+            :key="index"
             :message="message" />
           <h1 v-else class="m-3 text-lg">No sent messages.</h1>
+          <Pagination
+            v-if="messagesPartsTotalPages > 1"
+            :currentPage="partsCurrentPage"
+            :totalPages="messagesPartsTotalPages"
+            @switchPage="switchPartsPage" />
         </div>
       </div>
     </div>
@@ -69,5 +79,31 @@
     sentMessagesCars.value = undefined;
     sentMessagesParts.value = undefined;
   });
+  const perPage = 10;
+  const carsCurrentPage = ref(1);
+  const messagesCarsTotalPages = computed(() =>
+    Math.ceil(sentMessagesCars.value.length / perPage)
+  );
+  const paginatedMessagesCars = computed(() => {
+    const start = (carsCurrentPage.value - 1) * perPage;
+    const end = start + perPage;
+    return sentMessagesCars.value.slice(start, end);
+  });
+
+  function switchCarsPage(page) {
+    carsCurrentPage.value = page;
+  }
+  const partsCurrentPage = ref(1);
+  const messagesPartsTotalPages = computed(() =>
+    Math.ceil(sentMessagesParts.value.length / perPage)
+  );
+  const paginatedMessagesParts = computed(() => {
+    const start = (partsCurrentPage.value - 1) * perPage;
+    const end = start + perPage;
+    return sentMessagesParts.value.slice(start, end);
+  });
+  function switchPartsPage(page) {
+    partsCurrentPage.value = page;
+  }
 </script>
 <style lang=""></style>

@@ -19,12 +19,16 @@
             class="text-text-muted-color text-center text-sm sm:text-xl">
             No cars listed yet.
           </h1>
-
           <CarListingCard
-            v-for="listing in carsListings"
-            :key="listing.id"
+            v-for="(listing, index) in paginatedCars"
+            :key="index"
             :listing="listing"
             @deleteClick="handleDeleteCar" />
+          <Pagination
+            v-if="carsTotalPages > 1"
+            :currentPage="carsCurrentPage"
+            :totalPages="carsTotalPages"
+            @switchPage="switchCarPage" />
         </div>
       </div>
       <div v-if="partsListings" class="mt-5">
@@ -36,10 +40,15 @@
             No parts listed yet.
           </h1>
           <PartListingCard
-            v-for="listing in partsListings"
-            :key="listing.id"
+            v-for="(listing, index) in paginatedParts"
+            :key="index"
             :listing="listing"
             @deleteClick="handleDeletePart" />
+          <Pagination
+            v-if="partsTotalPages > 1"
+            :currentPage="partsCurrentPage"
+            :totalPages="partsTotalPages"
+            @switchPage="switchPartPage" />
         </div>
       </div>
       <p
@@ -72,13 +81,11 @@
   const { data: partsListings } = await useAsyncData("partsListings", () =>
     $fetch(`/api/part/listings/user/${user_id}`)
   );
-  console.log(partsListings.value);
   carsListings.value = undefined;
   partsListings.value = undefined;
   const refresh = () => refreshNuxtData(["carsListings", "partsListings"]);
   onMounted(async () => {
     await refresh();
-    console.log(partsListings.value);
   });
   onBeforeUnmount(() => {
     carsListings.value = undefined;
@@ -129,6 +136,33 @@
         errorMessage.value = err.message;
         window.scrollTo(0, window.innerHeight);
       });
+  }
+
+  const perPage = 10;
+  const carsCurrentPage = ref(1);
+  const carsTotalPages = computed(() =>
+    Math.ceil(carsListings.value.length / perPage)
+  );
+  const paginatedCars = computed(() => {
+    const start = (carsCurrentPage.value - 1) * perPage;
+    const end = start + perPage;
+    return carsListings.value.slice(start, end);
+  });
+
+  function switchCarPage(page) {
+    carsCurrentPage.value = page;
+  }
+  const partsCurrentPage = ref(1);
+  const partsTotalPages = computed(() =>
+    Math.ceil(partsListings.value.length / perPage)
+  );
+  const paginatedParts = computed(() => {
+    const start = (partsCurrentPage.value - 1) * perPage;
+    const end = start + perPage;
+    return partsListings.value.slice(start, end);
+  });
+  function switchPartPage(page) {
+    partsCurrentPage.value = page;
   }
 </script>
 <style lang="scss"></style>
