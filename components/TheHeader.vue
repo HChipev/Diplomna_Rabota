@@ -3,66 +3,70 @@
     <div class="flex items-center justify-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
     </div>
-    <div v-if="inBrowser" class="navbar-container">
-      <ul
-        :class="menuShow ? 'active' : 'not-active'"
-        @click="(menuShow = false), (clicked = false)">
-        <li>
-          <NuxtLink to="/" class="nav-button">
-            <font-awesome-icon
-              class="mr-1"
-              icon="fa-solid fa-house" />Home</NuxtLink
-          >
-        </li>
+    <ClientOnly>
+      <div class="navbar-container">
+        <ul
+          :class="menuShow ? 'active' : 'not-active'"
+          @click="(menuShow = false), (clicked = false)">
+          <li>
+            <NuxtLink to="/" class="nav-button">
+              <font-awesome-icon
+                class="mr-1"
+                icon="fa-solid fa-house" />Home</NuxtLink
+            >
+          </li>
 
-        <li>
-          <NuxtLink to="/search" class="nav-button"
-            ><font-awesome-icon
-              class="mr-1"
-              icon="fa-magnifying-glass" />Search</NuxtLink
-          >
-        </li>
+          <li>
+            <NuxtLink to="/search" class="nav-button"
+              ><font-awesome-icon
+                class="mr-1"
+                icon="fa-magnifying-glass" />Search</NuxtLink
+            >
+          </li>
 
-        <li v-if="useSupabaseUser().value">
-          <NuxtLink to="/account/my-listings/create" class="nav-button"
-            ><font-awesome-icon icon="fa-solid fa-plus" /> Add Listing</NuxtLink
-          >
-        </li>
-        <li v-if="useSupabaseUser().value">
-          <NuxtLink to="/account/my-listings" class="nav-button"
-            ><font-awesome-icon icon="fa-solid fa-list" /> My Listings</NuxtLink
-          >
-        </li>
-      </ul>
+          <li v-if="useSupabaseUser().value">
+            <NuxtLink to="/account/my-listings/create" class="nav-button"
+              ><font-awesome-icon icon="fa-solid fa-plus" /> Add
+              Listing</NuxtLink
+            >
+          </li>
+          <li v-if="useSupabaseUser().value">
+            <NuxtLink to="/account/my-listings" class="nav-button"
+              ><font-awesome-icon icon="fa-solid fa-list" /> My
+              Listings</NuxtLink
+            >
+          </li>
+        </ul>
 
-      <NuxtLink
-        :to="useSupabaseUser().value ? '/account' : '/login'"
-        :class="useSupabaseUser().value ? 'loggedIn' : ''"
-        class="nav-button"
-        ><img
-          v-if="useSupabaseUser().value && profilePic"
-          class="h-8 w-8 items-center justify-center rounded-full"
-          :src="profilePic"
-          alt="profile-pic" />
-        <font-awesome-icon v-else class="mx-1" icon="fa-solid fa-user" />
-        {{ useSupabaseUser().value ? "" : "Log In" }}
-      </NuxtLink>
+        <NuxtLink
+          :to="useSupabaseUser().value ? '/account' : '/login'"
+          :class="useSupabaseUser().value ? 'loggedIn' : ''"
+          class="nav-button"
+          ><img
+            v-if="useSupabaseUser().value && profilePic"
+            class="h-8 w-8 items-center justify-center rounded-full"
+            :src="profilePic"
+            alt="profile-pic" />
+          <font-awesome-icon v-else class="mx-1" icon="fa-solid fa-user" />
+          {{ useSupabaseUser().value ? "" : "Log In" }}
+        </NuxtLink>
 
-      <ReuseableButton
-        v-if="windowWidth <= 900 && inBrowser"
-        @click="
-          (clicked = !clicked),
-            //! menuShow value is changed
-            (menuShow = isMenuShown())
-        "
-        class="menu-button ml-1">
-        <font-awesome-icon
-          v-if="!clicked"
-          class="bars"
-          icon="fa-solid fa-bars" />
-        <font-awesome-icon v-else class="x" icon="fa-solid fa-xmark" />
-      </ReuseableButton>
-    </div>
+        <ReuseableButton
+          v-if="windowWidth <= 900"
+          @click="
+            (clicked = !clicked),
+              //! menuShow value is changed
+              (menuShow = isMenuShown())
+          "
+          class="menu-button ml-1">
+          <font-awesome-icon
+            v-if="!clicked"
+            class="bars"
+            icon="fa-solid fa-bars" />
+          <font-awesome-icon v-else class="x" icon="fa-solid fa-xmark" />
+        </ReuseableButton>
+      </div>
+    </ClientOnly>
   </nav>
 </template>
 <script setup>
@@ -71,7 +75,6 @@
   const clicked = ref(false);
   const menuShow = ref(null);
   const windowWidth = ref(0);
-  const inBrowser = inject("inBrowser");
 
   const { data: profilePic } = useAsyncData(
     "userImage",

@@ -23,15 +23,22 @@
   cars.value = undefined;
   const refresh = () => refreshNuxtData("cars");
   onMounted(async () => {
-    setTimeout(() => {
-      refresh();
-    }, 1000);
-    if (localStorage.getItem("sb-swvmmdzdfavkzeklnmpj-auth-token")) {
-      await useSupabaseAuthClient().auth.refreshSession();
-    }
+    await refresh();
   });
   onBeforeUnmount(() => {
     cars.value = undefined;
+    clearNuxtData([
+      "cars",
+      "car",
+      "carsListings",
+      "partsListings",
+      "parts",
+      "part",
+      "userFromCarCard",
+      "userFromPartCard",
+      "savedCars",
+      "savedParts",
+    ]);
   });
   watch(userLocation, () => {
     refresh();

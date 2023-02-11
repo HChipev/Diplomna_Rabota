@@ -40,13 +40,23 @@
   );
   cars.value = undefined;
   const refresh = () => refreshNuxtData("cars");
-  onMounted(() => {
-    setTimeout(() => {
-      refresh();
-    }, 1000);
+  onMounted(async () => {
+    await refresh();
   });
   onBeforeUnmount(() => {
     cars.value = undefined;
+    clearNuxtData([
+      "cars",
+      "car",
+      "carsListings",
+      "partsListings",
+      "parts",
+      "part",
+      "userFromCarCard",
+      "userFromPartCard",
+      "savedCars",
+      "savedParts",
+    ]);
   });
 </script>
 <style lang=""></style>

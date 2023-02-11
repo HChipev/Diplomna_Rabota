@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="inBrowser"
-    class="container mx-auto my-auto flex justify-center items-center">
+  <div class="container mx-auto my-auto flex justify-center items-center">
     <div
       class="flex flex-col px-4 py-2 border border-border-color rounded form">
       <form class="m-2" @submit.prevent="isLogInActive ? logIn() : register()">
@@ -124,7 +122,6 @@
   definePageMeta({
     middleware: ["auth-middleware"],
   });
-  const inBrowser = inject("inBrowser");
   const isLogInActive = ref(true);
   const email = ref("");
   const phone = ref("");

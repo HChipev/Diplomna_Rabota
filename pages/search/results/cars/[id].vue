@@ -50,6 +50,18 @@
   });
   onBeforeUnmount(() => {
     car.value = undefined;
+    clearNuxtData([
+      "cars",
+      "car",
+      "carsListings",
+      "partsListings",
+      "parts",
+      "part",
+      "userFromCarCard",
+      "userFromPartCard",
+      "savedCars",
+      "savedParts",
+    ]);
   });
 </script>
 <style scoped lang="scss">

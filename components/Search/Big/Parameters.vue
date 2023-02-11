@@ -64,7 +64,7 @@
             @click="showAdvanced()"
             :class="isAdvancedShown ? 'active' : ''"
             class="dropdown-button px-2 mt-2 flex items-center justify-center flex-nowrap"
-            v-if="inBrowser && carSearch && !carsOnParts"
+            v-if="carSearch && !carsOnParts"
             >Advanced
             <font-awesome-icon
               v-if="!isAdvancedShown"
@@ -118,8 +118,6 @@
       });
     }
   }
-
-  const inBrowser = inject("inBrowser");
 
   function showAdvanced() {
     isAdvancedShown.value = !isAdvancedShown.value;

@@ -49,9 +49,19 @@
     // });
   });
   onBeforeUnmount(() => {
-    console.log("un");
     part.value = undefined;
-    console.log(part.value, "asdasdasd");
+    clearNuxtData([
+      "cars",
+      "car",
+      "carsListings",
+      "partsListings",
+      "parts",
+      "part",
+      "userFromCarCard",
+      "userFromPartCard",
+      "savedCars",
+      "savedParts",
+    ]);
   });
 </script>
 <style scoped lang="scss">

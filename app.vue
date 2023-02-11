@@ -1,11 +1,12 @@
 <template>
   <NuxtLayout>
     <NuxtLoadingIndicator color="maroon" />
-    <NuxtPage v-if="inBrowser" />
+    <ClientOnly>
+      <NuxtPage />
+    </ClientOnly>
   </NuxtLayout>
 </template>
 <script setup>
-  const inBrowser = ref(false);
   const userLocation = ref(null);
   useSupabaseAuthClient().auth.onAuthStateChange((event, session) => {
     if (event === "SIGNED_IN") {
@@ -16,15 +17,20 @@
   });
 
   onMounted(async () => {
-    if (process.client) {
-      inBrowser.value = true;
-      userLocation.value = await useUserLocation();
-      console.log(userLocation.value);
-    } else {
-      inBrowser.value = false;
+    userLocation.value = await useUserLocation();
+    console.log(userLocation.value);
+    if (
+      localStorage.getItem("sb-swvmmdzdfavkzeklnmpj-auth-token") &&
+      !useSupabaseUser().value
+    ) {
+      try {
+        await useSupabaseAuthClient().auth.refreshSession();
+      } catch (err) {
+        console.log(err);
+        clearError();
+      }
     }
   });
-  provide("inBrowser", inBrowser);
   provide("userLocation", userLocation);
 
   //! realtime data updates
