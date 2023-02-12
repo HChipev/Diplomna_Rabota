@@ -13,7 +13,7 @@
 </template>
 <script setup>
   useHead({
-    titleTemplate: "",
+    titleTemplate: "%s | 4ip's Auto",
     title: "Search results",
   });
   const filter = {

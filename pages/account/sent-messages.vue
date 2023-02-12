@@ -32,6 +32,7 @@
 </template>
 <script setup>
   useHead({
+    titleTemplate: "%s | 4ip's Auto",
     title: "Sent Messages",
     meta: [
       {

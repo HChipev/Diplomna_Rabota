@@ -168,6 +168,7 @@
 <script setup>
   import { v4 as uuidv4 } from "uuid";
   useHead({
+    titleTemplate: "%s | 4ip's Auto",
     title: "Add Listing",
     meta: [
       {

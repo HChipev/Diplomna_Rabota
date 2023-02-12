@@ -111,6 +111,7 @@
 <script setup>
   import Joi from "joi";
   useHead({
+    titleTemplate: "%s | 4ip's Auto",
     title: "Login",
     meta: [
       {

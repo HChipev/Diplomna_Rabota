@@ -167,6 +167,7 @@
   const entry = useRuntimeConfig().public.supabase.url;
   const isModalOpen = ref(false);
   useHead({
+    titleTemplate: "%s | 4ip's Auto",
     title: "My Account",
     meta: [
       {
@@ -193,6 +194,7 @@
       return data;
     }
   });
+  user.value = undefined;
   const refresh = () => refreshNuxtData("user");
 
   async function onImageUpload(e) {
@@ -267,6 +269,8 @@
         `/api/part/listings/user/saved/${useSupabaseUser().value.id}`
       )
   );
+  savedCars.value = undefined;
+  savedParts.value = undefined;
   const refreshSaved = () => refreshNuxtData(["savedCars", "savedParts"]);
 
   function deleteAccount() {
