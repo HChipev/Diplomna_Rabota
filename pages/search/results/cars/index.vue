@@ -12,6 +12,10 @@
   </div>
 </template>
 <script setup>
+  useHead({
+    titleTemplate: "",
+    title: "Search results",
+  });
   const filter = {
     make: useRoute().query.make,
     model: useRoute().query.model,
@@ -46,6 +50,7 @@
   onBeforeUnmount(() => {
     cars.value = undefined;
     clearNuxtData([
+      "carsHome",
       "cars",
       "car",
       "carsListings",

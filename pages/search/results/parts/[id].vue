@@ -44,9 +44,10 @@
         message: "Part does not exist",
       });
     }
-    // useHead({
-    //   title: car.value.Make.name + " " + car.value.Model.name,
-    // });
+    useHead({
+      titleTemplate: "%s | 4ip's Auto",
+      title: `${part.value.PartType.name} ${part.value.PartName.name}/${part.value.Make.name} ${part.value.Model.name}`,
+    });
   });
   onBeforeUnmount(() => {
     part.value = undefined;

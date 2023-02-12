@@ -44,9 +44,10 @@
         message: "Car does not exist",
       });
     }
-    // useHead({
-    //   title: car.value.Make.name + " " + car.value.Model.name,
-    // });
+    useHead({
+      titleTemplate: "%s | 4ip's Auto",
+      title: `${car.value.Make.name} ${car.value.Model.name}`,
+    });
   });
   onBeforeUnmount(() => {
     car.value = undefined;

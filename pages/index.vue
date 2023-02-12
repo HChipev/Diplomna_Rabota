@@ -11,7 +11,7 @@
 <script setup>
   const userLocation = await inject("userLocation");
 
-  const { data: cars } = await useAsyncData("cars", async () => {
+  const { data: cars } = await useAsyncData("carsHome", async () => {
     if (userLocation.value) {
       return await $fetch(`/api/user/location/cars/${userLocation.value}`);
     } else {
@@ -21,13 +21,14 @@
     }
   });
   cars.value = undefined;
-  const refresh = () => refreshNuxtData("cars");
+  const refresh = () => refreshNuxtData("carsHome");
   onMounted(async () => {
     await refresh();
   });
   onBeforeUnmount(() => {
     cars.value = undefined;
     clearNuxtData([
+      "carsHome",
       "cars",
       "car",
       "carsListings",

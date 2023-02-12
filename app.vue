@@ -34,7 +34,8 @@
   provide("userLocation", userLocation);
 
   //! realtime data updates
-  const refreshCars = () => refreshNuxtData(["cars", "carsListings"]);
+  const refreshCars = () =>
+    refreshNuxtData(["carsHome", "cars", "carsListings"]);
   const refreshParts = () => refreshNuxtData(["parts", "partsListings"]);
   const refreshMessages = () =>
     refreshNuxtData(["messages", "sentMessagesCars", "sentMessagesParts"]);

@@ -30,6 +30,3 @@
 
   const error = useError();
 </script>
-<style lang="">
-  /*  */
-</style>
