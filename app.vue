@@ -19,10 +19,7 @@
   onMounted(async () => {
     userLocation.value = await useUserLocation();
     console.log(userLocation.value);
-    if (
-      localStorage.getItem("sb-swvmmdzdfavkzeklnmpj-auth-token") &&
-      !useSupabaseUser().value
-    ) {
+    if (useSupabaseAuthClient().auth.getSession() && !useSupabaseUser().value) {
       try {
         await useSupabaseAuthClient().auth.refreshSession();
       } catch (err) {
