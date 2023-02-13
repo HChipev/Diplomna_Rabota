@@ -359,24 +359,6 @@
       userId: useSupabaseUser().value.id,
       images: imagesData,
     };
-    carInfo.value = {
-      make: "",
-      model: "",
-      year: "",
-      mileage: "",
-      price: "",
-      hp: "",
-      engine: "",
-      gearbox: "",
-      drivetrain: "",
-      region: "",
-      city: "",
-      features: [],
-      color: "",
-      description: "",
-      isOnParts: false,
-      image: [],
-    };
     await $fetch("/api/car/listings/add", {
       method: "POST",
       body,
@@ -390,6 +372,24 @@
               .remove(imagesData[i]);
           }
         } else {
+          carInfo.value = {
+            make: "",
+            model: "",
+            year: "",
+            mileage: "",
+            price: "",
+            hp: "",
+            engine: "",
+            gearbox: "",
+            drivetrain: "",
+            region: "",
+            city: "",
+            features: [],
+            color: "",
+            description: "",
+            isOnParts: false,
+            image: [],
+          };
           navigateTo("/account/my-listings");
         }
       })

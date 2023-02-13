@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute flex justify-center items-center min-w-[320px] w-full h-full bg-primery-lighter-color z-10 bg-opacity-75">
+    class="absolute flex justify-center items-start pt-20 sm:pt-40 min-w-[320px] w-full h-full bg-primery-lighter-color z-10 bg-opacity-75">
     <div
       class="flex rounded-lg bg-primery-lighter-color shadow-md shadow-white p-3">
       <div class="flex flex-col sm:min-w-[350px]">

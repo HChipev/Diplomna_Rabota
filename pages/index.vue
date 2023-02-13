@@ -2,6 +2,7 @@
   <main>
     <div v-if="cars">
       <SearchSmallParameters />
+      {{ new Date().getFullDate() }}
       <TwoColGrid :cars="cars" />
     </div>
     <Loader v-else />
