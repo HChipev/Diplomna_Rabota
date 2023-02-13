@@ -235,6 +235,19 @@
       userId: useSupabaseUser().value.id,
       images: imagesData,
     };
+    const tempPartsInfo = partInfo.value;
+    partInfo.value = {
+      make: "",
+      model: "",
+      partType: "",
+      partName: "",
+      year: "",
+      price: "",
+      region: "",
+      city: "",
+      description: "",
+      image: [],
+    };
 
     await $fetch("/api/part/listings/add", {
       method: "POST",
@@ -242,6 +255,7 @@
     })
       .then(async (res) => {
         if (res.statusCode) {
+          partInfo.value = tempPartsInfo;
           errorMessage.value = res.body.message;
           for (let i = 0; i < imagesData.length; i++) {
             await useSupabaseClient()
@@ -249,18 +263,6 @@
               .remove(imagesData[i]);
           }
         } else {
-          partInfo.value = {
-            make: "",
-            model: "",
-            partType: "",
-            partName: "",
-            year: "",
-            price: "",
-            region: "",
-            city: "",
-            description: "",
-            image: [],
-          };
           navigateTo("/account/my-listings");
         }
       })

@@ -359,12 +359,32 @@
       userId: useSupabaseUser().value.id,
       images: imagesData,
     };
+    const tempCarInfo = carInfo.value;
+    carInfo.value = {
+      make: "",
+      model: "",
+      year: "",
+      mileage: "",
+      price: "",
+      hp: "",
+      engine: "",
+      gearbox: "",
+      drivetrain: "",
+      region: "",
+      city: "",
+      features: [],
+      color: "",
+      description: "",
+      isOnParts: false,
+      image: [],
+    };
     await $fetch("/api/car/listings/add", {
       method: "POST",
       body,
     })
       .then(async (res) => {
         if (res.statusCode) {
+          carInfo.value = tempCarInfo;
           errorMessage.value = res.body.message;
           for (let i = 0; i < imagesData.length; i++) {
             await useSupabaseClient()
@@ -372,24 +392,6 @@
               .remove(imagesData[i]);
           }
         } else {
-          carInfo.value = {
-            make: "",
-            model: "",
-            year: "",
-            mileage: "",
-            price: "",
-            hp: "",
-            engine: "",
-            gearbox: "",
-            drivetrain: "",
-            region: "",
-            city: "",
-            features: [],
-            color: "",
-            description: "",
-            isOnParts: false,
-            image: [],
-          };
           navigateTo("/account/my-listings");
         }
       })
