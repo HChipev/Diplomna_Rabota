@@ -2,6 +2,9 @@
   <nav class="noSelect">
     <div class="flex items-center justify-center">
       <a href="/"><img src="../assets/text-logo.svg" alt="text-logo" /></a>
+      <h1 v-if="isAdmin" class="ml-2 sm:ml-5 text-xs sm:text-base">
+        role and privileges: <span class="text-red-600">{{ user.role }}</span>
+      </h1>
     </div>
     <ClientOnly>
       <div class="navbar-container">
@@ -75,6 +78,14 @@
   const clicked = ref(false);
   const menuShow = ref(null);
   const windowWidth = ref(0);
+
+  const { data: user } = await useAsyncData(
+    "admin",
+    async () => await $fetch(`/api/admin/${useSupabaseUser().value.id}`)
+  );
+  const refresh = () => refreshNuxtData("admin");
+  const isAdmin = computed(() => user.value?.role === "admin");
+  watch(useSupabaseUser(), () => refresh());
 
   const { data: profilePic } = useAsyncData(
     "userImage",
