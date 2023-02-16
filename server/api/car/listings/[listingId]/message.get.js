@@ -6,5 +6,8 @@ export default defineEventHandler(async (event) => {
     where: {
       carId: parseInt(listingId),
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 });

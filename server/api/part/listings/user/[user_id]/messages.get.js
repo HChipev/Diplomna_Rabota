@@ -25,6 +25,9 @@ export default defineEventHandler(async (event) => {
         createdAt: true,
         partId: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   } else {
     messages = await prisma.message.findMany({
@@ -38,6 +41,9 @@ export default defineEventHandler(async (event) => {
         message: true,
         createdAt: true,
         partId: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }

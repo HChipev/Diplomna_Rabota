@@ -14,6 +14,9 @@ export default defineEventHandler(async (event) => {
       phone: true,
       createdAt: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return users;
 });

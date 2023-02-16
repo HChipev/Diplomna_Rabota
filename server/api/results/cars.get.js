@@ -114,6 +114,9 @@ export default defineEventHandler(async (event) => {
       isOnParts: true,
       images: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return cars;

@@ -76,6 +76,9 @@ export default defineEventHandler(async (event) => {
       createdAt: true,
       images: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return parts;
