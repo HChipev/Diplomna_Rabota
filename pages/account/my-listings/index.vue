@@ -13,43 +13,34 @@
       </div>
       <div v-if="carsListings" class="mt-5">
         <h1 class="text-xl sm:text-3xl m-2 ml-3">Cars</h1>
-        <div class="border border-border-color rounded-lg p-3 mb-5">
+        <div class="border border-border-color rounded-lg p-3">
           <h1
             v-if="carsListings.length <= 0"
             class="text-text-muted-color text-center text-sm sm:text-xl">
             No cars listed yet.
           </h1>
+
           <CarListingCard
-            v-for="(listing, index) in paginatedCars"
-            :key="index"
+            v-for="listing in carsListings"
+            :key="listing.id"
             :listing="listing"
             @deleteClick="handleDeleteCar" />
         </div>
-        <Pagination
-          v-if="carsListings && carsListings.length > listingsPerPage"
-          :currentPage="currentPageCars"
-          :totalPages="totalPagesCars"
-          @changePage="changePageCars" />
       </div>
       <div v-if="partsListings" class="mt-5">
         <h1 class="text-xl sm:text-3xl m-2 ml-3">Parts</h1>
-        <div class="border border-border-color rounded-lg p-3 mb-5">
+        <div class="border border-border-color rounded-lg p-3">
           <h1
             v-if="partsListings.length <= 0"
             class="text-text-muted-color text-center text-sm sm:text-xl">
             No parts listed yet.
           </h1>
           <PartListingCard
-            v-for="(listing, index) in paginatedParts"
-            :key="index"
+            v-for="listing in partsListings"
+            :key="listing.id"
             :listing="listing"
             @deleteClick="handleDeletePart" />
         </div>
-        <Pagination
-          v-if="partsListings && partsListings.length > listingsPerPage"
-          :currentPage="currentPageParts"
-          :totalPages="totalPagesParts"
-          @changePage="changePageParts" />
       </div>
       <p
         v-if="errorMessage"
@@ -82,38 +73,13 @@
   const { data: partsListings } = await useAsyncData("partsListings", () =>
     $fetch(`/api/part/listings/user/${user_id}`)
   );
+  console.log(partsListings.value);
   carsListings.value = undefined;
   partsListings.value = undefined;
   const refresh = () => refreshNuxtData(["carsListings", "partsListings"]);
-
-  const currentPageCars = ref(1);
-  const currentPageParts = ref(1);
-  const listingsPerPage = 5;
-  const totalPagesCars = computed(() =>
-    Math.ceil(carsListings.value.length / listingsPerPage)
-  );
-  const totalPagesParts = computed(() =>
-    Math.ceil(partsListings.value.length / listingsPerPage)
-  );
-  const paginatedCars = computed(() => {
-    const start = (currentPageCars.value - 1) * listingsPerPage;
-    const end = start + listingsPerPage;
-    return carsListings.value.slice(start, end);
-  });
-  const paginatedParts = computed(() => {
-    const start = (currentPageParts.value - 1) * listingsPerPage;
-    const end = start + listingsPerPage;
-    return partsListings.value.slice(start, end);
-  });
-  function changePageCars(page) {
-    currentPageCars.value = page;
-  }
-  function changePageParts(page) {
-    currentPageParts.value = page;
-  }
-
   onMounted(async () => {
     await refresh();
+    console.log(partsListings.value);
   });
   onBeforeUnmount(() => {
     carsListings.value = undefined;

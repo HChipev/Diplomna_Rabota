@@ -41,9 +41,6 @@ export default defineEventHandler(async (event) => {
         images: true,
         createdAt: true,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
     });
   } else {
     return await prisma.part.findMany({
@@ -72,9 +69,6 @@ export default defineEventHandler(async (event) => {
         price: true,
         images: true,
         createdAt: true,
-      },
-      orderBy: {
-        createdAt: "desc",
       },
     });
   }
