@@ -32,6 +32,9 @@ export default defineEventHandler(async (event) => {
         images: true,
         createdAt: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   } else {
     return await prisma.car.findMany({
@@ -51,6 +54,9 @@ export default defineEventHandler(async (event) => {
         isOnParts: true,
         images: true,
         createdAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }
