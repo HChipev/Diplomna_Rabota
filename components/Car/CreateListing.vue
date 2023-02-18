@@ -158,11 +158,6 @@
         {{ errorMessage }}
       </p>
     </div>
-    {{
-      carInfo.image.map((image) => {
-        return image.name;
-      })
-    }}
   </div>
 </template>
 <script setup>

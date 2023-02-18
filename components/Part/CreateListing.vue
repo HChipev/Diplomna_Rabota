@@ -73,11 +73,6 @@
         {{ errorMessage }}
       </p>
     </div>
-    {{
-      partInfo.image.map((img) => {
-        return img.name;
-      })
-    }}
   </div>
 </template>
 <script setup>
