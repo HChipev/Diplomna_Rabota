@@ -33,7 +33,7 @@
             <div class="flex flex-col max-h-16">
               <div class="flex justify-between border-b border-border-color">
                 <div class="flex flex-col">
-                  <h1 class="text-lg sm:text-xl md:text-2xl whitespace-nowrap">
+                  <h1 class="text-lg sm:text-xl 2xl:text-2xl whitespace-nowrap">
                     {{ car.Make.name }}
                   </h1>
                   <h1 class="text-base whitespace-nowrap -mt-2 sm:mt-0">
