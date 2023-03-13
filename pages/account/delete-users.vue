@@ -12,6 +12,13 @@
   </div>
 </template>
 <script setup>
+  useHead({
+    titleTemplate: "%s | 4ip's Auto",
+    title: "Delete Users",
+  });
+  definePageMeta({
+    middleware: ["admin-protected-pages-middleware"],
+  });
   const { data: users } = await useAsyncData(
     "allUser",
     async () => await $fetch("/api/admin/all/users")

@@ -41,6 +41,9 @@
       },
     ],
   });
+  definePageMeta({
+    middleware: ["user-protected-pages-middleware"],
+  });
   const { data: sentMessagesCars } = await useAsyncData(
     "sentMessagesCars",
     async () =>
