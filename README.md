@@ -19,6 +19,14 @@ pnpm install --shamefully-hoist
 
 ## Development Server
 
+Create an account in supabase then add the anon, private key and the database URL
+to the .env file after that migrate the prisma models
+
+```bash
+npx prisma db push
+npx prisma generate
+```
+
 Start the development server on http://localhost:3000
 
 ```bash
