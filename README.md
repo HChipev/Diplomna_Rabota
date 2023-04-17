@@ -1,4 +1,4 @@
-# Nuxt 3 Minimal Starter
+# Project setup
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
@@ -23,7 +23,10 @@ Create an account in supabase then add the anon, private key and the database UR
 to the .env file after that migrate the prisma models
 
 ```bash
+# push the prisma models to the database
 npx prisma db push
+
+# generate the prisma client
 npx prisma generate
 ```
 
